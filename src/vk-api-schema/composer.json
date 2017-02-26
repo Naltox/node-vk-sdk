@@ -1,7 +1,0 @@
-{
-  "name": "vkcom/vk-api-schema",
-  "description": "VK API JSON Schema",
-  "license": "MIT",
-  "type": "library",
-  "homepage": "https://vk.com/dev"
-}
