@@ -1,0 +1,20 @@
+{
+  "name": "node-vk-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "node_modules/.bin/webpack -w"
+  },
+  "author": "Narek Abovyan",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^7.0.5",
+    "awesome-typescript-loader": "^3.0.7",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "tiny_request": "^1.0.12"
+  }
+}
