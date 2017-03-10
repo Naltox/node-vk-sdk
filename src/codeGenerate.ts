@@ -30,20 +30,20 @@ const METHODS_PROPS_FILE = 'MethodsProps.ts'
 generate()
 
 async function generate() {
-    let modelsCode: SourceCode[] = []
-
-    for (let className in objects.definitions) {
-        if (className == 'base_bool_int') {
-            continue
-        }
-
-        let classScheme = jsonToClassScheme(className, objects.definitions[className])
-
-        modelsCode.push(codeGenerator.generateClass(classScheme))
-    }
-
-    await saveToFile(__dirname + '/' + MODELS_FILE, modelsCode.map(c => c.render()).join('\n\n'))
-    console.log('models generated')
+    // let modelsCode: SourceCode[] = []
+    //
+    // for (let className in objects.definitions) {
+    //     if (className == 'base_bool_int') {
+    //         continue
+    //     }
+    //
+    //     let classScheme = jsonToClassScheme(className, objects.definitions[className])
+    //
+    //     modelsCode.push(codeGenerator.generateClass(classScheme))
+    // }
+    //
+    // await saveToFile(__dirname + '/' + MODELS_FILE, modelsCode.map(c => c.render()).join('\n\n'))
+    // console.log('models generated')
 
     let responsesCode: SourceCode[] = []
 
@@ -56,6 +56,10 @@ async function generate() {
         else
             classScheme = jsonToClassScheme(className, responses.definitions[className], true)
 
+        if (classScheme.name == 'MessagesGetResponse') {
+            console.log(classScheme)
+            console.log(classScheme.fields[1])
+        }
 
         responsesCode.push(codeGenerator.generateClass(classScheme))
     }
@@ -63,25 +67,25 @@ async function generate() {
     await saveToFile(__dirname + '/' + RESPONSES_FILE, responsesCode.map(c => c.render()).join('\n\n'))
     console.log('responses generated')
 
-    let methodsCode: SourceCode[] = []
-
-    methods.methods.forEach(method => {
-        let scheme = jsonToMethodScheme(method)
-        methodsCode.push(codeGenerator.generateApiMethod(scheme))
-    })
-
-    await saveToFile(__dirname + '/' + METHODS_FILE, methodsCode.map(c => c.render()).join('\n\n'))
-    console.log('methods generated')
-
-    let methodsPropsCode: SourceCode[] = []
-
-    methods.methods.forEach(method => {
-        let scheme = jsonToMethodScheme(method)
-        methodsPropsCode.push(codeGenerator.generateApiMethodParamsInterface(scheme))
-    })
-
-    await saveToFile(__dirname + '/' + METHODS_PROPS_FILE, methodsPropsCode.map(c => c.render()).join('\n\n'))
-    console.log('methods props generated')
+    // let methodsCode: SourceCode[] = []
+    //
+    // methods.methods.forEach(method => {
+    //     let scheme = jsonToMethodScheme(method)
+    //     methodsCode.push(codeGenerator.generateApiMethod(scheme))
+    // })
+    //
+    // await saveToFile(__dirname + '/' + METHODS_FILE, methodsCode.map(c => c.render()).join('\n\n'))
+    // console.log('methods generated')
+    //
+    // let methodsPropsCode: SourceCode[] = []
+    //
+    // methods.methods.forEach(method => {
+    //     let scheme = jsonToMethodScheme(method)
+    //     methodsPropsCode.push(codeGenerator.generateApiMethodParamsInterface(scheme))
+    // })
+    //
+    // await saveToFile(__dirname + '/' + METHODS_PROPS_FILE, methodsPropsCode.map(c => c.render()).join('\n\n'))
+    // console.log('methods props generated')
 }
 
 function jsonToMethodScheme(scheme: any): ApiMethodScheme {
@@ -132,7 +136,8 @@ function jsonToClassScheme(name: string, scheme: any, forResponses = false): Cla
         fields.push(
             new ClassField(
                 name,
-                parseType(props[propName], forResponses)
+                parseType(props[propName], forResponses),
+                props[propName].description || ''
             )
         )
     }

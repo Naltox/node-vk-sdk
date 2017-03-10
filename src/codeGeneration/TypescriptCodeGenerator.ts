@@ -36,8 +36,29 @@ export default class TypescriptCodeGenerator implements CodeGenerator {
         let propsName = `MethodsProps.${toCamelCase(scheme.name, true, '.')}Params`
         let responseName = this.renderType(scheme.responseType, true)
 
+
+        /**
+         * Returns detailed information on users.
+         *
+         *
+         * @param {{
+         *   subview:string,
+         *   el:(number|Element)
+         * }} params
+         */
+
         code.add(`/**`)
         code.add(` * ${scheme.description}`)
+        code.add(' *')
+        code.add(' * @param {{')
+        scheme.params.forEach((param, index) => {
+            let coma = this.genComa(scheme.params, index)
+
+            code.add(` *   ${toCamelCase(param.name)}: (${this.renderType(param.type, true)}${param.required ? '' : '|undefined'})${coma}`)
+        })
+        code.add(' * }} params')
+        code.add(' *')
+        code.add(` * @returns {Promise<${responseName}>}`)
         code.add(` */`)
         code.add(`public async ${methodName}(params: ${propsName}): Promise<${responseName}> {`)
         code.add('return this.call(', 1)
@@ -77,6 +98,9 @@ export default class TypescriptCodeGenerator implements CodeGenerator {
 
     private generateClassConstructor(scheme: ClassScheme): SourceCode {
         let code = new SourceCode()
+        let jsdoc = this.generateClassConstructorJSDoc(scheme)
+
+        code.append(jsdoc)
 
         code.add('constructor (')
 
@@ -93,8 +117,28 @@ export default class TypescriptCodeGenerator implements CodeGenerator {
         return code
     }
 
+    private generateClassConstructorJSDoc(scheme: ClassScheme): SourceCode {
+        let code = new SourceCode()
+
+        code.add('/**')
+        code.add(' * @class')
+
+        scheme.fields.forEach(field => {
+            code.add(` * @property {${this.renderType(field.type)}} ${toCamelCase(field.name)} ${field.description}`)
+        })
+
+        code.add(' */')
+
+        return code
+    }
+
     private generateDeserializeMethod(scheme: ClassScheme): SourceCode {
         let code = new SourceCode()
+
+        code.add('/**')
+        code.add(' * @param {Object} raw')
+        code.add(` * @returns {${scheme.name}}`)
+        code.add(' */')
 
         code.add(`static deserialize(raw: Object): ${scheme.name} {`)
         code.add(`return new ${scheme.name} (`, 1)
@@ -138,8 +182,10 @@ export default class TypescriptCodeGenerator implements CodeGenerator {
         if (type instanceof CustomType)
             return type.name + `${!withoutUndefined ? '|undefined' : ''}`
 
-        if (type instanceof VectorType)
-            return this.renderType(type.item) + `[]${!withoutUndefined ? '|undefined' : ''}`
+        if (type instanceof VectorType) {
+            return this.renderType(type.item, true) + `[]${!withoutUndefined ? '|undefined' : ''}`
+        }
+
 
 
         throw { 'UNSUPPORTED TYPE': type }

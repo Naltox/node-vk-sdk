@@ -1,4 +1,17 @@
 export class AccountAccountCounters {
+    /**
+     * @class
+     * @property {number} friends New friends requests number
+     * @property {number} messages New messages number
+     * @property {number} photos New photo tags number
+     * @property {number} videos New video tags number
+     * @property {number} gifts New gifts number
+     * @property {number} events New events number
+     * @property {number} groups New groups number
+     * @property {number} notifications New notifications number
+     * @property {number} appRequests New app requests number
+     * @property {number} friendsSuggestions New friends suggestions number
+     */
     constructor (
         readonly friends: number,
         readonly messages: number,
@@ -14,6 +27,10 @@ export class AccountAccountCounters {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountAccountCounters}
+     */
     static deserialize(raw: Object): AccountAccountCounters {
         return new AccountAccountCounters (
             raw['friends'],
@@ -29,7 +46,13 @@ export class AccountAccountCounters {
         )
     }
 }
+
 export class AccountLookupResult {
+    /**
+     * @class
+     * @property {AccountUserXtrContact|undefined[]|undefined} found
+     * @property {AccountOtherContact|undefined[]|undefined} other
+     */
     constructor (
         readonly found: AccountUserXtrContact|undefined[]|undefined,
         readonly other: AccountOtherContact|undefined[]|undefined
@@ -37,6 +60,10 @@ export class AccountLookupResult {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountLookupResult}
+     */
     static deserialize(raw: Object): AccountLookupResult {
         return new AccountLookupResult (
             raw['found'] ? raw['found'].map(v => v ? AccountUserXtrContact.deserialize(v) : undefined) : undefined,
@@ -44,7 +71,15 @@ export class AccountLookupResult {
         )
     }
 }
+
 export class AccountNameRequest {
+    /**
+     * @class
+     * @property {number} id Request ID needed to cancel the request
+     * @property {string} status Request status
+     * @property {string} firstName First name in request
+     * @property {string} lastName Last name in request
+     */
     constructor (
         readonly id: number,
         readonly status: string,
@@ -54,6 +89,10 @@ export class AccountNameRequest {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountNameRequest}
+     */
     static deserialize(raw: Object): AccountNameRequest {
         return new AccountNameRequest (
             raw['id'],
@@ -63,7 +102,20 @@ export class AccountNameRequest {
         )
     }
 }
+
 export class AccountOffer {
+    /**
+     * @class
+     * @property {number} id Offer ID
+     * @property {string} title Offer title
+     * @property {string} instruction Instruction how to process the offer
+     * @property {string} instructionHtml Instruction how to process the offer (HTML format)
+     * @property {string} shortDescription Offer short description
+     * @property {string} description Offer description
+     * @property {string} img URL of the preview image
+     * @property {string} tag Offer tag
+     * @property {number} price Offer price
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -78,6 +130,10 @@ export class AccountOffer {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountOffer}
+     */
     static deserialize(raw: Object): AccountOffer {
         return new AccountOffer (
             raw['id'],
@@ -92,18 +148,32 @@ export class AccountOffer {
         )
     }
 }
+
 export class AccountOnoffOptions {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountOnoffOptions}
+     */
     static deserialize(raw: Object): AccountOnoffOptions {
         return new AccountOnoffOptions (
         )
     }
 }
+
 export class AccountOtherContact {
+    /**
+     * @class
+     * @property {string} contact Contact
+     * @property {number} commonCount Mutual friends count
+     */
     constructor (
         readonly contact: string,
         readonly commonCount: number
@@ -111,6 +181,10 @@ export class AccountOtherContact {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountOtherContact}
+     */
     static deserialize(raw: Object): AccountOtherContact {
         return new AccountOtherContact (
             raw['contact'],
@@ -118,7 +192,13 @@ export class AccountOtherContact {
         )
     }
 }
+
 export class AccountPushConversations {
+    /**
+     * @class
+     * @property {number} count Items count
+     * @property {AccountPushConversationsItem|undefined[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: AccountPushConversationsItem|undefined[]|undefined
@@ -126,6 +206,10 @@ export class AccountPushConversations {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountPushConversations}
+     */
     static deserialize(raw: Object): AccountPushConversations {
         return new AccountPushConversations (
             raw['count'],
@@ -133,7 +217,14 @@ export class AccountPushConversations {
         )
     }
 }
+
 export class AccountPushConversationsItem {
+    /**
+     * @class
+     * @property {number} peerId Peer ID
+     * @property {boolean} sound Information whether the sound are enabled
+     * @property {number} disabledUntil Time until that notifications are disabled in seconds
+     */
     constructor (
         readonly peerId: number,
         readonly sound: boolean,
@@ -142,6 +233,10 @@ export class AccountPushConversationsItem {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountPushConversationsItem}
+     */
     static deserialize(raw: Object): AccountPushConversationsItem {
         return new AccountPushConversationsItem (
             raw['peer_id'],
@@ -150,7 +245,31 @@ export class AccountPushConversationsItem {
         )
     }
 }
+
 export class AccountPushParams {
+    /**
+     * @class
+     * @property {string[]|undefined} msg
+     * @property {string[]|undefined} chat
+     * @property {AccountOnoffOptions|undefined[]|undefined} friend
+     * @property {AccountOnoffOptions|undefined[]|undefined} friendFound
+     * @property {AccountOnoffOptions|undefined[]|undefined} friendAccepted
+     * @property {AccountOnoffOptions|undefined[]|undefined} reply
+     * @property {string[]|undefined} comment
+     * @property {string[]|undefined} mention
+     * @property {string[]|undefined} like
+     * @property {string[]|undefined} repost
+     * @property {AccountOnoffOptions|undefined[]|undefined} wallPost
+     * @property {AccountOnoffOptions|undefined[]|undefined} wallPublish
+     * @property {AccountOnoffOptions|undefined[]|undefined} groupInvite
+     * @property {AccountOnoffOptions|undefined[]|undefined} groupAccepted
+     * @property {AccountOnoffOptions|undefined[]|undefined} eventSoon
+     * @property {string[]|undefined} photosTag
+     * @property {AccountOnoffOptions|undefined[]|undefined} appRequest
+     * @property {AccountOnoffOptions|undefined[]|undefined} sdkOpen
+     * @property {AccountOnoffOptions|undefined[]|undefined} newPost
+     * @property {AccountOnoffOptions|undefined[]|undefined} birthday
+     */
     constructor (
         readonly msg: string[]|undefined,
         readonly chat: string[]|undefined,
@@ -176,6 +295,10 @@ export class AccountPushParams {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountPushParams}
+     */
     static deserialize(raw: Object): AccountPushParams {
         return new AccountPushParams (
             raw['msg'] ? raw['msg'].map(v => v) : undefined,
@@ -201,7 +324,15 @@ export class AccountPushParams {
         )
     }
 }
+
 export class AccountPushSettings {
+    /**
+     * @class
+     * @property {boolean} disabled Information whether notifications are disabled
+     * @property {number} disabledUntil Time until that notifications are disabled in Unixtime
+     * @property {AccountPushConversations|undefined} conversations
+     * @property {AccountPushParams|undefined} settings
+     */
     constructor (
         readonly disabled: boolean,
         readonly disabledUntil: number,
@@ -211,6 +342,10 @@ export class AccountPushSettings {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountPushSettings}
+     */
     static deserialize(raw: Object): AccountPushSettings {
         return new AccountPushSettings (
             !!raw['disabled'],
@@ -220,7 +355,28 @@ export class AccountPushSettings {
         )
     }
 }
+
 export class AccountUserSettings {
+    /**
+     * @class
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} maidenName User maiden name
+     * @property {string} screenName Domain name of the user's page
+     * @property {BaseSex|undefined} sex User sex
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {number} relationPending Information whether relation status is pending
+     * @property {UsersUserMin|undefined[]|undefined} relationRequests
+     * @property {string} bdate User's date of birth
+     * @property {number} bdateVisibility Information whether user's birthdate are hidden
+     * @property {string} homeTown User's hometown
+     * @property {BaseCountry|undefined} country
+     * @property {BaseObject|undefined} city
+     * @property {string} status User status
+     * @property {string} phone User phone number with some hidden digits
+     * @property {AccountNameRequest|undefined} nameRequest
+     */
     constructor (
         readonly firstName: string,
         readonly lastName: string,
@@ -243,6 +399,10 @@ export class AccountUserSettings {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountUserSettings}
+     */
     static deserialize(raw: Object): AccountUserSettings {
         return new AccountUserSettings (
             raw['first_name'],
@@ -265,7 +425,97 @@ export class AccountUserSettings {
         )
     }
 }
+
 export class AccountUserXtrContact {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} nickname User nickname
+     * @property {string} maidenName User maiden name
+     * @property {string} domain Domain name of the user's page
+     * @property {string} bdate User's date of birth
+     * @property {BaseObject|undefined} city
+     * @property {BaseCountry|undefined} country
+     * @property {number} timezone User's timezone
+     * @property {string} photo200 URL of square photo of the user with 200 pixels in width
+     * @property {string} photoMax URL of square photo of the user with maximum width
+     * @property {string} photo200Orig URL of user's photo with 200 pixels in width
+     * @property {string} photo400Orig URL of user's photo with 400 pixels in width
+     * @property {string} photoMaxOrig URL of user's photo of maximum size
+     * @property {string} photoId ID of the user's main photo
+     * @property {number} hasPhoto Information whether the user has main photo
+     * @property {boolean} hasMobile Information whether the user specified his phone number
+     * @property {boolean} isFriend Information whether the user is a friend of current user
+     * @property {number} friendStatus Friend status for current user
+     * @property {boolean} wallComments Information whether current user can comment wall posts
+     * @property {boolean} canPost Information whether current user can post on the user's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see other users' audio on the wall
+     * @property {boolean} canSeeAudio Information whether current user can see the user's audio
+     * @property {boolean} canWritePrivateMessage Information whether current user can write private message
+     * @property {boolean} canSendFriendRequest Information whether current user can send a friend request
+     * @property {string} mobilePhone Information whether current user can see
+     * @property {string} homePhone User's mobile phone number
+     * @property {string} skype User's Skype nickname
+     * @property {string} facebook User's Facebook account
+     * @property {string} facebookName User's Facebook name
+     * @property {string} twitter User's Twitter account
+     * @property {string} livejournal User's Livejournal account
+     * @property {string} instagram User's Instagram account
+     * @property {string} site User's website
+     * @property {AudioAudioFull|undefined} statusAudio
+     * @property {string} status User's status
+     * @property {string} activity User's status
+     * @property {UsersLastSeen|undefined} lastSeen
+     * @property {UsersExports|undefined} exports
+     * @property {UsersCropPhoto|undefined} cropPhoto
+     * @property {boolean} verified Information whether the user is verified
+     * @property {number} followersCount Number of user's followers
+     * @property {boolean} blacklisted Information whether current user is in the requested user's blacklist.
+     * @property {boolean} blacklistedByMe Information whether the requested user is in current user's blacklist
+     * @property {boolean} isFavorite Information whether the requested user is in faves of current user
+     * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
+     * @property {number} commonCount Number of common friends with current user
+     * @property {UsersOccupation|undefined} occupation
+     * @property {UsersCareer|undefined[]|undefined} career
+     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {number} university University ID
+     * @property {string} universityName University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus User's education status
+     * @property {string} homeTown User hometown
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {UsersPersonal|undefined} personal
+     * @property {string} interests User's interests
+     * @property {string} music User's favorite music
+     * @property {string} activities User's activities
+     * @property {string} movies User's favorite movies
+     * @property {string} tv User's favorite tv shows
+     * @property {string} books User's favorite books
+     * @property {string} games User's favorite games
+     * @property {UsersUniversity|undefined[]|undefined} universities
+     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {string} about About me field
+     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {string} quotes Favorite quotes
+     * @property {string} contact
+     * @property {number} requestSent
+     * @property {number} sortNum
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -357,6 +607,10 @@ export class AccountUserXtrContact {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountUserXtrContact}
+     */
     static deserialize(raw: Object): AccountUserXtrContact {
         return new AccountUserXtrContact (
             raw['id'],
@@ -448,7 +702,18 @@ export class AccountUserXtrContact {
         )
     }
 }
+
 export class AccountInfo {
+    /**
+     * @class
+     * @property {string} country Country code
+     * @property {boolean} httpsRequired Information whether HTTPS-only is enabled
+     * @property {boolean} ownPostsDefault Information whether only owners posts should be shown
+     * @property {boolean} noWallReplies Information whether wall comments should be hidden
+     * @property {boolean} intro Information whether user has been processed intro
+     * @property {number} lang Language ID
+     * @property {boolean} twoFaRequired Two factor authentication is enabled
+     */
     constructor (
         readonly country: string,
         readonly httpsRequired: boolean,
@@ -461,6 +726,10 @@ export class AccountInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AccountInfo}
+     */
     static deserialize(raw: Object): AccountInfo {
         return new AccountInfo (
             raw['country'],
@@ -473,18 +742,32 @@ export class AccountInfo {
         )
     }
 }
+
 export class AdsAccessRole {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsAccessRole}
+     */
     static deserialize(raw: Object): AdsAccessRole {
         return new AdsAccessRole (
         )
     }
 }
+
 export class AdsAccesses {
+    /**
+     * @class
+     * @property {string} clientId Client ID
+     * @property {AdsAccessRole|undefined} role
+     */
     constructor (
         readonly clientId: string,
         readonly role: AdsAccessRole|undefined
@@ -492,6 +775,10 @@ export class AdsAccesses {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsAccesses}
+     */
     static deserialize(raw: Object): AdsAccesses {
         return new AdsAccesses (
             raw['client_id'],
@@ -499,7 +786,15 @@ export class AdsAccesses {
         )
     }
 }
+
 export class AdsAccount {
+    /**
+     * @class
+     * @property {number} accountId Account ID
+     * @property {string} accountType Account type
+     * @property {boolean} accountStatus Information whether account is active
+     * @property {AdsAccessRole|undefined} accessRole
+     */
     constructor (
         readonly accountId: number,
         readonly accountType: string,
@@ -509,6 +804,10 @@ export class AdsAccount {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsAccount}
+     */
     static deserialize(raw: Object): AdsAccount {
         return new AdsAccount (
             raw['account_id'],
@@ -518,7 +817,30 @@ export class AdsAccount {
         )
     }
 }
+
 export class AdsAd {
+    /**
+     * @class
+     * @property {number} id Ad ID
+     * @property {number} campaignId Campaign ID
+     * @property {number} adFormat Ad format
+     * @property {number} costType Cost type
+     * @property {number} cpc Cost of a click, kopecks
+     * @property {number} cpm Cost of 1000 impressions, kopecks
+     * @property {number} impressionsLimit Impressions limit
+     * @property {number} impressionsLimited Information whether impressions are limited
+     * @property {any} adPlatform Ad platform
+     * @property {number} allLimit Total limit
+     * @property {number} category1Id Category ID
+     * @property {number} category2Id Additional category ID
+     * @property {number} status Ad atatus
+     * @property {string} name Ad title
+     * @property {number} approved Review status
+     * @property {boolean} video Information whether the ad is a video
+     * @property {boolean} disclaimerMedical Information whether disclaimer is enabled
+     * @property {boolean} disclaimerSpecialist Information whether disclaimer is enabled
+     * @property {boolean} disclaimerSupplements Information whether disclaimer is enabled
+     */
     constructor (
         readonly id: number,
         readonly campaignId: number,
@@ -543,6 +865,10 @@ export class AdsAd {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsAd}
+     */
     static deserialize(raw: Object): AdsAd {
         return new AdsAd (
             raw['id'],
@@ -567,7 +893,23 @@ export class AdsAd {
         )
     }
 }
+
 export class AdsAdLayout {
+    /**
+     * @class
+     * @property {number} id Ad ID
+     * @property {number} campaignId Campaign ID
+     * @property {number} adFormat Ad format
+     * @property {number} costType Cost type
+     * @property {boolean} video Information whether the ad is a video
+     * @property {string} title Ad title
+     * @property {string} description Ad description
+     * @property {string} linkUrl URL of advertised object
+     * @property {string} linkDomain Domain of advertised object
+     * @property {any} previewLink link to preview an ad as it is shown on the website
+     * @property {number} imageSrc Image URL
+     * @property {number} imageSrc2x URL of the preview image in double size
+     */
     constructor (
         readonly id: number,
         readonly campaignId: number,
@@ -585,6 +927,10 @@ export class AdsAdLayout {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsAdLayout}
+     */
     static deserialize(raw: Object): AdsAdLayout {
         return new AdsAdLayout (
             raw['id'],
@@ -602,7 +948,19 @@ export class AdsAdLayout {
         )
     }
 }
+
 export class AdsCampaign {
+    /**
+     * @class
+     * @property {number} id Campaign ID
+     * @property {string} type Campaign type
+     * @property {string} name Campaign title
+     * @property {number} status Campaign status
+     * @property {string} dayLimit Campaign's day limit, rubles
+     * @property {string} allLimit Campaign's total limit, rubles
+     * @property {number} startTime Campaign start time, as Unixtime
+     * @property {number} stopTime Campaign stop time, as Unixtime
+     */
     constructor (
         readonly id: number,
         readonly type: string,
@@ -616,6 +974,10 @@ export class AdsCampaign {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsCampaign}
+     */
     static deserialize(raw: Object): AdsCampaign {
         return new AdsCampaign (
             raw['id'],
@@ -629,7 +991,14 @@ export class AdsCampaign {
         )
     }
 }
+
 export class AdsCategory {
+    /**
+     * @class
+     * @property {number} id Category ID
+     * @property {string} name Category name
+     * @property {BaseObjectWithName|undefined[]|undefined} subcategories
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -638,6 +1007,10 @@ export class AdsCategory {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsCategory}
+     */
     static deserialize(raw: Object): AdsCategory {
         return new AdsCategory (
             raw['id'],
@@ -646,7 +1019,15 @@ export class AdsCategory {
         )
     }
 }
+
 export class AdsClient {
+    /**
+     * @class
+     * @property {number} id Client ID
+     * @property {string} name Client name
+     * @property {string} dayLimit Client's day limit, rubles
+     * @property {string} allLimit Client's total limit, rubles
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -656,6 +1037,10 @@ export class AdsClient {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsClient}
+     */
     static deserialize(raw: Object): AdsClient {
         return new AdsClient (
             raw['id'],
@@ -665,7 +1050,41 @@ export class AdsClient {
         )
     }
 }
+
 export class AdsCriteria {
+    /**
+     * @class
+     * @property {number} sex Sex
+     * @property {number} ageFrom Age from
+     * @property {number} ageTo Age to
+     * @property {number} birthday Days to birthday
+     * @property {number} country Country ID
+     * @property {string} cities Cities IDs
+     * @property {string} citiesNot Cities IDs to except
+     * @property {string} statuses Relationship statuses
+     * @property {string} groups Communities IDs
+     * @property {string} apps Apps IDs
+     * @property {string} appsNot Apps IDs to except
+     * @property {string} districts Districts IDs
+     * @property {string} stations Stations IDs
+     * @property {string} streets Streets IDs
+     * @property {string} schools Schools IDs
+     * @property {string} positions Positions IDs
+     * @property {string} religions Religions IDs
+     * @property {string} interests Interests
+     * @property {string} interestCategories Interests categories IDs
+     * @property {string} userDevices Devices
+     * @property {string} userOs Operating systems
+     * @property {string} userBrowsers Browsers
+     * @property {string} retargetingGroups Retargeting groups IDs
+     * @property {string} retargetingGroupsNot Retargeting groups IDs to except
+     * @property {boolean} paying Information whether the user has proceeded VK payments before
+     * @property {BasePropertyExists|undefined} travellers Travellers only
+     * @property {number} schoolFrom School graduation year from
+     * @property {number} schoolTo School graduation year to
+     * @property {number} uniFrom University graduation year from
+     * @property {number} uniTo University graduation year to
+     */
     constructor (
         readonly sex: number,
         readonly ageFrom: number,
@@ -701,6 +1120,10 @@ export class AdsCriteria {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsCriteria}
+     */
     static deserialize(raw: Object): AdsCriteria {
         return new AdsCriteria (
             raw['sex'],
@@ -736,7 +1159,14 @@ export class AdsCriteria {
         )
     }
 }
+
 export class AdsDemoStats {
+    /**
+     * @class
+     * @property {number} id Object ID
+     * @property {AdsObjectType|undefined} type
+     * @property {AdsDemostatsFormat|undefined} stats
+     */
     constructor (
         readonly id: number,
         readonly type: AdsObjectType|undefined,
@@ -745,6 +1175,10 @@ export class AdsDemoStats {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsDemoStats}
+     */
     static deserialize(raw: Object): AdsDemoStats {
         return new AdsDemoStats (
             raw['id'],
@@ -753,7 +1187,18 @@ export class AdsDemoStats {
         )
     }
 }
+
 export class AdsDemostatsFormat {
+    /**
+     * @class
+     * @property {string} day Day as YYYY-MM-DD
+     * @property {string} month Month as YYYY-MM
+     * @property {number} overall 1 if period=overall
+     * @property {AdsStatsSex|undefined[]|undefined} sex
+     * @property {AdsStatsAge|undefined[]|undefined} age
+     * @property {AdsStatsSexAge|undefined[]|undefined} sexAge
+     * @property {AdsStatsCities|undefined[]|undefined} cities
+     */
     constructor (
         readonly day: string,
         readonly month: string,
@@ -766,6 +1211,10 @@ export class AdsDemostatsFormat {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsDemostatsFormat}
+     */
     static deserialize(raw: Object): AdsDemostatsFormat {
         return new AdsDemostatsFormat (
             raw['day'],
@@ -778,7 +1227,13 @@ export class AdsDemostatsFormat {
         )
     }
 }
+
 export class AdsFloodStats {
+    /**
+     * @class
+     * @property {number} left Requests left
+     * @property {number} refresh Time to refresh in seconds
+     */
     constructor (
         readonly left: number,
         readonly refresh: number
@@ -786,6 +1241,10 @@ export class AdsFloodStats {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsFloodStats}
+     */
     static deserialize(raw: Object): AdsFloodStats {
         return new AdsFloodStats (
             raw['left'],
@@ -793,7 +1252,14 @@ export class AdsFloodStats {
         )
     }
 }
+
 export class AdsLinkStatus {
+    /**
+     * @class
+     * @property {string} status Link status
+     * @property {string} description Reject reason
+     * @property {string} redirectUrl URL
+     */
     constructor (
         readonly status: string,
         readonly description: string,
@@ -802,6 +1268,10 @@ export class AdsLinkStatus {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsLinkStatus}
+     */
     static deserialize(raw: Object): AdsLinkStatus {
         return new AdsLinkStatus (
             raw['status'],
@@ -810,31 +1280,54 @@ export class AdsLinkStatus {
         )
     }
 }
+
 export class AdsObjectType {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsObjectType}
+     */
     static deserialize(raw: Object): AdsObjectType {
         return new AdsObjectType (
         )
     }
 }
+
 export class AdsParagraphs {
+    /**
+     * @class
+     * @property {string} paragraph Rules paragraph
+     */
     constructor (
         readonly paragraph: string
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsParagraphs}
+     */
     static deserialize(raw: Object): AdsParagraphs {
         return new AdsParagraphs (
             raw['paragraph']
         )
     }
 }
+
 export class AdsRejectReason {
+    /**
+     * @class
+     * @property {string} comment Comment text
+     * @property {AdsRules|undefined[]|undefined} rules
+     */
     constructor (
         readonly comment: string,
         readonly rules: AdsRules|undefined[]|undefined
@@ -842,6 +1335,10 @@ export class AdsRejectReason {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsRejectReason}
+     */
     static deserialize(raw: Object): AdsRejectReason {
         return new AdsRejectReason (
             raw['comment'],
@@ -849,7 +1346,13 @@ export class AdsRejectReason {
         )
     }
 }
+
 export class AdsRules {
+    /**
+     * @class
+     * @property {string} title Comment
+     * @property {AdsParagraphs|undefined[]|undefined} paragraphs
+     */
     constructor (
         readonly title: string,
         readonly paragraphs: AdsParagraphs|undefined[]|undefined
@@ -857,6 +1360,10 @@ export class AdsRules {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsRules}
+     */
     static deserialize(raw: Object): AdsRules {
         return new AdsRules (
             raw['title'],
@@ -864,7 +1371,14 @@ export class AdsRules {
         )
     }
 }
+
 export class AdsStats {
+    /**
+     * @class
+     * @property {number} id Object ID
+     * @property {AdsObjectType|undefined} type
+     * @property {AdsStatsFormat|undefined} stats
+     */
     constructor (
         readonly id: number,
         readonly type: AdsObjectType|undefined,
@@ -873,6 +1387,10 @@ export class AdsStats {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsStats}
+     */
     static deserialize(raw: Object): AdsStats {
         return new AdsStats (
             raw['id'],
@@ -881,7 +1399,23 @@ export class AdsStats {
         )
     }
 }
+
 export class AdsStatsFormat {
+    /**
+     * @class
+     * @property {string} day Day as YYYY-MM-DD
+     * @property {string} month Month as YYYY-MM
+     * @property {number} overall 1 if period=overall
+     * @property {number} spent Spent funds
+     * @property {number} impressions Impressions number
+     * @property {number} clicks Clicks number
+     * @property {number} reach Reach
+     * @property {number} videoViews Video views number
+     * @property {number} videoViewsHalf Video views (half of video)
+     * @property {number} videoViewsFull Video views (full video)
+     * @property {number} videoClicksSite Clickthoughs to the advertised site
+     * @property {number} joinRate Events number
+     */
     constructor (
         readonly day: string,
         readonly month: string,
@@ -899,6 +1433,10 @@ export class AdsStatsFormat {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsStatsFormat}
+     */
     static deserialize(raw: Object): AdsStatsFormat {
         return new AdsStatsFormat (
             raw['day'],
@@ -916,7 +1454,14 @@ export class AdsStatsFormat {
         )
     }
 }
+
 export class AdsStatsAge {
+    /**
+     * @class
+     * @property {number} impressionsRate Impressions rate
+     * @property {number} clicksRate Clicks rate
+     * @property {string} value Age interval
+     */
     constructor (
         readonly impressionsRate: number,
         readonly clicksRate: number,
@@ -925,6 +1470,10 @@ export class AdsStatsAge {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsStatsAge}
+     */
     static deserialize(raw: Object): AdsStatsAge {
         return new AdsStatsAge (
             raw['impressions_rate'],
@@ -933,7 +1482,15 @@ export class AdsStatsAge {
         )
     }
 }
+
 export class AdsStatsCities {
+    /**
+     * @class
+     * @property {number} impressionsRate Impressions rate
+     * @property {number} clicksRate Clicks rate
+     * @property {number} value City ID
+     * @property {string} name City name
+     */
     constructor (
         readonly impressionsRate: number,
         readonly clicksRate: number,
@@ -943,6 +1500,10 @@ export class AdsStatsCities {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsStatsCities}
+     */
     static deserialize(raw: Object): AdsStatsCities {
         return new AdsStatsCities (
             raw['impressions_rate'],
@@ -952,7 +1513,14 @@ export class AdsStatsCities {
         )
     }
 }
+
 export class AdsStatsSex {
+    /**
+     * @class
+     * @property {number} impressionsRate Impressions rate
+     * @property {number} clicksRate Clicks rate
+     * @property {string} value Sex
+     */
     constructor (
         readonly impressionsRate: number,
         readonly clicksRate: number,
@@ -961,6 +1529,10 @@ export class AdsStatsSex {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsStatsSex}
+     */
     static deserialize(raw: Object): AdsStatsSex {
         return new AdsStatsSex (
             raw['impressions_rate'],
@@ -969,7 +1541,14 @@ export class AdsStatsSex {
         )
     }
 }
+
 export class AdsStatsSexAge {
+    /**
+     * @class
+     * @property {number} impressionsRate Impressions rate
+     * @property {number} clicksRate Clicks rate
+     * @property {string} value Sex and age interval
+     */
     constructor (
         readonly impressionsRate: number,
         readonly clicksRate: number,
@@ -978,6 +1557,10 @@ export class AdsStatsSexAge {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsStatsSexAge}
+     */
     static deserialize(raw: Object): AdsStatsSexAge {
         return new AdsStatsSexAge (
             raw['impressions_rate'],
@@ -986,7 +1569,14 @@ export class AdsStatsSexAge {
         )
     }
 }
+
 export class AdsTargStats {
+    /**
+     * @class
+     * @property {number} audienceCount Audience
+     * @property {number} recommendedCpc Recommended CPC value
+     * @property {number} recommendedCpm Recommended CPM value
+     */
     constructor (
         readonly audienceCount: number,
         readonly recommendedCpc: number,
@@ -995,6 +1585,10 @@ export class AdsTargStats {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsTargStats}
+     */
     static deserialize(raw: Object): AdsTargStats {
         return new AdsTargStats (
             raw['audience_count'],
@@ -1003,7 +1597,13 @@ export class AdsTargStats {
         )
     }
 }
+
 export class AdsTargSuggestions {
+    /**
+     * @class
+     * @property {number} id Object ID
+     * @property {string} name Object name
+     */
     constructor (
         readonly id: number,
         readonly name: string
@@ -1011,6 +1611,10 @@ export class AdsTargSuggestions {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsTargSuggestions}
+     */
     static deserialize(raw: Object): AdsTargSuggestions {
         return new AdsTargSuggestions (
             raw['id'],
@@ -1018,7 +1622,14 @@ export class AdsTargSuggestions {
         )
     }
 }
+
 export class AdsTargSuggestionsRegions {
+    /**
+     * @class
+     * @property {number} id Object ID
+     * @property {string} name Object name
+     * @property {string} type Object type
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -1027,6 +1638,10 @@ export class AdsTargSuggestionsRegions {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsTargSuggestionsRegions}
+     */
     static deserialize(raw: Object): AdsTargSuggestionsRegions {
         return new AdsTargSuggestionsRegions (
             raw['id'],
@@ -1035,7 +1650,14 @@ export class AdsTargSuggestionsRegions {
         )
     }
 }
+
 export class AdsTargSuggestionsCities {
+    /**
+     * @class
+     * @property {number} id Object ID
+     * @property {string} name Object name
+     * @property {string} parent Parent object
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -1044,6 +1666,10 @@ export class AdsTargSuggestionsCities {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsTargSuggestionsCities}
+     */
     static deserialize(raw: Object): AdsTargSuggestionsCities {
         return new AdsTargSuggestionsCities (
             raw['id'],
@@ -1052,7 +1678,16 @@ export class AdsTargSuggestionsCities {
         )
     }
 }
+
 export class AdsTargSuggestionsSchools {
+    /**
+     * @class
+     * @property {number} id School ID
+     * @property {string} name School title
+     * @property {string} desc Full school title
+     * @property {string} type School type
+     * @property {string} parent City name
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -1063,6 +1698,10 @@ export class AdsTargSuggestionsSchools {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsTargSuggestionsSchools}
+     */
     static deserialize(raw: Object): AdsTargSuggestionsSchools {
         return new AdsTargSuggestionsSchools (
             raw['id'],
@@ -1073,7 +1712,43 @@ export class AdsTargSuggestionsSchools {
         )
     }
 }
+
 export class AdsTargSettings {
+    /**
+     * @class
+     * @property {number} id Ad ID
+     * @property {number} campaignId Campaign ID
+     * @property {number} sex Sex
+     * @property {number} ageFrom Age from
+     * @property {number} ageTo Age to
+     * @property {number} birthday Days to birthday
+     * @property {number} country Country ID
+     * @property {string} cities Cities IDs
+     * @property {string} citiesNot Cities IDs to except
+     * @property {string} statuses Relationship statuses
+     * @property {string} groups Communities IDs
+     * @property {string} apps Apps IDs
+     * @property {string} appsNot Apps IDs to except
+     * @property {string} districts Districts IDs
+     * @property {string} stations Stations IDs
+     * @property {string} streets Streets IDs
+     * @property {string} schools Schools IDs
+     * @property {string} positions Positions IDs
+     * @property {string} religions Religions IDs
+     * @property {string} interests Interests
+     * @property {string} interestCategories Interests categories IDs
+     * @property {string} userDevices Devices
+     * @property {string} userOs Operating systems
+     * @property {string} userBrowsers Browsers
+     * @property {string} retargetingGroups Retargeting groups IDs
+     * @property {string} retargetingGroupsNot Retargeting groups IDs to except
+     * @property {boolean} paying Information whether the user has proceeded VK payments before
+     * @property {BasePropertyExists|undefined} travellers Travellers only
+     * @property {number} schoolFrom School graduation year from
+     * @property {number} schoolTo School graduation year to
+     * @property {number} uniFrom University graduation year from
+     * @property {number} uniTo University graduation year to
+     */
     constructor (
         readonly id: number,
         readonly campaignId: number,
@@ -1111,6 +1786,10 @@ export class AdsTargSettings {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsTargSettings}
+     */
     static deserialize(raw: Object): AdsTargSettings {
         return new AdsTargSettings (
             raw['id'],
@@ -1148,7 +1827,17 @@ export class AdsTargSettings {
         )
     }
 }
+
 export class AdsTargetGroup {
+    /**
+     * @class
+     * @property {number} id Group ID
+     * @property {string} name Group name
+     * @property {string} domain Site domain
+     * @property {number} audienceCount Audience
+     * @property {number} lifetime Number of days for user to be in group
+     * @property {string} pixel Pixel code
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -1160,6 +1849,10 @@ export class AdsTargetGroup {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsTargetGroup}
+     */
     static deserialize(raw: Object): AdsTargetGroup {
         return new AdsTargetGroup (
             raw['id'],
@@ -1171,7 +1864,13 @@ export class AdsTargetGroup {
         )
     }
 }
+
 export class AdsUsers {
+    /**
+     * @class
+     * @property {number} userId User ID
+     * @property {AdsAccesses|undefined[]|undefined} accesses
+     */
     constructor (
         readonly userId: number,
         readonly accesses: AdsAccesses|undefined[]|undefined
@@ -1179,6 +1878,10 @@ export class AdsUsers {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsUsers}
+     */
     static deserialize(raw: Object): AdsUsers {
         return new AdsUsers (
             raw['user_id'],
@@ -1186,7 +1889,20 @@ export class AdsUsers {
         )
     }
 }
+
 export class AdsPostStats {
+    /**
+     * @class
+     * @property {number} adId Object ID
+     * @property {number} reachSubscribers Subscribers reach
+     * @property {number} reachTotal Total reach
+     * @property {number} links Link clickthrough
+     * @property {number} toGroup Clickthrough to community
+     * @property {number} joinGroup People have joined the group
+     * @property {number} report Reports number
+     * @property {number} hide Hidings number
+     * @property {number} unsubscribe Unsubscribed members
+     */
     constructor (
         readonly adId: number,
         readonly reachSubscribers: number,
@@ -1201,6 +1917,10 @@ export class AdsPostStats {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AdsPostStats}
+     */
     static deserialize(raw: Object): AdsPostStats {
         return new AdsPostStats (
             raw['ad_id'],
@@ -1215,7 +1935,36 @@ export class AdsPostStats {
         )
     }
 }
+
 export class AppsApp {
+    /**
+     * @class
+     * @property {number} id Application ID
+     * @property {string} title Application title
+     * @property {string} screenName Screen name
+     * @property {string} description Application description
+     * @property {string} icon278 URL of the app icon with 279 px in width
+     * @property {string} icon150 URL of the app icon with 150 px in width
+     * @property {string} icon139 URL of the app icon with 139 px in width
+     * @property {string} icon75 URL of the app icon with 75 px in width
+     * @property {string} banner560 URL of the app banner with 560 px in width
+     * @property {string} banner1120 URL of the app banner with 1120 px in width
+     * @property {string} type Application type
+     * @property {string} section Application section name
+     * @property {string} authorUrl Application author's URL
+     * @property {number} authorId Application author's ID
+     * @property {number} authorGroup Official community's ID
+     * @property {number} membersCount Members number
+     * @property {number} publishedDate Date when the application has been published in Unixtime
+     * @property {number} catalogPosition Catalog position
+     * @property {PhotosPhoto|undefined[]|undefined} screenshots
+     * @property {number} international Information whether the application is multilanguage
+     * @property {number} leaderboardType Leaderboard type
+     * @property {number} genreId Genre ID
+     * @property {string} genre Genre name
+     * @property {number} platformId Application ID in store
+     * @property {number} isInCatalog Information whther application is in mobile catalog
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -1246,6 +1995,10 @@ export class AppsApp {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AppsApp}
+     */
     static deserialize(raw: Object): AppsApp {
         return new AppsApp (
             raw['id'],
@@ -1276,7 +2029,15 @@ export class AppsApp {
         )
     }
 }
+
 export class AppsLeaderboard {
+    /**
+     * @class
+     * @property {number} score Score number
+     * @property {number} level Level
+     * @property {number} points Points number
+     * @property {number} userId User ID
+     */
     constructor (
         readonly score: number,
         readonly level: number,
@@ -1286,6 +2047,10 @@ export class AppsLeaderboard {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AppsLeaderboard}
+     */
     static deserialize(raw: Object): AppsLeaderboard {
         return new AppsLeaderboard (
             raw['score'],
@@ -1295,7 +2060,14 @@ export class AppsLeaderboard {
         )
     }
 }
+
 export class AudioAudioAlbum {
+    /**
+     * @class
+     * @property {number} id Album ID
+     * @property {number} ownerId Album owner's ID
+     * @property {string} title Album title
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -1304,6 +2076,10 @@ export class AudioAudioAlbum {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AudioAudioAlbum}
+     */
     static deserialize(raw: Object): AudioAudioAlbum {
         return new AudioAudioAlbum (
             raw['id'],
@@ -1312,7 +2088,17 @@ export class AudioAudioAlbum {
         )
     }
 }
+
 export class AudioAudio {
+    /**
+     * @class
+     * @property {number} id Audio ID
+     * @property {number} ownerId Audio owner's ID
+     * @property {string} artist Artist name
+     * @property {string} title Title
+     * @property {string} url URL of mp3 file
+     * @property {string} accessKey Access key for the audio
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -1324,6 +2110,10 @@ export class AudioAudio {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AudioAudio}
+     */
     static deserialize(raw: Object): AudioAudio {
         return new AudioAudio (
             raw['id'],
@@ -1335,7 +2125,23 @@ export class AudioAudio {
         )
     }
 }
+
 export class AudioAudioFull {
+    /**
+     * @class
+     * @property {number} id Audio ID
+     * @property {number} ownerId Audio owner's ID
+     * @property {string} artist Artist name
+     * @property {string} title Title
+     * @property {string} url URL of mp3 file
+     * @property {string} accessKey Access key for the audio
+     * @property {number} duration Duration in seconds
+     * @property {number} date Date when uploaded
+     * @property {number} albumId Album ID
+     * @property {number} lyricsId Lyrics ID
+     * @property {number} genreId Genre ID
+     * @property {boolean} noSearch Information whether the audio is hidden from search
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -1353,6 +2159,10 @@ export class AudioAudioFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AudioAudioFull}
+     */
     static deserialize(raw: Object): AudioAudioFull {
         return new AudioAudioFull (
             raw['id'],
@@ -1370,7 +2180,13 @@ export class AudioAudioFull {
         )
     }
 }
+
 export class AudioLyrics {
+    /**
+     * @class
+     * @property {number} lyricsId Lyrics ID
+     * @property {string} text Lyrics text
+     */
     constructor (
         readonly lyricsId: number,
         readonly text: string
@@ -1378,6 +2194,10 @@ export class AudioLyrics {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AudioLyrics}
+     */
     static deserialize(raw: Object): AudioLyrics {
         return new AudioLyrics (
             raw['lyrics_id'],
@@ -1385,7 +2205,15 @@ export class AudioLyrics {
         )
     }
 }
+
 export class AudioAudioUploadResponse {
+    /**
+     * @class
+     * @property {string} redirect Redirect URL
+     * @property {number} server Upload server number
+     * @property {string} audio Uploaded aduio data
+     * @property {string} hash Uploading hash
+     */
     constructor (
         readonly redirect: string,
         readonly server: number,
@@ -1395,6 +2223,10 @@ export class AudioAudioUploadResponse {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {AudioAudioUploadResponse}
+     */
     static deserialize(raw: Object): AudioAudioUploadResponse {
         return new AudioAudioUploadResponse (
             raw['redirect'],
@@ -1404,7 +2236,13 @@ export class AudioAudioUploadResponse {
         )
     }
 }
+
 export class BaseCommentsInfo {
+    /**
+     * @class
+     * @property {number} count Comments number
+     * @property {number} canPost Information whether current user can comment the post
+     */
     constructor (
         readonly count: number,
         readonly canPost: number
@@ -1412,6 +2250,10 @@ export class BaseCommentsInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseCommentsInfo}
+     */
     static deserialize(raw: Object): BaseCommentsInfo {
         return new BaseCommentsInfo (
             raw['count'],
@@ -1419,7 +2261,13 @@ export class BaseCommentsInfo {
         )
     }
 }
+
 export class BaseCountry {
+    /**
+     * @class
+     * @property {number} id Country ID
+     * @property {string} title Country title
+     */
     constructor (
         readonly id: number,
         readonly title: string
@@ -1427,6 +2275,10 @@ export class BaseCountry {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseCountry}
+     */
     static deserialize(raw: Object): BaseCountry {
         return new BaseCountry (
             raw['id'],
@@ -1434,7 +2286,14 @@ export class BaseCountry {
         )
     }
 }
+
 export class BaseError {
+    /**
+     * @class
+     * @property {number} errorCode Error code
+     * @property {string} errorMsg Error message
+     * @property {BaseRequestParam|undefined[]|undefined} requestParams
+     */
     constructor (
         readonly errorCode: number,
         readonly errorMsg: string,
@@ -1443,6 +2302,10 @@ export class BaseError {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseError}
+     */
     static deserialize(raw: Object): BaseError {
         return new BaseError (
             raw['error_code'],
@@ -1451,7 +2314,13 @@ export class BaseError {
         )
     }
 }
+
 export class BaseRequestParam {
+    /**
+     * @class
+     * @property {string} key Parameter name
+     * @property {string} value Parameter value
+     */
     constructor (
         readonly key: string,
         readonly value: string
@@ -1459,6 +2328,10 @@ export class BaseRequestParam {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseRequestParam}
+     */
     static deserialize(raw: Object): BaseRequestParam {
         return new BaseRequestParam (
             raw['key'],
@@ -1466,7 +2339,15 @@ export class BaseRequestParam {
         )
     }
 }
+
 export class BaseGeo {
+    /**
+     * @class
+     * @property {string} type Place type
+     * @property {string} coordinates String with coordinates
+     * @property {BasePlace|undefined} place
+     * @property {number} showmap Information whether a map is showed
+     */
     constructor (
         readonly type: string,
         readonly coordinates: string,
@@ -1476,6 +2357,10 @@ export class BaseGeo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseGeo}
+     */
     static deserialize(raw: Object): BaseGeo {
         return new BaseGeo (
             raw['type'],
@@ -1485,7 +2370,15 @@ export class BaseGeo {
         )
     }
 }
+
 export class BaseLikesInfo {
+    /**
+     * @class
+     * @property {number} count Likes number
+     * @property {number} userLikes Information whether current uer has liked the post
+     * @property {number} canLike Information whether current user can like the post
+     * @property {number} canPublish Information whether current user can repost
+     */
     constructor (
         readonly count: number,
         readonly userLikes: number,
@@ -1495,6 +2388,10 @@ export class BaseLikesInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLikesInfo}
+     */
     static deserialize(raw: Object): BaseLikesInfo {
         return new BaseLikesInfo (
             raw['count'],
@@ -1504,7 +2401,13 @@ export class BaseLikesInfo {
         )
     }
 }
+
 export class BaseLikes {
+    /**
+     * @class
+     * @property {boolean} userLikes Information whether current user likes the photo
+     * @property {number} count Likes number
+     */
     constructor (
         readonly userLikes: boolean,
         readonly count: number
@@ -1512,6 +2415,10 @@ export class BaseLikes {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLikes}
+     */
     static deserialize(raw: Object): BaseLikes {
         return new BaseLikes (
             !!raw['user_likes'],
@@ -1519,7 +2426,23 @@ export class BaseLikes {
         )
     }
 }
+
 export class BaseLink {
+    /**
+     * @class
+     * @property {string} url Link URL
+     * @property {string} title Link title
+     * @property {string} caption Link caption
+     * @property {string} description Link description
+     * @property {PhotosPhoto|undefined} photo
+     * @property {boolean} isExternal Information whether the link is external
+     * @property {string} previewUrl URL of the page with article preview
+     * @property {string} previewPage String ID of the page with article preview
+     * @property {BaseLinkButton|undefined} button
+     * @property {BaseLinkProduct|undefined} product
+     * @property {BaseLinkRating|undefined} rating
+     * @property {BaseLinkApplication|undefined} application
+     */
     constructor (
         readonly url: string,
         readonly title: string,
@@ -1537,6 +2460,10 @@ export class BaseLink {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLink}
+     */
     static deserialize(raw: Object): BaseLink {
         return new BaseLink (
             raw['url'],
@@ -1554,7 +2481,13 @@ export class BaseLink {
         )
     }
 }
+
 export class BaseLinkButton {
+    /**
+     * @class
+     * @property {string} title Button title
+     * @property {BaseLinkButtonAction|undefined} action Button action
+     */
     constructor (
         readonly title: string,
         readonly action: BaseLinkButtonAction|undefined
@@ -1562,6 +2495,10 @@ export class BaseLinkButton {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLinkButton}
+     */
     static deserialize(raw: Object): BaseLinkButton {
         return new BaseLinkButton (
             raw['title'],
@@ -1569,7 +2506,13 @@ export class BaseLinkButton {
         )
     }
 }
+
 export class BaseLinkButtonAction {
+    /**
+     * @class
+     * @property {BaseLinkButtonActionType|undefined} type
+     * @property {string} url Action URL
+     */
     constructor (
         readonly type: BaseLinkButtonActionType|undefined,
         readonly url: string
@@ -1577,6 +2520,10 @@ export class BaseLinkButtonAction {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLinkButtonAction}
+     */
     static deserialize(raw: Object): BaseLinkButtonAction {
         return new BaseLinkButtonAction (
             raw['type'] ? BaseLinkButtonActionType.deserialize(raw['type']) : undefined,
@@ -1584,31 +2531,54 @@ export class BaseLinkButtonAction {
         )
     }
 }
+
 export class BaseLinkButtonActionType {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLinkButtonActionType}
+     */
     static deserialize(raw: Object): BaseLinkButtonActionType {
         return new BaseLinkButtonActionType (
         )
     }
 }
+
 export class BaseLinkProduct {
+    /**
+     * @class
+     * @property {MarketPrice|undefined} price
+     */
     constructor (
         readonly price: MarketPrice|undefined
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLinkProduct}
+     */
     static deserialize(raw: Object): BaseLinkProduct {
         return new BaseLinkProduct (
             raw['price'] ? MarketPrice.deserialize(raw['price']) : undefined
         )
     }
 }
+
 export class BaseLinkApplication {
+    /**
+     * @class
+     * @property {number} appId Application Id
+     * @property {BaseLinkApplicationStore|undefined} store
+     */
     constructor (
         readonly appId: number,
         readonly store: BaseLinkApplicationStore|undefined
@@ -1616,6 +2586,10 @@ export class BaseLinkApplication {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLinkApplication}
+     */
     static deserialize(raw: Object): BaseLinkApplication {
         return new BaseLinkApplication (
             raw['app_id'],
@@ -1623,7 +2597,13 @@ export class BaseLinkApplication {
         )
     }
 }
+
 export class BaseLinkApplicationStore {
+    /**
+     * @class
+     * @property {number} id Store Id
+     * @property {string} name Store name
+     */
     constructor (
         readonly id: number,
         readonly name: string
@@ -1631,6 +2611,10 @@ export class BaseLinkApplicationStore {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLinkApplicationStore}
+     */
     static deserialize(raw: Object): BaseLinkApplicationStore {
         return new BaseLinkApplicationStore (
             raw['id'],
@@ -1638,7 +2622,13 @@ export class BaseLinkApplicationStore {
         )
     }
 }
+
 export class BaseLinkRating {
+    /**
+     * @class
+     * @property {number} stars Count of stars
+     * @property {number} reviewsCount Count of reviews
+     */
     constructor (
         readonly stars: number,
         readonly reviewsCount: number
@@ -1646,6 +2636,10 @@ export class BaseLinkRating {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseLinkRating}
+     */
     static deserialize(raw: Object): BaseLinkRating {
         return new BaseLinkRating (
             raw['stars'],
@@ -1653,7 +2647,13 @@ export class BaseLinkRating {
         )
     }
 }
+
 export class BaseObject {
+    /**
+     * @class
+     * @property {number} id Object ID
+     * @property {string} title Object title
+     */
     constructor (
         readonly id: number,
         readonly title: string
@@ -1661,6 +2661,10 @@ export class BaseObject {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseObject}
+     */
     static deserialize(raw: Object): BaseObject {
         return new BaseObject (
             raw['id'],
@@ -1668,7 +2672,13 @@ export class BaseObject {
         )
     }
 }
+
 export class BaseObjectWithName {
+    /**
+     * @class
+     * @property {number} id Object ID
+     * @property {string} name Object name
+     */
     constructor (
         readonly id: number,
         readonly name: string
@@ -1676,6 +2686,10 @@ export class BaseObjectWithName {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseObjectWithName}
+     */
     static deserialize(raw: Object): BaseObjectWithName {
         return new BaseObjectWithName (
             raw['id'],
@@ -1683,31 +2697,63 @@ export class BaseObjectWithName {
         )
     }
 }
+
 export class BaseObjectCount {
+    /**
+     * @class
+     * @property {number} count Items count
+     */
     constructor (
         readonly count: number
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseObjectCount}
+     */
     static deserialize(raw: Object): BaseObjectCount {
         return new BaseObjectCount (
             raw['count']
         )
     }
 }
+
 export class BaseOkResponse {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseOkResponse}
+     */
     static deserialize(raw: Object): BaseOkResponse {
         return new BaseOkResponse (
         )
     }
 }
+
 export class BasePlace {
+    /**
+     * @class
+     * @property {number} id Place ID
+     * @property {string} title Place title
+     * @property {number} latitude Place latitude
+     * @property {number} longitude Place longitude
+     * @property {number} created Date of the place creation in Unixtime
+     * @property {string} icon URL of the place's icon
+     * @property {number} checkins Checkins number
+     * @property {string} type Place type
+     * @property {string} country Country name
+     * @property {string} city City name
+     * @property {string} address Place address
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -1724,6 +2770,10 @@ export class BasePlace {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BasePlace}
+     */
     static deserialize(raw: Object): BasePlace {
         return new BasePlace (
             raw['id'],
@@ -1740,18 +2790,32 @@ export class BasePlace {
         )
     }
 }
+
 export class BasePropertyExists {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BasePropertyExists}
+     */
     static deserialize(raw: Object): BasePropertyExists {
         return new BasePropertyExists (
         )
     }
 }
+
 export class BaseRepostsInfo {
+    /**
+     * @class
+     * @property {number} count Reposts number
+     * @property {number} userReposted Information whether current user has reposted the post
+     */
     constructor (
         readonly count: number,
         readonly userReposted: number
@@ -1759,6 +2823,10 @@ export class BaseRepostsInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseRepostsInfo}
+     */
     static deserialize(raw: Object): BaseRepostsInfo {
         return new BaseRepostsInfo (
             raw['count'],
@@ -1766,7 +2834,19 @@ export class BaseRepostsInfo {
         )
     }
 }
+
 export class BaseSticker {
+    /**
+     * @class
+     * @property {number} id Sticker ID
+     * @property {number} productId Collection ID
+     * @property {string} photo64 URL of the preview image with 64 px in height
+     * @property {string} photo128 URL of the preview image with 128 px in height
+     * @property {string} photo256 URL of the preview image with 256 px in height
+     * @property {string} photo352 URL of the preview image with 352 px in height
+     * @property {number} width Width in px
+     * @property {number} height Hieght in px
+     */
     constructor (
         readonly id: number,
         readonly productId: number,
@@ -1780,6 +2860,10 @@ export class BaseSticker {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseSticker}
+     */
     static deserialize(raw: Object): BaseSticker {
         return new BaseSticker (
             raw['id'],
@@ -1793,42 +2877,79 @@ export class BaseSticker {
         )
     }
 }
+
 export class BaseUserId {
+    /**
+     * @class
+     * @property {number} userId User ID
+     */
     constructor (
         readonly userId: number
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseUserId}
+     */
     static deserialize(raw: Object): BaseUserId {
         return new BaseUserId (
             raw['user_id']
         )
     }
 }
+
 export class BaseSex {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseSex}
+     */
     static deserialize(raw: Object): BaseSex {
         return new BaseSex (
         )
     }
 }
+
 export class BoardDefaultOrder {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BoardDefaultOrder}
+     */
     static deserialize(raw: Object): BoardDefaultOrder {
         return new BoardDefaultOrder (
         )
     }
 }
+
 export class BoardTopicPoll {
+    /**
+     * @class
+     * @property {number} pollId Poll ID
+     * @property {number} ownerId Poll owner's ID
+     * @property {number} created Date when poll has been created in Unixtime
+     * @property {boolean} isClosed Information whether the poll is closed
+     * @property {string} question Poll question
+     * @property {string} votes Votes number
+     * @property {number} answerId Current user's answer ID
+     * @property {PollsAnswer|undefined[]|undefined} answers
+     */
     constructor (
         readonly pollId: number,
         readonly ownerId: number,
@@ -1842,6 +2963,10 @@ export class BoardTopicPoll {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BoardTopicPoll}
+     */
     static deserialize(raw: Object): BoardTopicPoll {
         return new BoardTopicPoll (
             raw['poll_id'],
@@ -1855,7 +2980,20 @@ export class BoardTopicPoll {
         )
     }
 }
+
 export class BoardTopic {
+    /**
+     * @class
+     * @property {number} id Topic ID
+     * @property {string} title Topic title
+     * @property {number} created Date when the topic has been created in Unixtime
+     * @property {number} createdBy Creator ID
+     * @property {number} updated Date when the topic has been updated in Unixtime
+     * @property {number} updatedBy ID of user who updated the topic
+     * @property {boolean} isClosed Information whether the topic is closed
+     * @property {boolean} isFixed Information whether the topic is fixed
+     * @property {number} comments Comments number
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -1870,6 +3008,10 @@ export class BoardTopic {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BoardTopic}
+     */
     static deserialize(raw: Object): BoardTopic {
         return new BoardTopic (
             raw['id'],
@@ -1884,7 +3026,17 @@ export class BoardTopic {
         )
     }
 }
+
 export class BoardTopicComment {
+    /**
+     * @class
+     * @property {number} id Comment ID
+     * @property {number} fromId Author ID
+     * @property {number} date Date when the comment has been added in Unixtime
+     * @property {string} text Comment text
+     * @property {WallCommentAttachment|undefined[]|undefined} attachments
+     * @property {number} realOffset Real position of the comment
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -1896,6 +3048,10 @@ export class BoardTopicComment {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BoardTopicComment}
+     */
     static deserialize(raw: Object): BoardTopicComment {
         return new BoardTopicComment (
             raw['id'],
@@ -1907,7 +3063,14 @@ export class BoardTopicComment {
         )
     }
 }
+
 export class BaseImage {
+    /**
+     * @class
+     * @property {string} url Image url
+     * @property {number} width Image width
+     * @property {number} height Image height
+     */
     constructor (
         readonly url: string,
         readonly width: number,
@@ -1916,6 +3079,10 @@ export class BaseImage {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {BaseImage}
+     */
     static deserialize(raw: Object): BaseImage {
         return new BaseImage (
             raw['url'],
@@ -1924,7 +3091,16 @@ export class BaseImage {
         )
     }
 }
+
 export class DatabaseCity {
+    /**
+     * @class
+     * @property {number} id Object ID
+     * @property {string} title Object title
+     * @property {string} area Area title
+     * @property {string} region Region title
+     * @property {boolean} important Information whether the city is included in important cities list
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -1935,6 +3111,10 @@ export class DatabaseCity {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DatabaseCity}
+     */
     static deserialize(raw: Object): DatabaseCity {
         return new DatabaseCity (
             raw['id'],
@@ -1945,7 +3125,13 @@ export class DatabaseCity {
         )
     }
 }
+
 export class DatabaseFaculty {
+    /**
+     * @class
+     * @property {number} id Faculty ID
+     * @property {string} title Faculty title
+     */
     constructor (
         readonly id: number,
         readonly title: string
@@ -1953,6 +3139,10 @@ export class DatabaseFaculty {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DatabaseFaculty}
+     */
     static deserialize(raw: Object): DatabaseFaculty {
         return new DatabaseFaculty (
             raw['id'],
@@ -1960,7 +3150,13 @@ export class DatabaseFaculty {
         )
     }
 }
+
 export class DatabaseRegion {
+    /**
+     * @class
+     * @property {number} id Region ID
+     * @property {string} title Region title
+     */
     constructor (
         readonly id: number,
         readonly title: string
@@ -1968,6 +3164,10 @@ export class DatabaseRegion {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DatabaseRegion}
+     */
     static deserialize(raw: Object): DatabaseRegion {
         return new DatabaseRegion (
             raw['id'],
@@ -1975,7 +3175,13 @@ export class DatabaseRegion {
         )
     }
 }
+
 export class DatabaseSchool {
+    /**
+     * @class
+     * @property {number} id School ID
+     * @property {string} title School title
+     */
     constructor (
         readonly id: number,
         readonly title: string
@@ -1983,6 +3189,10 @@ export class DatabaseSchool {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DatabaseSchool}
+     */
     static deserialize(raw: Object): DatabaseSchool {
         return new DatabaseSchool (
             raw['id'],
@@ -1990,7 +3200,13 @@ export class DatabaseSchool {
         )
     }
 }
+
 export class DatabaseStreet {
+    /**
+     * @class
+     * @property {number} id Street ID
+     * @property {string} title Street title
+     */
     constructor (
         readonly id: number,
         readonly title: string
@@ -1998,6 +3214,10 @@ export class DatabaseStreet {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DatabaseStreet}
+     */
     static deserialize(raw: Object): DatabaseStreet {
         return new DatabaseStreet (
             raw['id'],
@@ -2005,7 +3225,13 @@ export class DatabaseStreet {
         )
     }
 }
+
 export class DatabaseUniversity {
+    /**
+     * @class
+     * @property {number} id University ID
+     * @property {string} title University title
+     */
     constructor (
         readonly id: number,
         readonly title: string
@@ -2013,6 +3239,10 @@ export class DatabaseUniversity {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DatabaseUniversity}
+     */
     static deserialize(raw: Object): DatabaseUniversity {
         return new DatabaseUniversity (
             raw['id'],
@@ -2020,7 +3250,21 @@ export class DatabaseUniversity {
         )
     }
 }
+
 export class DocsDoc {
+    /**
+     * @class
+     * @property {number} id Document ID
+     * @property {number} ownerId Document owner ID
+     * @property {string} title Document title
+     * @property {number} size File size in bites
+     * @property {string} ext File extension
+     * @property {string} url File URL
+     * @property {number} date Date when file has been uploaded in Unixtime
+     * @property {number} type Document type
+     * @property {DocsDocPreview|undefined} preview
+     * @property {string} accessKey Access key for the document
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -2036,6 +3280,10 @@ export class DocsDoc {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DocsDoc}
+     */
     static deserialize(raw: Object): DocsDoc {
         return new DocsDoc (
             raw['id'],
@@ -2051,7 +3299,14 @@ export class DocsDoc {
         )
     }
 }
+
 export class DocsDocTypes {
+    /**
+     * @class
+     * @property {number} id Doc type ID
+     * @property {string} title Doc type title
+     * @property {number} count Number of docs
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -2060,6 +3315,10 @@ export class DocsDocTypes {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DocsDocTypes}
+     */
     static deserialize(raw: Object): DocsDocTypes {
         return new DocsDocTypes (
             raw['id'],
@@ -2068,20 +3327,35 @@ export class DocsDocTypes {
         )
     }
 }
+
 export class DocsDocUploadResponse {
+    /**
+     * @class
+     * @property {string} file Uploaded file data
+     */
     constructor (
         readonly file: string
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DocsDocUploadResponse}
+     */
     static deserialize(raw: Object): DocsDocUploadResponse {
         return new DocsDocUploadResponse (
             raw['file']
         )
     }
 }
+
 export class DocsDocPreview {
+    /**
+     * @class
+     * @property {DocsDocPreviewPhoto|undefined} photo
+     * @property {DocsDocPreviewVideo|undefined} video
+     */
     constructor (
         readonly photo: DocsDocPreviewPhoto|undefined,
         readonly video: DocsDocPreviewVideo|undefined
@@ -2089,6 +3363,10 @@ export class DocsDocPreview {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DocsDocPreview}
+     */
     static deserialize(raw: Object): DocsDocPreview {
         return new DocsDocPreview (
             raw['photo'] ? DocsDocPreviewPhoto.deserialize(raw['photo']) : undefined,
@@ -2096,20 +3374,37 @@ export class DocsDocPreview {
         )
     }
 }
+
 export class DocsDocPreviewPhoto {
+    /**
+     * @class
+     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     */
     constructor (
         readonly sizes: PhotosPhotoSizes|undefined[]|undefined
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DocsDocPreviewPhoto}
+     */
     static deserialize(raw: Object): DocsDocPreviewPhoto {
         return new DocsDocPreviewPhoto (
             raw['sizes'] ? raw['sizes'].map(v => v ? PhotosPhotoSizes.deserialize(v) : undefined) : undefined
         )
     }
 }
+
 export class DocsDocPreviewVideo {
+    /**
+     * @class
+     * @property {string} src Video URL
+     * @property {number} width Video's width in pixels
+     * @property {number} height Video's height in pixels
+     * @property {number} filesize Video file size in bites
+     */
     constructor (
         readonly src: string,
         readonly width: number,
@@ -2119,6 +3414,10 @@ export class DocsDocPreviewVideo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {DocsDocPreviewVideo}
+     */
     static deserialize(raw: Object): DocsDocPreviewVideo {
         return new DocsDocPreviewVideo (
             raw['src'],
@@ -2128,7 +3427,18 @@ export class DocsDocPreviewVideo {
         )
     }
 }
+
 export class FaveFavesLink {
+    /**
+     * @class
+     * @property {number} id Link ID
+     * @property {string} url Link URL
+     * @property {string} title Link title
+     * @property {string} description Link description
+     * @property {string} photo50 URL of the preview image with 50 px in width
+     * @property {string} photo100 URL of the preview image with 100 px in width
+     * @property {string} photo200 URL of the preview image with 200 px in width
+     */
     constructor (
         readonly id: number,
         readonly url: string,
@@ -2141,6 +3451,10 @@ export class FaveFavesLink {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {FaveFavesLink}
+     */
     static deserialize(raw: Object): FaveFavesLink {
         return new FaveFavesLink (
             raw['id'],
@@ -2153,7 +3467,13 @@ export class FaveFavesLink {
         )
     }
 }
+
 export class FriendsFriendsList {
+    /**
+     * @class
+     * @property {string} name List title
+     * @property {number} id List ID
+     */
     constructor (
         readonly name: string,
         readonly id: number
@@ -2161,6 +3481,10 @@ export class FriendsFriendsList {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {FriendsFriendsList}
+     */
     static deserialize(raw: Object): FriendsFriendsList {
         return new FriendsFriendsList (
             raw['name'],
@@ -2168,7 +3492,14 @@ export class FriendsFriendsList {
         )
     }
 }
+
 export class FriendsRequests {
+    /**
+     * @class
+     * @property {number} userId User ID
+     * @property {string} from ID of the user by whom friend has been suggested
+     * @property {FriendsRequestsMutual|undefined} mutual
+     */
     constructor (
         readonly userId: number,
         readonly from: string,
@@ -2177,6 +3508,10 @@ export class FriendsRequests {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {FriendsRequests}
+     */
     static deserialize(raw: Object): FriendsRequests {
         return new FriendsRequests (
             raw['user_id'],
@@ -2185,7 +3520,13 @@ export class FriendsRequests {
         )
     }
 }
+
 export class FriendsRequestsMutual {
+    /**
+     * @class
+     * @property {number} count Total mutual friends number
+     * @property {number[]|undefined} users
+     */
     constructor (
         readonly count: number,
         readonly users: number[]|undefined
@@ -2193,6 +3534,10 @@ export class FriendsRequestsMutual {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {FriendsRequestsMutual}
+     */
     static deserialize(raw: Object): FriendsRequestsMutual {
         return new FriendsRequestsMutual (
             raw['count'],
@@ -2200,7 +3545,15 @@ export class FriendsRequestsMutual {
         )
     }
 }
+
 export class FriendsRequestsXtrMessage {
+    /**
+     * @class
+     * @property {number} userId User ID
+     * @property {string} from ID of the user by whom friend has been suggested
+     * @property {FriendsRequestsMutual|undefined} mutual
+     * @property {string} message Message sent with a request
+     */
     constructor (
         readonly userId: number,
         readonly from: string,
@@ -2210,6 +3563,10 @@ export class FriendsRequestsXtrMessage {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {FriendsRequestsXtrMessage}
+     */
     static deserialize(raw: Object): FriendsRequestsXtrMessage {
         return new FriendsRequestsXtrMessage (
             raw['user_id'],
@@ -2219,7 +3576,16 @@ export class FriendsRequestsXtrMessage {
         )
     }
 }
+
 export class FriendsFriendStatus {
+    /**
+     * @class
+     * @property {number} userId User ID
+     * @property {number} friendStatus Friend status with the user
+     * @property {string} requestMessage Message sent with request
+     * @property {number} readState Information whether request is unviewed
+     * @property {string} sign MD5 hash for the result validation
+     */
     constructor (
         readonly userId: number,
         readonly friendStatus: number,
@@ -2230,6 +3596,10 @@ export class FriendsFriendStatus {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {FriendsFriendStatus}
+     */
     static deserialize(raw: Object): FriendsFriendStatus {
         return new FriendsFriendStatus (
             raw['user_id'],
@@ -2240,7 +3610,95 @@ export class FriendsFriendStatus {
         )
     }
 }
+
 export class FriendsUserXtrLists {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} nickname User nickname
+     * @property {string} maidenName User maiden name
+     * @property {string} domain Domain name of the user's page
+     * @property {string} bdate User's date of birth
+     * @property {BaseObject|undefined} city
+     * @property {BaseCountry|undefined} country
+     * @property {number} timezone User's timezone
+     * @property {string} photo200 URL of square photo of the user with 200 pixels in width
+     * @property {string} photoMax URL of square photo of the user with maximum width
+     * @property {string} photo200Orig URL of user's photo with 200 pixels in width
+     * @property {string} photo400Orig URL of user's photo with 400 pixels in width
+     * @property {string} photoMaxOrig URL of user's photo of maximum size
+     * @property {string} photoId ID of the user's main photo
+     * @property {number} hasPhoto Information whether the user has main photo
+     * @property {boolean} hasMobile Information whether the user specified his phone number
+     * @property {boolean} isFriend Information whether the user is a friend of current user
+     * @property {number} friendStatus Friend status for current user
+     * @property {boolean} wallComments Information whether current user can comment wall posts
+     * @property {boolean} canPost Information whether current user can post on the user's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see other users' audio on the wall
+     * @property {boolean} canSeeAudio Information whether current user can see the user's audio
+     * @property {boolean} canWritePrivateMessage Information whether current user can write private message
+     * @property {boolean} canSendFriendRequest Information whether current user can send a friend request
+     * @property {string} mobilePhone Information whether current user can see
+     * @property {string} homePhone User's mobile phone number
+     * @property {string} skype User's Skype nickname
+     * @property {string} facebook User's Facebook account
+     * @property {string} facebookName User's Facebook name
+     * @property {string} twitter User's Twitter account
+     * @property {string} livejournal User's Livejournal account
+     * @property {string} instagram User's Instagram account
+     * @property {string} site User's website
+     * @property {AudioAudioFull|undefined} statusAudio
+     * @property {string} status User's status
+     * @property {string} activity User's status
+     * @property {UsersLastSeen|undefined} lastSeen
+     * @property {UsersExports|undefined} exports
+     * @property {UsersCropPhoto|undefined} cropPhoto
+     * @property {boolean} verified Information whether the user is verified
+     * @property {number} followersCount Number of user's followers
+     * @property {boolean} blacklisted Information whether current user is in the requested user's blacklist.
+     * @property {boolean} blacklistedByMe Information whether the requested user is in current user's blacklist
+     * @property {boolean} isFavorite Information whether the requested user is in faves of current user
+     * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
+     * @property {number} commonCount Number of common friends with current user
+     * @property {UsersOccupation|undefined} occupation
+     * @property {UsersCareer|undefined[]|undefined} career
+     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {number} university University ID
+     * @property {string} universityName University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus User's education status
+     * @property {string} homeTown User hometown
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {UsersPersonal|undefined} personal
+     * @property {string} interests User's interests
+     * @property {string} music User's favorite music
+     * @property {string} activities User's activities
+     * @property {string} movies User's favorite movies
+     * @property {string} tv User's favorite tv shows
+     * @property {string} books User's favorite books
+     * @property {string} games User's favorite games
+     * @property {UsersUniversity|undefined[]|undefined} universities
+     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {string} about About me field
+     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {string} quotes Favorite quotes
+     * @property {number[]|undefined} lists
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -2330,6 +3788,10 @@ export class FriendsUserXtrLists {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {FriendsUserXtrLists}
+     */
     static deserialize(raw: Object): FriendsUserXtrLists {
         return new FriendsUserXtrLists (
             raw['id'],
@@ -2419,7 +3881,95 @@ export class FriendsUserXtrLists {
         )
     }
 }
+
 export class FriendsUserXtrPhone {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} nickname User nickname
+     * @property {string} maidenName User maiden name
+     * @property {string} domain Domain name of the user's page
+     * @property {string} bdate User's date of birth
+     * @property {BaseObject|undefined} city
+     * @property {BaseCountry|undefined} country
+     * @property {number} timezone User's timezone
+     * @property {string} photo200 URL of square photo of the user with 200 pixels in width
+     * @property {string} photoMax URL of square photo of the user with maximum width
+     * @property {string} photo200Orig URL of user's photo with 200 pixels in width
+     * @property {string} photo400Orig URL of user's photo with 400 pixels in width
+     * @property {string} photoMaxOrig URL of user's photo of maximum size
+     * @property {string} photoId ID of the user's main photo
+     * @property {number} hasPhoto Information whether the user has main photo
+     * @property {boolean} hasMobile Information whether the user specified his phone number
+     * @property {boolean} isFriend Information whether the user is a friend of current user
+     * @property {number} friendStatus Friend status for current user
+     * @property {boolean} wallComments Information whether current user can comment wall posts
+     * @property {boolean} canPost Information whether current user can post on the user's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see other users' audio on the wall
+     * @property {boolean} canSeeAudio Information whether current user can see the user's audio
+     * @property {boolean} canWritePrivateMessage Information whether current user can write private message
+     * @property {boolean} canSendFriendRequest Information whether current user can send a friend request
+     * @property {string} mobilePhone Information whether current user can see
+     * @property {string} homePhone User's mobile phone number
+     * @property {string} skype User's Skype nickname
+     * @property {string} facebook User's Facebook account
+     * @property {string} facebookName User's Facebook name
+     * @property {string} twitter User's Twitter account
+     * @property {string} livejournal User's Livejournal account
+     * @property {string} instagram User's Instagram account
+     * @property {string} site User's website
+     * @property {AudioAudioFull|undefined} statusAudio
+     * @property {string} status User's status
+     * @property {string} activity User's status
+     * @property {UsersLastSeen|undefined} lastSeen
+     * @property {UsersExports|undefined} exports
+     * @property {UsersCropPhoto|undefined} cropPhoto
+     * @property {boolean} verified Information whether the user is verified
+     * @property {number} followersCount Number of user's followers
+     * @property {boolean} blacklisted Information whether current user is in the requested user's blacklist.
+     * @property {boolean} blacklistedByMe Information whether the requested user is in current user's blacklist
+     * @property {boolean} isFavorite Information whether the requested user is in faves of current user
+     * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
+     * @property {number} commonCount Number of common friends with current user
+     * @property {UsersOccupation|undefined} occupation
+     * @property {UsersCareer|undefined[]|undefined} career
+     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {number} university University ID
+     * @property {string} universityName University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus User's education status
+     * @property {string} homeTown User hometown
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {UsersPersonal|undefined} personal
+     * @property {string} interests User's interests
+     * @property {string} music User's favorite music
+     * @property {string} activities User's activities
+     * @property {string} movies User's favorite movies
+     * @property {string} tv User's favorite tv shows
+     * @property {string} books User's favorite books
+     * @property {string} games User's favorite games
+     * @property {UsersUniversity|undefined[]|undefined} universities
+     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {string} about About me field
+     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {string} quotes Favorite quotes
+     * @property {string} phone User phone
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -2509,6 +4059,10 @@ export class FriendsUserXtrPhone {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {FriendsUserXtrPhone}
+     */
     static deserialize(raw: Object): FriendsUserXtrPhone {
         return new FriendsUserXtrPhone (
             raw['id'],
@@ -2598,7 +4152,15 @@ export class FriendsUserXtrPhone {
         )
     }
 }
+
 export class GiftsLayout {
+    /**
+     * @class
+     * @property {number} id Gift ID
+     * @property {string} thumb256 URL of the preview image with 256 px in width
+     * @property {string} thumb96 URL of the preview image with 96 px in width
+     * @property {string} thumb48 URL of the preview image with 48 px in width
+     */
     constructor (
         readonly id: number,
         readonly thumb256: string,
@@ -2608,6 +4170,10 @@ export class GiftsLayout {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GiftsLayout}
+     */
     static deserialize(raw: Object): GiftsLayout {
         return new GiftsLayout (
             raw['id'],
@@ -2617,7 +4183,18 @@ export class GiftsLayout {
         )
     }
 }
+
 export class GiftsGift {
+    /**
+     * @class
+     * @property {number} id Gift ID
+     * @property {number} fromId Gift sender ID
+     * @property {string} message Comment text
+     * @property {number} date Date when gist has been sent in Unixtime
+     * @property {GiftsLayout|undefined} gift
+     * @property {number} privacy Gift privacy
+     * @property {string} giftHash Hash
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -2630,6 +4207,10 @@ export class GiftsGift {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GiftsGift}
+     */
     static deserialize(raw: Object): GiftsGift {
         return new GiftsGift (
             raw['id'],
@@ -2642,7 +4223,16 @@ export class GiftsGift {
         )
     }
 }
+
 export class GroupsBanInfo {
+    /**
+     * @class
+     * @property {number} adminId Administrator ID
+     * @property {number} date Date when user has been added to blacklist in Unixtime
+     * @property {number} reason Ban reason
+     * @property {string} comment Comment for a ban
+     * @property {number} endDate Date when user will be removed from blacklist in Unixtime
+     */
     constructor (
         readonly adminId: number,
         readonly date: number,
@@ -2653,6 +4243,10 @@ export class GroupsBanInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsBanInfo}
+     */
     static deserialize(raw: Object): GroupsBanInfo {
         return new GroupsBanInfo (
             raw['admin_id'],
@@ -2663,7 +4257,13 @@ export class GroupsBanInfo {
         )
     }
 }
+
 export class GroupsGroupsArray {
+    /**
+     * @class
+     * @property {number} count Communities number
+     * @property {number[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: number[]|undefined
@@ -2671,6 +4271,10 @@ export class GroupsGroupsArray {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsGroupsArray}
+     */
     static deserialize(raw: Object): GroupsGroupsArray {
         return new GroupsGroupsArray (
             raw['count'],
@@ -2678,7 +4282,14 @@ export class GroupsGroupsArray {
         )
     }
 }
+
 export class GroupsGroupCategory {
+    /**
+     * @class
+     * @property {number} id Category ID
+     * @property {string} name Category name
+     * @property {BaseObjectWithName|undefined[]|undefined} subcategories
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -2687,6 +4298,10 @@ export class GroupsGroupCategory {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsGroupCategory}
+     */
     static deserialize(raw: Object): GroupsGroupCategory {
         return new GroupsGroupCategory (
             raw['id'],
@@ -2695,7 +4310,16 @@ export class GroupsGroupCategory {
         )
     }
 }
+
 export class GroupsGroupCategoryFull {
+    /**
+     * @class
+     * @property {number} id Category ID
+     * @property {string} name Category name
+     * @property {GroupsGroupCategory|undefined[]|undefined} subcategories
+     * @property {number} pageCount Pages number
+     * @property {GroupsGroup|undefined[]|undefined} pagePreviews
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -2706,6 +4330,10 @@ export class GroupsGroupCategoryFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsGroupCategoryFull}
+     */
     static deserialize(raw: Object): GroupsGroupCategoryFull {
         return new GroupsGroupCategoryFull (
             raw['id'],
@@ -2716,7 +4344,15 @@ export class GroupsGroupCategoryFull {
         )
     }
 }
+
 export class GroupsContactsItem {
+    /**
+     * @class
+     * @property {number} userId User ID
+     * @property {string} desc Contact description
+     * @property {string} email Contact email
+     * @property {string} phone Contact phone
+     */
     constructor (
         readonly userId: number,
         readonly desc: string,
@@ -2726,6 +4362,10 @@ export class GroupsContactsItem {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsContactsItem}
+     */
     static deserialize(raw: Object): GroupsContactsItem {
         return new GroupsContactsItem (
             raw['user_id'],
@@ -2735,7 +4375,18 @@ export class GroupsContactsItem {
         )
     }
 }
+
 export class GroupsCountersGroup {
+    /**
+     * @class
+     * @property {number} photos Photos number
+     * @property {number} albums Photo albums number
+     * @property {number} topics Topics number
+     * @property {number} videos Videos number
+     * @property {number} audios Audios number
+     * @property {number} docs Docs number
+     * @property {number} market Market items number
+     */
     constructor (
         readonly photos: number,
         readonly albums: number,
@@ -2748,6 +4399,10 @@ export class GroupsCountersGroup {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsCountersGroup}
+     */
     static deserialize(raw: Object): GroupsCountersGroup {
         return new GroupsCountersGroup (
             raw['photos'],
@@ -2760,7 +4415,13 @@ export class GroupsCountersGroup {
         )
     }
 }
+
 export class GroupsCover {
+    /**
+     * @class
+     * @property {boolean} enabled Information whether cover is enabled
+     * @property {BaseImage|undefined[]|undefined} images
+     */
     constructor (
         readonly enabled: boolean,
         readonly images: BaseImage|undefined[]|undefined
@@ -2768,6 +4429,10 @@ export class GroupsCover {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsCover}
+     */
     static deserialize(raw: Object): GroupsCover {
         return new GroupsCover (
             !!raw['enabled'],
@@ -2775,7 +4440,22 @@ export class GroupsCover {
         )
     }
 }
+
 export class GroupsGroup {
+    /**
+     * @class
+     * @property {number} id Community ID
+     * @property {string} name Community name
+     * @property {string} screenName Domain of the community page
+     * @property {number} isClosed Information whether community is closed
+     * @property {string} type Community type
+     * @property {boolean} isAdmin Information whether current user is administrator
+     * @property {number} adminLevel Level of current user's credentials as manager
+     * @property {boolean} isMember Information whether current user is member
+     * @property {string} photo50 URL of square photo of the community with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the community with 100 pixels in width
+     * @property {string} photo200 URL of square photo of the community with 200 pixels in width
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -2792,6 +4472,10 @@ export class GroupsGroup {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsGroup}
+     */
     static deserialize(raw: Object): GroupsGroup {
         return new GroupsGroup (
             raw['id'],
@@ -2808,7 +4492,52 @@ export class GroupsGroup {
         )
     }
 }
+
 export class GroupsGroupFull {
+    /**
+     * @class
+     * @property {number} id Community ID
+     * @property {string} name Community name
+     * @property {string} screenName Domain of the community page
+     * @property {number} isClosed Information whether community is closed
+     * @property {string} type Community type
+     * @property {boolean} isAdmin Information whether current user is administrator
+     * @property {number} adminLevel Level of current user's credentials as manager
+     * @property {boolean} isMember Information whether current user is member
+     * @property {string} photo50 URL of square photo of the community with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the community with 100 pixels in width
+     * @property {string} photo200 URL of square photo of the community with 200 pixels in width
+     * @property {GroupsMarketInfo|undefined} market
+     * @property {number} memberStatus Current user's member status
+     * @property {boolean} isFavorite Information whether community is in faves
+     * @property {boolean} isSubscribed Information whether current user is subscribed
+     * @property {BaseObject|undefined} city
+     * @property {BaseCountry|undefined} country
+     * @property {boolean} verified Information whether community is verified
+     * @property {string} description Community description
+     * @property {string} wikiPage Community's main wiki page title
+     * @property {number} membersCount Community members number
+     * @property {GroupsCountersGroup|undefined} counters
+     * @property {GroupsCover|undefined} cover
+     * @property {boolean} canPost Information whether current user can post on community's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see all posts on community's wall
+     * @property {string} activity Type of group, start date of event or category of public page
+     * @property {number} fixedPost Fixed post ID
+     * @property {boolean} canCreateTopic Information whether current user can create topic
+     * @property {boolean} canUploadVideo Information whether current user can upload video
+     * @property {string} status Community status
+     * @property {number} mainAlbumId Community's main photo album ID
+     * @property {GroupsLinksItem|undefined[]|undefined} links
+     * @property {GroupsContactsItem|undefined[]|undefined} contacts
+     * @property {string} site Community's website
+     * @property {number} mainSection Main section of community
+     * @property {boolean} canMessage Information whether current user can send a message to community
+     * @property {boolean} isMessagesAllowed Information whether current user can send a message to community
+     * @property {number} startDate Start date of event in Unixtime
+     * @property {number} finishDate Finish date of event in Unixtime
+     * @property {string} deactivated Information whether community is banned
+     * @property {number} ageLimits Information whether age limit
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -2855,6 +4584,10 @@ export class GroupsGroupFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsGroupFull}
+     */
     static deserialize(raw: Object): GroupsGroupFull {
         return new GroupsGroupFull (
             raw['id'],
@@ -2901,7 +4634,23 @@ export class GroupsGroupFull {
         )
     }
 }
+
 export class GroupsGroupXtrInvitedBy {
+    /**
+     * @class
+     * @property {string} id Community ID
+     * @property {string} name Community name
+     * @property {string} screenName Domain of the community page
+     * @property {boolean} isClosed Information whether community is closed
+     * @property {string} type Community type
+     * @property {boolean} isAdmin Information whether current user is manager
+     * @property {number} adminLevel Level of current user's credentials as manager
+     * @property {boolean} isMember Information whether current user is member
+     * @property {string} photo50 URL of square photo of the community with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the community with 100 pixels in width
+     * @property {string} photo200 URL of square photo of the community with 200 pixels in width
+     * @property {number} invitedBy Inviter ID
+     */
     constructor (
         readonly id: string,
         readonly name: string,
@@ -2919,6 +4668,10 @@ export class GroupsGroupXtrInvitedBy {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsGroupXtrInvitedBy}
+     */
     static deserialize(raw: Object): GroupsGroupXtrInvitedBy {
         return new GroupsGroupXtrInvitedBy (
             raw['id'],
@@ -2936,7 +4689,16 @@ export class GroupsGroupXtrInvitedBy {
         )
     }
 }
+
 export class GroupsGroupLink {
+    /**
+     * @class
+     * @property {number} id Link ID
+     * @property {string} url Link URL
+     * @property {boolean} editTitle Information whether the title can be edited
+     * @property {string} desc Link description
+     * @property {boolean} imageProcessing Information whether the image on processing
+     */
     constructor (
         readonly id: number,
         readonly url: string,
@@ -2947,6 +4709,10 @@ export class GroupsGroupLink {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsGroupLink}
+     */
     static deserialize(raw: Object): GroupsGroupLink {
         return new GroupsGroupLink (
             raw['id'],
@@ -2957,7 +4723,18 @@ export class GroupsGroupLink {
         )
     }
 }
+
 export class GroupsLinksItem {
+    /**
+     * @class
+     * @property {number} id Link ID
+     * @property {string} url Link URL
+     * @property {number} editTitle Information whether the link title can be edited
+     * @property {number} name Link title
+     * @property {string} desc Link description
+     * @property {string} photo50 URL of square image of the link with 50 pixels in width
+     * @property {string} photo100 URL of square image of the link with 100 pixels in width
+     */
     constructor (
         readonly id: number,
         readonly url: string,
@@ -2970,6 +4747,10 @@ export class GroupsLinksItem {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsLinksItem}
+     */
     static deserialize(raw: Object): GroupsLinksItem {
         return new GroupsLinksItem (
             raw['id'],
@@ -2982,7 +4763,18 @@ export class GroupsLinksItem {
         )
     }
 }
+
 export class GroupsMarketInfo {
+    /**
+     * @class
+     * @property {boolean} enabled Information whether the market is enabled
+     * @property {number} priceMin Minimum price
+     * @property {number} priceMax Maximum price
+     * @property {number} mainAlbumId Main market album ID
+     * @property {number} contactId Contact person ID
+     * @property {MarketCurrency|undefined} currency
+     * @property {string} currencyText Currency name
+     */
     constructor (
         readonly enabled: boolean,
         readonly priceMin: number,
@@ -2995,6 +4787,10 @@ export class GroupsMarketInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsMarketInfo}
+     */
     static deserialize(raw: Object): GroupsMarketInfo {
         return new GroupsMarketInfo (
             !!raw['enabled'],
@@ -3007,7 +4803,13 @@ export class GroupsMarketInfo {
         )
     }
 }
+
 export class GroupsMemberRole {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} role User's credentials as community admin
+     */
     constructor (
         readonly id: number,
         readonly role: string
@@ -3015,6 +4817,10 @@ export class GroupsMemberRole {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsMemberRole}
+     */
     static deserialize(raw: Object): GroupsMemberRole {
         return new GroupsMemberRole (
             raw['id'],
@@ -3022,7 +4828,13 @@ export class GroupsMemberRole {
         )
     }
 }
+
 export class GroupsMemberStatus {
+    /**
+     * @class
+     * @property {boolean} member Information whether user is a member of the group
+     * @property {number} userId User ID
+     */
     constructor (
         readonly member: boolean,
         readonly userId: number
@@ -3030,6 +4842,10 @@ export class GroupsMemberStatus {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsMemberStatus}
+     */
     static deserialize(raw: Object): GroupsMemberStatus {
         return new GroupsMemberStatus (
             !!raw['member'],
@@ -3037,7 +4853,15 @@ export class GroupsMemberStatus {
         )
     }
 }
+
 export class GroupsMemberStatusFull {
+    /**
+     * @class
+     * @property {boolean} member Information whether user is a member of the group
+     * @property {number} userId User ID
+     * @property {boolean} invitation Information whether user has been invited to the group
+     * @property {boolean} request Information whether user has send request to the group
+     */
     constructor (
         readonly member: boolean,
         readonly userId: number,
@@ -3047,6 +4871,10 @@ export class GroupsMemberStatusFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsMemberStatusFull}
+     */
     static deserialize(raw: Object): GroupsMemberStatusFull {
         return new GroupsMemberStatusFull (
             !!raw['member'],
@@ -3056,7 +4884,30 @@ export class GroupsMemberStatusFull {
         )
     }
 }
+
 export class GroupsGroupSettings {
+    /**
+     * @class
+     * @property {string} title Community title
+     * @property {string} description Community description
+     * @property {string} address Community's page domain
+     * @property {PlacesPlaceMin|undefined} place
+     * @property {number} wall Wall settings
+     * @property {number} photos Photos settings
+     * @property {number} video Video settings
+     * @property {number} audio Audio settings
+     * @property {number} docs Docs settings
+     * @property {number} topics Topics settings
+     * @property {number} wiki Wiki settings
+     * @property {boolean} obsceneFilter Information whether the obscene filter is enabled
+     * @property {boolean} obsceneStopwords Information whether the stopwords filter is enabled
+     * @property {string} obsceneWords The list of stop words
+     * @property {number} access Community access settings
+     * @property {number} subject Community subject ID
+     * @property {GroupsSubjectItem|undefined[]|undefined} subjectList
+     * @property {string} rss URL of the RSS feed
+     * @property {string} website Community website
+     */
     constructor (
         readonly title: string,
         readonly description: string,
@@ -3081,6 +4932,10 @@ export class GroupsGroupSettings {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsGroupSettings}
+     */
     static deserialize(raw: Object): GroupsGroupSettings {
         return new GroupsGroupSettings (
             raw['title'],
@@ -3105,7 +4960,13 @@ export class GroupsGroupSettings {
         )
     }
 }
+
 export class GroupsSubjectItem {
+    /**
+     * @class
+     * @property {number} id Subject ID
+     * @property {string} name Subject title
+     */
     constructor (
         readonly id: number,
         readonly name: string
@@ -3113,6 +4974,10 @@ export class GroupsSubjectItem {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsSubjectItem}
+     */
     static deserialize(raw: Object): GroupsSubjectItem {
         return new GroupsSubjectItem (
             raw['id'],
@@ -3120,7 +4985,95 @@ export class GroupsSubjectItem {
         )
     }
 }
+
 export class GroupsUserXtrBanInfo {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} nickname User nickname
+     * @property {string} maidenName User maiden name
+     * @property {string} domain Domain name of the user's page
+     * @property {string} bdate User's date of birth
+     * @property {BaseObject|undefined} city
+     * @property {BaseObject|undefined} country
+     * @property {number} timezone User's timezone
+     * @property {string} photo200 URL of square photo of the user with 200 pixels in width
+     * @property {string} photoMax URL of square photo of the user with maximum width
+     * @property {string} photo200Orig URL of user's photo with 200 pixels in width
+     * @property {string} photo400Orig URL of user's photo with 400 pixels in width
+     * @property {string} photoMaxOrig URL of user's photo of maximum size
+     * @property {string} photoId ID of the user's main photo
+     * @property {boolean} hasPhoto Information whether the user has main photo
+     * @property {boolean} hasMobile Information whether the user specified his phone number
+     * @property {boolean} isFriend Information whether the user is a friend of current user
+     * @property {number} friendStatus Friend status for current user
+     * @property {boolean} wallComments Information whether current user can comment wall posts
+     * @property {boolean} canPost Information whether current user can post on the user's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see other users' audio on the wall
+     * @property {boolean} canSeeAudio Information whether current user can see the user's audio
+     * @property {boolean} canWritePrivateMessage Information whether current user can write private message
+     * @property {boolean} canSendFriendRequest Information whether current user can send a friend request
+     * @property {string} mobilePhone Information whether current user can see
+     * @property {string} homePhone User's mobile phone number
+     * @property {string} skype User's Skype nickname
+     * @property {string} facebook User's Facebook account
+     * @property {string} facebookName User's Facebook name
+     * @property {string} twitter User's Twitter account
+     * @property {string} livejournal User's Livejournal account
+     * @property {string} instagram User's Instagram account
+     * @property {string} site User's website
+     * @property {AudioAudioFull|undefined} statusAudio
+     * @property {string} status User's status
+     * @property {string} activity User's status
+     * @property {UsersLastSeen|undefined} lastSeen
+     * @property {UsersExports|undefined} exports
+     * @property {UsersCropPhoto|undefined} cropPhoto
+     * @property {boolean} verified Information whether the user is verified
+     * @property {number} followersCount Number of user's followers
+     * @property {boolean} blacklisted Information whether current user is in the requested user's blacklist.
+     * @property {boolean} blacklistedByMe Information whether the requested user is in current user's blacklist
+     * @property {boolean} isFavorite Information whether the requested user is in faves of current user
+     * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
+     * @property {number} commonCount Number of common friends with current user
+     * @property {UsersOccupation|undefined} occupation
+     * @property {UsersCareer|undefined[]|undefined} career
+     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {number} university University ID
+     * @property {string} universityName University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus User's education status
+     * @property {string} homeTown User hometown
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {UsersPersonal|undefined} personal
+     * @property {string} interests User's interests
+     * @property {string} music User's favorite music
+     * @property {string} activities User's activities
+     * @property {string} movies User's favorite movies
+     * @property {string} tv User's favorite tv shows
+     * @property {string} books User's favorite books
+     * @property {string} games User's favorite games
+     * @property {UsersUniversity|undefined[]|undefined} universities
+     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {string} about About me field
+     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {string} quotes Favorite quotes
+     * @property {GroupsBanInfo|undefined} banInfo
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -3210,6 +5163,10 @@ export class GroupsUserXtrBanInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsUserXtrBanInfo}
+     */
     static deserialize(raw: Object): GroupsUserXtrBanInfo {
         return new GroupsUserXtrBanInfo (
             raw['id'],
@@ -3299,18 +5256,114 @@ export class GroupsUserXtrBanInfo {
         )
     }
 }
+
 export class GroupsRoleOptions {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsRoleOptions}
+     */
     static deserialize(raw: Object): GroupsRoleOptions {
         return new GroupsRoleOptions (
         )
     }
 }
+
 export class GroupsUserXtrRole {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} nickname User nickname
+     * @property {string} maidenName User maiden name
+     * @property {string} domain Domain name of the user's page
+     * @property {string} bdate User's date of birth
+     * @property {BaseObject|undefined} city
+     * @property {BaseCountry|undefined} country
+     * @property {number} timezone User's timezone
+     * @property {string} photo200 URL of square photo of the user with 200 pixels in width
+     * @property {string} photoMax URL of square photo of the user with maximum width
+     * @property {string} photo200Orig URL of user's photo with 200 pixels in width
+     * @property {string} photo400Orig URL of user's photo with 400 pixels in width
+     * @property {string} photoMaxOrig URL of user's photo of maximum size
+     * @property {string} photoId ID of the user's main photo
+     * @property {number} hasPhoto Information whether the user has main photo
+     * @property {boolean} hasMobile Information whether the user specified his phone number
+     * @property {boolean} isFriend Information whether the user is a friend of current user
+     * @property {number} friendStatus Friend status for current user
+     * @property {boolean} wallComments Information whether current user can comment wall posts
+     * @property {boolean} canPost Information whether current user can post on the user's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see other users' audio on the wall
+     * @property {boolean} canSeeAudio Information whether current user can see the user's audio
+     * @property {boolean} canWritePrivateMessage Information whether current user can write private message
+     * @property {boolean} canSendFriendRequest Information whether current user can send a friend request
+     * @property {string} mobilePhone Information whether current user can see
+     * @property {string} homePhone User's mobile phone number
+     * @property {string} skype User's Skype nickname
+     * @property {string} facebook User's Facebook account
+     * @property {string} facebookName User's Facebook name
+     * @property {string} twitter User's Twitter account
+     * @property {string} livejournal User's Livejournal account
+     * @property {string} instagram User's Instagram account
+     * @property {string} site User's website
+     * @property {AudioAudioFull|undefined} statusAudio
+     * @property {string} status User's status
+     * @property {string} activity User's status
+     * @property {UsersLastSeen|undefined} lastSeen
+     * @property {UsersExports|undefined} exports
+     * @property {UsersCropPhoto|undefined} cropPhoto
+     * @property {boolean} verified Information whether the user is verified
+     * @property {number} followersCount Number of user's followers
+     * @property {boolean} blacklisted Information whether current user is in the requested user's blacklist.
+     * @property {boolean} blacklistedByMe Information whether the requested user is in current user's blacklist
+     * @property {boolean} isFavorite Information whether the requested user is in faves of current user
+     * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
+     * @property {number} commonCount Number of common friends with current user
+     * @property {UsersOccupation|undefined} occupation
+     * @property {UsersCareer|undefined[]|undefined} career
+     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {number} university University ID
+     * @property {string} universityName University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus User's education status
+     * @property {string} homeTown User hometown
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {UsersPersonal|undefined} personal
+     * @property {string} interests User's interests
+     * @property {string} music User's favorite music
+     * @property {string} activities User's activities
+     * @property {string} movies User's favorite movies
+     * @property {string} tv User's favorite tv shows
+     * @property {string} books User's favorite books
+     * @property {string} games User's favorite games
+     * @property {UsersUniversity|undefined[]|undefined} universities
+     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {string} about About me field
+     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {string} quotes Favorite quotes
+     * @property {GroupsRoleOptions|undefined} role
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -3400,6 +5453,10 @@ export class GroupsUserXtrRole {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {GroupsUserXtrRole}
+     */
     static deserialize(raw: Object): GroupsUserXtrRole {
         return new GroupsUserXtrRole (
             raw['id'],
@@ -3489,7 +5546,18 @@ export class GroupsUserXtrRole {
         )
     }
 }
+
 export class LeadsLead {
+    /**
+     * @class
+     * @property {number} limit Lead limit
+     * @property {number} spent Amount of spent votes
+     * @property {number} cost Offer cost
+     * @property {number} impressions Impressions number
+     * @property {number} started Started offers number
+     * @property {number} completed Completed offers number
+     * @property {LeadsLeadDays|undefined} days
+     */
     constructor (
         readonly limit: number,
         readonly spent: number,
@@ -3502,6 +5570,10 @@ export class LeadsLead {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {LeadsLead}
+     */
     static deserialize(raw: Object): LeadsLead {
         return new LeadsLead (
             raw['limit'],
@@ -3514,7 +5586,15 @@ export class LeadsLead {
         )
     }
 }
+
 export class LeadsLeadDays {
+    /**
+     * @class
+     * @property {number} impressions Impressions number
+     * @property {number} started Started offers number
+     * @property {number} completed Completed offers number
+     * @property {number} spent Amount of spent votes
+     */
     constructor (
         readonly impressions: number,
         readonly started: number,
@@ -3524,6 +5604,10 @@ export class LeadsLeadDays {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {LeadsLeadDays}
+     */
     static deserialize(raw: Object): LeadsLeadDays {
         return new LeadsLeadDays (
             raw['impressions'],
@@ -3533,7 +5617,13 @@ export class LeadsLeadDays {
         )
     }
 }
+
 export class LeadsStart {
+    /**
+     * @class
+     * @property {boolean} testMode Information whether test mode is enabled
+     * @property {string} vkSid Session data
+     */
     constructor (
         readonly testMode: boolean,
         readonly vkSid: string
@@ -3541,6 +5631,10 @@ export class LeadsStart {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {LeadsStart}
+     */
     static deserialize(raw: Object): LeadsStart {
         return new LeadsStart (
             !!raw['test_mode'],
@@ -3548,7 +5642,15 @@ export class LeadsStart {
         )
     }
 }
+
 export class LeadsChecked {
+    /**
+     * @class
+     * @property {string} result Information whether user can start the lead
+     * @property {string} reason Reason why user can't start the lead
+     * @property {string} startLink URL user should open to start the lead
+     * @property {string} sid Session ID
+     */
     constructor (
         readonly result: string,
         readonly reason: string,
@@ -3558,6 +5660,10 @@ export class LeadsChecked {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {LeadsChecked}
+     */
     static deserialize(raw: Object): LeadsChecked {
         return new LeadsChecked (
             raw['result'],
@@ -3567,7 +5673,16 @@ export class LeadsChecked {
         )
     }
 }
+
 export class LeadsComplete {
+    /**
+     * @class
+     * @property {number} limit Offer limit
+     * @property {number} spent Amount of spent votes
+     * @property {number} cost Offer cost
+     * @property {boolean} testMode Information whether test mode is enabled
+     * @property {BaseOkResponse|undefined} success
+     */
     constructor (
         readonly limit: number,
         readonly spent: number,
@@ -3578,6 +5693,10 @@ export class LeadsComplete {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {LeadsComplete}
+     */
     static deserialize(raw: Object): LeadsComplete {
         return new LeadsComplete (
             raw['limit'],
@@ -3588,7 +5707,19 @@ export class LeadsComplete {
         )
     }
 }
+
 export class LeadsEntry {
+    /**
+     * @class
+     * @property {number} uid User ID
+     * @property {number} aid Application ID
+     * @property {string} sid Session string ID
+     * @property {number} date Date when the action has been started in Unixtime
+     * @property {number} status Action type
+     * @property {boolean} testMode Information whether test mode is enabled
+     * @property {number} startDate Start date in Unixtime (for status=2)
+     * @property {string} comment Comment text
+     */
     constructor (
         readonly uid: number,
         readonly aid: number,
@@ -3602,6 +5733,10 @@ export class LeadsEntry {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {LeadsEntry}
+     */
     static deserialize(raw: Object): LeadsEntry {
         return new LeadsEntry (
             raw['uid'],
@@ -3615,7 +5750,17 @@ export class LeadsEntry {
         )
     }
 }
+
 export class MarketMarketAlbum {
+    /**
+     * @class
+     * @property {number} id Market album ID
+     * @property {number} ownerId Market album owner's ID
+     * @property {string} title Market album title
+     * @property {number} count Items number
+     * @property {number} updatedTime Date when album has been updated last time in Unixtime
+     * @property {PhotosPhoto|undefined} photo
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -3627,6 +5772,10 @@ export class MarketMarketAlbum {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MarketMarketAlbum}
+     */
     static deserialize(raw: Object): MarketMarketAlbum {
         return new MarketMarketAlbum (
             raw['id'],
@@ -3638,7 +5787,14 @@ export class MarketMarketAlbum {
         )
     }
 }
+
 export class MarketMarketCategory {
+    /**
+     * @class
+     * @property {number} id Category ID
+     * @property {string} name Category name
+     * @property {MarketSection|undefined} section
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -3647,6 +5803,10 @@ export class MarketMarketCategory {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MarketMarketCategory}
+     */
     static deserialize(raw: Object): MarketMarketCategory {
         return new MarketMarketCategory (
             raw['id'],
@@ -3655,7 +5815,13 @@ export class MarketMarketCategory {
         )
     }
 }
+
 export class MarketCurrency {
+    /**
+     * @class
+     * @property {number} id Currency ID
+     * @property {string} name Currency sign
+     */
     constructor (
         readonly id: number,
         readonly name: string
@@ -3663,6 +5829,10 @@ export class MarketCurrency {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MarketCurrency}
+     */
     static deserialize(raw: Object): MarketCurrency {
         return new MarketCurrency (
             raw['id'],
@@ -3670,7 +5840,20 @@ export class MarketCurrency {
         )
     }
 }
+
 export class MarketMarketItem {
+    /**
+     * @class
+     * @property {number} id Item ID
+     * @property {number} ownerId Item owner's ID
+     * @property {string} title Item title
+     * @property {string} description Item description
+     * @property {MarketPrice|undefined} price
+     * @property {MarketMarketCategory|undefined} category
+     * @property {number} date Date when the item has been created in Unixtime
+     * @property {string} thumbPhoto URL of the preview image
+     * @property {number} availability Information whether the item is available
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -3685,6 +5868,10 @@ export class MarketMarketItem {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MarketMarketItem}
+     */
     static deserialize(raw: Object): MarketMarketItem {
         return new MarketMarketItem (
             raw['id'],
@@ -3699,7 +5886,25 @@ export class MarketMarketItem {
         )
     }
 }
+
 export class MarketMarketItemFull {
+    /**
+     * @class
+     * @property {number} id Item ID
+     * @property {number} ownerId Item owner's ID
+     * @property {string} title Item title
+     * @property {string} description Item description
+     * @property {MarketPrice|undefined} price
+     * @property {MarketMarketCategory|undefined} category
+     * @property {number} date Date when the item has been created in Unixtime
+     * @property {string} thumbPhoto URL of the preview image
+     * @property {number} availability Information whether the item is available
+     * @property {PhotosPhoto|undefined[]|undefined} photos
+     * @property {boolean} canComment Information whether current use can comment the item
+     * @property {boolean} canRepost Information whether current use can repost the item
+     * @property {BaseLikes|undefined} likes
+     * @property {number} viewsCount Views number
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -3719,6 +5924,10 @@ export class MarketMarketItemFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MarketMarketItemFull}
+     */
     static deserialize(raw: Object): MarketMarketItemFull {
         return new MarketMarketItemFull (
             raw['id'],
@@ -3738,7 +5947,14 @@ export class MarketMarketItemFull {
         )
     }
 }
+
 export class MarketPrice {
+    /**
+     * @class
+     * @property {string} amount Amount
+     * @property {MarketCurrency|undefined} currency
+     * @property {string} text Text
+     */
     constructor (
         readonly amount: string,
         readonly currency: MarketCurrency|undefined,
@@ -3747,6 +5963,10 @@ export class MarketPrice {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MarketPrice}
+     */
     static deserialize(raw: Object): MarketPrice {
         return new MarketPrice (
             raw['amount'],
@@ -3755,7 +5975,13 @@ export class MarketPrice {
         )
     }
 }
+
 export class MarketSection {
+    /**
+     * @class
+     * @property {number} id Section ID
+     * @property {string} name Section name
+     */
     constructor (
         readonly id: number,
         readonly name: string
@@ -3763,6 +5989,10 @@ export class MarketSection {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MarketSection}
+     */
     static deserialize(raw: Object): MarketSection {
         return new MarketSection (
             raw['id'],
@@ -3770,7 +6000,17 @@ export class MarketSection {
         )
     }
 }
+
 export class MessagesAttachmentsHistory {
+    /**
+     * @class
+     * @property {string} type Attachments type
+     * @property {PhotosPhoto|undefined} photo
+     * @property {VideoVideo|undefined} video
+     * @property {AudioAudioFull|undefined} audio
+     * @property {DocsDoc|undefined} doc
+     * @property {BaseLink|undefined} link
+     */
     constructor (
         readonly type: string,
         readonly photo: PhotosPhoto|undefined,
@@ -3782,6 +6022,10 @@ export class MessagesAttachmentsHistory {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesAttachmentsHistory}
+     */
     static deserialize(raw: Object): MessagesAttachmentsHistory {
         return new MessagesAttachmentsHistory (
             raw['type'],
@@ -3793,7 +6037,23 @@ export class MessagesAttachmentsHistory {
         )
     }
 }
+
 export class MessagesMessageAttachment {
+    /**
+     * @class
+     * @property {PhotosPhoto|undefined} photo
+     * @property {AudioAudioFull|undefined} audio
+     * @property {VideoVideo|undefined} video
+     * @property {DocsDoc|undefined} doc
+     * @property {BaseLink|undefined} link
+     * @property {MarketMarketItem|undefined} market
+     * @property {MarketMarketAlbum|undefined} marketMarketAlbum
+     * @property {GiftsLayout|undefined} gift
+     * @property {BaseSticker|undefined} sticker
+     * @property {WallWallpostAttached|undefined} wall
+     * @property {WallWallComment|undefined} wallReply
+     * @property {string} type Attachment type
+     */
     constructor (
         readonly photo: PhotosPhoto|undefined,
         readonly audio: AudioAudioFull|undefined,
@@ -3811,6 +6071,10 @@ export class MessagesMessageAttachment {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesMessageAttachment}
+     */
     static deserialize(raw: Object): MessagesMessageAttachment {
         return new MessagesMessageAttachment (
             raw['photo'] ? PhotosPhoto.deserialize(raw['photo']) : undefined,
@@ -3828,7 +6092,22 @@ export class MessagesMessageAttachment {
         )
     }
 }
+
 export class MessagesChat {
+    /**
+     * @class
+     * @property {number} id Chat ID
+     * @property {string} type Chat type
+     * @property {string} title Chat title
+     * @property {number} adminId Chat creator ID
+     * @property {number[]|undefined} users
+     * @property {MessagesChatPushSettings|undefined} pushSettings
+     * @property {string} photo50 URL of the preview image with 50 px in width
+     * @property {string} photo100 URL of the preview image with 100 px in width
+     * @property {string} photo200 URL of the preview image with 200 px in width
+     * @property {boolean} left Shows that user has been left the chat
+     * @property {boolean} kicked Shows that user has been kicked from the chat
+     */
     constructor (
         readonly id: number,
         readonly type: string,
@@ -3845,6 +6124,10 @@ export class MessagesChat {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesChat}
+     */
     static deserialize(raw: Object): MessagesChat {
         return new MessagesChat (
             raw['id'],
@@ -3861,7 +6144,22 @@ export class MessagesChat {
         )
     }
 }
+
 export class MessagesChatFull {
+    /**
+     * @class
+     * @property {number} id Chat ID
+     * @property {string} type Chat type
+     * @property {string} title Chat title
+     * @property {number} adminId Chat creator ID
+     * @property {MessagesUserXtrInvitedBy|undefined[]|undefined} users
+     * @property {MessagesChatPushSettings|undefined} pushSettings
+     * @property {string} photo50 URL of the preview image with 50 px in width
+     * @property {string} photo100 URL of the preview image with 100 px in width
+     * @property {string} photo200 URL of the preview image with 200 px in width
+     * @property {boolean} left Shows that user has been left the chat
+     * @property {boolean} kicked Shows that user has been kicked from the chat
+     */
     constructor (
         readonly id: number,
         readonly type: string,
@@ -3878,6 +6176,10 @@ export class MessagesChatFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesChatFull}
+     */
     static deserialize(raw: Object): MessagesChatFull {
         return new MessagesChatFull (
             raw['id'],
@@ -3894,7 +6196,13 @@ export class MessagesChatFull {
         )
     }
 }
+
 export class MessagesChatPushSettings {
+    /**
+     * @class
+     * @property {boolean} sound Information whether the sound is on
+     * @property {number} disabledUntil Time until that notifications are disabled
+     */
     constructor (
         readonly sound: boolean,
         readonly disabledUntil: number
@@ -3902,6 +6210,10 @@ export class MessagesChatPushSettings {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesChatPushSettings}
+     */
     static deserialize(raw: Object): MessagesChatPushSettings {
         return new MessagesChatPushSettings (
             !!raw['sound'],
@@ -3909,7 +6221,15 @@ export class MessagesChatPushSettings {
         )
     }
 }
+
 export class MessagesDialog {
+    /**
+     * @class
+     * @property {number} unread Information whether unread messages are in the dialog
+     * @property {MessagesMessage|undefined} message
+     * @property {number} inRead ID of the last message read by current user
+     * @property {number} outRead ID of the last message read by the others
+     */
     constructor (
         readonly unread: number,
         readonly message: MessagesMessage|undefined,
@@ -3919,6 +6239,10 @@ export class MessagesDialog {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesDialog}
+     */
     static deserialize(raw: Object): MessagesDialog {
         return new MessagesDialog (
             raw['unread'],
@@ -3928,7 +6252,13 @@ export class MessagesDialog {
         )
     }
 }
+
 export class MessagesLastActivity {
+    /**
+     * @class
+     * @property {boolean} online Information whether user is online
+     * @property {number} time Time when user was online in Unixtime
+     */
     constructor (
         readonly online: boolean,
         readonly time: number
@@ -3936,6 +6266,10 @@ export class MessagesLastActivity {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesLastActivity}
+     */
     static deserialize(raw: Object): MessagesLastActivity {
         return new MessagesLastActivity (
             !!raw['online'],
@@ -3943,7 +6277,15 @@ export class MessagesLastActivity {
         )
     }
 }
+
 export class MessagesLongpollParams {
+    /**
+     * @class
+     * @property {string} key Key
+     * @property {string} server Server URL
+     * @property {number} ts Timestamp
+     * @property {number} pts Persistent timestamp
+     */
     constructor (
         readonly key: string,
         readonly server: string,
@@ -3953,6 +6295,10 @@ export class MessagesLongpollParams {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesLongpollParams}
+     */
     static deserialize(raw: Object): MessagesLongpollParams {
         return new MessagesLongpollParams (
             raw['key'],
@@ -3962,7 +6308,13 @@ export class MessagesLongpollParams {
         )
     }
 }
+
 export class MessagesLongpollMessages {
+    /**
+     * @class
+     * @property {number} count Total number
+     * @property {MessagesMessage|undefined[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: MessagesMessage|undefined[]|undefined
@@ -3970,6 +6322,10 @@ export class MessagesLongpollMessages {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesLongpollMessages}
+     */
     static deserialize(raw: Object): MessagesLongpollMessages {
         return new MessagesLongpollMessages (
             raw['count'],
@@ -3977,7 +6333,32 @@ export class MessagesLongpollMessages {
         )
     }
 }
+
 export class MessagesMessage {
+    /**
+     * @class
+     * @property {number} id Message ID
+     * @property {number} date Date when the message has been sent in Unixtime
+     * @property {boolean} out Information whether the message is outcoming
+     * @property {number} userId Message author's ID
+     * @property {number} fromId Message author's ID
+     * @property {number} randomId ID used for sending messages. It returned only for outgoing messages
+     * @property {boolean} important Is it an important message
+     * @property {boolean} deleted Is it an deleted message
+     * @property {MessagesMessage|undefined[]|undefined} fwdMessages Forwarded messages
+     * @property {boolean} readState Information whether the messages is read
+     * @property {string} title Message title or chat title
+     * @property {string} body Message text
+     * @property {MessagesMessageAttachment|undefined[]|undefined} attachments
+     * @property {number} chatId Chat ID
+     * @property {number[]|undefined} chatActive
+     * @property {number} usersCount Chat users number
+     * @property {number} adminId Chat administrator ID
+     * @property {string} photo50 URL of the preview image with 50px in width
+     * @property {string} photo100 URL of the preview image with 100px in width
+     * @property {string} photo200 URL of the preview image with 200px in width
+     * @property {BaseGeo|undefined} geo
+     */
     constructor (
         readonly id: number,
         readonly date: number,
@@ -4004,6 +6385,10 @@ export class MessagesMessage {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesMessage}
+     */
     static deserialize(raw: Object): MessagesMessage {
         return new MessagesMessage (
             raw['id'],
@@ -4030,7 +6415,25 @@ export class MessagesMessage {
         )
     }
 }
+
 export class MessagesUserXtrInvitedBy {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} type Object type
+     * @property {number} invitedBy ID of the inviter
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -4050,6 +6453,10 @@ export class MessagesUserXtrInvitedBy {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {MessagesUserXtrInvitedBy}
+     */
     static deserialize(raw: Object): MessagesUserXtrInvitedBy {
         return new MessagesUserXtrInvitedBy (
             raw['id'],
@@ -4069,7 +6476,14 @@ export class MessagesUserXtrInvitedBy {
         )
     }
 }
+
 export class NewsfeedNewsfeedItem {
+    /**
+     * @class
+     * @property {string} type Item type
+     * @property {number} sourceId Item source ID
+     * @property {number} date Date when item has been added in Unixtime
+     */
     constructor (
         readonly type: string,
         readonly sourceId: number,
@@ -4078,6 +6492,10 @@ export class NewsfeedNewsfeedItem {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedNewsfeedItem}
+     */
     static deserialize(raw: Object): NewsfeedNewsfeedItem {
         return new NewsfeedNewsfeedItem (
             raw['type'],
@@ -4086,7 +6504,13 @@ export class NewsfeedNewsfeedItem {
         )
     }
 }
+
 export class NewsfeedItemAudio {
+    /**
+     * @class
+     * @property {NewsfeedItemAudioAudio|undefined} audio
+     * @property {number} postId Post ID
+     */
     constructor (
         readonly audio: NewsfeedItemAudioAudio|undefined,
         readonly postId: number
@@ -4094,6 +6518,10 @@ export class NewsfeedItemAudio {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemAudio}
+     */
     static deserialize(raw: Object): NewsfeedItemAudio {
         return new NewsfeedItemAudio (
             raw['audio'] ? NewsfeedItemAudioAudio.deserialize(raw['audio']) : undefined,
@@ -4101,7 +6529,13 @@ export class NewsfeedItemAudio {
         )
     }
 }
+
 export class NewsfeedItemAudioAudio {
+    /**
+     * @class
+     * @property {number} count Audios number
+     * @property {AudioAudioFull|undefined[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: AudioAudioFull|undefined[]|undefined
@@ -4109,6 +6543,10 @@ export class NewsfeedItemAudioAudio {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemAudioAudio}
+     */
     static deserialize(raw: Object): NewsfeedItemAudioAudio {
         return new NewsfeedItemAudioAudio (
             raw['count'],
@@ -4116,33 +6554,57 @@ export class NewsfeedItemAudioAudio {
         )
     }
 }
+
 export class NewsfeedItemFriend {
+    /**
+     * @class
+     * @property {BaseUserId|undefined[]|undefined} friends
+     */
     constructor (
         readonly friends: BaseUserId|undefined[]|undefined
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemFriend}
+     */
     static deserialize(raw: Object): NewsfeedItemFriend {
         return new NewsfeedItemFriend (
             raw['friends'] ? raw['friends'].map(v => v ? BaseUserId.deserialize(v) : undefined) : undefined
         )
     }
 }
+
 export class NewsfeedItemNote {
+    /**
+     * @class
+     * @property {NewsfeedItemNoteNotes|undefined} notes
+     */
     constructor (
         readonly notes: NewsfeedItemNoteNotes|undefined
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemNote}
+     */
     static deserialize(raw: Object): NewsfeedItemNote {
         return new NewsfeedItemNote (
             raw['notes'] ? NewsfeedItemNoteNotes.deserialize(raw['notes']) : undefined
         )
     }
 }
+
 export class NewsfeedItemNoteNotes {
+    /**
+     * @class
+     * @property {number} count Notes number
+     * @property {NewsfeedNewsfeedNote|undefined[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: NewsfeedNewsfeedNote|undefined[]|undefined
@@ -4150,6 +6612,10 @@ export class NewsfeedItemNoteNotes {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemNoteNotes}
+     */
     static deserialize(raw: Object): NewsfeedItemNoteNotes {
         return new NewsfeedItemNoteNotes (
             raw['count'],
@@ -4157,7 +6623,13 @@ export class NewsfeedItemNoteNotes {
         )
     }
 }
+
 export class NewsfeedItemPhoto {
+    /**
+     * @class
+     * @property {NewsfeedItemPhotoPhotos|undefined} photos
+     * @property {number} postId Post ID
+     */
     constructor (
         readonly photos: NewsfeedItemPhotoPhotos|undefined,
         readonly postId: number
@@ -4165,6 +6637,10 @@ export class NewsfeedItemPhoto {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemPhoto}
+     */
     static deserialize(raw: Object): NewsfeedItemPhoto {
         return new NewsfeedItemPhoto (
             raw['photos'] ? NewsfeedItemPhotoPhotos.deserialize(raw['photos']) : undefined,
@@ -4172,7 +6648,13 @@ export class NewsfeedItemPhoto {
         )
     }
 }
+
 export class NewsfeedItemPhotoPhotos {
+    /**
+     * @class
+     * @property {number} count Photos number
+     * @property {NewsfeedNewsfeedPhoto|undefined[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: NewsfeedNewsfeedPhoto|undefined[]|undefined
@@ -4180,6 +6662,10 @@ export class NewsfeedItemPhotoPhotos {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemPhotoPhotos}
+     */
     static deserialize(raw: Object): NewsfeedItemPhotoPhotos {
         return new NewsfeedItemPhotoPhotos (
             raw['count'],
@@ -4187,7 +6673,13 @@ export class NewsfeedItemPhotoPhotos {
         )
     }
 }
+
 export class NewsfeedItemPhotoTag {
+    /**
+     * @class
+     * @property {NewsfeedItemPhotoTagPhotoTags|undefined} photoTags
+     * @property {number} postId Post ID
+     */
     constructor (
         readonly photoTags: NewsfeedItemPhotoTagPhotoTags|undefined,
         readonly postId: number
@@ -4195,6 +6687,10 @@ export class NewsfeedItemPhotoTag {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemPhotoTag}
+     */
     static deserialize(raw: Object): NewsfeedItemPhotoTag {
         return new NewsfeedItemPhotoTag (
             raw['photo_tags'] ? NewsfeedItemPhotoTagPhotoTags.deserialize(raw['photo_tags']) : undefined,
@@ -4202,7 +6698,13 @@ export class NewsfeedItemPhotoTag {
         )
     }
 }
+
 export class NewsfeedItemPhotoTagPhotoTags {
+    /**
+     * @class
+     * @property {number} count Tags number
+     * @property {NewsfeedNewsfeedPhoto|undefined[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: NewsfeedNewsfeedPhoto|undefined[]|undefined
@@ -4210,6 +6712,10 @@ export class NewsfeedItemPhotoTagPhotoTags {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemPhotoTagPhotoTags}
+     */
     static deserialize(raw: Object): NewsfeedItemPhotoTagPhotoTags {
         return new NewsfeedItemPhotoTagPhotoTags (
             raw['count'],
@@ -4217,7 +6723,15 @@ export class NewsfeedItemPhotoTagPhotoTags {
         )
     }
 }
+
 export class NewsfeedItemTopic {
+    /**
+     * @class
+     * @property {number} postId Topic post ID
+     * @property {string} text Post text
+     * @property {BaseCommentsInfo|undefined} comments
+     * @property {BaseLikesInfo|undefined} likes
+     */
     constructor (
         readonly postId: number,
         readonly text: string,
@@ -4227,6 +6741,10 @@ export class NewsfeedItemTopic {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemTopic}
+     */
     static deserialize(raw: Object): NewsfeedItemTopic {
         return new NewsfeedItemTopic (
             raw['post_id'],
@@ -4236,20 +6754,35 @@ export class NewsfeedItemTopic {
         )
     }
 }
+
 export class NewsfeedItemVideo {
+    /**
+     * @class
+     * @property {NewsfeedItemVideoVideo|undefined} video
+     */
     constructor (
         readonly video: NewsfeedItemVideoVideo|undefined
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemVideo}
+     */
     static deserialize(raw: Object): NewsfeedItemVideo {
         return new NewsfeedItemVideo (
             raw['video'] ? NewsfeedItemVideoVideo.deserialize(raw['video']) : undefined
         )
     }
 }
+
 export class NewsfeedItemVideoVideo {
+    /**
+     * @class
+     * @property {number} count Tags number
+     * @property {VideoVideo|undefined[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: VideoVideo|undefined[]|undefined
@@ -4257,6 +6790,10 @@ export class NewsfeedItemVideoVideo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemVideoVideo}
+     */
     static deserialize(raw: Object): NewsfeedItemVideoVideo {
         return new NewsfeedItemVideoVideo (
             raw['count'],
@@ -4264,7 +6801,21 @@ export class NewsfeedItemVideoVideo {
         )
     }
 }
+
 export class NewsfeedItemWallpost {
+    /**
+     * @class
+     * @property {number} postId Post ID
+     * @property {string} postType Post type
+     * @property {string} text Post text
+     * @property {WallWallpost|undefined[]|undefined} copyHistory
+     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {BaseGeo|undefined} geo
+     * @property {WallPostSource|undefined} postSource
+     * @property {BaseCommentsInfo|undefined} comments
+     * @property {BaseLikesInfo|undefined} likes
+     * @property {BaseRepostsInfo|undefined} reposts
+     */
     constructor (
         readonly postId: number,
         readonly postType: string,
@@ -4280,6 +6831,10 @@ export class NewsfeedItemWallpost {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedItemWallpost}
+     */
     static deserialize(raw: Object): NewsfeedItemWallpost {
         return new NewsfeedItemWallpost (
             raw['post_id'],
@@ -4295,7 +6850,15 @@ export class NewsfeedItemWallpost {
         )
     }
 }
+
 export class NewsfeedList {
+    /**
+     * @class
+     * @property {number} id List ID
+     * @property {string} title List title
+     * @property {boolean} noReposts Information whether reposts hiding is enabled
+     * @property {number[]|undefined} sourceIds
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -4305,6 +6868,10 @@ export class NewsfeedList {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedList}
+     */
     static deserialize(raw: Object): NewsfeedList {
         return new NewsfeedList (
             raw['id'],
@@ -4314,7 +6881,15 @@ export class NewsfeedList {
         )
     }
 }
+
 export class NewsfeedNewsfeedNote {
+    /**
+     * @class
+     * @property {number} id Note ID
+     * @property {number} ownerId integer
+     * @property {string} title Note title
+     * @property {number} comments Comments Number
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -4324,6 +6899,10 @@ export class NewsfeedNewsfeedNote {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedNewsfeedNote}
+     */
     static deserialize(raw: Object): NewsfeedNewsfeedNote {
         return new NewsfeedNewsfeedNote (
             raw['id'],
@@ -4333,7 +6912,34 @@ export class NewsfeedNewsfeedNote {
         )
     }
 }
+
 export class NewsfeedNewsfeedPhoto {
+    /**
+     * @class
+     * @property {number} id Photo ID
+     * @property {number} albumId Album ID
+     * @property {number} ownerId Photo owner's ID
+     * @property {number} userId ID of the user who have uploaded the photo
+     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {string} photo75 URL of image with 75 px width
+     * @property {string} photo130 URL of image with 130 px width
+     * @property {string} photo604 URL of image with 604 px width
+     * @property {string} photo807 URL of image with 807 px width
+     * @property {string} photo1280 URL of image with 1280 px width
+     * @property {string} photo2560 URL of image with 2560 px width
+     * @property {number} postId Post ID
+     * @property {number} width Original photo width
+     * @property {number} height Original photo height
+     * @property {string} text Photo caption
+     * @property {number} date Date when uploaded
+     * @property {number} lat Latitude
+     * @property {number} long Longitude
+     * @property {string} accessKey Access key for the photo
+     * @property {BaseLikes|undefined} likes
+     * @property {BaseObjectCount|undefined} comments
+     * @property {boolean} canComment Information whether current user can comment the photo
+     * @property {boolean} canRepost Information whether current user can repost the photo
+     */
     constructor (
         readonly id: number,
         readonly albumId: number,
@@ -4362,6 +6968,10 @@ export class NewsfeedNewsfeedPhoto {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NewsfeedNewsfeedPhoto}
+     */
     static deserialize(raw: Object): NewsfeedNewsfeedPhoto {
         return new NewsfeedNewsfeedPhoto (
             raw['id'],
@@ -4390,7 +7000,18 @@ export class NewsfeedNewsfeedPhoto {
         )
     }
 }
+
 export class NotesNoteComment {
+    /**
+     * @class
+     * @property {number} id Comment ID
+     * @property {number} uid Comment author's ID
+     * @property {number} nid Note ID
+     * @property {number} oid Note ID
+     * @property {number} date Date when the comment has beed added in Unixtime
+     * @property {string} message Comment text
+     * @property {number} replyTo ID of replied comment
+     */
     constructor (
         readonly id: number,
         readonly uid: number,
@@ -4403,6 +7024,10 @@ export class NotesNoteComment {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NotesNoteComment}
+     */
     static deserialize(raw: Object): NotesNoteComment {
         return new NotesNoteComment (
             raw['id'],
@@ -4415,7 +7040,20 @@ export class NotesNoteComment {
         )
     }
 }
+
 export class NotesNote {
+    /**
+     * @class
+     * @property {number} id Note ID
+     * @property {number} ownerId Note owner's ID
+     * @property {number} comments Comments number
+     * @property {boolean} canComment Information whether current user can comment the note
+     * @property {number} date Date when the note has been created in Unixtime
+     * @property {string} title Note title
+     * @property {string} text Note text
+     * @property {string} textWiki Note text in wiki format
+     * @property {string} viewUrl URL of the page with note preview
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -4430,6 +7068,10 @@ export class NotesNote {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NotesNote}
+     */
     static deserialize(raw: Object): NotesNote {
         return new NotesNote (
             raw['id'],
@@ -4444,7 +7086,19 @@ export class NotesNote {
         )
     }
 }
+
 export class NotificationsNotificationsComment {
+    /**
+     * @class
+     * @property {number} id Comment ID
+     * @property {number} ownerId Author ID
+     * @property {number} date Date when the comment has been added in Unixtime
+     * @property {string} text Comment text
+     * @property {PhotosPhoto|undefined} photo
+     * @property {VideoVideo|undefined} video
+     * @property {WallWallpost|undefined} post
+     * @property {BoardTopic|undefined} topic
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -4458,6 +7112,10 @@ export class NotificationsNotificationsComment {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NotificationsNotificationsComment}
+     */
     static deserialize(raw: Object): NotificationsNotificationsComment {
         return new NotificationsNotificationsComment (
             raw['id'],
@@ -4471,7 +7129,16 @@ export class NotificationsNotificationsComment {
         )
     }
 }
+
 export class NotificationsNotification {
+    /**
+     * @class
+     * @property {string} type Notification type
+     * @property {number} date Date when the event has been occured
+     * @property {any} parent
+     * @property {NotificationsFeedback|undefined} feedback
+     * @property {NotificationsReply|undefined} reply
+     */
     constructor (
         readonly type: string,
         readonly date: number,
@@ -4482,6 +7149,10 @@ export class NotificationsNotification {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NotificationsNotification}
+     */
     static deserialize(raw: Object): NotificationsNotification {
         return new NotificationsNotification (
             raw['type'],
@@ -4492,7 +7163,18 @@ export class NotificationsNotification {
         )
     }
 }
+
 export class NotificationsFeedback {
+    /**
+     * @class
+     * @property {number} id Item ID
+     * @property {number} toId Wall owner's ID
+     * @property {number} fromId Reply author's ID
+     * @property {string} text Reply text
+     * @property {BaseLikesInfo|undefined} likes
+     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {BaseGeo|undefined} geo
+     */
     constructor (
         readonly id: number,
         readonly toId: number,
@@ -4505,6 +7187,10 @@ export class NotificationsFeedback {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NotificationsFeedback}
+     */
     static deserialize(raw: Object): NotificationsFeedback {
         return new NotificationsFeedback (
             raw['id'],
@@ -4517,7 +7203,14 @@ export class NotificationsFeedback {
         )
     }
 }
+
 export class NotificationsReply {
+    /**
+     * @class
+     * @property {number} id Reply ID
+     * @property {number} date Date when the reply has been created in Unixtime
+     * @property {number} text Reply text
+     */
     constructor (
         readonly id: number,
         readonly date: number,
@@ -4526,6 +7219,10 @@ export class NotificationsReply {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {NotificationsReply}
+     */
     static deserialize(raw: Object): NotificationsReply {
         return new NotificationsReply (
             raw['id'],
@@ -4534,7 +7231,14 @@ export class NotificationsReply {
         )
     }
 }
+
 export class OauthError {
+    /**
+     * @class
+     * @property {string} error Error type
+     * @property {string} errorDescription Error description
+     * @property {string} redirectUri URI for validation
+     */
     constructor (
         readonly error: string,
         readonly errorDescription: string,
@@ -4543,6 +7247,10 @@ export class OauthError {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {OauthError}
+     */
     static deserialize(raw: Object): OauthError {
         return new OauthError (
             raw['error'],
@@ -4551,7 +7259,21 @@ export class OauthError {
         )
     }
 }
+
 export class OrdersOrder {
+    /**
+     * @class
+     * @property {number} id Order ID
+     * @property {number} appOrderId App order ID
+     * @property {string} status Order status
+     * @property {number} userId User ID
+     * @property {number} receiverId Receiver ID
+     * @property {string} item Order item
+     * @property {number} amount Amount
+     * @property {number} date Date of creation in Unixtime
+     * @property {number} transactionId Transaction ID
+     * @property {number} cancelTransactionId Cancel transaction ID
+     */
     constructor (
         readonly id: number,
         readonly appOrderId: number,
@@ -4567,6 +7289,10 @@ export class OrdersOrder {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {OrdersOrder}
+     */
     static deserialize(raw: Object): OrdersOrder {
         return new OrdersOrder (
             raw['id'],
@@ -4582,7 +7308,13 @@ export class OrdersOrder {
         )
     }
 }
+
 export class OrdersAmount {
+    /**
+     * @class
+     * @property {OrdersAmountItem|undefined[]|undefined} amounts
+     * @property {string} currency Currency name
+     */
     constructor (
         readonly amounts: OrdersAmountItem|undefined[]|undefined,
         readonly currency: string
@@ -4590,6 +7322,10 @@ export class OrdersAmount {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {OrdersAmount}
+     */
     static deserialize(raw: Object): OrdersAmount {
         return new OrdersAmount (
             raw['amounts'] ? raw['amounts'].map(v => v ? OrdersAmountItem.deserialize(v) : undefined) : undefined,
@@ -4597,7 +7333,14 @@ export class OrdersAmount {
         )
     }
 }
+
 export class OrdersAmountItem {
+    /**
+     * @class
+     * @property {string} votes Votes number
+     * @property {number} amount Votes amount in user's currency
+     * @property {string} description Amount description
+     */
     constructor (
         readonly votes: string,
         readonly amount: number,
@@ -4606,6 +7349,10 @@ export class OrdersAmountItem {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {OrdersAmountItem}
+     */
     static deserialize(raw: Object): OrdersAmountItem {
         return new OrdersAmountItem (
             raw['votes'],
@@ -4614,18 +7361,40 @@ export class OrdersAmountItem {
         )
     }
 }
+
 export class PagesPrivacySettings {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PagesPrivacySettings}
+     */
     static deserialize(raw: Object): PagesPrivacySettings {
         return new PagesPrivacySettings (
         )
     }
 }
+
 export class PagesWikipage {
+    /**
+     * @class
+     * @property {number} id Page ID
+     * @property {number} groupId Community ID
+     * @property {string} title Page title
+     * @property {PagesPrivacySettings|undefined} whoCanView View settings of the page
+     * @property {PagesPrivacySettings|undefined} whoCanEdit Edit settings of the page
+     * @property {number} views Views number
+     * @property {number} editorId Last editor ID
+     * @property {string} editorName Last editor name
+     * @property {number} creatorId Page creator ID
+     * @property {number} creatorName Page creator name
+     */
     constructor (
         readonly id: number,
         readonly groupId: number,
@@ -4641,6 +7410,10 @@ export class PagesWikipage {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PagesWikipage}
+     */
     static deserialize(raw: Object): PagesWikipage {
         return new PagesWikipage (
             raw['id'],
@@ -4656,7 +7429,26 @@ export class PagesWikipage {
         )
     }
 }
+
 export class PagesWikipageFull {
+    /**
+     * @class
+     * @property {number} id Page ID
+     * @property {number} groupId Community ID
+     * @property {string} title Page title
+     * @property {boolean} currentUserCanEdit Information whether current user can edit the page
+     * @property {boolean} currentUserCanEditAccess Information whether current user can edit the page access settings
+     * @property {PagesPrivacySettings|undefined} whoCanView View settings of the page
+     * @property {PagesPrivacySettings|undefined} whoCanEdit Edit settings of the page
+     * @property {number} edited Date when the page has been edited in Unixtime
+     * @property {number} created Date when the page has been created in Unixtime
+     * @property {number} views Views number
+     * @property {number} editorId Last editor ID
+     * @property {number} creatorId Page creator ID
+     * @property {string} source Page content, wiki
+     * @property {string} html Page content, HTML
+     * @property {string} viewUrl URL of the page preview
+     */
     constructor (
         readonly id: number,
         readonly groupId: number,
@@ -4677,6 +7469,10 @@ export class PagesWikipageFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PagesWikipageFull}
+     */
     static deserialize(raw: Object): PagesWikipageFull {
         return new PagesWikipageFull (
             raw['id'],
@@ -4697,7 +7493,16 @@ export class PagesWikipageFull {
         )
     }
 }
+
 export class PagesWikipageVersion {
+    /**
+     * @class
+     * @property {number} id Version ID
+     * @property {number} length Page size in bytes
+     * @property {number} edited Date when the page has been edited in Unixtime
+     * @property {number} editorId Last editor ID
+     * @property {string} editorName Last editor name
+     */
     constructor (
         readonly id: number,
         readonly length: number,
@@ -4708,6 +7513,10 @@ export class PagesWikipageVersion {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PagesWikipageVersion}
+     */
     static deserialize(raw: Object): PagesWikipageVersion {
         return new PagesWikipageVersion (
             raw['id'],
@@ -4718,7 +7527,19 @@ export class PagesWikipageVersion {
         )
     }
 }
+
 export class PhotosPhotoAlbum {
+    /**
+     * @class
+     * @property {number} id Photo album ID
+     * @property {PhotosPhoto|undefined} thumb
+     * @property {number} ownerId Album owner's ID
+     * @property {string} title Photo album title
+     * @property {string} description Photo album description
+     * @property {number} created Date when the album has been created in Unixtime
+     * @property {number} updated Date when the album has been updated last time in Unixtime
+     * @property {number} size Photos number
+     */
     constructor (
         readonly id: number,
         readonly thumb: PhotosPhoto|undefined,
@@ -4732,6 +7553,10 @@ export class PhotosPhotoAlbum {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoAlbum}
+     */
     static deserialize(raw: Object): PhotosPhotoAlbum {
         return new PhotosPhotoAlbum (
             raw['id'],
@@ -4745,7 +7570,27 @@ export class PhotosPhotoAlbum {
         )
     }
 }
+
 export class PhotosPhotoAlbumFull {
+    /**
+     * @class
+     * @property {number} id Photo album ID
+     * @property {number} thumbId Thumb photo ID
+     * @property {string} thumbSrc URL of the thumb image
+     * @property {number} ownerId Album owner's ID
+     * @property {string} title Photo album title
+     * @property {string} description Photo album description
+     * @property {number} created Date when the album has been created in Unixtime
+     * @property {number} updated Date when the album has been updated last time in Unixtime
+     * @property {number} size Photos number
+     * @property {string[]|undefined} privacyView
+     * @property {string[]|undefined} privacyComment
+     * @property {boolean} uploadByAdminsOnly Information whether only community administrators can upload photos
+     * @property {boolean} commentsDisabled Information whether album comments are disabled
+     * @property {boolean} canUpload Information whether current user can upload photo to the album
+     * @property {boolean} thumbIsLast Information whether the album thumb is last photo
+     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     */
     constructor (
         readonly id: number,
         readonly thumbId: number,
@@ -4767,6 +7612,10 @@ export class PhotosPhotoAlbumFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoAlbumFull}
+     */
     static deserialize(raw: Object): PhotosPhotoAlbumFull {
         return new PhotosPhotoAlbumFull (
             raw['id'],
@@ -4788,7 +7637,20 @@ export class PhotosPhotoAlbumFull {
         )
     }
 }
+
 export class PhotosCommentXtrPid {
+    /**
+     * @class
+     * @property {number} id Comment ID
+     * @property {number} fromId Author ID
+     * @property {number} date Date when the comment has been added in Unixtime
+     * @property {string} text Comment text
+     * @property {BaseLikesInfo|undefined} likes
+     * @property {number} replyToUser Replied user ID
+     * @property {number} replyToComment Replied comment ID
+     * @property {WallCommentAttachment|undefined[]|undefined} attachments
+     * @property {number} pid Photo ID
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -4803,6 +7665,10 @@ export class PhotosCommentXtrPid {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosCommentXtrPid}
+     */
     static deserialize(raw: Object): PhotosCommentXtrPid {
         return new PhotosCommentXtrPid (
             raw['id'],
@@ -4817,7 +7683,15 @@ export class PhotosCommentXtrPid {
         )
     }
 }
+
 export class PhotosMarketAlbumUploadResponse {
+    /**
+     * @class
+     * @property {number} gid Community ID
+     * @property {number} server Upload server number
+     * @property {string} photo Uploaded photo data
+     * @property {string} hash Uploading hash
+     */
     constructor (
         readonly gid: number,
         readonly server: number,
@@ -4827,6 +7701,10 @@ export class PhotosMarketAlbumUploadResponse {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosMarketAlbumUploadResponse}
+     */
     static deserialize(raw: Object): PhotosMarketAlbumUploadResponse {
         return new PhotosMarketAlbumUploadResponse (
             raw['gid'],
@@ -4836,7 +7714,17 @@ export class PhotosMarketAlbumUploadResponse {
         )
     }
 }
+
 export class PhotosMarketUploadResponse {
+    /**
+     * @class
+     * @property {number} groupId Community ID
+     * @property {number} server Upload server number
+     * @property {string} photo Uploaded photo data
+     * @property {string} hash Uploading hash
+     * @property {string} cropData Crop data
+     * @property {string} cropHash Crop hash
+     */
     constructor (
         readonly groupId: number,
         readonly server: number,
@@ -4848,6 +7736,10 @@ export class PhotosMarketUploadResponse {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosMarketUploadResponse}
+     */
     static deserialize(raw: Object): PhotosMarketUploadResponse {
         return new PhotosMarketUploadResponse (
             raw['group_id'],
@@ -4859,7 +7751,14 @@ export class PhotosMarketUploadResponse {
         )
     }
 }
+
 export class PhotosMessageUploadResponse {
+    /**
+     * @class
+     * @property {number} server Upload server number
+     * @property {string} photo Uploaded photo data
+     * @property {string} hash Uploading hash
+     */
     constructor (
         readonly server: number,
         readonly photo: string,
@@ -4868,6 +7767,10 @@ export class PhotosMessageUploadResponse {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosMessageUploadResponse}
+     */
     static deserialize(raw: Object): PhotosMessageUploadResponse {
         return new PhotosMessageUploadResponse (
             raw['server'],
@@ -4876,7 +7779,14 @@ export class PhotosMessageUploadResponse {
         )
     }
 }
+
 export class PhotosOwnerUploadResponse {
+    /**
+     * @class
+     * @property {number} server Upload server number
+     * @property {string} photo Uploaded photo data
+     * @property {string} hash Uploading hash
+     */
     constructor (
         readonly server: number,
         readonly photo: string,
@@ -4885,6 +7795,10 @@ export class PhotosOwnerUploadResponse {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosOwnerUploadResponse}
+     */
     static deserialize(raw: Object): PhotosOwnerUploadResponse {
         return new PhotosOwnerUploadResponse (
             raw['server'],
@@ -4893,7 +7807,30 @@ export class PhotosOwnerUploadResponse {
         )
     }
 }
+
 export class PhotosPhoto {
+    /**
+     * @class
+     * @property {number} id Photo ID
+     * @property {number} albumId Album ID
+     * @property {number} ownerId Photo owner's ID
+     * @property {number} userId ID of the user who have uploaded the photo
+     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {string} photo75 URL of image with 75 px width
+     * @property {string} photo130 URL of image with 130 px width
+     * @property {string} photo604 URL of image with 604 px width
+     * @property {string} photo807 URL of image with 807 px width
+     * @property {string} photo1280 URL of image with 1280 px width
+     * @property {string} photo2560 URL of image with 2560 px width
+     * @property {number} postId Post ID
+     * @property {number} width Original photo width
+     * @property {number} height Original photo height
+     * @property {string} text Photo caption
+     * @property {number} date Date when uploaded
+     * @property {number} lat Latitude
+     * @property {number} long Longitude
+     * @property {string} accessKey Access key for the photo
+     */
     constructor (
         readonly id: number,
         readonly albumId: number,
@@ -4918,6 +7855,10 @@ export class PhotosPhoto {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhoto}
+     */
     static deserialize(raw: Object): PhotosPhoto {
         return new PhotosPhoto (
             raw['id'],
@@ -4942,7 +7883,35 @@ export class PhotosPhoto {
         )
     }
 }
+
 export class PhotosPhotoFull {
+    /**
+     * @class
+     * @property {number} id Photo ID
+     * @property {number} albumId Album ID
+     * @property {number} ownerId Photo owner's ID
+     * @property {number} userId ID of the user who have uploaded the photo
+     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {string} photo75 URL of image with 75 px width
+     * @property {string} photo130 URL of image with 130 px width
+     * @property {string} photo604 URL of image with 604 px width
+     * @property {string} photo807 URL of image with 807 px width
+     * @property {string} photo1280 URL of image with 1280 px width
+     * @property {string} photo2560 URL of image with 2560 px width
+     * @property {number} postId Post ID
+     * @property {number} width Original photo width
+     * @property {number} height Original photo height
+     * @property {string} text Photo caption
+     * @property {number} date Date when uploaded
+     * @property {number} lat Latitude
+     * @property {number} long Longitude
+     * @property {string} accessKey Access key for the photo
+     * @property {BaseLikes|undefined} likes
+     * @property {BaseObjectCount|undefined} reposts
+     * @property {BaseObjectCount|undefined} comments
+     * @property {boolean} canComment Information whether current user can comment the photo
+     * @property {BaseObjectCount|undefined} tags
+     */
     constructor (
         readonly id: number,
         readonly albumId: number,
@@ -4972,6 +7941,10 @@ export class PhotosPhotoFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoFull}
+     */
     static deserialize(raw: Object): PhotosPhotoFull {
         return new PhotosPhotoFull (
             raw['id'],
@@ -5001,7 +7974,37 @@ export class PhotosPhotoFull {
         )
     }
 }
+
 export class PhotosPhotoFullXtrRealOffset {
+    /**
+     * @class
+     * @property {number} id Photo ID
+     * @property {number} albumId Album ID
+     * @property {number} ownerId Photo owner's ID
+     * @property {number} userId ID of the user who have uploaded the photo
+     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {string} photo75 URL of image with 75 px width
+     * @property {string} photo130 URL of image with 130 px width
+     * @property {string} photo604 URL of image with 604 px width
+     * @property {string} photo807 URL of image with 807 px width
+     * @property {string} photo1280 URL of image with 1280 px width
+     * @property {string} photo2560 URL of image with 2560 px width
+     * @property {number} postId Post ID
+     * @property {number} width Original photo width
+     * @property {number} height Original photo height
+     * @property {string} text Photo caption
+     * @property {number} date Date when uploaded
+     * @property {number} lat Latitude
+     * @property {number} long Longitude
+     * @property {string} accessKey Access key for the photo
+     * @property {BaseLikes|undefined} likes
+     * @property {BaseObjectCount|undefined} reposts
+     * @property {BaseObjectCount|undefined} comments
+     * @property {boolean} canComment
+     * @property {BaseObjectCount|undefined} tags
+     * @property {BasePropertyExists|undefined} hidden Returns if the photo is hidden above the wall
+     * @property {number} realOffset Real position of the photo
+     */
     constructor (
         readonly id: number,
         readonly albumId: number,
@@ -5033,6 +8036,10 @@ export class PhotosPhotoFullXtrRealOffset {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoFullXtrRealOffset}
+     */
     static deserialize(raw: Object): PhotosPhotoFullXtrRealOffset {
         return new PhotosPhotoFullXtrRealOffset (
             raw['id'],
@@ -5064,7 +8071,32 @@ export class PhotosPhotoFullXtrRealOffset {
         )
     }
 }
+
 export class PhotosPhotoXtrRealOffset {
+    /**
+     * @class
+     * @property {number} id Photo ID
+     * @property {number} albumId Album ID
+     * @property {number} ownerId Photo owner's ID
+     * @property {number} userId ID of the user who have uploaded the photo
+     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {string} photo75 URL of image with 75 px width
+     * @property {string} photo130 URL of image with 130 px width
+     * @property {string} photo604 URL of image with 604 px width
+     * @property {string} photo807 URL of image with 807 px width
+     * @property {string} photo1280 URL of image with 1280 px width
+     * @property {string} photo2560 URL of image with 2560 px width
+     * @property {number} postId Post ID
+     * @property {number} width Original photo width
+     * @property {number} height Original photo height
+     * @property {string} text Photo caption
+     * @property {number} date Date when uploaded
+     * @property {number} lat Latitude
+     * @property {number} long Longitude
+     * @property {string} accessKey Access key for the photo
+     * @property {BasePropertyExists|undefined} hidden Returns if the photo is hidden above the wall
+     * @property {number} realOffset Real position of the photo
+     */
     constructor (
         readonly id: number,
         readonly albumId: number,
@@ -5091,6 +8123,10 @@ export class PhotosPhotoXtrRealOffset {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoXtrRealOffset}
+     */
     static deserialize(raw: Object): PhotosPhotoXtrRealOffset {
         return new PhotosPhotoXtrRealOffset (
             raw['id'],
@@ -5117,7 +8153,33 @@ export class PhotosPhotoXtrRealOffset {
         )
     }
 }
+
 export class PhotosPhotoXtrTagInfo {
+    /**
+     * @class
+     * @property {number} id Photo ID
+     * @property {number} albumId Album ID
+     * @property {number} ownerId Photo owner's ID
+     * @property {number} userId ID of the user who have uploaded the photo
+     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {string} photo75 URL of image with 75 px width
+     * @property {string} photo130 URL of image with 130 px width
+     * @property {string} photo604 URL of image with 604 px width
+     * @property {string} photo807 URL of image with 807 px width
+     * @property {string} photo1280 URL of image with 1280 px width
+     * @property {string} photo2560 URL of image with 2560 px width
+     * @property {number} postId Post ID
+     * @property {number} width Original photo width
+     * @property {number} height Original photo height
+     * @property {string} text Photo caption
+     * @property {number} date Date when uploaded
+     * @property {number} lat Latitude
+     * @property {number} long Longitude
+     * @property {string} accessKey Access key for the photo
+     * @property {number} placerId ID of the tag creator
+     * @property {number} tagCreated Date when tag has been added in Unixtime
+     * @property {number} tagId Tag ID
+     */
     constructor (
         readonly id: number,
         readonly albumId: number,
@@ -5145,6 +8207,10 @@ export class PhotosPhotoXtrTagInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoXtrTagInfo}
+     */
     static deserialize(raw: Object): PhotosPhotoXtrTagInfo {
         return new PhotosPhotoXtrTagInfo (
             raw['id'],
@@ -5172,7 +8238,15 @@ export class PhotosPhotoXtrTagInfo {
         )
     }
 }
+
 export class PhotosPhotoSizes {
+    /**
+     * @class
+     * @property {string} src URL of the image
+     * @property {number} width Width in px
+     * @property {number} height Height in px
+     * @property {string} type Size type
+     */
     constructor (
         readonly src: string,
         readonly width: number,
@@ -5182,6 +8256,10 @@ export class PhotosPhotoSizes {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoSizes}
+     */
     static deserialize(raw: Object): PhotosPhotoSizes {
         return new PhotosPhotoSizes (
             raw['src'],
@@ -5191,7 +8269,21 @@ export class PhotosPhotoSizes {
         )
     }
 }
+
 export class PhotosPhotoTag {
+    /**
+     * @class
+     * @property {number} userId Tagged user ID
+     * @property {number} id Tag ID
+     * @property {number} placerId ID of the tag creator
+     * @property {string} taggedName Tag description
+     * @property {number} date Date when tag has been added in Unixtime
+     * @property {number} x Coordinate X of the left upper corner
+     * @property {number} y Coordinate Y of the left upper corner
+     * @property {number} x2 Coordinate X of the right lower corner
+     * @property {number} y2 Coordinate Y of the right lower corner
+     * @property {boolean} viewed Information whether the tag is reviewed
+     */
     constructor (
         readonly userId: number,
         readonly id: number,
@@ -5207,6 +8299,10 @@ export class PhotosPhotoTag {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoTag}
+     */
     static deserialize(raw: Object): PhotosPhotoTag {
         return new PhotosPhotoTag (
             raw['user_id'],
@@ -5222,7 +8318,14 @@ export class PhotosPhotoTag {
         )
     }
 }
+
 export class PhotosPhotoUpload {
+    /**
+     * @class
+     * @property {string} uploadUrl URL to upload photo
+     * @property {number} albumId Album ID
+     * @property {number} userId User ID
+     */
     constructor (
         readonly uploadUrl: string,
         readonly albumId: number,
@@ -5231,6 +8334,10 @@ export class PhotosPhotoUpload {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoUpload}
+     */
     static deserialize(raw: Object): PhotosPhotoUpload {
         return new PhotosPhotoUpload (
             raw['upload_url'],
@@ -5239,7 +8346,15 @@ export class PhotosPhotoUpload {
         )
     }
 }
+
 export class PhotosPhotoUploadResponse {
+    /**
+     * @class
+     * @property {number} server Upload server number
+     * @property {string} photosList Uploaded photos data
+     * @property {number} aid Album ID
+     * @property {string} hash Uploading hash
+     */
     constructor (
         readonly server: number,
         readonly photosList: string,
@@ -5249,6 +8364,10 @@ export class PhotosPhotoUploadResponse {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosPhotoUploadResponse}
+     */
     static deserialize(raw: Object): PhotosPhotoUploadResponse {
         return new PhotosPhotoUploadResponse (
             raw['server'],
@@ -5258,7 +8377,14 @@ export class PhotosPhotoUploadResponse {
         )
     }
 }
+
 export class PhotosWallUploadResponse {
+    /**
+     * @class
+     * @property {number} server Upload server number
+     * @property {string} photo Uploaded photo data
+     * @property {string} hash Uploading hash
+     */
     constructor (
         readonly server: number,
         readonly photo: string,
@@ -5267,6 +8393,10 @@ export class PhotosWallUploadResponse {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PhotosWallUploadResponse}
+     */
     static deserialize(raw: Object): PhotosWallUploadResponse {
         return new PhotosWallUploadResponse (
             raw['server'],
@@ -5275,7 +8405,24 @@ export class PhotosWallUploadResponse {
         )
     }
 }
+
 export class PlacesCheckin {
+    /**
+     * @class
+     * @property {number} id Checkin ID
+     * @property {number} userId User ID
+     * @property {number} date Date when the checkin has been added in Unixtime
+     * @property {number} latitude Place latitude
+     * @property {number} longitude Place longitude
+     * @property {number} placeId Place ID
+     * @property {string} text Comment text
+     * @property {number} distance Distance to the place
+     * @property {string} placeTitle Place title
+     * @property {number} placeCountry Country ID
+     * @property {number} placeCity City ID
+     * @property {string} placeType Place type
+     * @property {string} placeIcon URL of the place's icon
+     */
     constructor (
         readonly id: number,
         readonly userId: number,
@@ -5294,6 +8441,10 @@ export class PlacesCheckin {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PlacesCheckin}
+     */
     static deserialize(raw: Object): PlacesCheckin {
         return new PlacesCheckin (
             raw['id'],
@@ -5312,7 +8463,22 @@ export class PlacesCheckin {
         )
     }
 }
+
 export class PlacesPlaceMin {
+    /**
+     * @class
+     * @property {number} id Place ID
+     * @property {string} title Place title
+     * @property {number} latitude Place latitude
+     * @property {number} longitude Place longitude
+     * @property {number} created Date of the place creation in Unixtime
+     * @property {string} icon URL of the place's icon
+     * @property {number} checkins Checkins number
+     * @property {string} type Place type
+     * @property {number} country Country ID
+     * @property {number} city City ID
+     * @property {string} address Place address
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -5329,6 +8495,10 @@ export class PlacesPlaceMin {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PlacesPlaceMin}
+     */
     static deserialize(raw: Object): PlacesPlaceMin {
         return new PlacesPlaceMin (
             raw['id'],
@@ -5345,7 +8515,25 @@ export class PlacesPlaceMin {
         )
     }
 }
+
 export class PlacesPlaceFull {
+    /**
+     * @class
+     * @property {number} id Place ID
+     * @property {string} title Place title
+     * @property {number} latitude Place latitude
+     * @property {number} longitude Place longitude
+     * @property {number} created Date of the place creation in Unixtime
+     * @property {string} icon URL of the place's icon
+     * @property {number} checkins Checkins number
+     * @property {string} type Place type
+     * @property {number} country Country ID
+     * @property {number} city City ID
+     * @property {string} address Place address
+     * @property {number} distance Distance to the place
+     * @property {number} groupId Community ID
+     * @property {string} groupPhoto URL of the community's photo
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -5365,6 +8553,10 @@ export class PlacesPlaceFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PlacesPlaceFull}
+     */
     static deserialize(raw: Object): PlacesPlaceFull {
         return new PlacesPlaceFull (
             raw['id'],
@@ -5384,7 +8576,14 @@ export class PlacesPlaceFull {
         )
     }
 }
+
 export class PlacesTypes {
+    /**
+     * @class
+     * @property {number} id Place type ID
+     * @property {number} title Place type title
+     * @property {string} icon URL of the place's icon
+     */
     constructor (
         readonly id: number,
         readonly title: number,
@@ -5393,6 +8592,10 @@ export class PlacesTypes {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PlacesTypes}
+     */
     static deserialize(raw: Object): PlacesTypes {
         return new PlacesTypes (
             raw['id'],
@@ -5401,7 +8604,15 @@ export class PlacesTypes {
         )
     }
 }
+
 export class PollsAnswer {
+    /**
+     * @class
+     * @property {number} id Answer ID
+     * @property {string} text Answer text
+     * @property {number} votes Votes number
+     * @property {number} rate Answer rate in percents
+     */
     constructor (
         readonly id: number,
         readonly text: string,
@@ -5411,6 +8622,10 @@ export class PollsAnswer {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PollsAnswer}
+     */
     static deserialize(raw: Object): PollsAnswer {
         return new PollsAnswer (
             raw['id'],
@@ -5420,7 +8635,19 @@ export class PollsAnswer {
         )
     }
 }
+
 export class PollsPoll {
+    /**
+     * @class
+     * @property {number} id Poll ID
+     * @property {number} ownerId Poll owner's ID
+     * @property {number} created Date when poll has been created in Unixtime
+     * @property {string} question Poll question
+     * @property {string} votes Votes number
+     * @property {number} answerId Current user's answer ID
+     * @property {PollsAnswer|undefined[]|undefined} answers
+     * @property {boolean} anonymous Information whether the pole is anonymous
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -5434,6 +8661,10 @@ export class PollsPoll {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PollsPoll}
+     */
     static deserialize(raw: Object): PollsPoll {
         return new PollsPoll (
             raw['id'],
@@ -5447,7 +8678,13 @@ export class PollsPoll {
         )
     }
 }
+
 export class PollsVoters {
+    /**
+     * @class
+     * @property {number} answerId Answer ID
+     * @property {PollsVotersUsers|undefined} users
+     */
     constructor (
         readonly answerId: number,
         readonly users: PollsVotersUsers|undefined
@@ -5455,6 +8692,10 @@ export class PollsVoters {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PollsVoters}
+     */
     static deserialize(raw: Object): PollsVoters {
         return new PollsVoters (
             raw['answer_id'],
@@ -5462,7 +8703,13 @@ export class PollsVoters {
         )
     }
 }
+
 export class PollsVotersUsers {
+    /**
+     * @class
+     * @property {number} count Votes number
+     * @property {number[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: number[]|undefined
@@ -5470,6 +8717,10 @@ export class PollsVotersUsers {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {PollsVotersUsers}
+     */
     static deserialize(raw: Object): PollsVotersUsers {
         return new PollsVotersUsers (
             raw['count'],
@@ -5477,7 +8728,17 @@ export class PollsVotersUsers {
         )
     }
 }
+
 export class SearchHint {
+    /**
+     * @class
+     * @property {string} type Object type
+     * @property {string} section Section title
+     * @property {string} description Object description
+     * @property {boolean} global Information whether the object has been found globally
+     * @property {GroupsGroup|undefined} group
+     * @property {UsersUserMin|undefined} profile
+     */
     constructor (
         readonly type: string,
         readonly section: string,
@@ -5489,6 +8750,10 @@ export class SearchHint {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {SearchHint}
+     */
     static deserialize(raw: Object): SearchHint {
         return new SearchHint (
             raw['type'],
@@ -5500,7 +8765,13 @@ export class SearchHint {
         )
     }
 }
+
 export class SecureLevel {
+    /**
+     * @class
+     * @property {number} uid User ID
+     * @property {number} level Level
+     */
     constructor (
         readonly uid: number,
         readonly level: number
@@ -5508,6 +8779,10 @@ export class SecureLevel {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {SecureLevel}
+     */
     static deserialize(raw: Object): SecureLevel {
         return new SecureLevel (
             raw['uid'],
@@ -5515,7 +8790,16 @@ export class SecureLevel {
         )
     }
 }
+
 export class SecureSmsNotification {
+    /**
+     * @class
+     * @property {number} id Notification ID
+     * @property {number} appId Application ID
+     * @property {number} userId User ID
+     * @property {number} date Date when message has been sent in Unixtime
+     * @property {string} message Messsage text
+     */
     constructor (
         readonly id: number,
         readonly appId: number,
@@ -5526,6 +8810,10 @@ export class SecureSmsNotification {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {SecureSmsNotification}
+     */
     static deserialize(raw: Object): SecureSmsNotification {
         return new SecureSmsNotification (
             raw['id'],
@@ -5536,7 +8824,15 @@ export class SecureSmsNotification {
         )
     }
 }
+
 export class SecureTokenChecked {
+    /**
+     * @class
+     * @property {BaseOkResponse|undefined} success Returns if successfully processed
+     * @property {number} userId User ID
+     * @property {number} date Date when access_token has been generated in Unixtime
+     * @property {number} expire Date when access_token will expire in Unixtime
+     */
     constructor (
         readonly success: BaseOkResponse|undefined,
         readonly userId: number,
@@ -5546,6 +8842,10 @@ export class SecureTokenChecked {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {SecureTokenChecked}
+     */
     static deserialize(raw: Object): SecureTokenChecked {
         return new SecureTokenChecked (
             raw['success'] ? BaseOkResponse.deserialize(raw['success']) : undefined,
@@ -5555,7 +8855,16 @@ export class SecureTokenChecked {
         )
     }
 }
+
 export class SecureTransaction {
+    /**
+     * @class
+     * @property {number} id Transaction ID
+     * @property {number} uidFrom From ID
+     * @property {number} uidTo To ID
+     * @property {number} votes Votes number
+     * @property {number} date Transaction date in Unixtime
+     */
     constructor (
         readonly id: number,
         readonly uidFrom: number,
@@ -5566,6 +8875,10 @@ export class SecureTransaction {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {SecureTransaction}
+     */
     static deserialize(raw: Object): SecureTransaction {
         return new SecureTransaction (
             raw['id'],
@@ -5576,7 +8889,23 @@ export class SecureTransaction {
         )
     }
 }
+
 export class StatsPeriod {
+    /**
+     * @class
+     * @property {string} day Day (YYYY-MM-DD)
+     * @property {number} views Views number
+     * @property {number} visitors Visitors number
+     * @property {number} reach Total reach
+     * @property {number} reachSubscribers Subscribers reach
+     * @property {number} subscribed Number of users subscribed
+     * @property {number} unsubscribed Number of users unsubscribed
+     * @property {StatsSex|undefined[]|undefined} sex
+     * @property {StatsAge|undefined[]|undefined} age
+     * @property {StatsSexAge|undefined[]|undefined} sexAge
+     * @property {StatsCity|undefined[]|undefined} cities
+     * @property {StatsCountry|undefined[]|undefined} countries
+     */
     constructor (
         readonly day: string,
         readonly views: number,
@@ -5594,6 +8923,10 @@ export class StatsPeriod {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {StatsPeriod}
+     */
     static deserialize(raw: Object): StatsPeriod {
         return new StatsPeriod (
             raw['day'],
@@ -5611,7 +8944,13 @@ export class StatsPeriod {
         )
     }
 }
+
 export class StatsAge {
+    /**
+     * @class
+     * @property {number} visitors Visitors number
+     * @property {string} value Age interval
+     */
     constructor (
         readonly visitors: number,
         readonly value: string
@@ -5619,6 +8958,10 @@ export class StatsAge {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {StatsAge}
+     */
     static deserialize(raw: Object): StatsAge {
         return new StatsAge (
             raw['visitors'],
@@ -5626,7 +8969,15 @@ export class StatsAge {
         )
     }
 }
+
 export class StatsCountry {
+    /**
+     * @class
+     * @property {number} visitors Visitors number
+     * @property {number} value Country ID
+     * @property {string} code Country code
+     * @property {string} name Country name
+     */
     constructor (
         readonly visitors: number,
         readonly value: number,
@@ -5636,6 +8987,10 @@ export class StatsCountry {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {StatsCountry}
+     */
     static deserialize(raw: Object): StatsCountry {
         return new StatsCountry (
             raw['visitors'],
@@ -5645,7 +9000,14 @@ export class StatsCountry {
         )
     }
 }
+
 export class StatsCity {
+    /**
+     * @class
+     * @property {number} visitors Visitors number
+     * @property {number} value City ID
+     * @property {string} name City name
+     */
     constructor (
         readonly visitors: number,
         readonly value: number,
@@ -5654,6 +9016,10 @@ export class StatsCity {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {StatsCity}
+     */
     static deserialize(raw: Object): StatsCity {
         return new StatsCity (
             raw['visitors'],
@@ -5662,7 +9028,13 @@ export class StatsCity {
         )
     }
 }
+
 export class StatsSex {
+    /**
+     * @class
+     * @property {number} visitors Visitors number
+     * @property {string} value Sex
+     */
     constructor (
         readonly visitors: number,
         readonly value: string
@@ -5670,6 +9042,10 @@ export class StatsSex {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {StatsSex}
+     */
     static deserialize(raw: Object): StatsSex {
         return new StatsSex (
             raw['visitors'],
@@ -5677,7 +9053,13 @@ export class StatsSex {
         )
     }
 }
+
 export class StatsSexAge {
+    /**
+     * @class
+     * @property {number} visitors Visitors number
+     * @property {string} value Sex and age interval
+     */
     constructor (
         readonly visitors: number,
         readonly value: string
@@ -5685,6 +9067,10 @@ export class StatsSexAge {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {StatsSexAge}
+     */
     static deserialize(raw: Object): StatsSexAge {
         return new StatsSexAge (
             raw['visitors'],
@@ -5692,7 +9078,19 @@ export class StatsSexAge {
         )
     }
 }
+
 export class StatsWallpostStat {
+    /**
+     * @class
+     * @property {number} reachSubscribers Subscribers reach
+     * @property {number} reachTotal Total reach
+     * @property {number} links Link clickthrough
+     * @property {number} toGroup Clickthrough to community
+     * @property {number} joinGroup People have joined the group
+     * @property {number} report Reports number
+     * @property {number} hide Hidings number
+     * @property {number} unsubscribe Unsubscribed members
+     */
     constructor (
         readonly reachSubscribers: number,
         readonly reachTotal: number,
@@ -5706,6 +9104,10 @@ export class StatsWallpostStat {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {StatsWallpostStat}
+     */
     static deserialize(raw: Object): StatsWallpostStat {
         return new StatsWallpostStat (
             raw['reach_subscribers'],
@@ -5719,7 +9121,13 @@ export class StatsWallpostStat {
         )
     }
 }
+
 export class StatusStatus {
+    /**
+     * @class
+     * @property {string} text Status text
+     * @property {AudioAudioFull|undefined} audio
+     */
     constructor (
         readonly text: string,
         readonly audio: AudioAudioFull|undefined
@@ -5727,6 +9135,10 @@ export class StatusStatus {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {StatusStatus}
+     */
     static deserialize(raw: Object): StatusStatus {
         return new StatusStatus (
             raw['text'],
@@ -5734,7 +9146,13 @@ export class StatusStatus {
         )
     }
 }
+
 export class UtilsDomainResolved {
+    /**
+     * @class
+     * @property {string} type Object type
+     * @property {number} objectId Object ID
+     */
     constructor (
         readonly type: string,
         readonly objectId: number
@@ -5742,6 +9160,10 @@ export class UtilsDomainResolved {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UtilsDomainResolved}
+     */
     static deserialize(raw: Object): UtilsDomainResolved {
         return new UtilsDomainResolved (
             raw['type'],
@@ -5749,7 +9171,13 @@ export class UtilsDomainResolved {
         )
     }
 }
+
 export class UtilsLinkChecked {
+    /**
+     * @class
+     * @property {string} status Link status
+     * @property {string} link Link URL
+     */
     constructor (
         readonly status: string,
         readonly link: string
@@ -5757,6 +9185,10 @@ export class UtilsLinkChecked {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UtilsLinkChecked}
+     */
     static deserialize(raw: Object): UtilsLinkChecked {
         return new UtilsLinkChecked (
             raw['status'],
@@ -5764,7 +9196,13 @@ export class UtilsLinkChecked {
         )
     }
 }
+
 export class UsersUsersArray {
+    /**
+     * @class
+     * @property {number} count Users number
+     * @property {number[]|undefined} items
+     */
     constructor (
         readonly count: number,
         readonly items: number[]|undefined
@@ -5772,6 +9210,10 @@ export class UsersUsersArray {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUsersArray}
+     */
     static deserialize(raw: Object): UsersUsersArray {
         return new UsersUsersArray (
             raw['count'],
@@ -5779,7 +9221,25 @@ export class UsersUsersArray {
         )
     }
 }
+
 export class UsersUserCounters {
+    /**
+     * @class
+     * @property {number} albums Albums number
+     * @property {number} videos Videos number
+     * @property {number} audios Audios number
+     * @property {number} notes Notes number
+     * @property {number} photos Photos number
+     * @property {number} groups Communities number
+     * @property {number} gifts Gifts number
+     * @property {number} friends Friends number
+     * @property {number} onlineFriends Online friends number
+     * @property {number} userPhotos Number of photos with user
+     * @property {number} userVideos Number of videos with user
+     * @property {number} followers Followers number
+     * @property {number} subscriptions Subscriptions number
+     * @property {number} pages Public pages number
+     */
     constructor (
         readonly albums: number,
         readonly videos: number,
@@ -5799,6 +9259,10 @@ export class UsersUserCounters {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUserCounters}
+     */
     static deserialize(raw: Object): UsersUserCounters {
         return new UsersUserCounters (
             raw['albums'],
@@ -5818,7 +9282,23 @@ export class UsersUserCounters {
         )
     }
 }
+
 export class UsersUser {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -5836,6 +9316,10 @@ export class UsersUser {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUser}
+     */
     static deserialize(raw: Object): UsersUser {
         return new UsersUser (
             raw['id'],
@@ -5853,7 +9337,95 @@ export class UsersUser {
         )
     }
 }
+
 export class UsersUserFullXtrType {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} nickname User nickname
+     * @property {string} maidenName User maiden name
+     * @property {string} domain Domain name of the user's page
+     * @property {string} bdate User's date of birth
+     * @property {BaseObject|undefined} city
+     * @property {BaseCountry|undefined} country
+     * @property {number} timezone User's timezone
+     * @property {string} photo200 URL of square photo of the user with 200 pixels in width
+     * @property {string} photoMax URL of square photo of the user with maximum width
+     * @property {string} photo200Orig URL of user's photo with 200 pixels in width
+     * @property {string} photo400Orig URL of user's photo with 400 pixels in width
+     * @property {string} photoMaxOrig URL of user's photo of maximum size
+     * @property {string} photoId ID of the user's main photo
+     * @property {number} hasPhoto Information whether the user has main photo
+     * @property {boolean} hasMobile Information whether the user specified his phone number
+     * @property {boolean} isFriend Information whether the user is a friend of current user
+     * @property {number} friendStatus Friend status for current user
+     * @property {boolean} wallComments Information whether current user can comment wall posts
+     * @property {boolean} canPost Information whether current user can post on the user's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see other users' audio on the wall
+     * @property {boolean} canSeeAudio Information whether current user can see the user's audio
+     * @property {boolean} canWritePrivateMessage Information whether current user can write private message
+     * @property {boolean} canSendFriendRequest Information whether current user can send a friend request
+     * @property {string} mobilePhone Information whether current user can see
+     * @property {string} homePhone User's mobile phone number
+     * @property {string} skype User's Skype nickname
+     * @property {string} facebook User's Facebook account
+     * @property {string} facebookName User's Facebook name
+     * @property {string} twitter User's Twitter account
+     * @property {string} livejournal User's Livejournal account
+     * @property {string} instagram User's Instagram account
+     * @property {string} site User's website
+     * @property {AudioAudioFull|undefined} statusAudio
+     * @property {string} status User's status
+     * @property {string} activity User's status
+     * @property {UsersLastSeen|undefined} lastSeen
+     * @property {UsersExports|undefined} exports
+     * @property {UsersCropPhoto|undefined} cropPhoto
+     * @property {boolean} verified Information whether the user is verified
+     * @property {number} followersCount Number of user's followers
+     * @property {boolean} blacklisted Information whether current user is in the requested user's blacklist.
+     * @property {boolean} blacklistedByMe Information whether the requested user is in current user's blacklist
+     * @property {boolean} isFavorite Information whether the requested user is in faves of current user
+     * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
+     * @property {number} commonCount Number of common friends with current user
+     * @property {UsersOccupation|undefined} occupation
+     * @property {UsersCareer|undefined[]|undefined} career
+     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {number} university University ID
+     * @property {string} universityName University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus User's education status
+     * @property {string} homeTown User hometown
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {UsersPersonal|undefined} personal
+     * @property {string} interests User's interests
+     * @property {string} music User's favorite music
+     * @property {string} activities User's activities
+     * @property {string} movies User's favorite movies
+     * @property {string} tv User's favorite tv shows
+     * @property {string} books User's favorite books
+     * @property {string} games User's favorite games
+     * @property {UsersUniversity|undefined[]|undefined} universities
+     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {string} about About me field
+     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {string} quotes Favorite quotes
+     * @property {string} type Object type
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -5943,6 +9515,10 @@ export class UsersUserFullXtrType {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUserFullXtrType}
+     */
     static deserialize(raw: Object): UsersUserFullXtrType {
         return new UsersUserFullXtrType (
             raw['id'],
@@ -6032,7 +9608,24 @@ export class UsersUserFullXtrType {
         )
     }
 }
+
 export class UsersUserXtrType {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} type Object type
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -6051,6 +9644,10 @@ export class UsersUserXtrType {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUserXtrType}
+     */
     static deserialize(raw: Object): UsersUserXtrType {
         return new UsersUserXtrType (
             raw['id'],
@@ -6069,7 +9666,16 @@ export class UsersUserXtrType {
         )
     }
 }
+
 export class UsersUserMin {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -6080,6 +9686,10 @@ export class UsersUserMin {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUserMin}
+     */
     static deserialize(raw: Object): UsersUserMin {
         return new UsersUserMin (
             raw['id'],
@@ -6090,7 +9700,17 @@ export class UsersUserMin {
         )
     }
 }
+
 export class UsersUserBroadcast {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {AudioAudioFull|undefined} statusAudio
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -6102,6 +9722,10 @@ export class UsersUserBroadcast {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUserBroadcast}
+     */
     static deserialize(raw: Object): UsersUserBroadcast {
         return new UsersUserBroadcast (
             raw['id'],
@@ -6113,7 +9737,94 @@ export class UsersUserBroadcast {
         )
     }
 }
+
 export class UsersUserFull {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} nickname User nickname
+     * @property {string} maidenName User maiden name
+     * @property {string} domain Domain name of the user's page
+     * @property {string} bdate User's date of birth
+     * @property {BaseObject|undefined} city
+     * @property {BaseCountry|undefined} country
+     * @property {number} timezone User's timezone
+     * @property {string} photo200 URL of square photo of the user with 200 pixels in width
+     * @property {string} photoMax URL of square photo of the user with maximum width
+     * @property {string} photo200Orig URL of user's photo with 200 pixels in width
+     * @property {string} photo400Orig URL of user's photo with 400 pixels in width
+     * @property {string} photoMaxOrig URL of user's photo of maximum size
+     * @property {string} photoId ID of the user's main photo
+     * @property {number} hasPhoto Information whether the user has main photo
+     * @property {boolean} hasMobile Information whether the user specified his phone number
+     * @property {boolean} isFriend Information whether the user is a friend of current user
+     * @property {number} friendStatus Friend status for current user
+     * @property {boolean} wallComments Information whether current user can comment wall posts
+     * @property {boolean} canPost Information whether current user can post on the user's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see other users' audio on the wall
+     * @property {boolean} canSeeAudio Information whether current user can see the user's audio
+     * @property {boolean} canWritePrivateMessage Information whether current user can write private message
+     * @property {boolean} canSendFriendRequest Information whether current user can send a friend request
+     * @property {string} mobilePhone Information whether current user can see
+     * @property {string} homePhone User's mobile phone number
+     * @property {string} skype User's Skype nickname
+     * @property {string} facebook User's Facebook account
+     * @property {string} facebookName User's Facebook name
+     * @property {string} twitter User's Twitter account
+     * @property {string} livejournal User's Livejournal account
+     * @property {string} instagram User's Instagram account
+     * @property {string} site User's website
+     * @property {AudioAudioFull|undefined} statusAudio
+     * @property {string} status User's status
+     * @property {string} activity User's status
+     * @property {UsersLastSeen|undefined} lastSeen
+     * @property {UsersExports|undefined} exports
+     * @property {UsersCropPhoto|undefined} cropPhoto
+     * @property {boolean} verified Information whether the user is verified
+     * @property {number} followersCount Number of user's followers
+     * @property {boolean} blacklisted Information whether current user is in the requested user's blacklist.
+     * @property {boolean} blacklistedByMe Information whether the requested user is in current user's blacklist
+     * @property {boolean} isFavorite Information whether the requested user is in faves of current user
+     * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
+     * @property {number} commonCount Number of common friends with current user
+     * @property {UsersOccupation|undefined} occupation
+     * @property {UsersCareer|undefined[]|undefined} career
+     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {number} university University ID
+     * @property {string} universityName University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus User's education status
+     * @property {string} homeTown User hometown
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {UsersPersonal|undefined} personal
+     * @property {string} interests User's interests
+     * @property {string} music User's favorite music
+     * @property {string} activities User's activities
+     * @property {string} movies User's favorite movies
+     * @property {string} tv User's favorite tv shows
+     * @property {string} books User's favorite books
+     * @property {string} games User's favorite games
+     * @property {UsersUniversity|undefined[]|undefined} universities
+     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {string} about About me field
+     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {string} quotes Favorite quotes
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -6202,6 +9913,10 @@ export class UsersUserFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUserFull}
+     */
     static deserialize(raw: Object): UsersUserFull {
         return new UsersUserFull (
             raw['id'],
@@ -6290,7 +10005,18 @@ export class UsersUserFull {
         )
     }
 }
+
 export class UsersCareer {
+    /**
+     * @class
+     * @property {number} groupId Community ID
+     * @property {string} company Company name
+     * @property {number} countryId Country ID
+     * @property {number} cityId City ID
+     * @property {number} from From year
+     * @property {number} until Till year
+     * @property {string} position Position
+     */
     constructor (
         readonly groupId: number,
         readonly company: string,
@@ -6303,6 +10029,10 @@ export class UsersCareer {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersCareer}
+     */
     static deserialize(raw: Object): UsersCareer {
         return new UsersCareer (
             raw['group_id'],
@@ -6315,7 +10045,14 @@ export class UsersCareer {
         )
     }
 }
+
 export class UsersExports {
+    /**
+     * @class
+     * @property {number} twitter
+     * @property {number} facebook
+     * @property {number} livejournal
+     */
     constructor (
         readonly twitter: number,
         readonly facebook: number,
@@ -6324,6 +10061,10 @@ export class UsersExports {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersExports}
+     */
     static deserialize(raw: Object): UsersExports {
         return new UsersExports (
             raw['twitter'],
@@ -6332,7 +10073,16 @@ export class UsersExports {
         )
     }
 }
+
 export class UsersMilitary {
+    /**
+     * @class
+     * @property {string} unit Unit name
+     * @property {number} unitId Unit ID
+     * @property {number} countryId Country ID
+     * @property {number} from From year
+     * @property {number} until Till year
+     */
     constructor (
         readonly unit: string,
         readonly unitId: number,
@@ -6343,6 +10093,10 @@ export class UsersMilitary {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersMilitary}
+     */
     static deserialize(raw: Object): UsersMilitary {
         return new UsersMilitary (
             raw['unit'],
@@ -6353,7 +10107,13 @@ export class UsersMilitary {
         )
     }
 }
+
 export class UsersRelative {
+    /**
+     * @class
+     * @property {number} id Relative ID
+     * @property {string} type Relative type
+     */
     constructor (
         readonly id: number,
         readonly type: string
@@ -6361,6 +10121,10 @@ export class UsersRelative {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersRelative}
+     */
     static deserialize(raw: Object): UsersRelative {
         return new UsersRelative (
             raw['id'],
@@ -6368,7 +10132,15 @@ export class UsersRelative {
         )
     }
 }
+
 export class UsersUserLim {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} photo URL of square photo of the user with 50 pixels in width
+     * @property {string} name User name and last name
+     * @property {string} nameGen User name in genitive declension
+     */
     constructor (
         readonly id: number,
         readonly photo: string,
@@ -6378,6 +10150,10 @@ export class UsersUserLim {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUserLim}
+     */
     static deserialize(raw: Object): UsersUserLim {
         return new UsersUserLim (
             raw['id'],
@@ -6387,7 +10163,13 @@ export class UsersUserLim {
         )
     }
 }
+
 export class UsersLastSeen {
+    /**
+     * @class
+     * @property {number} time Last visit date (in Unix time)
+     * @property {number} platform Type of the platform that used for the last authorization
+     */
     constructor (
         readonly time: number,
         readonly platform: number
@@ -6395,6 +10177,10 @@ export class UsersLastSeen {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersLastSeen}
+     */
     static deserialize(raw: Object): UsersLastSeen {
         return new UsersLastSeen (
             raw['time'],
@@ -6402,7 +10188,22 @@ export class UsersLastSeen {
         )
     }
 }
+
 export class UsersUniversity {
+    /**
+     * @class
+     * @property {number} id University ID
+     * @property {number} country Country ID
+     * @property {number} city City ID
+     * @property {string} name University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} chair Chair ID
+     * @property {string} chairName Chair name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus Education status
+     */
     constructor (
         readonly id: number,
         readonly country: number,
@@ -6419,6 +10220,10 @@ export class UsersUniversity {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUniversity}
+     */
     static deserialize(raw: Object): UsersUniversity {
         return new UsersUniversity (
             raw['id'],
@@ -6435,7 +10240,21 @@ export class UsersUniversity {
         )
     }
 }
+
 export class UsersSchool {
+    /**
+     * @class
+     * @property {string} id School ID
+     * @property {number} country Country ID
+     * @property {number} city City ID
+     * @property {string} name School name
+     * @property {number} yearFrom Year the user started to study
+     * @property {number} yearTo Year the user finished to study
+     * @property {number} yearGraduated Graduation year
+     * @property {string} schoolClass School class letter
+     * @property {number} type School type ID
+     * @property {string} typeStr School type name
+     */
     constructor (
         readonly id: string,
         readonly country: number,
@@ -6451,6 +10270,10 @@ export class UsersSchool {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersSchool}
+     */
     static deserialize(raw: Object): UsersSchool {
         return new UsersSchool (
             raw['id'],
@@ -6466,7 +10289,14 @@ export class UsersSchool {
         )
     }
 }
+
 export class UsersCropPhoto {
+    /**
+     * @class
+     * @property {PhotosPhoto|undefined} photo
+     * @property {UsersCropPhotoCrop|undefined} crop
+     * @property {UsersCropPhotoRect|undefined} rect
+     */
     constructor (
         readonly photo: PhotosPhoto|undefined,
         readonly crop: UsersCropPhotoCrop|undefined,
@@ -6475,6 +10305,10 @@ export class UsersCropPhoto {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersCropPhoto}
+     */
     static deserialize(raw: Object): UsersCropPhoto {
         return new UsersCropPhoto (
             raw['photo'] ? PhotosPhoto.deserialize(raw['photo']) : undefined,
@@ -6483,7 +10317,15 @@ export class UsersCropPhoto {
         )
     }
 }
+
 export class UsersCropPhotoCrop {
+    /**
+     * @class
+     * @property {number} x Coordinate X of the left upper corner
+     * @property {number} y Coordinate Y of the left upper corner
+     * @property {number} x2 Coordinate X of the right lower corner
+     * @property {number} y2 Coordinate Y of the right lower corner
+     */
     constructor (
         readonly x: number,
         readonly y: number,
@@ -6493,6 +10335,10 @@ export class UsersCropPhotoCrop {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersCropPhotoCrop}
+     */
     static deserialize(raw: Object): UsersCropPhotoCrop {
         return new UsersCropPhotoCrop (
             raw['x'],
@@ -6502,7 +10348,15 @@ export class UsersCropPhotoCrop {
         )
     }
 }
+
 export class UsersCropPhotoRect {
+    /**
+     * @class
+     * @property {number} x Coordinate X of the left upper corner
+     * @property {number} y Coordinate Y of the left upper corner
+     * @property {number} x2 Coordinate X of the right lower corner
+     * @property {number} y2 Coordinate Y of the right lower corner
+     */
     constructor (
         readonly x: number,
         readonly y: number,
@@ -6512,6 +10366,10 @@ export class UsersCropPhotoRect {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersCropPhotoRect}
+     */
     static deserialize(raw: Object): UsersCropPhotoRect {
         return new UsersCropPhotoRect (
             raw['x'],
@@ -6521,7 +10379,14 @@ export class UsersCropPhotoRect {
         )
     }
 }
+
 export class UsersOccupation {
+    /**
+     * @class
+     * @property {string} type Type of occupation
+     * @property {number} id ID of school, university, company group
+     * @property {string} name Name of occupation
+     */
     constructor (
         readonly type: string,
         readonly id: number,
@@ -6530,6 +10395,10 @@ export class UsersOccupation {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersOccupation}
+     */
     static deserialize(raw: Object): UsersOccupation {
         return new UsersOccupation (
             raw['type'],
@@ -6538,7 +10407,19 @@ export class UsersOccupation {
         )
     }
 }
+
 export class UsersPersonal {
+    /**
+     * @class
+     * @property {number} political User's political views
+     * @property {string[]|undefined} langs
+     * @property {string} religion User's religion
+     * @property {string} inspiredBy User's inspired by
+     * @property {number} peopleMain User's personal priority in people
+     * @property {number} lifeMain User's personal priority in life
+     * @property {number} smoking User's views on smoking
+     * @property {number} alcohol User's views on alcohol
+     */
     constructor (
         readonly political: number,
         readonly langs: string[]|undefined,
@@ -6552,6 +10433,10 @@ export class UsersPersonal {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersPersonal}
+     */
     static deserialize(raw: Object): UsersPersonal {
         return new UsersPersonal (
             raw['political'],
@@ -6565,7 +10450,95 @@ export class UsersPersonal {
         )
     }
 }
+
 export class UsersUserXtrCounters {
+    /**
+     * @class
+     * @property {number} id User ID
+     * @property {string} firstName User first name
+     * @property {string} lastName User last name
+     * @property {string} deactivated Returns if a profile is deleted or blocked
+     * @property {number} hidden Returns if a profile is hidden.
+     * @property {BaseSex|undefined} sex User sex
+     * @property {string} screenName Domain name of the user's page
+     * @property {string} photo50 URL of square photo of the user with 50 pixels in width
+     * @property {string} photo100 URL of square photo of the user with 100 pixels in width
+     * @property {boolean} online Information whether the user is online
+     * @property {boolean} onlineMobile Information whether the user is online in mobile site or application
+     * @property {number} onlineApp Application ID
+     * @property {string} nickname User nickname
+     * @property {string} maidenName User maiden name
+     * @property {string} domain Domain name of the user's page
+     * @property {string} bdate User's date of birth
+     * @property {BaseObject|undefined} city
+     * @property {BaseCountry|undefined} country
+     * @property {number} timezone User's timezone
+     * @property {string} photo200 URL of square photo of the user with 200 pixels in width
+     * @property {string} photoMax URL of square photo of the user with maximum width
+     * @property {string} photo200Orig URL of user's photo with 200 pixels in width
+     * @property {string} photo400Orig URL of user's photo with 400 pixels in width
+     * @property {string} photoMaxOrig URL of user's photo of maximum size
+     * @property {string} photoId ID of the user's main photo
+     * @property {number} hasPhoto Information whether the user has main photo
+     * @property {boolean} hasMobile Information whether the user specified his phone number
+     * @property {boolean} isFriend Information whether the user is a friend of current user
+     * @property {number} friendStatus Friend status for current user
+     * @property {boolean} wallComments Information whether current user can comment wall posts
+     * @property {boolean} canPost Information whether current user can post on the user's wall
+     * @property {boolean} canSeeAllPosts Information whether current user can see other users' audio on the wall
+     * @property {boolean} canSeeAudio Information whether current user can see the user's audio
+     * @property {boolean} canWritePrivateMessage Information whether current user can write private message
+     * @property {boolean} canSendFriendRequest Information whether current user can send a friend request
+     * @property {string} mobilePhone Information whether current user can see
+     * @property {string} homePhone User's mobile phone number
+     * @property {string} skype User's Skype nickname
+     * @property {string} facebook User's Facebook account
+     * @property {string} facebookName User's Facebook name
+     * @property {string} twitter User's Twitter account
+     * @property {string} livejournal User's Livejournal account
+     * @property {string} instagram User's Instagram account
+     * @property {string} site User's website
+     * @property {AudioAudioFull|undefined} statusAudio
+     * @property {string} status User's status
+     * @property {string} activity User's status
+     * @property {UsersLastSeen|undefined} lastSeen
+     * @property {UsersExports|undefined} exports
+     * @property {UsersCropPhoto|undefined} cropPhoto
+     * @property {boolean} verified Information whether the user is verified
+     * @property {number} followersCount Number of user's followers
+     * @property {boolean} blacklisted Information whether current user is in the requested user's blacklist.
+     * @property {boolean} blacklistedByMe Information whether the requested user is in current user's blacklist
+     * @property {boolean} isFavorite Information whether the requested user is in faves of current user
+     * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
+     * @property {number} commonCount Number of common friends with current user
+     * @property {UsersOccupation|undefined} occupation
+     * @property {UsersCareer|undefined[]|undefined} career
+     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {number} university University ID
+     * @property {string} universityName University name
+     * @property {number} faculty Faculty ID
+     * @property {string} facultyName Faculty name
+     * @property {number} graduation Graduation year
+     * @property {string} educationForm Education form
+     * @property {string} educationStatus User's education status
+     * @property {string} homeTown User hometown
+     * @property {number} relation User relationship status
+     * @property {UsersUserMin|undefined} relationPartner
+     * @property {UsersPersonal|undefined} personal
+     * @property {string} interests User's interests
+     * @property {string} music User's favorite music
+     * @property {string} activities User's activities
+     * @property {string} movies User's favorite movies
+     * @property {string} tv User's favorite tv shows
+     * @property {string} books User's favorite books
+     * @property {string} games User's favorite games
+     * @property {UsersUniversity|undefined[]|undefined} universities
+     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {string} about About me field
+     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {string} quotes Favorite quotes
+     * @property {UsersUserCounters|undefined} counters
+     */
     constructor (
         readonly id: number,
         readonly firstName: string,
@@ -6655,6 +10628,10 @@ export class UsersUserXtrCounters {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {UsersUserXtrCounters}
+     */
     static deserialize(raw: Object): UsersUserXtrCounters {
         return new UsersUserXtrCounters (
             raw['id'],
@@ -6744,7 +10721,14 @@ export class UsersUserXtrCounters {
         )
     }
 }
+
 export class VideoVideoAlbum {
+    /**
+     * @class
+     * @property {number} id Album ID
+     * @property {number} ownerId Album owner's ID
+     * @property {string} title Album title
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -6753,6 +10737,10 @@ export class VideoVideoAlbum {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoVideoAlbum}
+     */
     static deserialize(raw: Object): VideoVideoAlbum {
         return new VideoVideoAlbum (
             raw['id'],
@@ -6761,7 +10749,19 @@ export class VideoVideoAlbum {
         )
     }
 }
+
 export class VideoVideoAlbumFull {
+    /**
+     * @class
+     * @property {number} id Album ID
+     * @property {number} ownerId Album owner's ID
+     * @property {string} title Album title
+     * @property {number} count Total number of videos in album
+     * @property {string} photo160 URL of the preview image with 160px in width
+     * @property {string} photo320 URL of the preview image with 320px in width
+     * @property {number} updatedTime Date when the album has been updated last time in Unixtime
+     * @property {number} isSystem Information whether album is system
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -6775,6 +10775,10 @@ export class VideoVideoAlbumFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoVideoAlbumFull}
+     */
     static deserialize(raw: Object): VideoVideoAlbumFull {
         return new VideoVideoAlbumFull (
             raw['id'],
@@ -6788,7 +10792,18 @@ export class VideoVideoAlbumFull {
         )
     }
 }
+
 export class VideoCatBlock {
+    /**
+     * @class
+     * @property {VideoCatElement|undefined[]|undefined} items
+     * @property {string} next New value for _from_ parameter
+     * @property {string} name Block name
+     * @property {number} id Block ID
+     * @property {string} view Type of view
+     * @property {boolean} canHide Information whether the block can be hidden
+     * @property {string} type Block type
+     */
     constructor (
         readonly items: VideoCatElement|undefined[]|undefined,
         readonly next: string,
@@ -6801,6 +10816,10 @@ export class VideoCatBlock {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoCatBlock}
+     */
     static deserialize(raw: Object): VideoCatBlock {
         return new VideoCatBlock (
             raw['items'] ? raw['items'].map(v => v ? VideoCatElement.deserialize(v) : undefined) : undefined,
@@ -6813,7 +10832,30 @@ export class VideoCatBlock {
         )
     }
 }
+
 export class VideoCatElement {
+    /**
+     * @class
+     * @property {number} id Element ID
+     * @property {number} ownerId Element owner's ID
+     * @property {string} title Element title
+     * @property {string} type Element type
+     * @property {string} description Element description
+     * @property {number} duration Duration in seconds
+     * @property {string} photo130 URL of the preview image with 130 px in width
+     * @property {string} photo160 URL of the preview image with 160 px in width
+     * @property {string} photo320 URL of the preview image with 320 px in width
+     * @property {string} photo640 URL of the preview image with 640 px in width
+     * @property {string} photo800 URL of the preview image with 800 px in width
+     * @property {number} date Date when the element has been created
+     * @property {number} views Views number
+     * @property {number} comments Comments number
+     * @property {number} canAdd Information whether current user can add the video
+     * @property {number} canEdit Information whether current user can edit the video
+     * @property {number} isPrivate Information whether the video is private
+     * @property {number} count Videos number (for album)
+     * @property {number} updatedTime Date of last update (for album) in Unixtime
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -6838,6 +10880,10 @@ export class VideoCatElement {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoCatElement}
+     */
     static deserialize(raw: Object): VideoCatElement {
         return new VideoCatElement (
             raw['id'],
@@ -6862,7 +10908,16 @@ export class VideoCatElement {
         )
     }
 }
+
 export class VideoSaveResult {
+    /**
+     * @class
+     * @property {string} uploadUrl URL for the video uploading
+     * @property {number} videoId Video ID
+     * @property {number} ownerId Video owner ID
+     * @property {string} title Video title
+     * @property {string} description Video description
+     */
     constructor (
         readonly uploadUrl: string,
         readonly videoId: number,
@@ -6873,6 +10928,10 @@ export class VideoSaveResult {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoSaveResult}
+     */
     static deserialize(raw: Object): VideoSaveResult {
         return new VideoSaveResult (
             raw['upload_url'],
@@ -6883,7 +10942,17 @@ export class VideoSaveResult {
         )
     }
 }
+
 export class VideoVideoTag {
+    /**
+     * @class
+     * @property {number} userId Tagged user ID
+     * @property {number} id Tag ID
+     * @property {number} placerId ID of the tag creator
+     * @property {string} taggedName Tag description
+     * @property {number} date Date when tag has been added in Unixtime
+     * @property {boolean} viewed Information whether tha tag is reviewed
+     */
     constructor (
         readonly userId: number,
         readonly id: number,
@@ -6895,6 +10964,10 @@ export class VideoVideoTag {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoVideoTag}
+     */
     static deserialize(raw: Object): VideoVideoTag {
         return new VideoVideoTag (
             raw['user_id'],
@@ -6906,7 +10979,13 @@ export class VideoVideoTag {
         )
     }
 }
+
 export class VideoUploadResponse {
+    /**
+     * @class
+     * @property {number} size Video size
+     * @property {number} videoId Video ID
+     */
     constructor (
         readonly size: number,
         readonly videoId: number
@@ -6914,6 +10993,10 @@ export class VideoUploadResponse {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoUploadResponse}
+     */
     static deserialize(raw: Object): VideoUploadResponse {
         return new VideoUploadResponse (
             raw['size'],
@@ -6921,7 +11004,30 @@ export class VideoUploadResponse {
         )
     }
 }
+
 export class VideoVideo {
+    /**
+     * @class
+     * @property {number} id Video ID
+     * @property {number} ownerId Video owner ID
+     * @property {string} title Video title
+     * @property {number} duration Video duration in seconds
+     * @property {string} description Video description
+     * @property {number} date Date when video has been uploaded in Unixtime
+     * @property {number} views Number of views
+     * @property {number} comments Number of comments
+     * @property {string} photo130 URL of the preview image with 130 px in width
+     * @property {string} photo320 URL of the preview image with 320 px in width
+     * @property {string} photo800 URL of the preview image with 800 px in width
+     * @property {string} accessKey Video access key
+     * @property {number} addingDate Date when the video has been added in Unixtime
+     * @property {string} player URL of the page with a player that can be used to play the video in the browser.
+     * @property {boolean} canEdit Information whether current user can edit the video
+     * @property {boolean} canAdd Information whether current user can add the video
+     * @property {BasePropertyExists|undefined} processing Returns if the video is processing
+     * @property {BasePropertyExists|undefined} live Returns if the video is live translation
+     * @property {VideoVideoFiles|undefined} files
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -6946,6 +11052,10 @@ export class VideoVideo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoVideo}
+     */
     static deserialize(raw: Object): VideoVideo {
         return new VideoVideo (
             raw['id'],
@@ -6970,7 +11080,17 @@ export class VideoVideo {
         )
     }
 }
+
 export class VideoVideoFiles {
+    /**
+     * @class
+     * @property {string} mp240 URL of the mpeg4 file with 240p quality
+     * @property {string} mp360 URL of the mpeg4 file with 360p quality
+     * @property {string} mp480 URL of the mpeg4 file with 480p quality
+     * @property {string} mp720 URL of the mpeg4 file with 720p quality
+     * @property {string} mp1080 URL of the mpeg4 file with 1080p quality
+     * @property {string} external URL of the external player
+     */
     constructor (
         readonly mp240: string,
         readonly mp360: string,
@@ -6982,6 +11102,10 @@ export class VideoVideoFiles {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoVideoFiles}
+     */
     static deserialize(raw: Object): VideoVideoFiles {
         return new VideoVideoFiles (
             raw['mp_240'],
@@ -6993,7 +11117,33 @@ export class VideoVideoFiles {
         )
     }
 }
+
 export class VideoVideoTagInfo {
+    /**
+     * @class
+     * @property {number} id Video ID
+     * @property {number} ownerId Video owner ID
+     * @property {string} title Video title
+     * @property {number} duration Video duration in seconds
+     * @property {string} description Video description
+     * @property {number} date Date when video has been uploaded in Unixtime
+     * @property {number} views Number of views
+     * @property {number} comments Number of comments
+     * @property {string} photo130 URL of the preview image with 130 px in width
+     * @property {string} photo320 URL of the preview image with 320 px in width
+     * @property {string} photo800 URL of the preview image with 800 px in width
+     * @property {string} accessKey Video access key
+     * @property {number} addingDate Date when the video has been added in Unixtime
+     * @property {string} player URL of the page with a player that can be used to play the video in the browser.
+     * @property {boolean} canEdit Information whether current user can edit the video
+     * @property {boolean} canAdd Information whether current user can add the video
+     * @property {BasePropertyExists|undefined} processing Returns if the video is processing
+     * @property {BasePropertyExists|undefined} live Returns if the video is live translation
+     * @property {VideoVideoFiles|undefined} files
+     * @property {number} placerId ID of the tag creator
+     * @property {number} tagCreated Date when tag has been added in Unixtime
+     * @property {number} tagId Tag ID
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -7021,6 +11171,10 @@ export class VideoVideoTagInfo {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoVideoTagInfo}
+     */
     static deserialize(raw: Object): VideoVideoTagInfo {
         return new VideoVideoTagInfo (
             raw['id'],
@@ -7048,7 +11202,36 @@ export class VideoVideoTagInfo {
         )
     }
 }
+
 export class VideoVideoFull {
+    /**
+     * @class
+     * @property {number} id Video ID
+     * @property {number} ownerId Video owner ID
+     * @property {string} title Video title
+     * @property {number} duration Video duration in seconds
+     * @property {string} description Video description
+     * @property {number} date Date when video has been uploaded in Unixtime
+     * @property {number} views Number of views
+     * @property {number} comments Number of comments
+     * @property {string} photo130 URL of the preview image with 130 px in width
+     * @property {string} photo320 URL of the preview image with 320 px in width
+     * @property {string} photo800 URL of the preview image with 800 px in width
+     * @property {string} accessKey Video access key
+     * @property {number} addingDate Date when the video has been added in Unixtime
+     * @property {string} player URL of the page with a player that can be used to play the video in the browser.
+     * @property {boolean} canEdit Information whether current user can edit the video
+     * @property {boolean} canAdd Information whether current user can add the video
+     * @property {BasePropertyExists|undefined} processing Returns if the video is processing
+     * @property {BasePropertyExists|undefined} live Returns if the video is live translation
+     * @property {VideoVideoFiles|undefined} files
+     * @property {string[]|undefined} privacyView
+     * @property {string[]|undefined} privacyComment
+     * @property {boolean} canComment Information whether current user can comment the video
+     * @property {boolean} canRepost Information whether current user can comment the video
+     * @property {BaseLikes|undefined} likes
+     * @property {boolean} repeat Information whether the video is repeated
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -7079,6 +11262,10 @@ export class VideoVideoFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {VideoVideoFull}
+     */
     static deserialize(raw: Object): VideoVideoFull {
         return new VideoVideoFull (
             raw['id'],
@@ -7109,7 +11296,15 @@ export class VideoVideoFull {
         )
     }
 }
+
 export class WallAppPost {
+    /**
+     * @class
+     * @property {number} id Application ID
+     * @property {string} name Application name
+     * @property {string} photo130 URL of the preview image with 130 px in width
+     * @property {string} photo604 URL of the preview image with 604 px in width
+     */
     constructor (
         readonly id: number,
         readonly name: string,
@@ -7119,6 +11314,10 @@ export class WallAppPost {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallAppPost}
+     */
     static deserialize(raw: Object): WallAppPost {
         return new WallAppPost (
             raw['id'],
@@ -7128,7 +11327,18 @@ export class WallAppPost {
         )
     }
 }
+
 export class WallAttachedNote {
+    /**
+     * @class
+     * @property {number} id Note ID
+     * @property {number} ownerId Note owner's ID
+     * @property {number} comments Comments number
+     * @property {number} readComments Read comments number
+     * @property {number} date Date when the note has been created in Unixtime
+     * @property {string} title Note title
+     * @property {string} viewUrl URL of the page with note preview
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -7141,6 +11351,10 @@ export class WallAttachedNote {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallAttachedNote}
+     */
     static deserialize(raw: Object): WallAttachedNote {
         return new WallAttachedNote (
             raw['id'],
@@ -7153,7 +11367,22 @@ export class WallAttachedNote {
         )
     }
 }
+
 export class WallCommentAttachment {
+    /**
+     * @class
+     * @property {PhotosPhoto|undefined} photo
+     * @property {AudioAudioFull|undefined} audio
+     * @property {VideoVideo|undefined} video
+     * @property {DocsDoc|undefined} doc
+     * @property {BaseLink|undefined} link
+     * @property {WallAttachedNote|undefined} note
+     * @property {PagesWikipageFull|undefined} page
+     * @property {MarketMarketAlbum|undefined} marketMarketAlbum
+     * @property {MarketMarketItem|undefined} market
+     * @property {BaseSticker|undefined} sticker
+     * @property {string} type Attachment type
+     */
     constructor (
         readonly photo: PhotosPhoto|undefined,
         readonly audio: AudioAudioFull|undefined,
@@ -7170,6 +11399,10 @@ export class WallCommentAttachment {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallCommentAttachment}
+     */
     static deserialize(raw: Object): WallCommentAttachment {
         return new WallCommentAttachment (
             raw['photo'] ? PhotosPhoto.deserialize(raw['photo']) : undefined,
@@ -7186,7 +11419,15 @@ export class WallCommentAttachment {
         )
     }
 }
+
 export class WallGraffiti {
+    /**
+     * @class
+     * @property {number} id Graffiti ID
+     * @property {number} ownerId Graffiti owner's ID
+     * @property {string} photo200 URL of the preview image with 200 px in width
+     * @property {string} photo586 URL of the preview image with 586 px in width
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -7196,6 +11437,10 @@ export class WallGraffiti {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallGraffiti}
+     */
     static deserialize(raw: Object): WallGraffiti {
         return new WallGraffiti (
             raw['id'],
@@ -7205,7 +11450,15 @@ export class WallGraffiti {
         )
     }
 }
+
 export class WallPostSource {
+    /**
+     * @class
+     * @property {string} type Type of post source
+     * @property {string} platform Platform name
+     * @property {string} data Additional data
+     * @property {string} url URL to an external site used to publish the post
+     */
     constructor (
         readonly type: string,
         readonly platform: string,
@@ -7215,6 +11468,10 @@ export class WallPostSource {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallPostSource}
+     */
     static deserialize(raw: Object): WallPostSource {
         return new WallPostSource (
             raw['type'],
@@ -7224,7 +11481,15 @@ export class WallPostSource {
         )
     }
 }
+
 export class WallPostedPhoto {
+    /**
+     * @class
+     * @property {number} id Photo ID
+     * @property {number} ownerId Photo owner's ID
+     * @property {string} photo130 URL of the preview image with 130 px in width
+     * @property {string} photo604 URL of the preview image with 604 px in width
+     */
     constructor (
         readonly id: number,
         readonly ownerId: number,
@@ -7234,6 +11499,10 @@ export class WallPostedPhoto {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallPostedPhoto}
+     */
     static deserialize(raw: Object): WallPostedPhoto {
         return new WallPostedPhoto (
             raw['id'],
@@ -7243,18 +11512,39 @@ export class WallPostedPhoto {
         )
     }
 }
+
 export class WallPostType {
+    /**
+     * @class
+     */
     constructor (
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallPostType}
+     */
     static deserialize(raw: Object): WallPostType {
         return new WallPostType (
         )
     }
 }
+
 export class WallWallComment {
+    /**
+     * @class
+     * @property {number} id Comment ID
+     * @property {number} fromId Author ID
+     * @property {number} date Date when the comment has been added in Unixtime
+     * @property {string} text Comment text
+     * @property {BaseLikesInfo|undefined} likes
+     * @property {number} replyToUser Replied user ID
+     * @property {number} replyToComment Replied comment ID
+     * @property {WallCommentAttachment|undefined[]|undefined} attachments
+     * @property {number} realOffset Real position of the comment
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -7269,6 +11559,10 @@ export class WallWallComment {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallWallComment}
+     */
     static deserialize(raw: Object): WallWallComment {
         return new WallWallComment (
             raw['id'],
@@ -7283,7 +11577,21 @@ export class WallWallComment {
         )
     }
 }
+
 export class WallWallpost {
+    /**
+     * @class
+     * @property {number} id Post ID
+     * @property {number} fromId Post author ID
+     * @property {number} ownerId Wall owner's ID
+     * @property {number} date Date of publishing in Unixtime
+     * @property {WallPostType|undefined} postType
+     * @property {string} text Post text
+     * @property {number} signerId Post signer ID
+     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {BaseGeo|undefined} geo
+     * @property {WallPostSource|undefined} postSource
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -7299,6 +11607,10 @@ export class WallWallpost {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallWallpost}
+     */
     static deserialize(raw: Object): WallWallpost {
         return new WallWallpost (
             raw['id'],
@@ -7314,7 +11626,28 @@ export class WallWallpost {
         )
     }
 }
+
 export class WallWallpostAttached {
+    /**
+     * @class
+     * @property {number} id Post ID
+     * @property {number} fromId Post author ID
+     * @property {number} toId Post addresse
+     * @property {number} date Date of publishing in Unixtime
+     * @property {WallPostType|undefined} postType
+     * @property {string} text Post text
+     * @property {number} canDelete Information whether current user can delete the post
+     * @property {number} signerId Post signer ID
+     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {BaseGeo|undefined} geo
+     * @property {WallPostSource|undefined} postSource
+     * @property {BaseCommentsInfo|undefined} comments
+     * @property {BaseLikesInfo|undefined} likes
+     * @property {BaseRepostsInfo|undefined} reposts
+     * @property {number} copyOwnerId Source post owner's ID
+     * @property {number} copyPostId Source post ID
+     * @property {string} copyText Repost comment
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -7337,6 +11670,10 @@ export class WallWallpostAttached {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallWallpostAttached}
+     */
     static deserialize(raw: Object): WallWallpostAttached {
         return new WallWallpostAttached (
             raw['id'],
@@ -7359,7 +11696,27 @@ export class WallWallpostAttached {
         )
     }
 }
+
 export class WallWallpostAttachment {
+    /**
+     * @class
+     * @property {PhotosPhoto|undefined} photo
+     * @property {WallPostedPhoto|undefined} postedPhoto
+     * @property {AudioAudioFull|undefined} audio
+     * @property {VideoVideo|undefined} video
+     * @property {DocsDoc|undefined} doc
+     * @property {BaseLink|undefined} link
+     * @property {WallGraffiti|undefined} graffiti
+     * @property {WallAttachedNote|undefined} note
+     * @property {WallAppPost|undefined} app
+     * @property {PollsPoll|undefined} poll
+     * @property {PagesWikipageFull|undefined} page
+     * @property {PhotosPhotoAlbum|undefined} album
+     * @property {string[]|undefined} photosList
+     * @property {MarketMarketAlbum|undefined} marketMarketAlbum
+     * @property {MarketMarketItem|undefined} market
+     * @property {string} type Attachment type
+     */
     constructor (
         readonly photo: PhotosPhoto|undefined,
         readonly postedPhoto: WallPostedPhoto|undefined,
@@ -7381,6 +11738,10 @@ export class WallWallpostAttachment {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallWallpostAttachment}
+     */
     static deserialize(raw: Object): WallWallpostAttachment {
         return new WallWallpostAttachment (
             raw['photo'] ? PhotosPhoto.deserialize(raw['photo']) : undefined,
@@ -7402,7 +11763,27 @@ export class WallWallpostAttachment {
         )
     }
 }
+
 export class WallWallpostToId {
+    /**
+     * @class
+     * @property {number} id Post ID
+     * @property {number} fromId Post author ID
+     * @property {number} toId Wall owner's ID
+     * @property {number} date Date of publishing in Unixtime
+     * @property {number} postId wall post ID (if comment)
+     * @property {WallPostType|undefined} postType
+     * @property {string} text Post text
+     * @property {number} signerId Post signer ID
+     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {BaseGeo|undefined} geo
+     * @property {WallPostSource|undefined} postSource
+     * @property {BaseCommentsInfo|undefined} comments
+     * @property {BaseLikesInfo|undefined} likes
+     * @property {BaseRepostsInfo|undefined} reposts
+     * @property {number} copyOwnerId ID of the source post owner
+     * @property {number} copyPostId ID of the source post
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -7424,6 +11805,10 @@ export class WallWallpostToId {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallWallpostToId}
+     */
     static deserialize(raw: Object): WallWallpostToId {
         return new WallWallpostToId (
             raw['id'],
@@ -7445,7 +11830,30 @@ export class WallWallpostToId {
         )
     }
 }
+
 export class WallWallpostFull {
+    /**
+     * @class
+     * @property {number} id Post ID
+     * @property {number} fromId Post author ID
+     * @property {number} ownerId Wall owner's ID
+     * @property {number} date Date of publishing in Unixtime
+     * @property {WallPostType|undefined} postType
+     * @property {string} text Post text
+     * @property {number} signerId Post signer ID
+     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {BaseGeo|undefined} geo
+     * @property {WallPostSource|undefined} postSource
+     * @property {WallWallpost|undefined[]|undefined} copyHistory
+     * @property {number} canEdit Information whether current user can edit the post
+     * @property {number} createdBy Post creator ID (if post still can be edited)
+     * @property {number} canDelete Information whether current user can delete the post
+     * @property {number} canPin Information whether current user can pin the post
+     * @property {number} isPinned Information whether the post is pinned
+     * @property {BaseCommentsInfo|undefined} comments
+     * @property {BaseLikesInfo|undefined} likes
+     * @property {BaseRepostsInfo|undefined} reposts
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -7470,6 +11878,10 @@ export class WallWallpostFull {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WallWallpostFull}
+     */
     static deserialize(raw: Object): WallWallpostFull {
         return new WallWallpostFull (
             raw['id'],
@@ -7494,7 +11906,25 @@ export class WallWallpostFull {
         )
     }
 }
+
 export class WidgetsWidgetComment {
+    /**
+     * @class
+     * @property {number} id Comment ID
+     * @property {number} fromId Comment author ID
+     * @property {number} toId Wall owner
+     * @property {number} date Date when the comment has been added in Unixtime
+     * @property {UsersUserFull|undefined} user
+     * @property {number} postType Post type
+     * @property {string} text Comment text
+     * @property {number} canDelete Information whether current user can delete the comment
+     * @property {WidgetsCommentMedia|undefined} media
+     * @property {WallCommentAttachment|undefined[]|undefined} attachments
+     * @property {WallPostSource|undefined} postSource
+     * @property {WidgetsCommentReplies|undefined} comments
+     * @property {BaseLikesInfo|undefined} likes
+     * @property {BaseRepostsInfo|undefined} reposts
+     */
     constructor (
         readonly id: number,
         readonly fromId: number,
@@ -7514,6 +11944,10 @@ export class WidgetsWidgetComment {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WidgetsWidgetComment}
+     */
     static deserialize(raw: Object): WidgetsWidgetComment {
         return new WidgetsWidgetComment (
             raw['id'],
@@ -7533,7 +11967,15 @@ export class WidgetsWidgetComment {
         )
     }
 }
+
 export class WidgetsCommentMedia {
+    /**
+     * @class
+     * @property {string} type Media type
+     * @property {number} ownerId Media owner's ID
+     * @property {number} itemId Media item ID
+     * @property {string} thumbSrc URL of the preview image (type=photo only)
+     */
     constructor (
         readonly type: string,
         readonly ownerId: number,
@@ -7543,6 +11985,10 @@ export class WidgetsCommentMedia {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WidgetsCommentMedia}
+     */
     static deserialize(raw: Object): WidgetsCommentMedia {
         return new WidgetsCommentMedia (
             raw['type'],
@@ -7552,7 +11998,14 @@ export class WidgetsCommentMedia {
         )
     }
 }
+
 export class WidgetsCommentReplies {
+    /**
+     * @class
+     * @property {number} count Comments number
+     * @property {number} canPost Information whether current user can comment the post
+     * @property {WidgetsCommentRepliesItem|undefined[]|undefined} replies
+     */
     constructor (
         readonly count: number,
         readonly canPost: number,
@@ -7561,6 +12014,10 @@ export class WidgetsCommentReplies {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WidgetsCommentReplies}
+     */
     static deserialize(raw: Object): WidgetsCommentReplies {
         return new WidgetsCommentReplies (
             raw['count'],
@@ -7569,7 +12026,17 @@ export class WidgetsCommentReplies {
         )
     }
 }
+
 export class WidgetsCommentRepliesItem {
+    /**
+     * @class
+     * @property {number} cid Comment ID
+     * @property {number} uid User ID
+     * @property {number} date Date when the comment has been added in Unixtime
+     * @property {string} text Comment text
+     * @property {WidgetsWidgetLikes|undefined} likes
+     * @property {UsersUserFull|undefined} user
+     */
     constructor (
         readonly cid: number,
         readonly uid: number,
@@ -7581,6 +12048,10 @@ export class WidgetsCommentRepliesItem {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WidgetsCommentRepliesItem}
+     */
     static deserialize(raw: Object): WidgetsCommentRepliesItem {
         return new WidgetsCommentRepliesItem (
             raw['cid'],
@@ -7592,20 +12063,42 @@ export class WidgetsCommentRepliesItem {
         )
     }
 }
+
 export class WidgetsWidgetLikes {
+    /**
+     * @class
+     * @property {number} count Likes number
+     */
     constructor (
         readonly count: number
     ) {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WidgetsWidgetLikes}
+     */
     static deserialize(raw: Object): WidgetsWidgetLikes {
         return new WidgetsWidgetLikes (
             raw['count']
         )
     }
 }
+
 export class WidgetsWidgetPage {
+    /**
+     * @class
+     * @property {number} id Page ID
+     * @property {string} title Page title
+     * @property {string} description Page description
+     * @property {string} photo URL of the preview image
+     * @property {string} url Page absolute URL
+     * @property {BaseObjectCount|undefined} likes
+     * @property {BaseObjectCount|undefined} comments
+     * @property {number} date Date when widgets on the page has been initialized firstly in Unixtime
+     * @property {string} pageId page_id parameter value
+     */
     constructor (
         readonly id: number,
         readonly title: string,
@@ -7620,6 +12113,10 @@ export class WidgetsWidgetPage {
 
     }
 
+    /**
+     * @param {Object} raw
+     * @returns {WidgetsWidgetPage}
+     */
     static deserialize(raw: Object): WidgetsWidgetPage {
         return new WidgetsWidgetPage (
             raw['id'],
@@ -7634,4 +12131,3 @@ export class WidgetsWidgetPage {
         )
     }
 }
-
