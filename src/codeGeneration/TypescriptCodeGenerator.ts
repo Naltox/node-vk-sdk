@@ -36,17 +36,6 @@ export default class TypescriptCodeGenerator implements CodeGenerator {
         let propsName = `MethodsProps.${toCamelCase(scheme.name, true, '.')}Params`
         let responseName = this.renderType(scheme.responseType, true)
 
-
-        /**
-         * Returns detailed information on users.
-         *
-         *
-         * @param {{
-         *   subview:string,
-         *   el:(number|Element)
-         * }} params
-         */
-
         code.add(`/**`)
         code.add(` * ${scheme.description}`)
         code.add(' *')
