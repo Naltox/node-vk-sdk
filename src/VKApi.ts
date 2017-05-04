@@ -11,6 +11,8 @@ const API_BASE_URL = 'https://api.vk.com/method/'
 const API_VERSION = '5.62'
 
 export interface VKApiOptions {
+    lang?: string|number,
+    testMode?: number,
     logger?: BaseLogger,
     token?: string,
     timeout?: number,
@@ -19,6 +21,8 @@ export interface VKApiOptions {
 }
 
 export class VKApi {
+    private _lang: string|number|undefined
+    private _testMode: number|undefined
     private _logger: BaseLogger|undefined
     private _queue: CallbackQueue|undefined
     private _timeout: number
@@ -28,6 +32,8 @@ export class VKApi {
         this._logger = options.logger
         this._token = options.token
         this._timeout = options.timeout || TIMEOUT
+        this._lang = options.lang
+        this._testMode = options.testMode
 
         if (options.useQueue)
             this._queue = new CallbackQueue(options.requestsPerSecond || REQUESTS_PER_SECOND)
@@ -35,6 +41,12 @@ export class VKApi {
 
     public async call(method: string, params: Object, responseType?: Function): Promise<any> {
         params = this.filterParams(params)
+
+        if (params['lang'] == undefined && this._lang != undefined)
+            params['lang'] = this._lang
+
+        if (params['testMode'] == undefined && this._testMode != undefined)
+            params['testMode'] = this._testMode
 
         params['v'] = API_VERSION
         params['access_token'] = params['access_token'] || this._token
