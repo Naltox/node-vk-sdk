@@ -7871,7 +7871,7 @@ export class PhotosGetWallUploadServerResponse {
      */
     static deserialize(raw: Object): PhotosGetWallUploadServerResponse {
         return new PhotosGetWallUploadServerResponse (
-            raw['response'] ? Models.PhotosPhotoUpload.deserialize(raw['response']) : undefined
+            raw ? Models.PhotosPhotoUpload.deserialize(raw) : undefined
         )
     }
 }
