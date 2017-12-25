@@ -121,6 +121,7 @@ export class VKApi {
                     params
                 })
 
+	    reject(err)
             return
         }
 
