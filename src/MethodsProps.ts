@@ -229,7 +229,7 @@ export interface UsersReportParams {
     /**
      * Type of complaint:; 'porn' – pornography; 'spam' – spamming; 'insult' – abusive behavior; 'advertisment' – disruptive advertisements
      */
-        type: string,
+    type: string,
     /**
      * Comment describing the complaint.
      */
@@ -3212,7 +3212,7 @@ export interface PagesGetParams {
     /**
      * '1' — to return information about a global wiki page
      */
-        global?: boolean,
+    global?: boolean,
     /**
      * '1' — resulting wiki page is a preview for the attached link
      */
@@ -3506,7 +3506,7 @@ export interface GroupsSearchParams {
     /**
      * Community type. Possible values: 'group, page, event.'
      */
-        type?: string,
+    type?: string,
     /**
      * Country ID.
      */
@@ -3702,7 +3702,7 @@ export interface GroupsCreateParams {
     /**
      * Community type. Possible values:; *'group' – group;; *'event' – event;; *'public' – public page
      */
-        type?: string,
+    type?: string,
     /**
      * Category ID (for 'type' = 'public' only).
      */
@@ -5289,7 +5289,7 @@ export interface VideoGetCatalogParams {
     /**
      * parameter for requesting the next results page. Value for transmitting here is returned in the 'next' field in a reply.
      */
-        from?: string,
+    from?: string,
     /**
      * list of requested catalog sections
      */
@@ -5312,7 +5312,7 @@ export interface VideoGetCatalogSectionParams {
     /**
      * 'next' value returned with a block by the '' method.
      */
-        from: string,
+    from: string,
     /**
      * number of blocks to return.
      */
@@ -5532,7 +5532,7 @@ export interface PlacesAddParams {
     /**
      * ID of the location's type (e.g., '1' — Home, '2' — Work). To get location type IDs, use the [vk.com/dev/places.getTypes|places.getTypes] method.
      */
-        type?: number,
+    type?: number,
     /**
      * Title of the location.
      */
@@ -6472,7 +6472,7 @@ export interface MessagesSetActivityParams {
     /**
      * 'typing' — user has started to type.
      */
-        type?: string,
+    type?: string,
     /**
      * Destination ID.; ; "For user:; 'User ID', e.g. '12345'.; ; For chat:; '2000000000' + 'chat_id', e.g. '2000000001'.; ; For community:; '- community ID', e.g. '-12345'.; "
      */
@@ -6791,7 +6791,7 @@ export interface NewsfeedIgnoreItemParams {
     /**
      * Item type. Possible values:; *'wall' – post on the wall;; *'tag' – tag on a photo;; *'profilephoto' – profile photo;; *'video' – video;; *'audio' – audio.
      */
-        type: string,
+    type: string,
     /**
      * Item owner's identifier (user or community); "Note that community id must be negative. ; 'owner_id=1' – user ; 'owner_id=-1' – community "
      */
@@ -6810,7 +6810,7 @@ export interface NewsfeedUnignoreItemParams {
     /**
      * Item type. Possible values:; *'wall' – post on the wall;; *'tag' – tag on a photo;; *'profilephoto' – profile photo;; *'video' – video;; *'audio' – audio.
      */
-        type: string,
+    type: string,
     /**
      * Item owner's identifier (user or community); "Note that community id must be negative. ; 'owner_id=1' – user ; 'owner_id=-1' – community "
      */
@@ -6917,7 +6917,7 @@ export interface NewsfeedUnsubscribeParams {
     /**
      * Type of object from which to unsubscribe:; 'note' — note; 'photo' — photo; 'post' — post on user wall or community wall; 'topic' — topic; 'video' — video
      */
-        type: string,
+    type: string,
     /**
      * Object owner ID.
      */
@@ -6959,7 +6959,7 @@ export interface LikesGetListParams {
     /**
      * ; Object type:; 'post' — post on user or community wall; 'comment' — comment on a wall post; 'photo' — photo; 'audio' — audio; 'video' — video; 'note' — note; 'photo_comment' — comment on the photo; 'video_comment' — comment on the video; 'topic_comment' — comment in the discussion; 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
      */
-        type: string,
+    type: string,
     /**
      * ID of the user, community, or application that owns the object. If the 'type' parameter is set as 'sitepage', the application ID is passed as 'owner_id'. Use negative value for a community id. If the 'type' parameter is not set, the 'owner_id' is assumed to be either the current user or the same application ID as if the 'type' parameter was set to 'sitepage'.; ;
      */
@@ -7006,7 +7006,7 @@ export interface LikesAddParams {
     /**
      * Object type:; 'post' — post on user or community wall; 'comment' — comment on a wall post; 'photo' — photo; 'audio' — audio; 'video' — video; 'note' — note; 'photo_comment' — comment on the photo; 'video_comment' — comment on the video; 'topic_comment' — comment in the discussion; 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
      */
-        type: string,
+    type: string,
     /**
      * ID of the user or community that owns the object.
      */
@@ -7029,7 +7029,7 @@ export interface LikesDeleteParams {
     /**
      * Object type:; 'post' — post on user or community wall; 'comment' — comment on a wall post; 'photo' — photo; 'audio' — audio; 'video' — video; 'note' — note; 'photo_comment' — comment on the photo; 'video_comment' — comment on the video; 'topic_comment' — comment in the discussion; 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
      */
-        type: string,
+    type: string,
     /**
      * ID of the user or community that owns the object.
      */
@@ -7052,7 +7052,7 @@ export interface LikesIsLikedParams {
     /**
      * Object type:; 'post' — post on user or community wall; 'comment' — comment on a wall post; 'photo' — photo; 'audio' — audio; 'video' — video; 'note' — note; 'photo_comment' — comment on the photo; 'video_comment' — comment on the video; 'topic_comment' — comment in the discussion
      */
-        type: string,
+    type: string,
     /**
      * ID of the user or community that owns the object.
      */
@@ -7751,7 +7751,7 @@ export interface AppsSendRequestParams {
     /**
      * request type. Values:; 'invite' – if the request is sent to a user who does not have the app installed;; 'request' – if a user has already installed the app
      */
-        type?: string,
+    type?: string,
     /**
      * undefined
      */
@@ -7785,7 +7785,7 @@ export interface AppsGetFriendsListParams {
     /**
      * List type. Possible values:; * 'invite' — available for invites (don't play the game);; * 'request' — available for request (play the game).; ; By default: 'invite'.
      */
-        type?: string,
+    type?: string,
     /**
      * Additional profile fields, see [vk.com/dev/fields|description].
      */
@@ -7800,11 +7800,11 @@ export interface AppsGetLeaderboardParams {
     /**
      * Leaderboard type. Possible values:; *'level' — by level;; *'points' — by mission points;; *'score' — by score ().
      */
-        type: string,
+    type: string,
     /**
      * Rating type. Possible values:; *'1' — global rating among all players;; *'0' — rating among user friends.
      */
-        global?: boolean,
+    global?: boolean,
     /**
      * 1 — to return additional info about users
      */

@@ -50,12 +50,12 @@ export class AccountAccountCounters {
 export class AccountLookupResult {
     /**
      * @class
-     * @property {AccountUserXtrContact|undefined[]|undefined} found
-     * @property {AccountOtherContact|undefined[]|undefined} other
+     * @property {AccountUserXtrContact[]|undefined} found
+     * @property {AccountOtherContact[]|undefined} other
      */
     constructor (
-        readonly found: AccountUserXtrContact|undefined[]|undefined,
-        readonly other: AccountOtherContact|undefined[]|undefined
+        readonly found: AccountUserXtrContact[]|undefined,
+        readonly other: AccountOtherContact[]|undefined
     ) {
 
     }
@@ -197,11 +197,11 @@ export class AccountPushConversations {
     /**
      * @class
      * @property {number} count Items count
-     * @property {AccountPushConversationsItem|undefined[]|undefined} items
+     * @property {AccountPushConversationsItem[]|undefined} items
      */
     constructor (
         readonly count: number,
-        readonly items: AccountPushConversationsItem|undefined[]|undefined
+        readonly items: AccountPushConversationsItem[]|undefined
     ) {
 
     }
@@ -251,46 +251,46 @@ export class AccountPushParams {
      * @class
      * @property {string[]|undefined} msg
      * @property {string[]|undefined} chat
-     * @property {AccountOnoffOptions|undefined[]|undefined} friend
-     * @property {AccountOnoffOptions|undefined[]|undefined} friendFound
-     * @property {AccountOnoffOptions|undefined[]|undefined} friendAccepted
-     * @property {AccountOnoffOptions|undefined[]|undefined} reply
+     * @property {AccountOnoffOptions[]|undefined} friend
+     * @property {AccountOnoffOptions[]|undefined} friendFound
+     * @property {AccountOnoffOptions[]|undefined} friendAccepted
+     * @property {AccountOnoffOptions[]|undefined} reply
      * @property {string[]|undefined} comment
      * @property {string[]|undefined} mention
      * @property {string[]|undefined} like
      * @property {string[]|undefined} repost
-     * @property {AccountOnoffOptions|undefined[]|undefined} wallPost
-     * @property {AccountOnoffOptions|undefined[]|undefined} wallPublish
-     * @property {AccountOnoffOptions|undefined[]|undefined} groupInvite
-     * @property {AccountOnoffOptions|undefined[]|undefined} groupAccepted
-     * @property {AccountOnoffOptions|undefined[]|undefined} eventSoon
+     * @property {AccountOnoffOptions[]|undefined} wallPost
+     * @property {AccountOnoffOptions[]|undefined} wallPublish
+     * @property {AccountOnoffOptions[]|undefined} groupInvite
+     * @property {AccountOnoffOptions[]|undefined} groupAccepted
+     * @property {AccountOnoffOptions[]|undefined} eventSoon
      * @property {string[]|undefined} photosTag
-     * @property {AccountOnoffOptions|undefined[]|undefined} appRequest
-     * @property {AccountOnoffOptions|undefined[]|undefined} sdkOpen
-     * @property {AccountOnoffOptions|undefined[]|undefined} newPost
-     * @property {AccountOnoffOptions|undefined[]|undefined} birthday
+     * @property {AccountOnoffOptions[]|undefined} appRequest
+     * @property {AccountOnoffOptions[]|undefined} sdkOpen
+     * @property {AccountOnoffOptions[]|undefined} newPost
+     * @property {AccountOnoffOptions[]|undefined} birthday
      */
     constructor (
         readonly msg: string[]|undefined,
         readonly chat: string[]|undefined,
-        readonly friend: AccountOnoffOptions|undefined[]|undefined,
-        readonly friendFound: AccountOnoffOptions|undefined[]|undefined,
-        readonly friendAccepted: AccountOnoffOptions|undefined[]|undefined,
-        readonly reply: AccountOnoffOptions|undefined[]|undefined,
+        readonly friend: AccountOnoffOptions[]|undefined,
+        readonly friendFound: AccountOnoffOptions[]|undefined,
+        readonly friendAccepted: AccountOnoffOptions[]|undefined,
+        readonly reply: AccountOnoffOptions[]|undefined,
         readonly comment: string[]|undefined,
         readonly mention: string[]|undefined,
         readonly like: string[]|undefined,
         readonly repost: string[]|undefined,
-        readonly wallPost: AccountOnoffOptions|undefined[]|undefined,
-        readonly wallPublish: AccountOnoffOptions|undefined[]|undefined,
-        readonly groupInvite: AccountOnoffOptions|undefined[]|undefined,
-        readonly groupAccepted: AccountOnoffOptions|undefined[]|undefined,
-        readonly eventSoon: AccountOnoffOptions|undefined[]|undefined,
+        readonly wallPost: AccountOnoffOptions[]|undefined,
+        readonly wallPublish: AccountOnoffOptions[]|undefined,
+        readonly groupInvite: AccountOnoffOptions[]|undefined,
+        readonly groupAccepted: AccountOnoffOptions[]|undefined,
+        readonly eventSoon: AccountOnoffOptions[]|undefined,
         readonly photosTag: string[]|undefined,
-        readonly appRequest: AccountOnoffOptions|undefined[]|undefined,
-        readonly sdkOpen: AccountOnoffOptions|undefined[]|undefined,
-        readonly newPost: AccountOnoffOptions|undefined[]|undefined,
-        readonly birthday: AccountOnoffOptions|undefined[]|undefined
+        readonly appRequest: AccountOnoffOptions[]|undefined,
+        readonly sdkOpen: AccountOnoffOptions[]|undefined,
+        readonly newPost: AccountOnoffOptions[]|undefined,
+        readonly birthday: AccountOnoffOptions[]|undefined
     ) {
 
     }
@@ -367,7 +367,7 @@ export class AccountUserSettings {
      * @property {number} relation User relationship status
      * @property {UsersUserMin|undefined} relationPartner
      * @property {number} relationPending Information whether relation status is pending
-     * @property {UsersUserMin|undefined[]|undefined} relationRequests
+     * @property {UsersUserMin[]|undefined} relationRequests
      * @property {string} bdate User's date of birth
      * @property {number} bdateVisibility Information whether user's birthdate are hidden
      * @property {string} homeTown User's hometown
@@ -386,7 +386,7 @@ export class AccountUserSettings {
         readonly relation: number,
         readonly relationPartner: UsersUserMin|undefined,
         readonly relationPending: number,
-        readonly relationRequests: UsersUserMin|undefined[]|undefined,
+        readonly relationRequests: UsersUserMin[]|undefined,
         readonly bdate: string,
         readonly bdateVisibility: number,
         readonly homeTown: string,
@@ -487,8 +487,8 @@ export class AccountUserXtrContact {
      * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
      * @property {number} commonCount Number of common friends with current user
      * @property {UsersOccupation|undefined} occupation
-     * @property {UsersCareer|undefined[]|undefined} career
-     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {UsersCareer[]|undefined} career
+     * @property {UsersMilitary[]|undefined} military
      * @property {number} university University ID
      * @property {string} universityName University name
      * @property {number} faculty Faculty ID
@@ -507,10 +507,10 @@ export class AccountUserXtrContact {
      * @property {string} tv User's favorite tv shows
      * @property {string} books User's favorite books
      * @property {string} games User's favorite games
-     * @property {UsersUniversity|undefined[]|undefined} universities
-     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {UsersUniversity[]|undefined} universities
+     * @property {UsersSchool[]|undefined} schools
      * @property {string} about About me field
-     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {UsersRelative[]|undefined} relatives
      * @property {string} quotes Favorite quotes
      * @property {string} contact
      * @property {number} requestSent
@@ -575,8 +575,8 @@ export class AccountUserXtrContact {
         readonly isHiddenFromFeed: boolean,
         readonly commonCount: number,
         readonly occupation: UsersOccupation|undefined,
-        readonly career: UsersCareer|undefined[]|undefined,
-        readonly military: UsersMilitary|undefined[]|undefined,
+        readonly career: UsersCareer[]|undefined,
+        readonly military: UsersMilitary[]|undefined,
         readonly university: number,
         readonly universityName: string,
         readonly faculty: number,
@@ -595,10 +595,10 @@ export class AccountUserXtrContact {
         readonly tv: string,
         readonly books: string,
         readonly games: string,
-        readonly universities: UsersUniversity|undefined[]|undefined,
-        readonly schools: UsersSchool|undefined[]|undefined,
+        readonly universities: UsersUniversity[]|undefined,
+        readonly schools: UsersSchool[]|undefined,
         readonly about: string,
-        readonly relatives: UsersRelative|undefined[]|undefined,
+        readonly relatives: UsersRelative[]|undefined,
         readonly quotes: string,
         readonly contact: string,
         readonly requestSent: number,
@@ -997,12 +997,12 @@ export class AdsCategory {
      * @class
      * @property {number} id Category ID
      * @property {string} name Category name
-     * @property {BaseObjectWithName|undefined[]|undefined} subcategories
+     * @property {BaseObjectWithName[]|undefined} subcategories
      */
     constructor (
         readonly id: number,
         readonly name: string,
-        readonly subcategories: BaseObjectWithName|undefined[]|undefined
+        readonly subcategories: BaseObjectWithName[]|undefined
     ) {
 
     }
@@ -1194,19 +1194,19 @@ export class AdsDemostatsFormat {
      * @property {string} day Day as YYYY-MM-DD
      * @property {string} month Month as YYYY-MM
      * @property {number} overall 1 if period=overall
-     * @property {AdsStatsSex|undefined[]|undefined} sex
-     * @property {AdsStatsAge|undefined[]|undefined} age
-     * @property {AdsStatsSexAge|undefined[]|undefined} sexAge
-     * @property {AdsStatsCities|undefined[]|undefined} cities
+     * @property {AdsStatsSex[]|undefined} sex
+     * @property {AdsStatsAge[]|undefined} age
+     * @property {AdsStatsSexAge[]|undefined} sexAge
+     * @property {AdsStatsCities[]|undefined} cities
      */
     constructor (
         readonly day: string,
         readonly month: string,
         readonly overall: number,
-        readonly sex: AdsStatsSex|undefined[]|undefined,
-        readonly age: AdsStatsAge|undefined[]|undefined,
-        readonly sexAge: AdsStatsSexAge|undefined[]|undefined,
-        readonly cities: AdsStatsCities|undefined[]|undefined
+        readonly sex: AdsStatsSex[]|undefined,
+        readonly age: AdsStatsAge[]|undefined,
+        readonly sexAge: AdsStatsSexAge[]|undefined,
+        readonly cities: AdsStatsCities[]|undefined
     ) {
 
     }
@@ -1326,11 +1326,11 @@ export class AdsRejectReason {
     /**
      * @class
      * @property {string} comment Comment text
-     * @property {AdsRules|undefined[]|undefined} rules
+     * @property {AdsRules[]|undefined} rules
      */
     constructor (
         readonly comment: string,
-        readonly rules: AdsRules|undefined[]|undefined
+        readonly rules: AdsRules[]|undefined
     ) {
 
     }
@@ -1351,11 +1351,11 @@ export class AdsRules {
     /**
      * @class
      * @property {string} title Comment
-     * @property {AdsParagraphs|undefined[]|undefined} paragraphs
+     * @property {AdsParagraphs[]|undefined} paragraphs
      */
     constructor (
         readonly title: string,
-        readonly paragraphs: AdsParagraphs|undefined[]|undefined
+        readonly paragraphs: AdsParagraphs[]|undefined
     ) {
 
     }
@@ -1869,11 +1869,11 @@ export class AdsUsers {
     /**
      * @class
      * @property {number} userId User ID
-     * @property {AdsAccesses|undefined[]|undefined} accesses
+     * @property {AdsAccesses[]|undefined} accesses
      */
     constructor (
         readonly userId: number,
-        readonly accesses: AdsAccesses|undefined[]|undefined
+        readonly accesses: AdsAccesses[]|undefined
     ) {
 
     }
@@ -1957,7 +1957,7 @@ export class AppsApp {
      * @property {number} membersCount Members number
      * @property {number} publishedDate Date when the application has been published in Unixtime
      * @property {number} catalogPosition Catalog position
-     * @property {PhotosPhoto|undefined[]|undefined} screenshots
+     * @property {PhotosPhoto[]|undefined} screenshots
      * @property {number} international Information whether the application is multilanguage
      * @property {number} leaderboardType Leaderboard type
      * @property {number} genreId Genre ID
@@ -1984,7 +1984,7 @@ export class AppsApp {
         readonly membersCount: number,
         readonly publishedDate: number,
         readonly catalogPosition: number,
-        readonly screenshots: PhotosPhoto|undefined[]|undefined,
+        readonly screenshots: PhotosPhoto[]|undefined,
         readonly international: number,
         readonly leaderboardType: number,
         readonly genreId: number,
@@ -2292,12 +2292,12 @@ export class BaseError {
      * @class
      * @property {number} errorCode Error code
      * @property {string} errorMsg Error message
-     * @property {BaseRequestParam|undefined[]|undefined} requestParams
+     * @property {BaseRequestParam[]|undefined} requestParams
      */
     constructor (
         readonly errorCode: number,
         readonly errorMsg: string,
-        readonly requestParams: BaseRequestParam|undefined[]|undefined
+        readonly requestParams: BaseRequestParam[]|undefined
     ) {
 
     }
@@ -2948,7 +2948,7 @@ export class BoardTopicPoll {
      * @property {string} question Poll question
      * @property {string} votes Votes number
      * @property {number} answerId Current user's answer ID
-     * @property {PollsAnswer|undefined[]|undefined} answers
+     * @property {PollsAnswer[]|undefined} answers
      */
     constructor (
         readonly pollId: number,
@@ -2958,7 +2958,7 @@ export class BoardTopicPoll {
         readonly question: string,
         readonly votes: string,
         readonly answerId: number,
-        readonly answers: PollsAnswer|undefined[]|undefined
+        readonly answers: PollsAnswer[]|undefined
     ) {
 
     }
@@ -3034,7 +3034,7 @@ export class BoardTopicComment {
      * @property {number} fromId Author ID
      * @property {number} date Date when the comment has been added in Unixtime
      * @property {string} text Comment text
-     * @property {WallCommentAttachment|undefined[]|undefined} attachments
+     * @property {WallCommentAttachment[]|undefined} attachments
      * @property {number} realOffset Real position of the comment
      */
     constructor (
@@ -3042,7 +3042,7 @@ export class BoardTopicComment {
         readonly fromId: number,
         readonly date: number,
         readonly text: string,
-        readonly attachments: WallCommentAttachment|undefined[]|undefined,
+        readonly attachments: WallCommentAttachment[]|undefined,
         readonly realOffset: number
     ) {
 
@@ -3378,10 +3378,10 @@ export class DocsDocPreview {
 export class DocsDocPreviewPhoto {
     /**
      * @class
-     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {PhotosPhotoSizes[]|undefined} sizes
      */
     constructor (
-        readonly sizes: PhotosPhotoSizes|undefined[]|undefined
+        readonly sizes: PhotosPhotoSizes[]|undefined
     ) {
 
     }
@@ -3672,8 +3672,8 @@ export class FriendsUserXtrLists {
      * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
      * @property {number} commonCount Number of common friends with current user
      * @property {UsersOccupation|undefined} occupation
-     * @property {UsersCareer|undefined[]|undefined} career
-     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {UsersCareer[]|undefined} career
+     * @property {UsersMilitary[]|undefined} military
      * @property {number} university University ID
      * @property {string} universityName University name
      * @property {number} faculty Faculty ID
@@ -3692,10 +3692,10 @@ export class FriendsUserXtrLists {
      * @property {string} tv User's favorite tv shows
      * @property {string} books User's favorite books
      * @property {string} games User's favorite games
-     * @property {UsersUniversity|undefined[]|undefined} universities
-     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {UsersUniversity[]|undefined} universities
+     * @property {UsersSchool[]|undefined} schools
      * @property {string} about About me field
-     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {UsersRelative[]|undefined} relatives
      * @property {string} quotes Favorite quotes
      * @property {number[]|undefined} lists
      */
@@ -3758,8 +3758,8 @@ export class FriendsUserXtrLists {
         readonly isHiddenFromFeed: boolean,
         readonly commonCount: number,
         readonly occupation: UsersOccupation|undefined,
-        readonly career: UsersCareer|undefined[]|undefined,
-        readonly military: UsersMilitary|undefined[]|undefined,
+        readonly career: UsersCareer[]|undefined,
+        readonly military: UsersMilitary[]|undefined,
         readonly university: number,
         readonly universityName: string,
         readonly faculty: number,
@@ -3778,10 +3778,10 @@ export class FriendsUserXtrLists {
         readonly tv: string,
         readonly books: string,
         readonly games: string,
-        readonly universities: UsersUniversity|undefined[]|undefined,
-        readonly schools: UsersSchool|undefined[]|undefined,
+        readonly universities: UsersUniversity[]|undefined,
+        readonly schools: UsersSchool[]|undefined,
         readonly about: string,
-        readonly relatives: UsersRelative|undefined[]|undefined,
+        readonly relatives: UsersRelative[]|undefined,
         readonly quotes: string,
         readonly lists: number[]|undefined
     ) {
@@ -3943,8 +3943,8 @@ export class FriendsUserXtrPhone {
      * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
      * @property {number} commonCount Number of common friends with current user
      * @property {UsersOccupation|undefined} occupation
-     * @property {UsersCareer|undefined[]|undefined} career
-     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {UsersCareer[]|undefined} career
+     * @property {UsersMilitary[]|undefined} military
      * @property {number} university University ID
      * @property {string} universityName University name
      * @property {number} faculty Faculty ID
@@ -3963,10 +3963,10 @@ export class FriendsUserXtrPhone {
      * @property {string} tv User's favorite tv shows
      * @property {string} books User's favorite books
      * @property {string} games User's favorite games
-     * @property {UsersUniversity|undefined[]|undefined} universities
-     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {UsersUniversity[]|undefined} universities
+     * @property {UsersSchool[]|undefined} schools
      * @property {string} about About me field
-     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {UsersRelative[]|undefined} relatives
      * @property {string} quotes Favorite quotes
      * @property {string} phone User phone
      */
@@ -4029,8 +4029,8 @@ export class FriendsUserXtrPhone {
         readonly isHiddenFromFeed: boolean,
         readonly commonCount: number,
         readonly occupation: UsersOccupation|undefined,
-        readonly career: UsersCareer|undefined[]|undefined,
-        readonly military: UsersMilitary|undefined[]|undefined,
+        readonly career: UsersCareer[]|undefined,
+        readonly military: UsersMilitary[]|undefined,
         readonly university: number,
         readonly universityName: string,
         readonly faculty: number,
@@ -4049,10 +4049,10 @@ export class FriendsUserXtrPhone {
         readonly tv: string,
         readonly books: string,
         readonly games: string,
-        readonly universities: UsersUniversity|undefined[]|undefined,
-        readonly schools: UsersSchool|undefined[]|undefined,
+        readonly universities: UsersUniversity[]|undefined,
+        readonly schools: UsersSchool[]|undefined,
         readonly about: string,
-        readonly relatives: UsersRelative|undefined[]|undefined,
+        readonly relatives: UsersRelative[]|undefined,
         readonly quotes: string,
         readonly phone: string
     ) {
@@ -4288,12 +4288,12 @@ export class GroupsGroupCategory {
      * @class
      * @property {number} id Category ID
      * @property {string} name Category name
-     * @property {BaseObjectWithName|undefined[]|undefined} subcategories
+     * @property {BaseObjectWithName[]|undefined} subcategories
      */
     constructor (
         readonly id: number,
         readonly name: string,
-        readonly subcategories: BaseObjectWithName|undefined[]|undefined
+        readonly subcategories: BaseObjectWithName[]|undefined
     ) {
 
     }
@@ -4316,16 +4316,16 @@ export class GroupsGroupCategoryFull {
      * @class
      * @property {number} id Category ID
      * @property {string} name Category name
-     * @property {GroupsGroupCategory|undefined[]|undefined} subcategories
+     * @property {GroupsGroupCategory[]|undefined} subcategories
      * @property {number} pageCount Pages number
-     * @property {GroupsGroup|undefined[]|undefined} pagePreviews
+     * @property {GroupsGroup[]|undefined} pagePreviews
      */
     constructor (
         readonly id: number,
         readonly name: string,
-        readonly subcategories: GroupsGroupCategory|undefined[]|undefined,
+        readonly subcategories: GroupsGroupCategory[]|undefined,
         readonly pageCount: number,
-        readonly pagePreviews: GroupsGroup|undefined[]|undefined
+        readonly pagePreviews: GroupsGroup[]|undefined
     ) {
 
     }
@@ -4420,11 +4420,11 @@ export class GroupsCover {
     /**
      * @class
      * @property {boolean} enabled Information whether cover is enabled
-     * @property {BaseImage|undefined[]|undefined} images
+     * @property {BaseImage[]|undefined} images
      */
     constructor (
         readonly enabled: boolean,
-        readonly images: BaseImage|undefined[]|undefined
+        readonly images: BaseImage[]|undefined
     ) {
 
     }
@@ -4527,8 +4527,8 @@ export class GroupsGroupFull {
      * @property {boolean} canUploadVideo Information whether current user can upload video
      * @property {string} status Community status
      * @property {number} mainAlbumId Community's main photo album ID
-     * @property {GroupsLinksItem|undefined[]|undefined} links
-     * @property {GroupsContactsItem|undefined[]|undefined} contacts
+     * @property {GroupsLinksItem[]|undefined} links
+     * @property {GroupsContactsItem[]|undefined} contacts
      * @property {string} site Community's website
      * @property {number} mainSection Main section of community
      * @property {boolean} canMessage Information whether current user can send a message to community
@@ -4570,8 +4570,8 @@ export class GroupsGroupFull {
         readonly canUploadVideo: boolean,
         readonly status: string,
         readonly mainAlbumId: number,
-        readonly links: GroupsLinksItem|undefined[]|undefined,
-        readonly contacts: GroupsContactsItem|undefined[]|undefined,
+        readonly links: GroupsLinksItem[]|undefined,
+        readonly contacts: GroupsContactsItem[]|undefined,
         readonly site: string,
         readonly mainSection: number,
         readonly canMessage: boolean,
@@ -4904,7 +4904,7 @@ export class GroupsGroupSettings {
      * @property {string} obsceneWords The list of stop words
      * @property {number} access Community access settings
      * @property {number} subject Community subject ID
-     * @property {GroupsSubjectItem|undefined[]|undefined} subjectList
+     * @property {GroupsSubjectItem[]|undefined} subjectList
      * @property {string} rss URL of the RSS feed
      * @property {string} website Community website
      */
@@ -4925,7 +4925,7 @@ export class GroupsGroupSettings {
         readonly obsceneWords: string,
         readonly access: number,
         readonly subject: number,
-        readonly subjectList: GroupsSubjectItem|undefined[]|undefined,
+        readonly subjectList: GroupsSubjectItem[]|undefined,
         readonly rss: string,
         readonly website: string
     ) {
@@ -5047,8 +5047,8 @@ export class GroupsUserXtrBanInfo {
      * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
      * @property {number} commonCount Number of common friends with current user
      * @property {UsersOccupation|undefined} occupation
-     * @property {UsersCareer|undefined[]|undefined} career
-     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {UsersCareer[]|undefined} career
+     * @property {UsersMilitary[]|undefined} military
      * @property {number} university University ID
      * @property {string} universityName University name
      * @property {number} faculty Faculty ID
@@ -5067,10 +5067,10 @@ export class GroupsUserXtrBanInfo {
      * @property {string} tv User's favorite tv shows
      * @property {string} books User's favorite books
      * @property {string} games User's favorite games
-     * @property {UsersUniversity|undefined[]|undefined} universities
-     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {UsersUniversity[]|undefined} universities
+     * @property {UsersSchool[]|undefined} schools
      * @property {string} about About me field
-     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {UsersRelative[]|undefined} relatives
      * @property {string} quotes Favorite quotes
      * @property {GroupsBanInfo|undefined} banInfo
      */
@@ -5133,8 +5133,8 @@ export class GroupsUserXtrBanInfo {
         readonly isHiddenFromFeed: boolean,
         readonly commonCount: number,
         readonly occupation: UsersOccupation|undefined,
-        readonly career: UsersCareer|undefined[]|undefined,
-        readonly military: UsersMilitary|undefined[]|undefined,
+        readonly career: UsersCareer[]|undefined,
+        readonly military: UsersMilitary[]|undefined,
         readonly university: number,
         readonly universityName: string,
         readonly faculty: number,
@@ -5153,10 +5153,10 @@ export class GroupsUserXtrBanInfo {
         readonly tv: string,
         readonly books: string,
         readonly games: string,
-        readonly universities: UsersUniversity|undefined[]|undefined,
-        readonly schools: UsersSchool|undefined[]|undefined,
+        readonly universities: UsersUniversity[]|undefined,
+        readonly schools: UsersSchool[]|undefined,
         readonly about: string,
-        readonly relatives: UsersRelative|undefined[]|undefined,
+        readonly relatives: UsersRelative[]|undefined,
         readonly quotes: string,
         readonly banInfo: GroupsBanInfo|undefined
     ) {
@@ -5337,8 +5337,8 @@ export class GroupsUserXtrRole {
      * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
      * @property {number} commonCount Number of common friends with current user
      * @property {UsersOccupation|undefined} occupation
-     * @property {UsersCareer|undefined[]|undefined} career
-     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {UsersCareer[]|undefined} career
+     * @property {UsersMilitary[]|undefined} military
      * @property {number} university University ID
      * @property {string} universityName University name
      * @property {number} faculty Faculty ID
@@ -5357,10 +5357,10 @@ export class GroupsUserXtrRole {
      * @property {string} tv User's favorite tv shows
      * @property {string} books User's favorite books
      * @property {string} games User's favorite games
-     * @property {UsersUniversity|undefined[]|undefined} universities
-     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {UsersUniversity[]|undefined} universities
+     * @property {UsersSchool[]|undefined} schools
      * @property {string} about About me field
-     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {UsersRelative[]|undefined} relatives
      * @property {string} quotes Favorite quotes
      * @property {GroupsRoleOptions|undefined} role
      */
@@ -5423,8 +5423,8 @@ export class GroupsUserXtrRole {
         readonly isHiddenFromFeed: boolean,
         readonly commonCount: number,
         readonly occupation: UsersOccupation|undefined,
-        readonly career: UsersCareer|undefined[]|undefined,
-        readonly military: UsersMilitary|undefined[]|undefined,
+        readonly career: UsersCareer[]|undefined,
+        readonly military: UsersMilitary[]|undefined,
         readonly university: number,
         readonly universityName: string,
         readonly faculty: number,
@@ -5443,10 +5443,10 @@ export class GroupsUserXtrRole {
         readonly tv: string,
         readonly books: string,
         readonly games: string,
-        readonly universities: UsersUniversity|undefined[]|undefined,
-        readonly schools: UsersSchool|undefined[]|undefined,
+        readonly universities: UsersUniversity[]|undefined,
+        readonly schools: UsersSchool[]|undefined,
         readonly about: string,
-        readonly relatives: UsersRelative|undefined[]|undefined,
+        readonly relatives: UsersRelative[]|undefined,
         readonly quotes: string,
         readonly role: GroupsRoleOptions|undefined
     ) {
@@ -5899,7 +5899,7 @@ export class MarketMarketItemFull {
      * @property {number} date Date when the item has been created in Unixtime
      * @property {string} thumbPhoto URL of the preview image
      * @property {number} availability Information whether the item is available
-     * @property {PhotosPhoto|undefined[]|undefined} photos
+     * @property {PhotosPhoto[]|undefined} photos
      * @property {boolean} canComment Information whether current use can comment the item
      * @property {boolean} canRepost Information whether current use can repost the item
      * @property {BaseLikes|undefined} likes
@@ -5915,7 +5915,7 @@ export class MarketMarketItemFull {
         readonly date: number,
         readonly thumbPhoto: string,
         readonly availability: number,
-        readonly photos: PhotosPhoto|undefined[]|undefined,
+        readonly photos: PhotosPhoto[]|undefined,
         readonly canComment: boolean,
         readonly canRepost: boolean,
         readonly likes: BaseLikes|undefined,
@@ -6152,7 +6152,7 @@ export class MessagesChatFull {
      * @property {string} type Chat type
      * @property {string} title Chat title
      * @property {number} adminId Chat creator ID
-     * @property {MessagesUserXtrInvitedBy|undefined[]|undefined} users
+     * @property {MessagesUserXtrInvitedBy[]|undefined} users
      * @property {MessagesChatPushSettings|undefined} pushSettings
      * @property {string} photo50 URL of the preview image with 50 px in width
      * @property {string} photo100 URL of the preview image with 100 px in width
@@ -6165,7 +6165,7 @@ export class MessagesChatFull {
         readonly type: string,
         readonly title: string,
         readonly adminId: number,
-        readonly users: MessagesUserXtrInvitedBy|undefined[]|undefined,
+        readonly users: MessagesUserXtrInvitedBy[]|undefined,
         readonly pushSettings: MessagesChatPushSettings|undefined,
         readonly photo50: string,
         readonly photo100: string,
@@ -6313,11 +6313,11 @@ export class MessagesLongpollMessages {
     /**
      * @class
      * @property {number} count Total number
-     * @property {MessagesMessage|undefined[]|undefined} items
+     * @property {MessagesMessage[]|undefined} items
      */
     constructor (
         readonly count: number,
-        readonly items: MessagesMessage|undefined[]|undefined
+        readonly items: MessagesMessage[]|undefined
     ) {
 
     }
@@ -6345,11 +6345,11 @@ export class MessagesMessage {
      * @property {number} randomId ID used for sending messages. It returned only for outgoing messages
      * @property {boolean} important Is it an important message
      * @property {boolean} deleted Is it an deleted message
-     * @property {MessagesMessage|undefined[]|undefined} fwdMessages Forwarded messages
+     * @property {MessagesMessage[]|undefined} fwdMessages Forwarded messages
      * @property {boolean} readState Information whether the messages is read
      * @property {string} title Message title or chat title
      * @property {string} body Message text
-     * @property {MessagesMessageAttachment|undefined[]|undefined} attachments
+     * @property {MessagesMessageAttachment[]|undefined} attachments
      * @property {number} chatId Chat ID
      * @property {number[]|undefined} chatActive
      * @property {number} usersCount Chat users number
@@ -6368,11 +6368,11 @@ export class MessagesMessage {
         readonly randomId: number,
         readonly important: boolean,
         readonly deleted: boolean,
-        readonly fwdMessages: MessagesMessage|undefined[]|undefined,
+        readonly fwdMessages: MessagesMessage[]|undefined,
         readonly readState: boolean,
         readonly title: string,
         readonly body: string,
-        readonly attachments: MessagesMessageAttachment|undefined[]|undefined,
+        readonly attachments: MessagesMessageAttachment[]|undefined,
         readonly chatId: number,
         readonly chatActive: number[]|undefined,
         readonly usersCount: number,
@@ -6534,11 +6534,11 @@ export class NewsfeedItemAudioAudio {
     /**
      * @class
      * @property {number} count Audios number
-     * @property {AudioAudioFull|undefined[]|undefined} items
+     * @property {AudioAudioFull[]|undefined} items
      */
     constructor (
         readonly count: number,
-        readonly items: AudioAudioFull|undefined[]|undefined
+        readonly items: AudioAudioFull[]|undefined
     ) {
 
     }
@@ -6558,10 +6558,10 @@ export class NewsfeedItemAudioAudio {
 export class NewsfeedItemFriend {
     /**
      * @class
-     * @property {BaseUserId|undefined[]|undefined} friends
+     * @property {BaseUserId[]|undefined} friends
      */
     constructor (
-        readonly friends: BaseUserId|undefined[]|undefined
+        readonly friends: BaseUserId[]|undefined
     ) {
 
     }
@@ -6603,11 +6603,11 @@ export class NewsfeedItemNoteNotes {
     /**
      * @class
      * @property {number} count Notes number
-     * @property {NewsfeedNewsfeedNote|undefined[]|undefined} items
+     * @property {NewsfeedNewsfeedNote[]|undefined} items
      */
     constructor (
         readonly count: number,
-        readonly items: NewsfeedNewsfeedNote|undefined[]|undefined
+        readonly items: NewsfeedNewsfeedNote[]|undefined
     ) {
 
     }
@@ -6653,11 +6653,11 @@ export class NewsfeedItemPhotoPhotos {
     /**
      * @class
      * @property {number} count Photos number
-     * @property {NewsfeedNewsfeedPhoto|undefined[]|undefined} items
+     * @property {NewsfeedNewsfeedPhoto[]|undefined} items
      */
     constructor (
         readonly count: number,
-        readonly items: NewsfeedNewsfeedPhoto|undefined[]|undefined
+        readonly items: NewsfeedNewsfeedPhoto[]|undefined
     ) {
 
     }
@@ -6703,11 +6703,11 @@ export class NewsfeedItemPhotoTagPhotoTags {
     /**
      * @class
      * @property {number} count Tags number
-     * @property {NewsfeedNewsfeedPhoto|undefined[]|undefined} items
+     * @property {NewsfeedNewsfeedPhoto[]|undefined} items
      */
     constructor (
         readonly count: number,
-        readonly items: NewsfeedNewsfeedPhoto|undefined[]|undefined
+        readonly items: NewsfeedNewsfeedPhoto[]|undefined
     ) {
 
     }
@@ -6781,11 +6781,11 @@ export class NewsfeedItemVideoVideo {
     /**
      * @class
      * @property {number} count Tags number
-     * @property {VideoVideo|undefined[]|undefined} items
+     * @property {VideoVideo[]|undefined} items
      */
     constructor (
         readonly count: number,
-        readonly items: VideoVideo|undefined[]|undefined
+        readonly items: VideoVideo[]|undefined
     ) {
 
     }
@@ -6808,8 +6808,8 @@ export class NewsfeedItemWallpost {
      * @property {number} postId Post ID
      * @property {string} postType Post type
      * @property {string} text Post text
-     * @property {WallWallpost|undefined[]|undefined} copyHistory
-     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {WallWallpost[]|undefined} copyHistory
+     * @property {WallWallpostAttachment[]|undefined} attachments
      * @property {BaseGeo|undefined} geo
      * @property {WallPostSource|undefined} postSource
      * @property {BaseCommentsInfo|undefined} comments
@@ -6820,8 +6820,8 @@ export class NewsfeedItemWallpost {
         readonly postId: number,
         readonly postType: string,
         readonly text: string,
-        readonly copyHistory: WallWallpost|undefined[]|undefined,
-        readonly attachments: WallWallpostAttachment|undefined[]|undefined,
+        readonly copyHistory: WallWallpost[]|undefined,
+        readonly attachments: WallWallpostAttachment[]|undefined,
         readonly geo: BaseGeo|undefined,
         readonly postSource: WallPostSource|undefined,
         readonly comments: BaseCommentsInfo|undefined,
@@ -6920,7 +6920,7 @@ export class NewsfeedNewsfeedPhoto {
      * @property {number} albumId Album ID
      * @property {number} ownerId Photo owner's ID
      * @property {number} userId ID of the user who have uploaded the photo
-     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {PhotosPhotoSizes[]|undefined} sizes
      * @property {string} photo75 URL of image with 75 px width
      * @property {string} photo130 URL of image with 130 px width
      * @property {string} photo604 URL of image with 604 px width
@@ -6945,7 +6945,7 @@ export class NewsfeedNewsfeedPhoto {
         readonly albumId: number,
         readonly ownerId: number,
         readonly userId: number,
-        readonly sizes: PhotosPhotoSizes|undefined[]|undefined,
+        readonly sizes: PhotosPhotoSizes[]|undefined,
         readonly photo75: string,
         readonly photo130: string,
         readonly photo604: string,
@@ -7172,7 +7172,7 @@ export class NotificationsFeedback {
      * @property {number} fromId Reply author's ID
      * @property {string} text Reply text
      * @property {BaseLikesInfo|undefined} likes
-     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {WallWallpostAttachment[]|undefined} attachments
      * @property {BaseGeo|undefined} geo
      */
     constructor (
@@ -7181,7 +7181,7 @@ export class NotificationsFeedback {
         readonly fromId: number,
         readonly text: string,
         readonly likes: BaseLikesInfo|undefined,
-        readonly attachments: WallWallpostAttachment|undefined[]|undefined,
+        readonly attachments: WallWallpostAttachment[]|undefined,
         readonly geo: BaseGeo|undefined
     ) {
 
@@ -7312,11 +7312,11 @@ export class OrdersOrder {
 export class OrdersAmount {
     /**
      * @class
-     * @property {OrdersAmountItem|undefined[]|undefined} amounts
+     * @property {OrdersAmountItem[]|undefined} amounts
      * @property {string} currency Currency name
      */
     constructor (
-        readonly amounts: OrdersAmountItem|undefined[]|undefined,
+        readonly amounts: OrdersAmountItem[]|undefined,
         readonly currency: string
     ) {
 
@@ -7589,7 +7589,7 @@ export class PhotosPhotoAlbumFull {
      * @property {boolean} commentsDisabled Information whether album comments are disabled
      * @property {boolean} canUpload Information whether current user can upload photo to the album
      * @property {boolean} thumbIsLast Information whether the album thumb is last photo
-     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {PhotosPhotoSizes[]|undefined} sizes
      */
     constructor (
         readonly id: number,
@@ -7607,7 +7607,7 @@ export class PhotosPhotoAlbumFull {
         readonly commentsDisabled: boolean,
         readonly canUpload: boolean,
         readonly thumbIsLast: boolean,
-        readonly sizes: PhotosPhotoSizes|undefined[]|undefined
+        readonly sizes: PhotosPhotoSizes[]|undefined
     ) {
 
     }
@@ -7648,7 +7648,7 @@ export class PhotosCommentXtrPid {
      * @property {BaseLikesInfo|undefined} likes
      * @property {number} replyToUser Replied user ID
      * @property {number} replyToComment Replied comment ID
-     * @property {WallCommentAttachment|undefined[]|undefined} attachments
+     * @property {WallCommentAttachment[]|undefined} attachments
      * @property {number} pid Photo ID
      */
     constructor (
@@ -7659,7 +7659,7 @@ export class PhotosCommentXtrPid {
         readonly likes: BaseLikesInfo|undefined,
         readonly replyToUser: number,
         readonly replyToComment: number,
-        readonly attachments: WallCommentAttachment|undefined[]|undefined,
+        readonly attachments: WallCommentAttachment[]|undefined,
         readonly pid: number
     ) {
 
@@ -7815,7 +7815,7 @@ export class PhotosPhoto {
      * @property {number} albumId Album ID
      * @property {number} ownerId Photo owner's ID
      * @property {number} userId ID of the user who have uploaded the photo
-     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {PhotosPhotoSizes[]|undefined} sizes
      * @property {string} photo75 URL of image with 75 px width
      * @property {string} photo130 URL of image with 130 px width
      * @property {string} photo604 URL of image with 604 px width
@@ -7836,7 +7836,7 @@ export class PhotosPhoto {
         readonly albumId: number,
         readonly ownerId: number,
         readonly userId: number,
-        readonly sizes: PhotosPhotoSizes|undefined[]|undefined,
+        readonly sizes: PhotosPhotoSizes[]|undefined,
         readonly photo75: string,
         readonly photo130: string,
         readonly photo604: string,
@@ -7891,7 +7891,7 @@ export class PhotosPhotoFull {
      * @property {number} albumId Album ID
      * @property {number} ownerId Photo owner's ID
      * @property {number} userId ID of the user who have uploaded the photo
-     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {PhotosPhotoSizes[]|undefined} sizes
      * @property {string} photo75 URL of image with 75 px width
      * @property {string} photo130 URL of image with 130 px width
      * @property {string} photo604 URL of image with 604 px width
@@ -7917,7 +7917,7 @@ export class PhotosPhotoFull {
         readonly albumId: number,
         readonly ownerId: number,
         readonly userId: number,
-        readonly sizes: PhotosPhotoSizes|undefined[]|undefined,
+        readonly sizes: PhotosPhotoSizes[]|undefined,
         readonly photo75: string,
         readonly photo130: string,
         readonly photo604: string,
@@ -7982,7 +7982,7 @@ export class PhotosPhotoFullXtrRealOffset {
      * @property {number} albumId Album ID
      * @property {number} ownerId Photo owner's ID
      * @property {number} userId ID of the user who have uploaded the photo
-     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {PhotosPhotoSizes[]|undefined} sizes
      * @property {string} photo75 URL of image with 75 px width
      * @property {string} photo130 URL of image with 130 px width
      * @property {string} photo604 URL of image with 604 px width
@@ -8010,7 +8010,7 @@ export class PhotosPhotoFullXtrRealOffset {
         readonly albumId: number,
         readonly ownerId: number,
         readonly userId: number,
-        readonly sizes: PhotosPhotoSizes|undefined[]|undefined,
+        readonly sizes: PhotosPhotoSizes[]|undefined,
         readonly photo75: string,
         readonly photo130: string,
         readonly photo604: string,
@@ -8079,7 +8079,7 @@ export class PhotosPhotoXtrRealOffset {
      * @property {number} albumId Album ID
      * @property {number} ownerId Photo owner's ID
      * @property {number} userId ID of the user who have uploaded the photo
-     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {PhotosPhotoSizes[]|undefined} sizes
      * @property {string} photo75 URL of image with 75 px width
      * @property {string} photo130 URL of image with 130 px width
      * @property {string} photo604 URL of image with 604 px width
@@ -8102,7 +8102,7 @@ export class PhotosPhotoXtrRealOffset {
         readonly albumId: number,
         readonly ownerId: number,
         readonly userId: number,
-        readonly sizes: PhotosPhotoSizes|undefined[]|undefined,
+        readonly sizes: PhotosPhotoSizes[]|undefined,
         readonly photo75: string,
         readonly photo130: string,
         readonly photo604: string,
@@ -8161,7 +8161,7 @@ export class PhotosPhotoXtrTagInfo {
      * @property {number} albumId Album ID
      * @property {number} ownerId Photo owner's ID
      * @property {number} userId ID of the user who have uploaded the photo
-     * @property {PhotosPhotoSizes|undefined[]|undefined} sizes
+     * @property {PhotosPhotoSizes[]|undefined} sizes
      * @property {string} photo75 URL of image with 75 px width
      * @property {string} photo130 URL of image with 130 px width
      * @property {string} photo604 URL of image with 604 px width
@@ -8185,7 +8185,7 @@ export class PhotosPhotoXtrTagInfo {
         readonly albumId: number,
         readonly ownerId: number,
         readonly userId: number,
-        readonly sizes: PhotosPhotoSizes|undefined[]|undefined,
+        readonly sizes: PhotosPhotoSizes[]|undefined,
         readonly photo75: string,
         readonly photo130: string,
         readonly photo604: string,
@@ -8645,7 +8645,7 @@ export class PollsPoll {
      * @property {string} question Poll question
      * @property {string} votes Votes number
      * @property {number} answerId Current user's answer ID
-     * @property {PollsAnswer|undefined[]|undefined} answers
+     * @property {PollsAnswer[]|undefined} answers
      * @property {boolean} anonymous Information whether the pole is anonymous
      */
     constructor (
@@ -8655,7 +8655,7 @@ export class PollsPoll {
         readonly question: string,
         readonly votes: string,
         readonly answerId: number,
-        readonly answers: PollsAnswer|undefined[]|undefined,
+        readonly answers: PollsAnswer[]|undefined,
         readonly anonymous: boolean
     ) {
 
@@ -8900,11 +8900,11 @@ export class StatsPeriod {
      * @property {number} reachSubscribers Subscribers reach
      * @property {number} subscribed Number of users subscribed
      * @property {number} unsubscribed Number of users unsubscribed
-     * @property {StatsSex|undefined[]|undefined} sex
-     * @property {StatsAge|undefined[]|undefined} age
-     * @property {StatsSexAge|undefined[]|undefined} sexAge
-     * @property {StatsCity|undefined[]|undefined} cities
-     * @property {StatsCountry|undefined[]|undefined} countries
+     * @property {StatsSex[]|undefined} sex
+     * @property {StatsAge[]|undefined} age
+     * @property {StatsSexAge[]|undefined} sexAge
+     * @property {StatsCity[]|undefined} cities
+     * @property {StatsCountry[]|undefined} countries
      */
     constructor (
         readonly day: string,
@@ -8914,11 +8914,11 @@ export class StatsPeriod {
         readonly reachSubscribers: number,
         readonly subscribed: number,
         readonly unsubscribed: number,
-        readonly sex: StatsSex|undefined[]|undefined,
-        readonly age: StatsAge|undefined[]|undefined,
-        readonly sexAge: StatsSexAge|undefined[]|undefined,
-        readonly cities: StatsCity|undefined[]|undefined,
-        readonly countries: StatsCountry|undefined[]|undefined
+        readonly sex: StatsSex[]|undefined,
+        readonly age: StatsAge[]|undefined,
+        readonly sexAge: StatsSexAge[]|undefined,
+        readonly cities: StatsCity[]|undefined,
+        readonly countries: StatsCountry[]|undefined
     ) {
 
     }
@@ -9399,8 +9399,8 @@ export class UsersUserFullXtrType {
      * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
      * @property {number} commonCount Number of common friends with current user
      * @property {UsersOccupation|undefined} occupation
-     * @property {UsersCareer|undefined[]|undefined} career
-     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {UsersCareer[]|undefined} career
+     * @property {UsersMilitary[]|undefined} military
      * @property {number} university University ID
      * @property {string} universityName University name
      * @property {number} faculty Faculty ID
@@ -9419,10 +9419,10 @@ export class UsersUserFullXtrType {
      * @property {string} tv User's favorite tv shows
      * @property {string} books User's favorite books
      * @property {string} games User's favorite games
-     * @property {UsersUniversity|undefined[]|undefined} universities
-     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {UsersUniversity[]|undefined} universities
+     * @property {UsersSchool[]|undefined} schools
      * @property {string} about About me field
-     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {UsersRelative[]|undefined} relatives
      * @property {string} quotes Favorite quotes
      * @property {string} type Object type
      */
@@ -9485,8 +9485,8 @@ export class UsersUserFullXtrType {
         readonly isHiddenFromFeed: boolean,
         readonly commonCount: number,
         readonly occupation: UsersOccupation|undefined,
-        readonly career: UsersCareer|undefined[]|undefined,
-        readonly military: UsersMilitary|undefined[]|undefined,
+        readonly career: UsersCareer[]|undefined,
+        readonly military: UsersMilitary[]|undefined,
         readonly university: number,
         readonly universityName: string,
         readonly faculty: number,
@@ -9505,10 +9505,10 @@ export class UsersUserFullXtrType {
         readonly tv: string,
         readonly books: string,
         readonly games: string,
-        readonly universities: UsersUniversity|undefined[]|undefined,
-        readonly schools: UsersSchool|undefined[]|undefined,
+        readonly universities: UsersUniversity[]|undefined,
+        readonly schools: UsersSchool[]|undefined,
         readonly about: string,
-        readonly relatives: UsersRelative|undefined[]|undefined,
+        readonly relatives: UsersRelative[]|undefined,
         readonly quotes: string,
         readonly type: string
     ) {
@@ -9799,8 +9799,8 @@ export class UsersUserFull {
      * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
      * @property {number} commonCount Number of common friends with current user
      * @property {UsersOccupation|undefined} occupation
-     * @property {UsersCareer|undefined[]|undefined} career
-     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {UsersCareer[]|undefined} career
+     * @property {UsersMilitary[]|undefined} military
      * @property {number} university University ID
      * @property {string} universityName University name
      * @property {number} faculty Faculty ID
@@ -9819,10 +9819,10 @@ export class UsersUserFull {
      * @property {string} tv User's favorite tv shows
      * @property {string} books User's favorite books
      * @property {string} games User's favorite games
-     * @property {UsersUniversity|undefined[]|undefined} universities
-     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {UsersUniversity[]|undefined} universities
+     * @property {UsersSchool[]|undefined} schools
      * @property {string} about About me field
-     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {UsersRelative[]|undefined} relatives
      * @property {string} quotes Favorite quotes
      */
     constructor (
@@ -9884,8 +9884,8 @@ export class UsersUserFull {
         readonly isHiddenFromFeed: boolean,
         readonly commonCount: number,
         readonly occupation: UsersOccupation|undefined,
-        readonly career: UsersCareer|undefined[]|undefined,
-        readonly military: UsersMilitary|undefined[]|undefined,
+        readonly career: UsersCareer[]|undefined,
+        readonly military: UsersMilitary[]|undefined,
         readonly university: number,
         readonly universityName: string,
         readonly faculty: number,
@@ -9904,10 +9904,10 @@ export class UsersUserFull {
         readonly tv: string,
         readonly books: string,
         readonly games: string,
-        readonly universities: UsersUniversity|undefined[]|undefined,
-        readonly schools: UsersSchool|undefined[]|undefined,
+        readonly universities: UsersUniversity[]|undefined,
+        readonly schools: UsersSchool[]|undefined,
         readonly about: string,
-        readonly relatives: UsersRelative|undefined[]|undefined,
+        readonly relatives: UsersRelative[]|undefined,
         readonly quotes: string
     ) {
 
@@ -10512,8 +10512,8 @@ export class UsersUserXtrCounters {
      * @property {boolean} isHiddenFromFeed Information whether the requested user is hidden from current user's newsfeed
      * @property {number} commonCount Number of common friends with current user
      * @property {UsersOccupation|undefined} occupation
-     * @property {UsersCareer|undefined[]|undefined} career
-     * @property {UsersMilitary|undefined[]|undefined} military
+     * @property {UsersCareer[]|undefined} career
+     * @property {UsersMilitary[]|undefined} military
      * @property {number} university University ID
      * @property {string} universityName University name
      * @property {number} faculty Faculty ID
@@ -10532,10 +10532,10 @@ export class UsersUserXtrCounters {
      * @property {string} tv User's favorite tv shows
      * @property {string} books User's favorite books
      * @property {string} games User's favorite games
-     * @property {UsersUniversity|undefined[]|undefined} universities
-     * @property {UsersSchool|undefined[]|undefined} schools
+     * @property {UsersUniversity[]|undefined} universities
+     * @property {UsersSchool[]|undefined} schools
      * @property {string} about About me field
-     * @property {UsersRelative|undefined[]|undefined} relatives
+     * @property {UsersRelative[]|undefined} relatives
      * @property {string} quotes Favorite quotes
      * @property {UsersUserCounters|undefined} counters
      */
@@ -10598,8 +10598,8 @@ export class UsersUserXtrCounters {
         readonly isHiddenFromFeed: boolean,
         readonly commonCount: number,
         readonly occupation: UsersOccupation|undefined,
-        readonly career: UsersCareer|undefined[]|undefined,
-        readonly military: UsersMilitary|undefined[]|undefined,
+        readonly career: UsersCareer[]|undefined,
+        readonly military: UsersMilitary[]|undefined,
         readonly university: number,
         readonly universityName: string,
         readonly faculty: number,
@@ -10618,10 +10618,10 @@ export class UsersUserXtrCounters {
         readonly tv: string,
         readonly books: string,
         readonly games: string,
-        readonly universities: UsersUniversity|undefined[]|undefined,
-        readonly schools: UsersSchool|undefined[]|undefined,
+        readonly universities: UsersUniversity[]|undefined,
+        readonly schools: UsersSchool[]|undefined,
         readonly about: string,
-        readonly relatives: UsersRelative|undefined[]|undefined,
+        readonly relatives: UsersRelative[]|undefined,
         readonly quotes: string,
         readonly counters: UsersUserCounters|undefined
     ) {
@@ -10796,7 +10796,7 @@ export class VideoVideoAlbumFull {
 export class VideoCatBlock {
     /**
      * @class
-     * @property {VideoCatElement|undefined[]|undefined} items
+     * @property {VideoCatElement[]|undefined} items
      * @property {string} next New value for _from_ parameter
      * @property {string} name Block name
      * @property {number} id Block ID
@@ -10805,7 +10805,7 @@ export class VideoCatBlock {
      * @property {string} type Block type
      */
     constructor (
-        readonly items: VideoCatElement|undefined[]|undefined,
+        readonly items: VideoCatElement[]|undefined,
         readonly next: string,
         readonly name: string,
         readonly id: number,
@@ -11542,7 +11542,7 @@ export class WallWallComment {
      * @property {BaseLikesInfo|undefined} likes
      * @property {number} replyToUser Replied user ID
      * @property {number} replyToComment Replied comment ID
-     * @property {WallCommentAttachment|undefined[]|undefined} attachments
+     * @property {WallCommentAttachment[]|undefined} attachments
      * @property {number} realOffset Real position of the comment
      */
     constructor (
@@ -11553,7 +11553,7 @@ export class WallWallComment {
         readonly likes: BaseLikesInfo|undefined,
         readonly replyToUser: number,
         readonly replyToComment: number,
-        readonly attachments: WallCommentAttachment|undefined[]|undefined,
+        readonly attachments: WallCommentAttachment[]|undefined,
         readonly realOffset: number
     ) {
 
@@ -11588,7 +11588,7 @@ export class WallWallpost {
      * @property {WallPostType|undefined} postType
      * @property {string} text Post text
      * @property {number} signerId Post signer ID
-     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {WallWallpostAttachment[]|undefined} attachments
      * @property {BaseGeo|undefined} geo
      * @property {WallPostSource|undefined} postSource
      */
@@ -11600,7 +11600,7 @@ export class WallWallpost {
         readonly postType: WallPostType|undefined,
         readonly text: string,
         readonly signerId: number,
-        readonly attachments: WallWallpostAttachment|undefined[]|undefined,
+        readonly attachments: WallWallpostAttachment[]|undefined,
         readonly geo: BaseGeo|undefined,
         readonly postSource: WallPostSource|undefined
     ) {
@@ -11638,7 +11638,7 @@ export class WallWallpostAttached {
      * @property {string} text Post text
      * @property {number} canDelete Information whether current user can delete the post
      * @property {number} signerId Post signer ID
-     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {WallWallpostAttachment[]|undefined} attachments
      * @property {BaseGeo|undefined} geo
      * @property {WallPostSource|undefined} postSource
      * @property {BaseCommentsInfo|undefined} comments
@@ -11657,7 +11657,7 @@ export class WallWallpostAttached {
         readonly text: string,
         readonly canDelete: number,
         readonly signerId: number,
-        readonly attachments: WallWallpostAttachment|undefined[]|undefined,
+        readonly attachments: WallWallpostAttachment[]|undefined,
         readonly geo: BaseGeo|undefined,
         readonly postSource: WallPostSource|undefined,
         readonly comments: BaseCommentsInfo|undefined,
@@ -11775,7 +11775,7 @@ export class WallWallpostToId {
      * @property {WallPostType|undefined} postType
      * @property {string} text Post text
      * @property {number} signerId Post signer ID
-     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {WallWallpostAttachment[]|undefined} attachments
      * @property {BaseGeo|undefined} geo
      * @property {WallPostSource|undefined} postSource
      * @property {BaseCommentsInfo|undefined} comments
@@ -11793,7 +11793,7 @@ export class WallWallpostToId {
         readonly postType: WallPostType|undefined,
         readonly text: string,
         readonly signerId: number,
-        readonly attachments: WallWallpostAttachment|undefined[]|undefined,
+        readonly attachments: WallWallpostAttachment[]|undefined,
         readonly geo: BaseGeo|undefined,
         readonly postSource: WallPostSource|undefined,
         readonly comments: BaseCommentsInfo|undefined,
@@ -11841,10 +11841,10 @@ export class WallWallpostFull {
      * @property {WallPostType|undefined} postType
      * @property {string} text Post text
      * @property {number} signerId Post signer ID
-     * @property {WallWallpostAttachment|undefined[]|undefined} attachments
+     * @property {WallWallpostAttachment[]|undefined} attachments
      * @property {BaseGeo|undefined} geo
      * @property {WallPostSource|undefined} postSource
-     * @property {WallWallpost|undefined[]|undefined} copyHistory
+     * @property {WallWallpost[]|undefined} copyHistory
      * @property {number} canEdit Information whether current user can edit the post
      * @property {number} createdBy Post creator ID (if post still can be edited)
      * @property {number} canDelete Information whether current user can delete the post
@@ -11862,10 +11862,10 @@ export class WallWallpostFull {
         readonly postType: WallPostType|undefined,
         readonly text: string,
         readonly signerId: number,
-        readonly attachments: WallWallpostAttachment|undefined[]|undefined,
+        readonly attachments: WallWallpostAttachment[]|undefined,
         readonly geo: BaseGeo|undefined,
         readonly postSource: WallPostSource|undefined,
-        readonly copyHistory: WallWallpost|undefined[]|undefined,
+        readonly copyHistory: WallWallpost[]|undefined,
         readonly canEdit: number,
         readonly createdBy: number,
         readonly canDelete: number,
@@ -11919,7 +11919,7 @@ export class WidgetsWidgetComment {
      * @property {string} text Comment text
      * @property {number} canDelete Information whether current user can delete the comment
      * @property {WidgetsCommentMedia|undefined} media
-     * @property {WallCommentAttachment|undefined[]|undefined} attachments
+     * @property {WallCommentAttachment[]|undefined} attachments
      * @property {WallPostSource|undefined} postSource
      * @property {WidgetsCommentReplies|undefined} comments
      * @property {BaseLikesInfo|undefined} likes
@@ -11935,7 +11935,7 @@ export class WidgetsWidgetComment {
         readonly text: string,
         readonly canDelete: number,
         readonly media: WidgetsCommentMedia|undefined,
-        readonly attachments: WallCommentAttachment|undefined[]|undefined,
+        readonly attachments: WallCommentAttachment[]|undefined,
         readonly postSource: WallPostSource|undefined,
         readonly comments: WidgetsCommentReplies|undefined,
         readonly likes: BaseLikesInfo|undefined,
@@ -12004,12 +12004,12 @@ export class WidgetsCommentReplies {
      * @class
      * @property {number} count Comments number
      * @property {number} canPost Information whether current user can comment the post
-     * @property {WidgetsCommentRepliesItem|undefined[]|undefined} replies
+     * @property {WidgetsCommentRepliesItem[]|undefined} replies
      */
     constructor (
         readonly count: number,
         readonly canPost: number,
-        readonly replies: WidgetsCommentRepliesItem|undefined[]|undefined
+        readonly replies: WidgetsCommentRepliesItem[]|undefined
     ) {
 
     }
