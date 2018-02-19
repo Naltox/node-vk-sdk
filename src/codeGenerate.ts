@@ -56,6 +56,10 @@ async function generate() {
         else
             classScheme = jsonToClassScheme(className, responses.definitions[className], true)
 
+        if (classScheme.name == 'MessagesGetResponse') {
+            console.log(classScheme)
+            console.log(classScheme.fields[1])
+        }
 
         responsesCode.push(codeGenerator.generateClass(classScheme))
     }
@@ -132,7 +136,8 @@ function jsonToClassScheme(name: string, scheme: any, forResponses = false): Cla
         fields.push(
             new ClassField(
                 name,
-                parseType(props[propName], forResponses)
+                parseType(props[propName], forResponses),
+                props[propName].description || ''
             )
         )
     }

@@ -33,6 +33,8 @@ api.usersGet({ userIds: ['1'] })
 
 ```js
 interface VKApiOptions {
+    lang?: string|number,
+    testMode?: number,
     logger?: BaseLogger,
     token?: string,
     timeout?: number,
@@ -40,6 +42,18 @@ interface VKApiOptions {
     useQueue?: boolean
 }
 ```
+
+* lang?
+
+Determines the language for the data to be displayed on. For example country and city names.
+If you use a non-cyrillic language, cyrillic symbols will be transtiterated automatically  
+`en – English, ru – Russian, ua – Ukrainian, be – Belorussian, es – Spanish, fi – finnish, de – German, it – Italian.`  
+Numeric format from `account.getInfo` is supported as well.
+
+
+* test_mode?
+
+1 – allows to send requests from a native app without switching it on for all users.
 
 * logger?
 
