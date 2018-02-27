@@ -56,38 +56,24 @@ interface VKApiOptions {
 }
 ```
 
-* ```lang```?
-
-Determines the language for the data to be displayed on. For example country and city names.
+* ```lang```?  -  Determines the language for the data to be displayed on. For example country and city names.
 If you use a non-cyrillic language, cyrillic symbols will be transtiterated automatically  
 `en – English, ru – Russian, ua – Ukrainian, be – Belorussian, es – Spanish, fi – finnish, de – German, it – Italian.`  
 Numeric format from `account.getInfo` is supported as well.
 
 
-* ```test_mode```?
+* ```test_mode```?  -  1 – allows to send requests from a native app without switching it on for all users.
 
-1 – allows to send requests from a native app without switching it on for all users.
-
-* ```logger```?
-
-Logger class that implements `BaseLogger`
+* ```logger```?  -  Logger class that implements `BaseLogger`
 No logging will be used logger is not passed
 
-* ```token```?
+* ```token```?  -  Access token
 
-Access token
+* ```timeout```?  -  Network timeout in ms
 
-* ```timeout```?
+* ```requestsPerSecond```  -  Maximum requests per second, default is 3
 
-Network timeout in ms
-
-* ```requestsPerSecond```
-
-Maximum requests per second, default is 3
-
-* ```useQueue```
-
-If useQueue is true, then SDK will limit number of requests per second at `requestsPerSecond`
+* ```useQueue```  -  If useQueue is true, then SDK will limit number of requests per second at `requestsPerSecond`
 
 ## Calling methods
 
