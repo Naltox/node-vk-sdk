@@ -109,7 +109,7 @@ Calling example:
 
 
 ```typescript
-api.usersGet({ userIds: ['1'] })
+api.usersGet({ user_ids: ['1'] })
     .then(response => {
         console.log(response)
     })
@@ -117,7 +117,7 @@ api.usersGet({ userIds: ['1'] })
 
 // or we can call it as async function
 
-let response = await api.usersGet({ userIds: ['1'] })
+let response = await api.usersGet({ user_ids: ['1'] })
 ```
 
 Direct call methods:
