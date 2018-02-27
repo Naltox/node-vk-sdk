@@ -1,6 +1,6 @@
 # node-vk-sdk
 
-Typescript SDK for VK API
+VK API SDK for Node.js
 
 ## Installation
 
@@ -13,10 +13,23 @@ npm install --save node-vk-sdk
 This assumes you are using [npm](https://www.npmjs.com/) as your package manager.
 If you don’t, you can access these files on [unpkg](https://unpkg.com/node-vk-sdk/), download them, or point your package manager to them.
 
+## Importing
+
+You can import SDK using ES6 modules:
+
+```typescript
+import {VKApi, ConsoleLogger} from 'node-vk-sdk'
+```
+
+Or using `require`:
+
+```typescript
+const {VKApi, ConsoleLogger} = require('node-vk-sdk')
+```
 
 ## Usage
 
-```js
+```typescript
 import {VKApi, ConsoleLogger} from 'node-vk-sdk'
 
 let api = new VKApi({
@@ -31,7 +44,7 @@ api.usersGet({ userIds: ['1'] })
 
 ## VKApi constructor options
 
-```js
+```typescript
 interface VKApiOptions {
     lang?: string|number,
     testMode?: number,
@@ -43,7 +56,7 @@ interface VKApiOptions {
 }
 ```
 
-* lang?
+* ```lang```?
 
 Determines the language for the data to be displayed on. For example country and city names.
 If you use a non-cyrillic language, cyrillic symbols will be transtiterated automatically  
@@ -51,28 +64,28 @@ If you use a non-cyrillic language, cyrillic symbols will be transtiterated auto
 Numeric format from `account.getInfo` is supported as well.
 
 
-* test_mode?
+* ```test_mode```?
 
 1 – allows to send requests from a native app without switching it on for all users.
 
-* logger?
+* ```logger```?
 
 Logger class that implements `BaseLogger`
 No logging will be used logger is not passed
 
-* token?
+* ```token```?
 
 Access token
 
-* timeout?
+* ```timeout```?
 
 Network timeout in ms
 
-* requestsPerSecond
+* ```requestsPerSecond```
 
 Maximum requests per second, default is 3
 
-* useQueue
+* ```useQueue```
 
 If useQueue is true, then SDK will limit number of requests per second at `requestsPerSecond`
 
