@@ -81,33 +81,34 @@ If useQueue is true, then SDK will limit number of requests per second at `reque
 All api methods returning Promise, so you can use them as Promise or as async functions.
 Methods arguments are described in interfaces, so you need to pass object implementing that interface, for example `users.get` props interface:
 
-```js
+```typescript
 export interface UsersGetParams {
     /**
      * User IDs or screen names ('screen_name'). By default, current user ID.
      */
-    userIds?: string[],
+    user_ids?: string[],
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'contacts', 'education', 'online', 'counters', 'relation', 'last_seen', 'activity', 'can_write_private_message', 'can_see_all_posts', 'can_post', 'universities';
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'contacts', 'education', 'online', 'counters', 'relation', 'last_seen', 'activity', 'can_write_private_message', 'can_see_all_posts', 'can_post', 'universities',
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname:; 'nom' — nominative (default); 'gen' — genitive ; 'dat' — dative; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive , 'dat' — dative, 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 ```
 
 All props interfaces have `accessToken` property, that token will be used instead of token passed to `VKApi`
 
+
 Calling example:
 
 
-```js
+```typescript
 api.usersGet({ userIds: ['1'] })
     .then(response => {
         console.log(response)
@@ -118,3 +119,16 @@ api.usersGet({ userIds: ['1'] })
 
 let response = await api.usersGet({ userIds: ['1'] })
 ```
+
+Direct call methods:
+
+```typescript
+// makes plain call & returns contents of "response" property of server response
+public async call(method: string, params: Object): Promise<any>
+
+// Makes api call and if there was
+// server-side error or requests limit was reached
+// repeats the call after some timeout
+public async callWithRetry(method: string, params: Object): Promise<any>
+```
+

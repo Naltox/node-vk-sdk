@@ -1,3 +1,4 @@
 [submodule "src/vk-api-schema"]
 	path = src/vk-api-schema
 	url = git@github.com:VKCOM/vk-api-schema.git
+	branch = master

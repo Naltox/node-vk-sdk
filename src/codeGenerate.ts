@@ -15,6 +15,9 @@ import BooleanType from "./codeGeneration/types/BooleanType";
 import {writeFile} from "fs";
 import SourceCode from "./codeGeneration/SourceCode";
 import {VKApi} from "./VKApi";
+import AliasClassScheme from "./codeGeneration/schema/AliasClassScheme";
+import CustomPrimitiveScheme from "./codeGeneration/schema/CustomPrimitiveScheme";
+import CustomPrimitiveType from "./codeGeneration/types/CustomPrimitiveType";
 
 const objects = require('./vk-api-schema/objects.json')
 const responses = require('./vk-api-schema/responses.json')
@@ -33,13 +36,22 @@ async function generate() {
     let modelsCode: SourceCode[] = []
 
     for (let className in objects.definitions) {
-        if (className == 'base_bool_int') {
-            continue
-        }
+        // if (className == 'base_bool_int') {
+        //     continue
+        // }
 
         let classScheme = jsonToClassScheme(className, objects.definitions[className])
 
-        modelsCode.push(codeGenerator.generateClass(classScheme))
+
+        if (classScheme instanceof ClassScheme) {
+            modelsCode.push(codeGenerator.generateInterface(classScheme))
+        }
+        if (classScheme instanceof CustomPrimitiveScheme) {
+            modelsCode.push(codeGenerator.generateCustomPrimitive(classScheme, true))
+        }
+
+
+        //modelsCode.push(codeGenerator.generateClass(classScheme))
     }
 
     await saveToFile(__dirname + '/' + MODELS_FILE, modelsCode.map(c => c.render()).join('\n\n'))
@@ -49,19 +61,49 @@ async function generate() {
 
     for (let className in responses.definitions) {
 
-        let classScheme
 
-        if (responses.definitions[className].properties.response.type == 'object')
-            classScheme = jsonToClassScheme(className, responses.definitions[className].properties.response, true)
-        else
-            classScheme = jsonToClassScheme(className, responses.definitions[className], true)
+        //let classScheme
 
-        if (classScheme.name == 'MessagesGetResponse') {
-            console.log(classScheme)
-            console.log(classScheme.fields[1])
+
+
+        // if (responses.definitions[className].properties.response.type != 'object') {
+        //     console.log(responses.definitions[className].properties.response)
+        //
+        // }
+        let classScheme = jsonToClassScheme(className, responses.definitions[className].properties.response, true)
+        //console.log(classScheme)
+
+        //console.dir(classScheme, {depth: null})
+
+        // if (responses.definitions[className].properties.response.type == undefined) {
+        //     console.log(className)
+        // }
+
+
+        // if (responses.definitions[className].properties.response.type == 'object') {
+        //     console.log(className)
+        //     classScheme = jsonToClassScheme(className, responses.definitions[className].properties.response, true)
+        // }
+        //
+        // else {
+        //     //console.log(className, responses.definitions[className])
+        //     classScheme = jsonToClassScheme(className, responses.definitions[className], true)
+        // }
+
+
+        //console.log(classScheme)
+
+        if (classScheme instanceof ClassScheme) {
+            responsesCode.push(codeGenerator.generateInterface(classScheme))
+        }
+        if (classScheme instanceof CustomPrimitiveScheme) {
+            responsesCode.push(codeGenerator.generateCustomPrimitive(classScheme, true))
         }
 
-        responsesCode.push(codeGenerator.generateClass(classScheme))
+
+
+        //console.dir(classScheme, {depth: null})
+
     }
 
     await saveToFile(__dirname + '/' + RESPONSES_FILE, responsesCode.map(c => c.render()).join('\n\n'))
@@ -119,7 +161,30 @@ function jsonToMethodScheme(scheme: any): ApiMethodScheme {
     )
 }
 
-function jsonToClassScheme(name: string, scheme: any, forResponses = false): ClassScheme {
+function jsonToClassScheme(name: string, scheme: any, forResponses = false): ClassScheme|CustomPrimitiveScheme {
+    // just create alias here
+    if (scheme.$ref) {
+        return new AliasClassScheme(
+            toCamelCase(name, true),
+            [],
+            jsonToClassScheme(
+                'Models.' + toCamelCase(normalizePath(scheme.$ref), true),
+                getScheme(scheme.$ref)
+            ) as ClassScheme
+        )
+    }
+
+    /**
+     * hack for ads_getCategories_response:
+     * ads_getCategories_response.response don't have "type" prop for some reason
+     */
+    if (scheme.type !== 'object' && name !== 'ads_getCategories_response') {
+        return new CustomPrimitiveScheme(
+            toCamelCase(name, true),
+            parseType(scheme, forResponses)
+        )
+    }
+
     let fields: ClassField[] = []
 
     let props = getSchemeClassProps(scheme)
@@ -132,6 +197,7 @@ function jsonToClassScheme(name: string, scheme: any, forResponses = false): Cla
 
         if (name == 'class')
             name = 'schoolClass'
+
 
         fields.push(
             new ClassField(
@@ -187,10 +253,24 @@ function parseType(scheme: any, forResponses = false): Type {
         }
 
         if (scheme.items.$ref) {
+            // hack
+            if (normalizePath(scheme.items.$ref) == 'messages_fwd_message') {
+                scheme.items.$ref = 'messages_message'
+            }
+
+            let primitive = isPrimitive(scheme.items.$ref)
             let name = toCamelCase(normalizePath(scheme.items.$ref), true)
 
-            if (forResponses)
+            if (forResponses) {
+                if (primitive)
+                    return  new VectorType(new CustomPrimitiveType('Models.' + name))
+
                 return new VectorType(new CustomType('Models.' + name))
+            }
+
+
+            if (primitive)
+                return  new VectorType(new CustomPrimitiveType(name))
 
             return new VectorType(new CustomType(name))
         }
@@ -199,17 +279,28 @@ function parseType(scheme: any, forResponses = false): Type {
     }
 
     if (scheme.$ref) {
-        if (
-            scheme.$ref == '#/definitions/base_bool_int' ||
-            scheme.$ref == 'objects.json#/definitions/base_bool_int'
-        ) {
-            return new IntBoolType()
-        }
+        // if (
+        //     scheme.$ref == '#/definitions/base_bool_int' ||
+        //     scheme.$ref == 'objects.json#/definitions/base_bool_int'
+        // ) {
+        //     return new IntBoolType()
+        // }
+
+        let primitive = isPrimitive(scheme.$ref)
 
         let name = toCamelCase(normalizePath(scheme.$ref), true)
 
-        if (forResponses)
+        if (forResponses) {
+            if (primitive)
+                return new CustomPrimitiveType('Models.' + name)
+
             return new CustomType('Models.' + name)
+        }
+
+
+
+        if (primitive)
+            return new CustomPrimitiveType(name)
 
         return new CustomType(name)
     }
@@ -246,6 +337,23 @@ function normalizePath(path: string): string {
     return path.replace('#/definitions/', '')
 }
 
+function isPrimitive(ref: string): boolean {
+    let scheme = getScheme(ref)
+
+    if (scheme.type !== 'object')
+        return true
+
+    return false
+}
+
+function isPrimitiveResponse(ref: string): boolean {
+    let scheme = responses.definitions[normalizePath(ref)].properties.response
+
+    if (scheme.type !== 'object')
+        return true
+
+    return false
+}
 async function saveToFile(name: string, data: string): Promise<any> {
     return new Promise((resolve, reject) => {
         writeFile(name, data, err => {

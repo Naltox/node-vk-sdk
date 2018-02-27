@@ -2,19 +2,19 @@ export interface UsersGetParams {
     /**
      * User IDs or screen names ('screen_name'). By default, current user ID.
      */
-    userIds?: string[],
+    user_ids?: string[],
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'contacts', 'education', 'online', 'counters', 'relation', 'last_seen', 'activity', 'can_write_private_message', 'can_see_all_posts', 'can_post', 'universities';
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'contacts', 'education', 'online', 'counters', 'relation', 'last_seen', 'activity', 'can_write_private_message', 'can_see_all_posts', 'can_post', 'universities',
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname:; 'nom' — nominative (default); 'gen' — genitive ; 'dat' — dative; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive , 'dat' — dative, 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface UsersSearchParams {
@@ -23,7 +23,7 @@ export interface UsersSearchParams {
      */
     q?: string,
     /**
-     * Sort order:; '1' — by date registered; '0' — by rating
+     * Sort order: '1' — by date registered, '0' — by rating
      */
     sort?: number,
     /**
@@ -35,7 +35,7 @@ export interface UsersSearchParams {
      */
     count?: number,
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online';
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online',
      */
     fields?: string[],
     /**
@@ -53,7 +53,7 @@ export interface UsersSearchParams {
     /**
      * ID of the country where the user graduated.
      */
-    universityCountry?: number,
+    university_country?: number,
     /**
      * ID of the institution of higher education.
      */
@@ -61,63 +61,63 @@ export interface UsersSearchParams {
     /**
      * Year of graduation from an institution of higher education.
      */
-    universityYear?: number,
+    university_year?: number,
     /**
      * Faculty ID.
      */
-    universityFaculty?: number,
+    university_faculty?: number,
     /**
      * Chair ID.
      */
-    universityChair?: number,
+    university_chair?: number,
     /**
-     * '1' — female; '2' — male; '0' — any (default)
+     * '1' — female, '2' — male, '0' — any (default)
      */
     sex?: number,
     /**
-     * Relationship status:; '1' — Not married; '2' — In a relationship; '3' — Engaged; '4' — Married; '5' — It's complicated; '6' — Actively searching; '7' — In love
+     * Relationship status: '1' — Not married, '2' — In a relationship, '3' — Engaged, '4' — Married, '5' — It's complicated, '6' — Actively searching, '7' — In love
      */
     status?: number,
     /**
      * Minimum age.
      */
-    ageFrom?: number,
+    age_from?: number,
     /**
      * Maximum age.
      */
-    ageTo?: number,
+    age_to?: number,
     /**
      * Day of birth.
      */
-    birthDay?: number,
+    birth_day?: number,
     /**
      * Month of birth.
      */
-    birthMonth?: number,
+    birth_month?: number,
     /**
      * Year of birth.
      */
-    birthYear?: number,
+    birth_year?: number,
     /**
-     * '1' — online only; '0' — all users
+     * '1' — online only, '0' — all users
      */
     online?: boolean,
     /**
-     * '1' — with photo only; '0' — all users
+     * '1' — with photo only, '0' — all users
      */
-    hasPhoto?: boolean,
+    has_photo?: boolean,
     /**
      * ID of the country where users finished school.
      */
-    schoolCountry?: number,
+    school_country?: number,
     /**
      * ID of the city where users finished school.
      */
-    schoolCity?: number,
+    school_city?: number,
     /**
      * undefined
      */
-    schoolClass?: number,
+    school_class?: number,
     /**
      * ID of the school.
      */
@@ -125,7 +125,7 @@ export interface UsersSearchParams {
     /**
      * School graduation year.
      */
-    schoolYear?: number,
+    school_year?: number,
     /**
      * Users' religious affiliation.
      */
@@ -145,35 +145,35 @@ export interface UsersSearchParams {
     /**
      * ID of a community to search in communities.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * undefined
      */
-    fromList?: string[],
+    from_list?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface UsersIsAppUserParams {
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface UsersGetSubscriptionsParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
-     * '1' — to return a combined list of users and communities; '0' — to return separate lists of users and communities (default)
+     * '1' — to return a combined list of users and communities, '0' — to return separate lists of users and communities (default)
      */
     extended?: boolean,
     /**
@@ -191,14 +191,14 @@ export interface UsersGetSubscriptionsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface UsersGetFollowersParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Offset needed to return a specific subset of followers.
      */
@@ -208,26 +208,26 @@ export interface UsersGetFollowersParams {
      */
     count?: number,
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online'.;
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online'.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname:; 'nom' — nominative (default); 'gen' — genitive ; 'dat' — dative; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive , 'dat' — dative, 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface UsersReportParams {
     /**
      * ID of the user about whom a complaint is being made.
      */
-    userId: number,
+    user_id: number,
     /**
-     * Type of complaint:; 'porn' – pornography; 'spam' – spamming; 'insult' – abusive behavior; 'advertisment' – disruptive advertisements
+     * Type of complaint: 'porn' – pornography, 'spam' – spamming, 'insult' – abusive behavior, 'advertisment' – disruptive advertisements
      */
     type: string,
     /**
@@ -237,7 +237,7 @@ export interface UsersReportParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface UsersGetNearbyParams {
@@ -258,21 +258,21 @@ export interface UsersGetNearbyParams {
      */
     timeout?: number,
     /**
-     * search zone radius type (1 to 4); :* 1 – 300 m;; :* 2 – 2400 m;; :* 3 – 18 km;; :* 4 – 150 km.
+     * search zone radius type (1 to 4), :* 1 – 300 m,, :* 2 – 2400 m,, :* 3 – 18 km,, :* 4 – 150 km.
      */
     radius?: number,
     /**
-     * list of additional fields to return.; Available values: sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, online, online_mobile, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters, screen_name, maiden_name, timezone, occupation
+     * list of additional fields to return. Available values: sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, online, online_mobile, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters, screen_name, maiden_name, timezone, occupation
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname: ; nom –nominative (default) ; gen – genitive ; dat – dative ; acc – accusative ; ins – instrumental ; abl – prepositional
+     * Case for declension of user name and surname: , nom –nominative (default) , gen – genitive , dat – dative , acc – accusative , ins – instrumental , abl – prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AuthCheckPhoneParams {
@@ -283,38 +283,42 @@ export interface AuthCheckPhoneParams {
     /**
      * User ID.
      */
-    clientId?: number,
+    client_id?: number,
     /**
      * undefined
      */
-    clientSecret: string,
+    client_secret: string,
     /**
      * undefined
      */
-    authByPhone?: boolean,
+    auth_by_phone?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AuthSignupParams {
     /**
      * User's first name.
      */
-    firstName: string,
+    first_name: string,
     /**
      * User's surname.
      */
-    lastName: string,
+    last_name: string,
+    /**
+     * User's birthday.
+     */
+    birthday: string,
     /**
      * Your application ID.
      */
-    clientId: number,
+    client_id: number,
     /**
      * undefined
      */
-    clientSecret: string,
+    client_secret: string,
     /**
      * User's phone number. Can be pre-checked with the [vk.com/dev/auth.checkPhone|auth.checkPhone] method.
      */
@@ -324,15 +328,15 @@ export interface AuthSignupParams {
      */
     password?: string,
     /**
-     * '1' — test mode, in which the user will not be registered and the phone number will not be checked for availability; '0' — default mode (default)
+     * '1' — test mode, in which the user will not be registered and the phone number will not be checked for availability, '0' — default mode (default)
      */
-    testMode?: boolean,
+    test_mode?: boolean,
     /**
-     * '1' — call the phone number and leave a voice message of the authorization code; '0' — send the code by SMS (default)
+     * '1' — call the phone number and leave a voice message of the authorization code, '0' — send the code by SMS (default)
      */
     voice?: boolean,
     /**
-     * '1' — female; '2' — male
+     * '1' — female, '2' — male
      */
     sex?: number,
     /**
@@ -342,18 +346,18 @@ export interface AuthSignupParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AuthConfirmParams {
     /**
      * undefined
      */
-    clientId: number,
+    client_id: number,
     /**
      * undefined
      */
-    clientSecret: string,
+    client_secret: string,
     /**
      * undefined
      */
@@ -369,7 +373,7 @@ export interface AuthConfirmParams {
     /**
      * undefined
      */
-    testMode?: boolean,
+    test_mode?: boolean,
     /**
      * undefined
      */
@@ -377,25 +381,29 @@ export interface AuthConfirmParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AuthRestoreParams {
     /**
-     * user phone number.
+     * User phone number.
      */
     phone: string,
     /**
+     * User last name.
+     */
+    last_name: string,
+    /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallGetParams {
     /**
      * ID of the user or community that owns the wall. By default, current user ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * User or community short address.
      */
@@ -409,11 +417,11 @@ export interface WallGetParams {
      */
     count?: number,
     /**
-     * Filter to apply:; 'owner' — posts by the wall owner; 'others' — posts by someone else; 'all' — posts by the wall owner and others (default); 'postponed' — timed posts (only available for calls with an 'access_token'); 'suggests' — suggested posts on a community wall
+     * Filter to apply: 'owner' — posts by the wall owner, 'others' — posts by someone else, 'all' — posts by the wall owner and others (default), 'postponed' — timed posts (only available for calls with an 'access_token'), 'suggests' — suggested posts on a community wall
      */
     filter?: string,
     /**
-     * '1' — to return 'wall', 'profiles', and 'groups' fields; '0' — to return no additional fields (default)
+     * '1' — to return 'wall', 'profiles', and 'groups' fields, '0' — to return no additional fields (default)
      */
     extended?: boolean,
     /**
@@ -423,14 +431,14 @@ export interface WallGetParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallSearchParams {
     /**
-     * user or community id. ; "Remember that for a community 'owner_id' must be negative."
+     * user or community id. "Remember that for a community 'owner_id' must be negative."
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * user or community screen name.
      */
@@ -442,7 +450,7 @@ export interface WallSearchParams {
     /**
      * '1' – returns only page owner's posts.
      */
-    ownersOnly?: boolean,
+    owners_only?: boolean,
     /**
      * count of posts to return.
      */
@@ -462,7 +470,7 @@ export interface WallSearchParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosCreateAlbumParams {
@@ -473,7 +481,7 @@ export interface PhotosCreateAlbumParams {
     /**
      * ID of the community in which the album will be created.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * Album description.
      */
@@ -481,30 +489,30 @@ export interface PhotosCreateAlbumParams {
     /**
      * undefined
      */
-    privacyView?: string[],
+    privacy_view?: string[],
     /**
      * undefined
      */
-    privacyComment?: string[],
+    privacy_comment?: string[],
     /**
      * undefined
      */
-    uploadByAdminsOnly?: boolean,
+    upload_by_admins_only?: boolean,
     /**
      * undefined
      */
-    commentsDisabled?: boolean,
+    comments_disabled?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosEditAlbumParams {
     /**
      * ID of the photo album to be edited.
      */
-    albumId: number,
+    album_id: number,
     /**
      * New album title.
      */
@@ -516,38 +524,38 @@ export interface PhotosEditAlbumParams {
     /**
      * ID of the user or community that owns the album.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * undefined
      */
-    privacyView?: string[],
+    privacy_view?: string[],
     /**
      * undefined
      */
-    privacyComment?: string[],
+    privacy_comment?: string[],
     /**
      * undefined
      */
-    uploadByAdminsOnly?: boolean,
+    upload_by_admins_only?: boolean,
     /**
      * undefined
      */
-    commentsDisabled?: boolean,
+    comments_disabled?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetAlbumsParams {
     /**
      * ID of the user or community that owns the albums.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Album IDs.
      */
-    albumIds?: number[],
+    album_ids?: number[],
     /**
      * Offset needed to return a specific subset of albums.
      */
@@ -559,46 +567,46 @@ export interface PhotosGetAlbumsParams {
     /**
      * '1' — to return system albums with negative IDs
      */
-    needSystem?: boolean,
+    need_system?: boolean,
     /**
-     * '1' — to return an additional 'thumb_src' field; '0' — (default)
+     * '1' — to return an additional 'thumb_src' field, '0' — (default)
      */
-    needCovers?: boolean,
+    need_covers?: boolean,
     /**
      * '1' — to return photo sizes in a
      */
-    photoSizes?: boolean,
+    photo_sizes?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetParams {
     /**
      * ID of the user or community that owns the photos. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo album ID. To return information about photos from service albums, use the following string values: 'profile, wall, saved'.
      */
-    albumId?: string,
+    album_id?: string,
     /**
      * Photo IDs.
      */
-    photoIds?: string[],
+    photo_ids?: string[],
     /**
-     * Sort order:; '1' — reverse chronological; '0' — chronological
+     * Sort order: '1' — reverse chronological, '0' — chronological
      */
     rev?: boolean,
     /**
-     * '1' — to return additional 'likes', 'comments', and 'tags' fields; '0' — (default)
+     * '1' — to return additional 'likes', 'comments', and 'tags' fields, '0' — (default)
      */
     extended?: boolean,
     /**
      * Type of feed obtained in 'feed' field of the method.
      */
-    feedType?: string,
+    feed_type?: string,
     /**
      * unixtime, that can be obtained with [vk.com/dev/newsfeed.get|newsfeed.get] method in date field to get all photos uploaded by the user on a specific day, or photos the user has been tagged on. Also, 'uid' parameter of the user the event happened with shall be specified.
      */
@@ -606,7 +614,7 @@ export interface PhotosGetParams {
     /**
      * '1' — to return photo sizes in a [vk.com/dev/photo_sizes|special format]
      */
-    photoSizes?: boolean,
+    photo_sizes?: boolean,
     /**
      * undefined
      */
@@ -618,135 +626,162 @@ export interface PhotosGetParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetAlbumsCountParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Community ID.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetByIdParams {
     /**
-     * IDs separated with a comma, that are IDs of users who posted photos and IDs of photos themselves with an underscore character between such IDs. To get information about a photo in the group album, you shall specify group ID instead of user ID. Example:; "1_129207899,6492_135055734, ; -20629724_271945303"
+     * IDs separated with a comma, that are IDs of users who posted photos and IDs of photos themselves with an underscore character between such IDs. To get information about a photo in the group album, you shall specify group ID instead of user ID. Example: "1_129207899,6492_135055734, , -20629724_271945303"
      */
     photos: string[],
     /**
-     * '1' — to return additional fields; '0' — (default)
+     * '1' — to return additional fields, '0' — (default)
      */
     extended?: boolean,
     /**
      * '1' — to return photo sizes in a
      */
-    photoSizes?: boolean,
+    photo_sizes?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetUploadServerParams {
     /**
      * Album ID.
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * ID of community that owns the album (if the photo will be uploaded to a community album).
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
+}
+
+export interface PhotosGetOwnerCoverPhotoUploadServerParams {
+    /**
+     * ID of community that owns the album (if the photo will be uploaded to a community album).
+     */
+    group_id?: number,
+    /**
+     * X coordinate of the left-upper corner
+     */
+    crop_x?: number,
+    /**
+     * Y coordinate of the left-upper corner
+     */
+    crop_y?: number,
+    /**
+     * X coordinate of the right-bottom corner
+     */
+    crop_x2?: number,
+    /**
+     * Y coordinate of the right-bottom corner
+     */
+    crop_y2?: number,
+    /**
+     * access token
+     */
+    access_token?: string
 }
 
 export interface PhotosGetOwnerPhotoUploadServerParams {
     /**
-     * identifier of a community or current user.; ; "Note that community id must be negative.; 'owner_id=1' – user; 'owner_id=-1' – community; "
+     * identifier of a community or current user. "Note that community id must be negative. 'owner_id=1' – user, 'owner_id=-1' – community, "
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetChatUploadServerParams {
     /**
      * ID of the chat for which you want to upload a cover photo.
      */
-    chatId: number,
+    chat_id: number,
     /**
      *
      */
-    cropX?: number,
+    crop_x?: number,
     /**
      *
      */
-    cropY?: number,
+    crop_y?: number,
     /**
      * Width (in pixels) of the photo after cropping.
      */
-    cropWidth?: number,
+    crop_width?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetMarketUploadServerParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * '1' if you want to upload the main item photo.
      */
-    mainPhoto?: boolean,
+    main_photo?: boolean,
     /**
      * X coordinate of the crop left upper corner.
      */
-    cropX?: number,
+    crop_x?: number,
     /**
      * Y coordinate of the crop left upper corner.
      */
-    cropY?: number,
+    crop_y?: number,
     /**
      * Width of the cropped photo in px.
      */
-    cropWidth?: number,
+    crop_width?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetMarketAlbumUploadServerParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosSaveMarketPhotoParams {
     /**
      * Community ID.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
      */
@@ -762,22 +797,37 @@ export interface PhotosSaveMarketPhotoParams {
     /**
      * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
      */
-    cropData?: string,
+    crop_data?: string,
     /**
      * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
      */
-    cropHash?: string,
+    crop_hash?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
+}
+
+export interface PhotosSaveOwnerCoverPhotoParams {
+    /**
+     * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
+     */
+    photo: string,
+    /**
+     * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
+     */
+    hash: string,
+    /**
+     * access token
+     */
+    access_token?: string
 }
 
 export interface PhotosSaveMarketAlbumPhotoParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
      */
@@ -793,7 +843,7 @@ export interface PhotosSaveMarketAlbumPhotoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosSaveOwnerPhotoParams {
@@ -812,18 +862,18 @@ export interface PhotosSaveOwnerPhotoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosSaveWallPhotoParams {
     /**
      * ID of the user on whose wall the photo will be saved.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * ID of community on whose wall the photo will be saved.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * Parameter returned when the the photo is [vk.com/dev/upload_files|uploaded to the server].
      */
@@ -851,25 +901,25 @@ export interface PhotosSaveWallPhotoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetWallUploadServerParams {
     /**
      * ID of community to whose wall the photo will be uploaded.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetMessagesUploadServerParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosSaveMessagesPhotoParams {
@@ -888,45 +938,45 @@ export interface PhotosSaveMessagesPhotoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosReportParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
-     * Reason for the complaint:; '0' – spam; '1' – child pornography; '2' – extremism; '3' – violence; '4' – drug propaganda; '5' – adult material; '6' – insult; abuse
+     * Reason for the complaint: '0' – spam, '1' – child pornography, '2' – extremism, '3' – violence, '4' – drug propaganda, '5' – adult material, '6' – insult, abuse
      */
     reason?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosReportCommentParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * ID of the comment being reported.
      */
-    commentId: number,
+    comment_id: number,
     /**
-     * Reason for the complaint:; '0' – spam; '1' – child pornography; '2' – extremism; '3' – violence; '4' – drug propaganda; '5' – adult material; '6' – insult; abuse
+     * Reason for the complaint: '0' – spam, '1' – child pornography, '2' – extremism, '3' – violence, '4' – drug propaganda, '5' – adult material, '6' – insult, abuse
      */
     reason?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosSearchParams {
@@ -939,17 +989,17 @@ export interface PhotosSearchParams {
      */
     lat?: number,
     /**
-     * Geographical longitude, in degrees (from '-180' to '180').;
+     * Geographical longitude, in degrees (from '-180' to '180').
      */
     long?: number,
     /**
      *
      */
-    startTime?: number,
+    start_time?: number,
     /**
      *
      */
-    endTime?: number,
+    end_time?: number,
     /**
      * Sort order:
      */
@@ -969,22 +1019,22 @@ export interface PhotosSearchParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetParams {
     /**
      * User ID. By default, the current user ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
-     * Sort order: ; 'name' — by name (enabled only if the 'fields' parameter is used); 'hints' — by rating, similar to how friends are sorted in My friends section; ; This parameter is available only for [vk.com/dev/standalone|desktop applications].
+     * Sort order: , 'name' — by name (enabled only if the 'fields' parameter is used), 'hints' — by rating, similar to how friends are sorted in My friends section, , This parameter is available only for [vk.com/dev/standalone|desktop applications].
      */
     order?: string,
     /**
-     * ID of the friend list returned by the [vk.com/dev/friends.getLists|friends.getLists] method to be used as the source. This parameter is taken into account only when the uid parameter is set to the current user ID.; ; This parameter is available only for [vk.com/dev/standalone|desktop applications].
+     * ID of the friend list returned by the [vk.com/dev/friends.getLists|friends.getLists] method to be used as the source. This parameter is taken into account only when the uid parameter is set to the current user ID. This parameter is available only for [vk.com/dev/standalone|desktop applications].
      */
-    listId?: number,
+    list_id?: number,
     /**
      * Number of friends to return.
      */
@@ -994,34 +1044,34 @@ export interface FriendsGetParams {
      */
     offset?: number,
     /**
-     * Profile fields to return. Sample values: 'uid', 'first_name', 'last_name', 'nickname', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'domain', 'has_mobile', 'rate', 'contacts', 'education'.;
+     * Profile fields to return. Sample values: 'uid', 'first_name', 'last_name', 'nickname', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'domain', 'has_mobile', 'rate', 'contacts', 'education'.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname: ; 'nom' — nominative (default) ; 'gen' — genitive ; 'dat' — dative ; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: , 'nom' — nominative (default) , 'gen' — genitive , 'dat' — dative , 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetOnlineParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Friend list ID. If this parameter is not set, information about all online friends is returned.
      */
-    listId?: number,
+    list_id?: number,
     /**
-     * '1' — to return an additional 'online_mobile' field; '0' — (default);
+     * '1' — to return an additional 'online_mobile' field, '0' — (default),
      */
-    onlineMobile?: boolean,
+    online_mobile?: boolean,
     /**
-     * Sort order:; 'random' — random order
+     * Sort order: 'random' — random order
      */
     order?: string,
     /**
@@ -1035,24 +1085,24 @@ export interface FriendsGetOnlineParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetMutualParams {
     /**
      * ID of the user whose friends will be checked against the friends of the user specified in 'target_uid'.
      */
-    sourceUid?: number,
+    source_uid?: number,
     /**
      * ID of the user whose friends will be checked against the friends of the user specified in 'source_uid'.
      */
-    targetUid?: number,
+    target_uid?: number,
     /**
      * IDs of the users whose friends will be checked against the friends of the user specified in 'source_uid'.
      */
-    targetUids?: number[],
+    target_uids?: number[],
     /**
-     * Sort order:; 'random' — random order
+     * Sort order: 'random' — random order
      */
     order?: string,
     /**
@@ -1066,7 +1116,7 @@ export interface FriendsGetMutualParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetRecentParams {
@@ -1077,7 +1127,7 @@ export interface FriendsGetRecentParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetRequestsParams {
@@ -1096,30 +1146,30 @@ export interface FriendsGetRequestsParams {
     /**
      * '1' — to return a list of mutual friends (up to 20), if any
      */
-    needMutual?: boolean,
+    need_mutual?: boolean,
     /**
-     * '1' — to return outgoing requests; '0' — to return incoming requests (default)
+     * '1' — to return outgoing requests, '0' — to return incoming requests (default)
      */
     out?: boolean,
     /**
-     * Sort order:; '1' — by number of mutual friends; '0' — by date
+     * Sort order: '1' — by number of mutual friends, '0' — by date
      */
     sort?: number,
     /**
-     * '1' — to return a list of suggested friends; '0' — to return friend requests (default)
+     * '1' — to return a list of suggested friends, '0' — to return friend requests (default)
      */
     suggested?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsAddParams {
     /**
      * ID of the user whose friend request will be approved or to whom a friend request will be sent.
      */
-    userId: number,
+    user_id: number,
     /**
      * Text of the message (up to 500 characters) for the friend request, if any.
      */
@@ -1131,48 +1181,48 @@ export interface FriendsAddParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsEditParams {
     /**
      * ID of the user whose friend list is to be edited.
      */
-    userId: number,
+    user_id: number,
     /**
      * IDs of the friend lists to which to add the user.
      */
-    listIds?: number[],
+    list_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsDeleteParams {
     /**
      * ID of the user whose friend request is to be declined or who is to be deleted from the current user's friend list.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetListsParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * '1' — to return system friend lists. By default: '0'.
      */
-    returnSystem?: boolean,
+    return_system?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsAddListParams {
@@ -1181,13 +1231,13 @@ export interface FriendsAddListParams {
      */
     name: string,
     /**
-     * IDs of users to be added to the friend list.;
+     * IDs of users to be added to the friend list.
      */
-    userIds?: number[],
+    user_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsEditListParams {
@@ -1198,68 +1248,68 @@ export interface FriendsEditListParams {
     /**
      * Friend list ID.
      */
-    listId: number,
+    list_id: number,
     /**
      * IDs of users in the friend list.
      */
-    userIds?: number[],
+    user_ids?: number[],
     /**
-     * (Applies if 'user_ids' parameter is not set.); User IDs to add to the friend list.
+     * (Applies if 'user_ids' parameter is not set.), User IDs to add to the friend list.
      */
-    addUserIds?: number[],
+    add_user_ids?: number[],
     /**
-     * (Applies if 'user_ids' parameter is not set.); User IDs to delete from the friend list.
+     * (Applies if 'user_ids' parameter is not set.), User IDs to delete from the friend list.
      */
-    deleteUserIds?: number[],
+    delete_user_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsDeleteListParams {
     /**
      * ID of the friend list to delete.
      */
-    listId: number,
+    list_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetAppUsersParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetByPhonesParams {
     /**
-     * List of phone numbers in MSISDN format (maximum 1000).; Example:; "+79219876543,+79111234567"
+     * List of phone numbers in MSISDN format (maximum 1000). Example: "+79219876543,+79111234567"
      */
     phones?: string[],
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online, counters'.;
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online, counters'.
      */
     fields?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsDeleteAllRequestsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetSuggestionsParams {
     /**
-     * Types of potential friends to return:; 'mutual' — users with many mutual friends ; 'contacts' — users found with the [vk.com/dev/account.importContacts|account.importContacts] method ; 'mutual_contacts' — users who imported the same contacts as the current user with the [vk.com/dev/account.importContacts|account.importContacts] method
+     * Types of potential friends to return: 'mutual' — users with many mutual friends , 'contacts' — users found with the [vk.com/dev/account.importContacts|account.importContacts] method , 'mutual_contacts' — users who imported the same contacts as the current user with the [vk.com/dev/account.importContacts|account.importContacts] method
      */
     filter?: string[],
     /**
@@ -1271,66 +1321,66 @@ export interface FriendsGetSuggestionsParams {
      */
     offset?: number,
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online', 'counters'.;
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online', 'counters'.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname: ; 'nom' — nominative (default) ; 'gen' — genitive ; 'dat' — dative ; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: , 'nom' — nominative (default) , 'gen' — genitive , 'dat' — dative , 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsAreFriendsParams {
     /**
      * IDs of the users whose friendship status to check.
      */
-    userIds: number[],
+    user_ids: number[],
     /**
-     * '1' — to return 'sign' field. 'sign' is md5("{id}_{user_id}_{friends_status}_{application_secret}"), where id is current user ID.; This field allows to check that data has not been modified by the client.; By default: '0'.
+     * '1' — to return 'sign' field. 'sign' is md5("{id}_{user_id}_{friends_status}_{application_secret}"), where id is current user ID. This field allows to check that data has not been modified by the client. By default: '0'.
      */
-    needSign?: boolean,
+    need_sign?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsGetAvailableForCallParams {
     /**
-     * Profile fields to return. Sample values: 'uid', 'first_name', 'last_name', 'nickname', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'domain', 'has_mobile', 'rate', 'contacts', 'education'.;
+     * Profile fields to return. Sample values: 'uid', 'first_name', 'last_name', 'nickname', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'domain', 'has_mobile', 'rate', 'contacts', 'education'.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname: ; 'nom' — nominative (default) ; 'gen' — genitive ; 'dat' — dative ; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: , 'nom' — nominative (default) , 'gen' — genitive , 'dat' — dative , 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FriendsSearchParams {
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * Search query string (e.g., 'Vasya Babich').
      */
     q?: string,
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online';
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online',
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname:; 'nom' — nominative (default); 'gen' — genitive ; 'dat' — dative; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive , 'dat' — dative, 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * Offset needed to return a specific subset of friends.
      */
@@ -1342,14 +1392,14 @@ export interface FriendsSearchParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WidgetsGetCommentsParams {
     /**
      * undefined
      */
-    widgetApiId?: number,
+    widget_api_id?: number,
     /**
      * undefined
      */
@@ -1357,7 +1407,7 @@ export interface WidgetsGetCommentsParams {
     /**
      * undefined
      */
-    pageId?: string,
+    page_id?: string,
     /**
      * undefined
      */
@@ -1373,14 +1423,14 @@ export interface WidgetsGetCommentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WidgetsGetPagesParams {
     /**
      * undefined
      */
-    widgetApiId?: number,
+    widget_api_id?: number,
     /**
      * undefined
      */
@@ -1396,36 +1446,36 @@ export interface WidgetsGetPagesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureGetAppBalanceParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureGetTransactionsHistoryParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureGetSMSHistoryParams {
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * filter by start date. It is set as UNIX-time.
      */
-    dateFrom?: number,
+    date_from?: number,
     /**
      * filter by end date. It is set as UNIX-time.
      */
-    dateTo?: number,
+    date_to?: number,
     /**
      * number of returned posts. By default — 1000.
      */
@@ -1433,14 +1483,14 @@ export interface SecureGetSMSHistoryParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureSendSMSNotificationParams {
     /**
      * ID of the user to whom SMS notification is sent. The user shall allow the application to send him/her notifications (, +1).
      */
-    userId: number,
+    user_id: number,
     /**
      * 'SMS' text to be sent in 'UTF-8' encoding. Only Latin letters and numbers are allowed. Maximum size is '160' characters.
      */
@@ -1448,18 +1498,18 @@ export interface SecureSendSMSNotificationParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureSendNotificationParams {
     /**
      * undefined
      */
-    userIds?: number[],
+    user_ids?: number[],
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * notification text which should be sent in 'UTF-8' encoding ('254' characters maximum).
      */
@@ -1467,7 +1517,7 @@ export interface SecureSendNotificationParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureSetCounterParams {
@@ -1478,7 +1528,7 @@ export interface SecureSetCounterParams {
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * counter value.
      */
@@ -1486,7 +1536,7 @@ export interface SecureSetCounterParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureSetUserLevelParams {
@@ -1497,7 +1547,7 @@ export interface SecureSetUserLevelParams {
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * level value.
      */
@@ -1505,18 +1555,25 @@ export interface SecureSetUserLevelParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureGetUserLevelParams {
     /**
      * undefined
      */
-    userIds: number[],
+    user_ids: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
+}
+
+export interface StreamingGetServerUrlParams {
+    /**
+     * access token
+     */
+    access_token?: string
 }
 
 export interface StorageGetParams {
@@ -1531,11 +1588,11 @@ export interface StorageGetParams {
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface StorageSetParams {
@@ -1550,18 +1607,18 @@ export interface StorageSetParams {
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface StorageGetKeysParams {
     /**
      * user id, whose variables names are returned if they were requested with a server method.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * amount of variable names the info needs to be collected from.
      */
@@ -1569,7 +1626,7 @@ export interface StorageGetKeysParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface OrdersGetParams {
@@ -1580,60 +1637,60 @@ export interface OrdersGetParams {
     /**
      * if this parameter is set to 1, this method returns a list of test mode orders. By default — 0.
      */
-    testMode?: boolean,
+    test_mode?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface OrdersGetByIdParams {
     /**
      * order ID.
      */
-    orderId?: number,
+    order_id?: number,
     /**
      * order IDs (when information about several orders is requested).
      */
-    orderIds?: number[],
+    order_ids?: number[],
     /**
      * if this parameter is set to 1, this method returns a list of test mode orders. By default — 0.
      */
-    testMode?: boolean,
+    test_mode?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface OrdersChangeStateParams {
     /**
      * order ID.
      */
-    orderId: number,
+    order_id: number,
     /**
-     * action to be done with the order. ; ; Available actions:; *cancel — to cancel unconfirmed order.; *charge — to confirm unconfirmed order. Applies only if processing of [vk.com/dev/payments_status|order_change_state] notification failed.; *refund — to cancel confirmed order.;
+     * action to be done with the order. Available actions: *cancel — to cancel unconfirmed order. *charge — to confirm unconfirmed order. Applies only if processing of [vk.com/dev/payments_status|order_change_state] notification failed. *refund — to cancel confirmed order.
      */
     action: string,
     /**
      * internal ID of the order in the application.
      */
-    appOrderId?: number,
+    app_order_id?: number,
     /**
      * if this parameter is set to 1, this method returns a list of test mode orders. By default — 0.
      */
-    testMode?: boolean,
+    test_mode?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface OrdersGetAmountParams {
     /**
      * undefined
      */
-    userId: number,
+    user_id: number,
     /**
      * undefined
      */
@@ -1641,18 +1698,18 @@ export interface OrdersGetAmountParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosSaveParams {
     /**
      * ID of the album to save photos to.
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * ID of the community to save photos to.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
      */
@@ -1660,7 +1717,7 @@ export interface PhotosSaveParams {
     /**
      * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
      */
-    photosList?: string,
+    photos_list?: string,
     /**
      * Parameter returned when photos are [vk.com/dev/upload_files|uploaded to server].
      */
@@ -1680,37 +1737,37 @@ export interface PhotosSaveParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosCopyParams {
     /**
      * photo's owner ID
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * photo ID
      */
-    photoId: number,
+    photo_id: number,
     /**
      * for private photos
      */
-    accessKey?: string,
+    access_key?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosEditParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * New caption for the photo. If this parameter is not set, it is considered to be equal to an empty string.
      */
@@ -1726,68 +1783,68 @@ export interface PhotosEditParams {
     /**
      * undefined
      */
-    placeStr?: string,
+    place_str?: string,
     /**
      * undefined
      */
-    foursquareId?: string,
+    foursquare_id?: string,
     /**
      * undefined
      */
-    deletePlace?: boolean,
+    delete_place?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosMoveParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * ID of the album to which the photo will be moved.
      */
-    targetAlbumId: number,
+    target_album_id: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosMakeCoverParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * Album ID.
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosReorderAlbumsParams {
     /**
      * ID of the user or community that owns the album.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Album ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * ID of the album before which the album in question shall be placed.
      */
@@ -1799,18 +1856,18 @@ export interface PhotosReorderAlbumsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosReorderPhotosParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * ID of the photo before which the photo in question shall be placed.
      */
@@ -1822,14 +1879,14 @@ export interface PhotosReorderPhotosParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetAllParams {
     /**
-     * ID of a user or community that owns the photos.; Use a negative value to designate a community ID.
+     * ID of a user or community that owns the photos. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * '1' — to return detailed information about photos
      */
@@ -1845,30 +1902,30 @@ export interface PhotosGetAllParams {
     /**
      * '1' – to return image sizes in [vk.com/dev/photo_sizes|special format].
      */
-    photoSizes?: boolean,
+    photo_sizes?: boolean,
     /**
-     * '1' – to return photos only from standard albums; '0' – to return all photos including those in service albums, e.g., 'My wall photos' (default)
+     * '1' – to return photos only from standard albums, '0' – to return all photos including those in service albums, e.g., 'My wall photos' (default)
      */
-    noServiceAlbums?: boolean,
+    no_service_albums?: boolean,
     /**
      * '1' – to show information about photos being hidden from the block above the wall.
      */
-    needHidden?: boolean,
+    need_hidden?: boolean,
     /**
      * '1' – not to return photos being hidden from the block above the wall. Works only with owner_id>0, no_service_albums is ignored.
      */
-    skipHidden?: boolean,
+    skip_hidden?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetUserPhotosParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Offset needed to return a specific subset of photos. By default, '0'.
      */
@@ -1878,100 +1935,100 @@ export interface PhotosGetUserPhotosParams {
      */
     count?: number,
     /**
-     * '1' — to return an additional 'likes' field; '0' — (default)
+     * '1' — to return an additional 'likes' field, '0' — (default)
      */
     extended?: boolean,
     /**
-     * Sort order:; '1' — by date the tag was added in ascending order; '0' — by date the tag was added in descending order
+     * Sort order: '1' — by date the tag was added in ascending order, '0' — by date the tag was added in descending order
      */
     sort?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosDeleteAlbumParams {
     /**
      * Album ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * ID of the community that owns the album.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosDeleteParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosRestoreParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosConfirmTagParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: string,
+    photo_id: string,
     /**
      * Tag ID.
      */
-    tagId: number,
+    tag_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetCommentsParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
-     * '1' — to return an additional 'likes' field; '0' — (default)
+     * '1' — to return an additional 'likes' field, '0' — (default)
      */
-    needLikes?: boolean,
+    need_likes?: boolean,
     /**
      * undefined
      */
-    startCommentId?: number,
+    start_comment_id?: number,
     /**
      * Offset needed to return a specific subset of comments. By default, '0'.
      */
@@ -1981,13 +2038,13 @@ export interface PhotosGetCommentsParams {
      */
     count?: number,
     /**
-     * Sort order:; 'asc' — old first; 'desc' — new first
+     * Sort order: 'asc' — old first, 'desc' — new first
      */
     sort?: string,
     /**
      * undefined
      */
-    accessKey?: string,
+    access_key?: string,
     /**
      * undefined
      */
@@ -1999,22 +2056,22 @@ export interface PhotosGetCommentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetAllCommentsParams {
     /**
      * ID of the user or community that owns the album(s).
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Album ID. If the parameter is not set, comments on all of the user's albums will be returned.
      */
-    albumId?: number,
+    album_id?: number,
     /**
-     * '1' — to return an additional 'likes' field; '0' — (default)
+     * '1' — to return an additional 'likes' field, '0' — (default)
      */
-    needLikes?: boolean,
+    need_likes?: boolean,
     /**
      * Offset needed to return a specific subset of comments. By default, '0'.
      */
@@ -2026,42 +2083,42 @@ export interface PhotosGetAllCommentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosCreateCommentParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * Comment text.
      */
     message?: string,
     /**
-     * (Required if 'message' is not set.) List of objects attached to the post, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media attachment:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — Media attachment owner ID.; '<media_id>' — Media attachment ID.; ; Example:; "photo100172_166443618,photo66748_265827614"
+     * (Required if 'message' is not set.) List of objects attached to the post, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — Media attachment owner ID. '<media_id>' — Media attachment ID. Example: "photo100172_166443618,photo66748_265827614"
      */
     attachments?: string[],
     /**
      * '1' — to post a comment from the community
      */
-    fromGroup?: boolean,
+    from_group?: boolean,
     /**
      *
      */
-    replyToComment?: number,
+    reply_to_comment?: number,
     /**
      * undefined
      */
-    stickerId?: number,
+    sticker_id?: number,
     /**
      * undefined
      */
-    accessKey?: string,
+    access_key?: string,
     /**
      * undefined
      */
@@ -2069,94 +2126,94 @@ export interface PhotosCreateCommentParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosDeleteCommentParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosRestoreCommentParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * ID of the deleted comment.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosEditCommentParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * New text of the comment.
      */
     message?: string,
     /**
-     * (Required if 'message' is not set.) List of objects attached to the post, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media attachment:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — Media attachment owner ID.; '<media_id>' — Media attachment ID.; ; Example:; "photo100172_166443618,photo66748_265827614"
+     * (Required if 'message' is not set.) List of objects attached to the post, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — Media attachment owner ID. '<media_id>' — Media attachment ID. Example: "photo100172_166443618,photo66748_265827614"
      */
     attachments?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetTagsParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * undefined
      */
-    accessKey?: string,
+    access_key?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosPutTagParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * ID of the user to be tagged.
      */
-    userId: number,
+    user_id: number,
     /**
      * Upper left-corner coordinate of the tagged area (as a percentage of the photo's width).
      */
@@ -2176,26 +2233,26 @@ export interface PhotosPutTagParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosRemoveTagParams {
     /**
      * ID of the user or community that owns the photo.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Photo ID.
      */
-    photoId: number,
+    photo_id: number,
     /**
      * Tag ID.
      */
-    tagId: number,
+    tag_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PhotosGetNewTagsParams {
@@ -2210,22 +2267,22 @@ export interface PhotosGetNewTagsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallGetByIdParams {
     /**
-     * User or community IDs and post IDs, separated by underscores. Use a negative value to designate a community ID. Example:; "93388_21539,93388_20904,2943_4276,-1_1"
+     * User or community IDs and post IDs, separated by underscores. Use a negative value to designate a community ID. Example: "93388_21539,93388_20904,2943_4276,-1_1"
      */
     posts: string[],
     /**
-     * '1' — to return user and community objects needed to display posts; '0' — no additional fields are returned (default)
+     * '1' — to return user and community objects needed to display posts, '0' — no additional fields are returned (default)
      */
     extended?: boolean,
     /**
      * Sets the number of parent elements to include in the array 'copy_history' that is returned if the post is a repost from another wall.
      */
-    copyHistoryDepth?: number,
+    copy_history_depth?: number,
     /**
      * undefined
      */
@@ -2233,28 +2290,28 @@ export interface WallGetByIdParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallPostParams {
     /**
      * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
-     * '1' — post will be available to friends only; '0' — post will be available to all users (default)
+     * '1' — post will be available to friends only, '0' — post will be available to all users (default)
      */
-    friendsOnly?: boolean,
+    friends_only?: boolean,
     /**
-     * For a community:; '1' — post will be published by the community; '0' — post will be published by the user (default)
+     * For a community: '1' — post will be published by the community, '0' — post will be published by the user (default)
      */
-    fromGroup?: boolean,
+    from_group?: boolean,
     /**
      * (Required if 'attachments' is not set.) Text of the post.
      */
     message?: string,
     /**
-     * (Required if 'message' is not set.) List of objects attached to the post, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media attachment:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; 'page' — wiki-page; 'note' — note; 'poll' — poll; 'album' — photo album; '<owner_id>' — ID of the media application owner. ; '<media_id>' — Media application ID.; ; Example:; "photo100172_166443618,photo66748_265827614"; May contain a link to an external page to include in the post. Example:; "photo66748_265827614,http://habrahabr.ru"; "NOTE: If more than one link is being attached, an error will be thrown."
+     * (Required if 'message' is not set.) List of objects attached to the post, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, 'page' — wiki-page, 'note' — note, 'poll' — poll, 'album' — photo album, '<owner_id>' — ID of the media application owner. '<media_id>' — Media application ID. Example: "photo100172_166443618,photo66748_265827614", May contain a link to an external page to include in the post. Example: "photo66748_265827614,http://habrahabr.ru", "NOTE: If more than one link is being attached, an error will be thrown."
      */
     attachments?: string[],
     /**
@@ -2262,13 +2319,13 @@ export interface WallPostParams {
      */
     services?: string,
     /**
-     * Only for posts in communities with 'from_group' set to '1':; '1' — post will be signed with the name of the posting user; '0' — post will not be signed (default)
+     * Only for posts in communities with 'from_group' set to '1': '1' — post will be signed with the name of the posting user, '0' — post will not be signed (default)
      */
     signed?: boolean,
     /**
      * Publication date (in Unix time). If used, posting will be delayed until the set time.
      */
-    publishDate?: number,
+    publish_date?: number,
     /**
      * Geographical latitude of a check-in, in degrees (from -90 to 90).
      */
@@ -2280,11 +2337,11 @@ export interface WallPostParams {
     /**
      * ID of the location where the user was tagged.
      */
-    placeId?: number,
+    place_id?: number,
     /**
      * Post ID. Used for publishing of scheduled and suggested posts.
      */
-    postId?: number,
+    post_id?: number,
     /**
      * undefined
      */
@@ -2292,16 +2349,16 @@ export interface WallPostParams {
     /**
      * undefined
      */
-    markAsAds?: boolean,
+    mark_as_ads?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallRepostParams {
     /**
-     * ID of the object to be reposted on the wall. Example:; "wall66748_3675"
+     * ID of the object to be reposted on the wall. Example: "wall66748_3675"
      */
     object: string,
     /**
@@ -2311,26 +2368,26 @@ export interface WallRepostParams {
     /**
      * Target community ID when reposting to a community.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * undefined
      */
-    markAsAds?: boolean,
+    mark_as_ads?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallGetRepostsParams {
     /**
      * User ID or community ID. By default, current user ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Post ID.
      */
-    postId?: number,
+    post_id?: number,
     /**
      * Offset needed to return a specific subset of reposts.
      */
@@ -2342,28 +2399,28 @@ export interface WallGetRepostsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallEditParams {
     /**
      * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Post ID.
      */
-    postId: number,
+    post_id: number,
     /**
-     * (Applies only when editing a scheduled post.); '1' — post will be available to friends only; '0' — post will be available to all users (default)
+     * (Applies only when editing a scheduled post.), '1' — post will be available to friends only, '0' — post will be available to all users (default)
      */
-    friendsOnly?: boolean,
+    friends_only?: boolean,
     /**
      * (Required if 'attachments' is not set.) Text of the post.
      */
     message?: string,
     /**
-     * (Required if 'message' is not set.) List of objects attached to the post, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media attachment:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — ID of the media application owner.; '<media_id>' — Media application ID. ; ; Example:; "photo100172_166443618,photo66748_265827614"; May contain a link to an external page to include in the post. Example:; "photo66748_265827614,http://habrahabr.ru"; "NOTE: If more than one link is being attached, an error is thrown."
+     * (Required if 'message' is not set.) List of objects attached to the post, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media application owner. '<media_id>' — Media application ID. Example: "photo100172_166443618,photo66748_265827614", May contain a link to an external page to include in the post. Example: "photo66748_265827614,http://habrahabr.ru", "NOTE: If more than one link is being attached, an error is thrown."
      */
     attachments?: string[],
     /**
@@ -2371,13 +2428,13 @@ export interface WallEditParams {
      */
     services?: string,
     /**
-     * (Applies only to a post that was created "as community" on a community wall.); '1' — to add the signature of the user who created the post
+     * (Applies only to a post that was created "as community" on a community wall.), '1' — to add the signature of the user who created the post
      */
     signed?: boolean,
     /**
      * (Applies only to a scheduled post.) Publication date (in Unix time). If used, posting will be delayed until the set time.
      */
-    publishDate?: number,
+    publish_date?: number,
     /**
      * Geographical latitude of the check-in, in degrees (from -90 to 90).
      */
@@ -2389,94 +2446,94 @@ export interface WallEditParams {
     /**
      * ID of the location where the user was tagged.
      */
-    placeId?: number,
+    place_id?: number,
     /**
      * undefined
      */
-    markAsAds?: boolean,
+    mark_as_ads?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallDeleteParams {
     /**
      * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * ID of the post to be deleted.
      */
-    postId?: number,
+    post_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallRestoreParams {
     /**
      * User ID or community ID from whose wall the post was deleted. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * ID of the post to be restored.
      */
-    postId?: number,
+    post_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallPinParams {
     /**
      * ID of the user or community that owns the wall. By default, current user ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Post ID.
      */
-    postId: number,
+    post_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallUnpinParams {
     /**
      * ID of the user or community that owns the wall. By default, current user ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Post ID.
      */
-    postId: number,
+    post_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallGetCommentsParams {
     /**
      * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Post ID.
      */
-    postId: number,
+    post_id: number,
     /**
-     * '1' — to return the 'likes' field; '0' — not to return the 'likes' field (default)
+     * '1' — to return the 'likes' field, '0' — not to return the 'likes' field (default)
      */
-    needLikes?: boolean,
+    need_likes?: boolean,
     /**
      * undefined
      */
-    startCommentId?: number,
+    start_comment_id?: number,
     /**
      * Offset needed to return a specific subset of comments.
      */
@@ -2486,13 +2543,13 @@ export interface WallGetCommentsParams {
      */
     count?: number,
     /**
-     * Sort order:; 'asc' — chronological; 'desc' — reverse chronological
+     * Sort order: 'asc' — chronological, 'desc' — reverse chronological
      */
     sort?: string,
     /**
-     * Number of characters at which to truncate comments when previewed. By default, '90'. Specify '0' if you do not want to truncate comments.;
+     * Number of characters at which to truncate comments when previewed. By default, '90'. Specify '0' if you do not want to truncate comments.
      */
-    previewLength?: number,
+    preview_length?: number,
     /**
      * undefined
      */
@@ -2500,22 +2557,22 @@ export interface WallGetCommentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallCreateCommentParams {
     /**
      * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Post ID.
      */
-    postId: number,
+    post_id: number,
     /**
-     * '1' — to post the comment as from the community;; '0' — (default) to post the comment as from the user.
+     * Group ID.
      */
-    fromGroup?: boolean,
+    from_group?: number,
     /**
      * (Required if 'attachments' is not set.) Text of the comment.
      */
@@ -2523,15 +2580,15 @@ export interface WallCreateCommentParams {
     /**
      * ID of comment to reply.
      */
-    replyToComment?: number,
+    reply_to_comment?: number,
     /**
-     * (Required if 'message' is not set.) List of media objects attached to the comment, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media ojbect:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — ID of the media owner.; '<media_id>' — Media ID. ; ; For example:; "photo100172_166443618,photo66748_265827614"
+     * (Required if 'message' is not set.) List of media objects attached to the comment, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media ojbect: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media owner. '<media_id>' — Media ID. For example: "photo100172_166443618,photo66748_265827614"
      */
     attachments?: string[],
     /**
      * Sticker ID.
      */
-    stickerId?: number,
+    sticker_id?: number,
     /**
      * Unique identifier to avoid repeated comments.
      */
@@ -2539,113 +2596,113 @@ export interface WallCreateCommentParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallEditCommentParams {
     /**
-     * User ID or community ID. Use a negative value to designate a community ID.; ;
+     * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
-     * New comment text.;
+     * New comment text.
      */
     message?: string,
     /**
-     * List of objects attached to the comment, in the following format:; ; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media attachment:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — ID of the media attachment owner.; '<media_id>' — Media attachment ID. ; ; For example:; "photo100172_166443618,photo66748_265827614"
+     * List of objects attached to the comment, in the following format: , "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media attachment owner. '<media_id>' — Media attachment ID. For example: "photo100172_166443618,photo66748_265827614"
      */
     attachments?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallDeleteCommentParams {
     /**
-     * User ID or community ID. Use a negative value to designate a community ID.;
+     * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallRestoreCommentParams {
     /**
      * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallReportPostParams {
     /**
      * ID of the user or community that owns the wall.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Post ID.
      */
-    postId: number,
+    post_id: number,
     /**
-     * Reason for the complaint:; '0' – spam; '1' – child pornography; '2' – extremism; '3' – violence; '4' – drug propaganda; '5' – adult material; '6' – insult; abuse
+     * Reason for the complaint: '0' – spam, '1' – child pornography, '2' – extremism, '3' – violence, '4' – drug propaganda, '5' – adult material, '6' – insult, abuse
      */
     reason?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface WallReportCommentParams {
     /**
      * ID of the user or community that owns the wall.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
-     * Reason for the complaint:; '0' – spam; '1' – child pornography; '2' – extremism; '3' – violence; '4' – drug propaganda; '5' – adult material; '6' – insult; abuse
+     * Reason for the complaint: '0' – spam, '1' – child pornography, '2' – extremism, '3' – violence, '4' – drug propaganda, '5' – adult material, '6' – insult, abuse
      */
     reason?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface StatusGetParams {
     /**
      * User ID or community ID. Use a negative value to designate a community ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * undefined
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface StatusSetParams {
@@ -2656,433 +2713,18 @@ export interface StatusSetParams {
     /**
      * Identifier of a community to set a status in. If left blank the status is set to current user.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
-}
-
-export interface AudioGetParams {
-    /**
-     * ID of the user or community that owns the audio file. Use a negative value to designate a community ID.
-     */
-    ownerId?: number,
-    /**
-     * Audio album ID.
-     */
-    albumId?: number,
-    /**
-     * IDs of the audio files to return.
-     */
-    audioIds?: number[],
-    /**
-     * '1' — to return information about users who uploaded audio files
-     */
-    needUser?: boolean,
-    /**
-     * Offset needed to return a specific subset of audio files.
-     */
-    offset?: number,
-    /**
-     * Number of audio files to return.
-     */
-    count?: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioGetByIdParams {
-    /**
-     * Audio file IDs, in the following format:; "{owner_id}_{audio_id}"
-     */
-    audios: string[],
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioGetLyricsParams {
-    /**
-     * Lyrics ID (could be obtained with [vk.com/dev/audio.get|audio.get], [vk.com/dev/audio.getById|audio.getById], or [vk.com/dev/audio.search|audio.search] methods).
-     */
-    lyricsId: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioSearchParams {
-    /**
-     * Search query string (e.g., 'The Beatles').
-     */
-    q?: string,
-    /**
-     * '1' — to correct for mistakes in the search query (e.g., if you enter 'Beetles', the system will search for 'Beatles').
-     */
-    autoComplete?: boolean,
-    /**
-     * '1' — to return only audio files that have associated lyrics.
-     */
-    lyrics?: boolean,
-    /**
-     * '1' — to search only by artist name.
-     */
-    performerOnly?: boolean,
-    /**
-     * Sort order: ; '1' — by duration;; '2' — by popularity;; '0' — by date added.
-     */
-    sort?: number,
-    /**
-     * '1' — to search among current user's audios. By default: '0'.
-     */
-    searchOwn?: boolean,
-    /**
-     * Offset needed to return a specific subset of audio files.
-     */
-    offset?: number,
-    /**
-     * Number of audio files to return.
-     */
-    count?: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioGetUploadServerParams {
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioSaveParams {
-    /**
-     * This parameter is returned when the audio file is [vk.com/dev/upload_files_2|uploaded to the server].
-     */
-    server: number,
-    /**
-     * This parameter is returned when the audio file is [vk.com/dev/upload_files_2|uploaded to the server].
-     */
-    audio: string,
-    /**
-     * This parameter is returned when the audio file is [vk.com/dev/upload_files_2|uploaded to the server].
-     */
-    hash?: string,
-    /**
-     * The name of the artist. By default, this is obtained from ID3 tags.
-     */
-    artist?: string,
-    /**
-     * The title of the audio file. By default, this is obtained from ID3 tags.
-     */
-    title?: string,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioAddParams {
-    /**
-     * Audio file ID.
-     */
-    audioId: number,
-    /**
-     * ID of the user or community that owns the audio file. Use a negative value to designate a community ID. ; ;
-     */
-    ownerId: number,
-    /**
-     * Community ID, needed when adding the audio file to a community (without minus).
-     */
-    groupId?: number,
-    /**
-     * Album ID.
-     */
-    albumId?: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioDeleteParams {
-    /**
-     * Audio file ID.
-     */
-    audioId: number,
-    /**
-     * ID of the user or community that owns the audio file. Use a negative value to designate a community ID.
-     */
-    ownerId: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioEditParams {
-    /**
-     * ID of the user or community that owns the audio file.
-     */
-    ownerId: number,
-    /**
-     * Audio file ID.
-     */
-    audioId: number,
-    /**
-     * Name of the artist.
-     */
-    artist?: string,
-    /**
-     * Title of the audio file.
-     */
-    title?: string,
-    /**
-     * Text of the lyrics of the audio file.
-     */
-    text?: string,
-    /**
-     * Genre of the audio file. See the list of [vk.com/dev/audio_genres|audio genres].
-     */
-    genreId?: number,
-    /**
-     * '1' — audio file will not be available for search; '0' — audio file will be available for search (default)
-     */
-    noSearch?: boolean,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioReorderParams {
-    /**
-     * Audio file ID.
-     */
-    audioId: number,
-    /**
-     * ID of the user or community that owns the audio file.
-     */
-    ownerId?: number,
-    /**
-     * ID of the audio file before which to place the audio file.
-     */
-    before?: number,
-    /**
-     * ID of the audio file after which to place the audio file.
-     */
-    after?: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioRestoreParams {
-    /**
-     * Audio file ID.
-     */
-    audioId: number,
-    /**
-     * ID of the user or community that owns the audio file.
-     */
-    ownerId?: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioGetAlbumsParams {
-    /**
-     * ID of the user or community that owns the audio file.
-     */
-    ownerId?: number,
-    /**
-     * Offset needed to return a specific subset of albums.
-     */
-    offset?: number,
-    /**
-     * Number of albums to return.
-     */
-    count?: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioAddAlbumParams {
-    /**
-     * Community ID (if the album will be created in a community).
-     */
-    groupId?: number,
-    /**
-     * Album title.
-     */
-    title: string,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioEditAlbumParams {
-    /**
-     * ID of the community where the album is located.;
-     */
-    groupId?: number,
-    /**
-     * Album ID.
-     */
-    albumId: number,
-    /**
-     * New album title.
-     */
-    title: string,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioDeleteAlbumParams {
-    /**
-     * ID of the community where the album is located.;
-     */
-    groupId?: number,
-    /**
-     * Album ID.
-     */
-    albumId: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioMoveToAlbumParams {
-    /**
-     * ID of the community where the audio files are located. By default, current user ID.;
-     */
-    groupId?: number,
-    /**
-     * ID of the album to which the audio files will be moved.
-     */
-    albumId?: number,
-    /**
-     * IDs of the audio files to be moved.; "NOTE: An album can hold up to 1000 audio files.";
-     */
-    audioIds: number[],
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioSetBroadcastParams {
-    /**
-     * ID of the audio file to be shown in status (e.g., '1_190442705'). If the parameter is not set, the audio status of given communities and user will be deleted.
-     */
-    audio?: string,
-    /**
-     * IDs of communities and user whose statuses will be included in the broadcast. Use a negative value to designate a community ID. By default, current user ID.
-     */
-    targetIds?: number[],
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioGetBroadcastListParams {
-    /**
-     * Types of objects to return:; 'friends' — only friends; 'groups' — only communities; 'all' — both friends and communities (default)
-     */
-    filter?: string,
-    /**
-     * '1' — to return only friends and communities that are broadcasting at the moment.; '0' — to return all friends and communities (default).
-     */
-    active?: boolean,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioGetRecommendationsParams {
-    /**
-     * Use to get recommendations based on a particular audio file. The ID of the user or community that owns an audio file and that audio file's ID, separated by an underscore.;
-     */
-    targetAudio?: string,
-    /**
-     * Use to get recommendations based on a user's playlist. User ID. By default, the current user ID.;
-     */
-    userId?: number,
-    /**
-     * Offset needed to return a specific subset of audio files.
-     */
-    offset?: number,
-    /**
-     * Number of audio files to return.
-     */
-    count?: number,
-    /**
-     * '1' — shuffle on
-     */
-    shuffle?: boolean,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioGetPopularParams {
-    /**
-     * '1' — to return only foreign audio files; '0' — to return all audio files;
-     */
-    onlyEng?: boolean,
-    /**
-     * Genre ID. See the list of [vk.com/dev/audio_genres|audio genres].
-     */
-    genreId?: number,
-    /**
-     * Offset needed to return a specific subset of audio files.
-     */
-    offset?: number,
-    /**
-     * Number of audio files to return.
-     */
-    count?: number,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface AudioGetCountParams {
-    /**
-     * ID of the user or community that owns the audio files. By default, current user ID.
-     */
-    ownerId: number,
-    /**
-     * access token
-     */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LeadsCompleteParams {
     /**
      * Session obtained as GET parameter when session started.
      */
-    vkSid: string,
+    vk_sid: string,
     /**
      * Secret key from the lead testing interface.
      */
@@ -3094,14 +2736,14 @@ export interface LeadsCompleteParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LeadsStartParams {
     /**
      * Lead ID.
      */
-    leadId: number,
+    lead_id: number,
     /**
      * Secret key from the lead testing interface.
      */
@@ -3109,14 +2751,14 @@ export interface LeadsStartParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LeadsGetStatsParams {
     /**
      * Lead ID.
      */
-    leadId: number,
+    lead_id: number,
     /**
      * Secret key obtained from the lead testing interface.
      */
@@ -3124,22 +2766,22 @@ export interface LeadsGetStatsParams {
     /**
      * Day to start stats from (YYYY_MM_DD, e.g.2011-09-17).
      */
-    dateStart?: string,
+    date_start?: string,
     /**
      * Day to finish stats (YYYY_MM_DD, e.g.2011-09-17).
      */
-    dateEnd?: string,
+    date_end?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LeadsGetUsersParams {
     /**
      * Offer ID.
      */
-    offerId: number,
+    offer_id: number,
     /**
      * Secret key obtained in the lead testing interface.
      */
@@ -3153,28 +2795,28 @@ export interface LeadsGetUsersParams {
      */
     count?: number,
     /**
-     * Action type. Possible values:; *'0' — start;; *'1' — finish;; *'2' — blocking users;; *'3' — start in a test mode;; *'4' — finish in a test mode.;
+     * Action type. Possible values: *'0' — start,, *'1' — finish,, *'2' — blocking users,, *'3' — start in a test mode,, *'4' — finish in a test mode.
      */
     status?: number,
     /**
-     * Sort order. Possible values:; *'1' — chronological;; *'0' — reverse chronological.
+     * Sort order. Possible values: *'1' — chronological,, *'0' — reverse chronological.
      */
     reverse?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LeadsCheckUserParams {
     /**
      * Lead ID.
      */
-    leadId: number,
+    lead_id: number,
     /**
      * Value to be return in 'result' field when test mode is used.
      */
-    testResult?: number,
+    test_result?: number,
     /**
      * User age.
      */
@@ -3186,7 +2828,7 @@ export interface LeadsCheckUserParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LeadsMetricHitParams {
@@ -3197,18 +2839,18 @@ export interface LeadsMetricHitParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PagesGetParams {
     /**
      * Page owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Wiki page ID.
      */
-    pageId?: number,
+    page_id?: number,
     /**
      * '1' — to return information about a global wiki page
      */
@@ -3216,7 +2858,7 @@ export interface PagesGetParams {
     /**
      * '1' — resulting wiki page is a preview for the attached link
      */
-    sitePreview?: boolean,
+    site_preview?: boolean,
     /**
      * Wiki page title.
      */
@@ -3224,15 +2866,15 @@ export interface PagesGetParams {
     /**
      * undefined
      */
-    needSource?: boolean,
+    need_source?: boolean,
     /**
-     * '1' — to return the page as HTML;
+     * '1' — to return the page as HTML,
      */
-    needHtml?: boolean,
+    need_html?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PagesSaveParams {
@@ -3243,15 +2885,15 @@ export interface PagesSaveParams {
     /**
      * Wiki page ID. The 'title' parameter can be passed instead of 'pid'.
      */
-    pageId?: number,
+    page_id?: number,
     /**
      * ID of the community that owns the wiki page.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      *
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Wiki page title.
      */
@@ -3259,87 +2901,87 @@ export interface PagesSaveParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PagesSaveAccessParams {
     /**
      * Wiki page ID.
      */
-    pageId: number,
+    page_id: number,
     /**
      * ID of the community that owns the wiki page.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      *
      */
-    userId?: number,
+    user_id?: number,
     /**
-     * Who can view the wiki page:; '1' — only community members; '2' — all users can view the page; '0' — only community managers
+     * Who can view the wiki page: '1' — only community members, '2' — all users can view the page, '0' — only community managers
      */
     view?: number,
     /**
-     * Who can edit the wiki page:; '1' — only community members; '2' — all users can edit the page; '0' — only community managers
+     * Who can edit the wiki page: '1' — only community members, '2' — all users can edit the page, '0' — only community managers
      */
     edit?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PagesGetHistoryParams {
     /**
      * Wiki page ID.
      */
-    pageId: number,
+    page_id: number,
     /**
      * ID of the community that owns the wiki page.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      *
      */
-    userId?: number,
+    user_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PagesGetTitlesParams {
     /**
      * ID of the community that owns the wiki page.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PagesGetVersionParams {
     /**
      *
      */
-    versionId: number,
+    version_id: number,
     /**
      * ID of the community that owns the wiki page.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      *
      */
-    userId?: number,
+    user_id?: number,
     /**
      * '1' — to return the page as HTML
      */
-    needHtml?: boolean,
+    need_html?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PagesParseWikiParams {
@@ -3348,13 +2990,13 @@ export interface PagesParseWikiParams {
      */
     text: string,
     /**
-     * ID of the group in the context of which this markup is interpreted.;
+     * ID of the group in the context of which this markup is interpreted.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PagesClearCacheParams {
@@ -3365,66 +3007,66 @@ export interface PagesClearCacheParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsIsMemberParams {
     /**
      * ID or screen name of the community.
      */
-    groupId: string,
+    group_id: string,
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * User IDs.
      */
-    userIds?: number[],
+    user_ids?: number[],
     /**
-     * '1' — to return an extended response with additional fields.; By default: '0'.
+     * '1' — to return an extended response with additional fields. By default: '0'.
      */
     extended?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetByIdParams {
     /**
      * IDs or screen names of communities.
      */
-    groupIds?: string[],
+    group_ids?: string[],
     /**
      * ID or screen name of the community.
      */
-    groupId?: string,
+    group_id?: string,
     /**
-     * Group fields to return.;
+     * Group fields to return.
      */
     fields?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
-     * '1' — to return complete information about a user's communities; '0' — to return a list of community IDs without any additional fields (default);
+     * '1' — to return complete information about a user's communities, '0' — to return a list of community IDs without any additional fields (default),
      */
     extended?: boolean,
     /**
-     * Types of communities to return:; 'admin' — to return communities administered by the user ; 'editor' — to return communities where the user is an administrator or editor; 'moder' — to return communities where the user is an administrator, editor, or moderator; 'groups' — to return only groups; 'publics' — to return only public pages; 'events' — to return only events
+     * Types of communities to return: 'admin' — to return communities administered by the user , 'editor' — to return communities where the user is an administrator or editor, 'moder' — to return communities where the user is an administrator, editor, or moderator, 'groups' — to return only groups, 'publics' — to return only public pages, 'events' — to return only events
      */
     filter?: string[],
     /**
-     * Profile fields to return.;
+     * Profile fields to return.
      */
     fields?: string[],
     /**
@@ -3438,16 +3080,16 @@ export interface GroupsGetParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetMembersParams {
     /**
      * ID or screen name of the community.
      */
-    groupId?: string,
+    group_id?: string,
     /**
-     * Sort order. Available values: 'id_asc', 'id_desc', 'time_asc', 'time_desc'.; 'time_asc' and 'time_desc' are availavle only if the method is called by the group's 'moderator'.
+     * Sort order. Available values: 'id_asc', 'id_desc', 'time_asc', 'time_desc'. 'time_asc' and 'time_desc' are availavle only if the method is called by the group's 'moderator'.
      */
     sort?: string,
     /**
@@ -3459,43 +3101,43 @@ export interface GroupsGetMembersParams {
      */
     count?: number,
     /**
-     * List of additional fields to be returned. ; Available values: 'sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, online, online_mobile, lists, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters'.
+     * List of additional fields to be returned. Available values: 'sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, online, online_mobile, lists, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters'.
      */
     fields?: string[],
     /**
-     * *'friends' – only friends in this community will be returned;; *'unsure' – only those who pressed 'I may attend' will be returned (if it's an event).
+     * *'friends' – only friends in this community will be returned,, *'unsure' – only those who pressed 'I may attend' will be returned (if it's an event).
      */
     filter?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsJoinParams {
     /**
      * ID or screen name of the community.
      */
-    groupId?: number,
+    group_id?: number,
     /**
-     * Optional parameter which is taken into account when 'gid' belongs to the event:; '1' — Perhaps I will attend; '0' — I will be there for sure (default); ;
+     * Optional parameter which is taken into account when 'gid' belongs to the event: '1' — Perhaps I will attend, '0' — I will be there for sure (default), ,
      */
-    notSure?: string,
+    not_sure?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsLeaveParams {
     /**
      * ID or screen name of the community.
      */
-    groupId: number,
+    group_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsSearchParams {
@@ -3510,11 +3152,11 @@ export interface GroupsSearchParams {
     /**
      * Country ID.
      */
-    countryId?: number,
+    country_id?: number,
     /**
      * City ID. If this parameter is transmitted, country_id is ignored.
      */
-    cityId?: number,
+    city_id?: number,
     /**
      * '1' — to return only upcoming events. Works with the 'type' = 'event' only.
      */
@@ -3524,7 +3166,7 @@ export interface GroupsSearchParams {
      */
     market?: boolean,
     /**
-     * Sort order. Possible values:; *'0' — default sorting (similar the full version of the site);; *'1' — by growth speed;; *'2'— by the "day attendance/members number" ratio;; *'3' — by the "Likes number/members number" ratio;; *'4' — by the "comments number/members number" ratio;; *'5' — by the "boards entries number/members number" ratio.; ;
+     * Sort order. Possible values: *'0' — default sorting (similar the full version of the site),, *'1' — by growth speed,, *'2'— by the "day attendance/members number" ratio,, *'3' — by the "Likes number/members number" ratio,, *'4' — by the "comments number/members number" ratio,, *'5' — by the "boards entries number/members number" ratio.
      */
     sort?: number,
     /**
@@ -3532,43 +3174,43 @@ export interface GroupsSearchParams {
      */
     offset?: number,
     /**
-     * Number of communities to return.; "Note that you can not receive more than first thousand of results, regardless of 'count' and 'offset' values."
+     * Number of communities to return. "Note that you can not receive more than first thousand of results, regardless of 'count' and 'offset' values."
      */
     count?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetCatalogParams {
     /**
      * Category id received from [vk.com/dev/groups.getCatalogInfo|groups.getCatalogInfo].
      */
-    categoryId?: number,
+    category_id?: number,
     /**
      * Subcategory id received from [vk.com/dev/groups.getCatalogInfo|groups.getCatalogInfo].
      */
-    subcategoryId?: number,
+    subcategory_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetCatalogInfoParams {
     /**
-     * 1 – to return communities count and three communities for preview.; By default: 0.
+     * 1 – to return communities count and three communities for preview. By default: 0.
      */
     extended?: boolean,
     /**
-     * 1 – to return subcategories info.; By default: 0.
+     * 1 – to return subcategories info. By default: 0.
      */
     subcategories?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetInvitesParams {
@@ -3587,14 +3229,14 @@ export interface GroupsGetInvitesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetInvitedUsersParams {
     /**
      * Group ID to return invited users for.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Offset needed to return a specific subset of results.
      */
@@ -3604,34 +3246,34 @@ export interface GroupsGetInvitedUsersParams {
      */
     count?: number,
     /**
-     * List of additional fields to be returned. ; Available values: 'sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, online, online_mobile, lists, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters'.
+     * List of additional fields to be returned. Available values: 'sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, online, online_mobile, lists, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters'.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname. Possible values:; *'nom' — nominative (default);; *'gen' — genitive;; *'dat' — dative;; *'acc' — accusative; ; *'ins' — instrumental;; *'abl' — prepositional.
+     * Case for declension of user name and surname. Possible values: *'nom' — nominative (default),, *'gen' — genitive,, *'dat' — dative,, *'acc' — accusative, , *'ins' — instrumental,, *'abl' — prepositional.
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsBanUserParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * Date (in Unix time) when the user will be removed from the blacklist.
      */
-    endDate?: number,
+    end_date?: number,
     /**
-     * Reason for ban:; '1' — spam; '2' — verbal abuse; '3' — strong language; '4' — irrelevant messages; '0' — other (default)
+     * Reason for ban: '1' — spam, '2' — verbal abuse, '3' — strong language, '4' — irrelevant messages, '0' — other (default)
      */
     reason?: number,
     /**
@@ -3639,35 +3281,35 @@ export interface GroupsBanUserParams {
      */
     comment?: string,
     /**
-     * '1' — text of comment will be visible to the user;; '0' — text of comment will be invisible to the user. ; By default: '0'.
+     * '1' — text of comment will be visible to the user,, '0' — text of comment will be invisible to the user. By default: '0'.
      */
-    commentVisible?: boolean,
+    comment_visible?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsUnbanUserParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetBannedParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Offset needed to return a specific subset of users.
      */
@@ -3683,11 +3325,11 @@ export interface GroupsGetBannedParams {
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsCreateParams {
@@ -3700,28 +3342,28 @@ export interface GroupsCreateParams {
      */
     description?: string,
     /**
-     * Community type. Possible values:; *'group' – group;; *'event' – event;; *'public' – public page
+     * Community type. Possible values: *'group' – group,, *'event' – event,, *'public' – public page
      */
     type?: string,
     /**
      * Category ID (for 'type' = 'public' only).
      */
-    publicCategory?: number,
+    public_category?: number,
     /**
-     * Public page subtype. Possible values:; *'1' – place or small business;; *'2' – company, organization or website;; *'3' – famous person or group of people;; *'4' – product or work of art.
+     * Public page subtype. Possible values: *'1' – place or small business,, *'2' – company, organization or website,, *'3' – famous person or group of people,, *'4' – product or work of art.
      */
     subtype?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsEditParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Community title.
      */
@@ -3733,9 +3375,9 @@ export interface GroupsEditParams {
     /**
      * Community screen name.
      */
-    screenName?: string,
+    screen_name?: string,
     /**
-     * Community type. Possible values:; *'0' – open;; *'1' – closed;; *'2' – private.
+     * Community type. Possible values: *'0' – open,, *'1' – closed,, *'2' – private.
      */
     access?: number,
     /**
@@ -3743,7 +3385,7 @@ export interface GroupsEditParams {
      */
     website?: string,
     /**
-     * Community subject. Possible values: ; *'1' – auto/moto;; *'2' – activity holidays;; *'3' – business;; *'4' – pets;; *'5' – health;; *'6' – dating and communication; ; *'7' – games;; *'8' – IT (computers and software);; *'9' – cinema;; *'10' – beauty and fashion;; *'11' – cooking;; *'12' – art and culture;; *'13' – literature;; *'14' – mobile services and internet;; *'15' – music;; *'16' – science and technology;; *'17' – real estate;; *'18' – news and media;; *'19' – security;; *'20' – education;; *'21' – home and renovations;; *'22' – politics;; *'23' – food;; *'24' – industry;; *'25' – travel;; *'26' – work;; *'27' – entertainment;; *'28' – religion;; *'29' – family;; *'30' – sports;; *'31' – insurance;; *'32' – television;; *'33' – goods and services;; *'34' – hobbies;; *'35' – finance;; *'36' – photo;; *'37' – esoterics;; *'38' – electronics and appliances;; *'39' – erotic;; *'40' – humor;; *'41' – society, humanities;; *'42' – design and graphics.
+     * Community subject. Possible values: , *'1' – auto/moto,, *'2' – activity holidays,, *'3' – business,, *'4' – pets,, *'5' – health,, *'6' – dating and communication, , *'7' – games,, *'8' – IT (computers and software),, *'9' – cinema,, *'10' – beauty and fashion,, *'11' – cooking,, *'12' – art and culture,, *'13' – literature,, *'14' – mobile services and internet,, *'15' – music,, *'16' – science and technology,, *'17' – real estate,, *'18' – news and media,, *'19' – security,, *'20' – education,, *'21' – home and renovations,, *'22' – politics,, *'23' – food,, *'24' – industry,, *'25' – travel,, *'26' – work,, *'27' – entertainment,, *'28' – religion,, *'29' – family,, *'30' – sports,, *'31' – insurance,, *'32' – television,, *'33' – goods and services,, *'34' – hobbies,, *'35' – finance,, *'36' – photo,, *'37' – esoterics,, *'38' – electronics and appliances,, *'39' – erotic,, *'40' – humor,, *'41' – society, humanities,, *'42' – design and graphics.
      */
     subject?: string,
     /**
@@ -3761,130 +3403,130 @@ export interface GroupsEditParams {
     /**
      * Event start date in Unixtime format.
      */
-    eventStartDate?: number,
+    event_start_date?: number,
     /**
      * Event finish date in Unixtime format.
      */
-    eventFinishDate?: number,
+    event_finish_date?: number,
     /**
      * Organizer community ID (for events only).
      */
-    eventGroupId?: number,
+    event_group_id?: number,
     /**
      * Public page category ID.
      */
-    publicCategory?: number,
+    public_category?: number,
     /**
      * Public page subcategory ID.
      */
-    publicSubcategory?: number,
+    public_subcategory?: number,
     /**
      * Founding date of a company or organization owning the community in "dd.mm.YYYY" format.
      */
-    publicDate?: string,
+    public_date?: string,
     /**
-     * Wall settings. Possible values:; *'0' – disabled;; *'1' – open;; *'2' – limited (groups and events only);; *'3' – closed (groups and events only).;
+     * Wall settings. Possible values: *'0' – disabled,, *'1' – open,, *'2' – limited (groups and events only),, *'3' – closed (groups and events only).
      */
     wall?: number,
     /**
-     * Board topics settings. Possbile values: ; *'0' – disabled;; *'1' – open;; *'2' – limited (for groups and events only).;
+     * Board topics settings. Possbile values: , *'0' – disabled,, *'1' – open,, *'2' – limited (for groups and events only).
      */
     topics?: number,
     /**
-     * Photos settings. Possible values:; *'0' – disabled;; *'1' – open;; *'2' – limited (for groups and events only).;
+     * Photos settings. Possible values: *'0' – disabled,, *'1' – open,, *'2' – limited (for groups and events only).
      */
     photos?: number,
     /**
-     * Video settings. Possible values:; *'0' – disabled;; *'1' – open;; *'2' – limited (for groups and events only).
+     * Video settings. Possible values: *'0' – disabled,, *'1' – open,, *'2' – limited (for groups and events only).
      */
     video?: number,
     /**
-     * Audio settings. Possible values:; *'0' – disabled;; *'1' – open;; *'2' – limited (for groups and events only).
+     * Audio settings. Possible values: *'0' – disabled,, *'1' – open,, *'2' – limited (for groups and events only).
      */
     audio?: number,
     /**
-     * Links settings (for public pages only). Possible values:; *'0' – disabled;; *'1' – enabled.;
+     * Links settings (for public pages only). Possible values: *'0' – disabled,, *'1' – enabled.
      */
     links?: boolean,
     /**
-     * Events settings (for public pages only). Possible values:; *'0' – disabled;; *'1' – enabled.;
+     * Events settings (for public pages only). Possible values: *'0' – disabled,, *'1' – enabled.
      */
     events?: boolean,
     /**
-     * Places settings (for public pages only). Possible values:; *'0' – disabled;; *'1' – enabled.;
+     * Places settings (for public pages only). Possible values: *'0' – disabled,, *'1' – enabled.
      */
     places?: boolean,
     /**
-     * Contacts settings (for public pages only). Possible values:; *'0' – disabled;; *'1' – enabled.;
+     * Contacts settings (for public pages only). Possible values: *'0' – disabled,, *'1' – enabled.
      */
     contacts?: boolean,
     /**
-     * Documents settings. Possible values:; *'0' – disabled;; *'1' – open;; *'2' – limited (for groups and events only).
+     * Documents settings. Possible values: *'0' – disabled,, *'1' – open,, *'2' – limited (for groups and events only).
      */
     docs?: number,
     /**
-     * Wiki pages settings. Possible values:; *'0' – disabled;; *'1' – open;; *'2' – limited (for groups and events only).
+     * Wiki pages settings. Possible values: *'0' – disabled,, *'1' – open,, *'2' – limited (for groups and events only).
      */
     wiki?: number,
     /**
-     * Community messages. Possible values:; *'0' — disabled;; *'1' — enabled.
+     * Community messages. Possible values: *'0' — disabled,, *'1' — enabled.
      */
     messages?: boolean,
     /**
-     * Community age limits. Possible values:; *'1' — no limits;; *'2' — 16+;; *'3' — 18+.
+     * Community age limits. Possible values: *'1' — no limits,, *'2' — 16+,, *'3' — 18+.
      */
-    ageLimits?: number,
+    age_limits?: number,
     /**
-     * Market settings. Possible values:; *'0' – disabled;; *'1' – enabled.
+     * Market settings. Possible values: *'0' – disabled,, *'1' – enabled.
      */
     market?: boolean,
     /**
-     * market comments settings. Possible values:; *'0' – disabled;; *'1' – enabled.
+     * market comments settings. Possible values: *'0' – disabled,, *'1' – enabled.
      */
-    marketComments?: boolean,
+    market_comments?: boolean,
     /**
      * Market delivery countries.
      */
-    marketCountry?: number[],
+    market_country?: number[],
     /**
      * Market delivery cities (if only one country is specified).
      */
-    marketCity?: number[],
+    market_city?: number[],
     /**
-     * Market currency settings. Possbile values: ; *'643' – Russian rubles;; *'980' – Ukrainian hryvnia;; *'398' – Kazakh tenge;; *'978' – Euro;; *'840' – US dollars
+     * Market currency settings. Possbile values: , *'643' – Russian rubles,, *'980' – Ukrainian hryvnia,, *'398' – Kazakh tenge,, *'978' – Euro,, *'840' – US dollars
      */
-    marketCurrency?: number,
+    market_currency?: number,
     /**
-     * Seller contact for market.; Set '0' for community messages.
+     * Seller contact for market. Set '0' for community messages.
      */
-    marketContact?: number,
+    market_contact?: number,
     /**
      * ID of a wiki page with market description.
      */
-    marketWiki?: number,
+    market_wiki?: number,
     /**
-     * Obscene expressions filter in comments. Possible values: ; *'0' – disabled;; *'1' – enabled.
+     * Obscene expressions filter in comments. Possible values: , *'0' – disabled,, *'1' – enabled.
      */
-    obsceneFilter?: boolean,
+    obscene_filter?: boolean,
     /**
-     * Stopwords filter in comments. Possible values: ; *'0' – disabled;; *'1' – enabled.
+     * Stopwords filter in comments. Possible values: , *'0' – disabled,, *'1' – enabled.
      */
-    obsceneStopwords?: boolean,
+    obscene_stopwords?: boolean,
     /**
      * Keywords for stopwords filter.
      */
-    obsceneWords?: string[],
+    obscene_words?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsEditPlaceParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Place title.
      */
@@ -3896,11 +3538,11 @@ export interface GroupsEditPlaceParams {
     /**
      * Country ID.
      */
-    countryId?: number,
+    country_id?: number,
     /**
      * City ID.
      */
-    cityId?: number,
+    city_id?: number,
     /**
      * Geographical latitude.
      */
@@ -3912,25 +3554,25 @@ export interface GroupsEditPlaceParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetSettingsParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetRequestsParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Offset needed to return a specific subset of results.
      */
@@ -3940,70 +3582,70 @@ export interface GroupsGetRequestsParams {
      */
     count?: number,
     /**
-     * Profile fields to return.;
+     * Profile fields to return.
      */
     fields?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsEditManagerParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
-     * Manager role. Possible values:; *'moderator';; *'editor';; *'administrator'.
+     * Manager role. Possible values: *'moderator',, *'editor',, *'administrator'.
      */
     role?: string,
     /**
      * '1' — to show the manager in Contacts block of the community.
      */
-    isContact?: boolean,
+    is_contact?: boolean,
     /**
      * Position to show in Contacts block.
      */
-    contactPosition?: string,
+    contact_position?: string,
     /**
      * Contact phone.
      */
-    contactPhone?: string,
+    contact_phone?: string,
     /**
      * Contact e-mail.
      */
-    contactEmail?: string,
+    contact_email?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsInviteParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsAddLinkParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Link URL.
      */
@@ -4015,33 +3657,33 @@ export interface GroupsAddLinkParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsDeleteLinkParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Link ID.
      */
-    linkId: number,
+    link_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsEditLinkParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Link ID.
      */
-    linkId: number,
+    link_id: number,
     /**
      * New description text for the link.
      */
@@ -4049,18 +3691,18 @@ export interface GroupsEditLinkParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsReorderLinkParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Link ID.
      */
-    linkId: number,
+    link_id: number,
     /**
      * ID of the link after which to place the link with 'link_id'.
      */
@@ -4068,196 +3710,227 @@ export interface GroupsReorderLinkParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsRemoveUserParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsApproveRequestParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetCallbackConfirmationCodeParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * access token
      */
-    accessToken?: string
-}
-
-export interface GroupsGetCallbackServerSettingsParams {
-    /**
-     * Community ID.
-     */
-    groupId: number,
-    /**
-     * access token
-     */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsGetCallbackSettingsParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
+    /**
+     * Server ID.
+     */
+    server_id?: number,
     /**
      * access token
      */
-    accessToken?: string
-}
-
-export interface GroupsSetCallbackServerParams {
-    /**
-     * Community ID.
-     */
-    groupId: number,
-    /**
-     * Server URL.
-     */
-    serverUrl?: string,
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface GroupsSetCallbackServerSettingsParams {
-    /**
-     * Community ID.
-     */
-    groupId: number,
-    /**
-     * Callback API secret key.
-     */
-    secretKey?: string,
-    /**
-     * access token
-     */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GroupsSetCallbackSettingsParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
-     * New messages notifications ('0' — disabled, '1' — enabled).
+     * Server ID.
      */
-    messageNew?: boolean,
+    server_id?: number,
+    /**
+     * A new incoming message has been received ('0' — disabled, '1' — enabled).
+     */
+    message_new?: boolean,
+    /**
+     * A new outcoming message has been received ('0' — disabled, '1' — enabled).
+     */
+    message_reply?: boolean,
     /**
      * Allowed messages notifications ('0' — disabled, '1' — enabled).
      */
-    messageAllow?: boolean,
+    message_allow?: boolean,
     /**
      * Denied messages notifications ('0' — disabled, '1' — enabled).
      */
-    messageDeny?: boolean,
+    message_deny?: boolean,
     /**
      * New photos notifications ('0' — disabled, '1' — enabled).
      */
-    photoNew?: boolean,
+    photo_new?: boolean,
     /**
      * New audios notifications ('0' — disabled, '1' — enabled).
      */
-    audioNew?: boolean,
+    audio_new?: boolean,
     /**
      * New videos notifications ('0' — disabled, '1' — enabled).
      */
-    videoNew?: boolean,
+    video_new?: boolean,
     /**
      * New wall replies notifications ('0' — disabled, '1' — enabled).
      */
-    wallReplyNew?: boolean,
+    wall_reply_new?: boolean,
     /**
      * Wall replies edited notifications ('0' — disabled, '1' — enabled).
      */
-    wallReplyEdit?: boolean,
+    wall_reply_edit?: boolean,
+    /**
+     * A wall comment has been deleted ('0' — disabled, '1' — enabled).
+     */
+    wall_reply_delete?: boolean,
+    /**
+     * A wall comment has been restored ('0' — disabled, '1' — enabled).
+     */
+    wall_reply_restore?: boolean,
     /**
      * New wall posts notifications ('0' — disabled, '1' — enabled).
      */
-    wallPostNew?: boolean,
+    wall_post_new?: boolean,
+    /**
+     * New wall posts notifications ('0' — disabled, '1' — enabled).
+     */
+    wall_repost?: boolean,
     /**
      * New board posts notifications ('0' — disabled, '1' — enabled).
      */
-    boardPostNew?: boolean,
+    board_post_new?: boolean,
     /**
      * Board posts edited notifications ('0' — disabled, '1' — enabled).
      */
-    boardPostEdit?: boolean,
+    board_post_edit?: boolean,
     /**
      * Board posts restored notifications ('0' — disabled, '1' — enabled).
      */
-    boardPostRestore?: boolean,
+    board_post_restore?: boolean,
     /**
      * Board posts deleted notifications ('0' — disabled, '1' — enabled).
      */
-    boardPostDelete?: boolean,
+    board_post_delete?: boolean,
     /**
      * New comment to photo notifications ('0' — disabled, '1' — enabled).
      */
-    photoCommentNew?: boolean,
+    photo_comment_new?: boolean,
+    /**
+     * A photo comment has been edited ('0' — disabled, '1' — enabled).
+     */
+    photo_comment_edit?: boolean,
+    /**
+     * A photo comment has been deleted ('0' — disabled, '1' — enabled).
+     */
+    photo_comment_delete?: boolean,
+    /**
+     * A photo comment has been restored ('0' — disabled, '1' — enabled).
+     */
+    photo_comment_restore?: boolean,
     /**
      * New comment to video notifications ('0' — disabled, '1' — enabled).
      */
-    videoCommentNew?: boolean,
+    video_comment_new?: boolean,
+    /**
+     * A video comment has been edited ('0' — disabled, '1' — enabled).
+     */
+    video_comment_edit?: boolean,
+    /**
+     * A video comment has been deleted ('0' — disabled, '1' — enabled).
+     */
+    video_comment_delete?: boolean,
+    /**
+     * A video comment has been restored ('0' — disabled, '1' — enabled).
+     */
+    video_comment_restore?: boolean,
     /**
      * New comment to market item notifications ('0' — disabled, '1' — enabled).
      */
-    marketCommentNew?: boolean,
+    market_comment_new?: boolean,
+    /**
+     * A market comment has been edited ('0' — disabled, '1' — enabled).
+     */
+    market_comment_edit?: boolean,
+    /**
+     * A market comment has been deleted ('0' — disabled, '1' — enabled).
+     */
+    market_comment_delete?: boolean,
+    /**
+     * A market comment has been restored ('0' — disabled, '1' — enabled).
+     */
+    market_comment_restore?: boolean,
+    /**
+     * A vote in a public poll has been added ('0' — disabled, '1' — enabled).
+     */
+    poll_vote_new?: boolean,
     /**
      * Joined community notifications ('0' — disabled, '1' — enabled).
      */
-    groupJoin?: boolean,
+    group_join?: boolean,
     /**
      * Left community notifications ('0' — disabled, '1' — enabled).
      */
-    groupLeave?: boolean,
+    group_leave?: boolean,
+    /**
+     * User added to community blacklist
+     */
+    user_block?: boolean,
+    /**
+     * User removed from community blacklist
+     */
+    user_unblock?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardGetTopicsParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
-     * IDs of topics to be returned (100 maximum). By default, all topics are returned.; If this parameter is set, the 'order', 'offset', and 'count' parameters are ignored.
+     * IDs of topics to be returned (100 maximum). By default, all topics are returned. If this parameter is set, the 'order', 'offset', and 'count' parameters are ignored.
      */
-    topicIds?: number[],
+    topic_ids?: number[],
     /**
-     * Sort order:; '1' — by date updated in reverse chronological order.; '2' — by date created in reverse chronological order.; '-1' — by date updated in chronological order.; '-2' — by date created in chronological order.; ; If no sort order is specified, topics are returned in the order specified by the group administrator. Pinned topics are returned first, regardless of the sorting.
+     * Sort order: '1' — by date updated in reverse chronological order. '2' — by date created in reverse chronological order. '-1' — by date updated in chronological order. '-2' — by date created in chronological order. If no sort order is specified, topics are returned in the order specified by the group administrator. Pinned topics are returned first, regardless of the sorting.
      */
     order?: number,
     /**
@@ -4269,40 +3942,40 @@ export interface BoardGetTopicsParams {
      */
     count?: number,
     /**
-     * '1' — to return information about users who created topics or who posted there last; '0' — to return no additional fields (default)
+     * '1' — to return information about users who created topics or who posted there last, '0' — to return no additional fields (default)
      */
     extended?: boolean,
     /**
-     * '1' — to return the first comment in each topic;; '2' — to return the last comment in each topic;; '0' — to return no comments.; ; By default: '0'.
+     * '1' — to return the first comment in each topic,, '2' — to return the last comment in each topic,, '0' — to return no comments. By default: '0'.
      */
     preview?: number,
     /**
      * Number of characters after which to truncate the previewed comment. To preview the full comment, specify '0'.
      */
-    previewLength?: number,
+    preview_length?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardGetCommentsParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
-     * '1' — to return the 'likes' field; '0' — not to return the 'likes' field (default)
+     * '1' — to return the 'likes' field, '0' — not to return the 'likes' field (default)
      */
-    needLikes?: boolean,
+    need_likes?: boolean,
     /**
      * undefined
      */
-    startCommentId?: number,
+    start_comment_id?: number,
     /**
      * Offset needed to return a specific subset of comments.
      */
@@ -4312,24 +3985,24 @@ export interface BoardGetCommentsParams {
      */
     count?: number,
     /**
-     * '1' — to return information about users who posted comments; '0' — to return no additional fields (default)
+     * '1' — to return information about users who posted comments, '0' — to return no additional fields (default)
      */
     extended?: boolean,
     /**
-     * Sort order:; 'asc' — by creation date in chronological order; 'desc' — by creation date in reverse chronological order;
+     * Sort order: 'asc' — by creation date in chronological order, 'desc' — by creation date in reverse chronological order,
      */
     sort?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardAddTopicParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic title.
      */
@@ -4339,44 +4012,44 @@ export interface BoardAddTopicParams {
      */
     text?: string,
     /**
-     * For a community:; '1' — to post the topic as by the community; '0' — to post the topic as by the user (default)
+     * For a community: '1' — to post the topic as by the community, '0' — to post the topic as by the user (default)
      */
-    fromGroup?: boolean,
+    from_group?: boolean,
     /**
-     * List of media objects attached to the topic, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media object:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — ID of the media owner. ; '<media_id>' — Media ID.; ; Example:; "photo100172_166443618,photo66748_265827614"; ; "NOTE: If you try to attach more than one reference, an error will be thrown.";
+     * List of media objects attached to the topic, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media object: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media owner. '<media_id>' — Media ID. Example: "photo100172_166443618,photo66748_265827614", , "NOTE: If you try to attach more than one reference, an error will be thrown.",
      */
     attachments?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardCreateCommentParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * ID of the topic to be commented on.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * (Required if 'attachments' is not set.) Text of the comment.
      */
     message?: string,
     /**
-     * (Required if 'text' is not set.) List of media objects attached to the comment, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media object:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — ID of the media owner. ; '<media_id>' — Media ID.
+     * (Required if 'text' is not set.) List of media objects attached to the comment, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media object: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media owner. '<media_id>' — Media ID.
      */
     attachments?: string[],
     /**
-     * '1' — to post the comment as by the community; '0' — to post the comment as by the user (default)
+     * '1' — to post the comment as by the community, '0' — to post the comment as by the user (default)
      */
-    fromGroup?: boolean,
+    from_group?: boolean,
     /**
      * Sticker ID.
      */
-    stickerId?: number,
+    sticker_id?: number,
     /**
      * Unique identifier to avoid repeated comments.
      */
@@ -4384,33 +4057,33 @@ export interface BoardCreateCommentParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardDeleteTopicParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardEditTopicParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * New title of the topic.
      */
@@ -4418,147 +4091,147 @@ export interface BoardEditTopicParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardEditCommentParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * ID of the comment on the topic.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * (Required if 'attachments' is not set). New comment text.
      */
     message?: string,
     /**
-     * (Required if 'message' is not set.) List of media objects attached to the comment, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media object:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — ID of the media owner. ; '<media_id>' — Media ID.; ; Example:; "photo100172_166443618,photo66748_265827614"
+     * (Required if 'message' is not set.) List of media objects attached to the comment, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media object: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media owner. '<media_id>' — Media ID. Example: "photo100172_166443618,photo66748_265827614"
      */
     attachments?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardRestoreCommentParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardDeleteCommentParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardOpenTopicParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardCloseTopicParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardFixTopicParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface BoardUnfixTopicParams {
     /**
      * ID of the community that owns the discussion board.
      */
-    groupId: number,
+    group_id: number,
     /**
      * Topic ID.
      */
-    topicId: number,
+    topic_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetParams {
     /**
      * ID of the user or community that owns the video(s).
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
-     * Video IDs, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; Use a negative value to designate a community ID.; ; Example:; "-4363_136089719,13245770_137352259"
+     * Video IDs, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", Use a negative value to designate a community ID. Example: "-4363_136089719,13245770_137352259"
      */
     videos?: string[],
     /**
      * ID of the album containing the video(s).
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * Number of videos to return.
      */
@@ -4574,18 +4247,18 @@ export interface VideoGetParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoEditParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
      * New video title.
      */
@@ -4595,44 +4268,44 @@ export interface VideoEditParams {
      */
     desc?: string,
     /**
-     * Privacy settings in a [vk.com/dev/privacy_setting|special format].; Privacy setting is available for videos uploaded to own profile by user.
+     * Privacy settings in a [vk.com/dev/privacy_setting|special format]. Privacy setting is available for videos uploaded to own profile by user.
      */
-    privacyView?: string[],
+    privacy_view?: string[],
     /**
      * Privacy settings for comments in a [vk.com/dev/privacy_setting|special format].
      */
-    privacyComment?: string[],
+    privacy_comment?: string[],
     /**
      * Disable comments for the group video.
      */
-    noComments?: boolean,
+    no_comments?: boolean,
     /**
-     * '1' — to repeat the playback of the video; '0' — to play the video once;
+     * '1' — to repeat the playback of the video, '0' — to play the video once,
      */
     repeat?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoAddParams {
     /**
-     * identifier of a user or community to add a video to.; Use a negative value to designate a community ID.
+     * identifier of a user or community to add a video to. Use a negative value to designate a community ID.
      */
-    targetId?: number,
+    target_id?: number,
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
-     * ID of the user or community that owns the video.; Use a negative value to designate a community ID.
+     * ID of the user or community that owns the video. Use a negative value to designate a community ID.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoSaveParams {
@@ -4645,11 +4318,11 @@ export interface VideoSaveParams {
      */
     description?: string,
     /**
-     * '1' — to designate the video as private (send it via a private message); the video will not appear on the user's video list and will not be available by ID for other users; '0' — not to designate the video as private
+     * '1' — to designate the video as private (send it via a private message), the video will not appear on the user's video list and will not be available by ID for other users, '0' — not to designate the video as private
      */
-    isPrivate?: boolean,
+    is_private?: boolean,
     /**
-     * '1' — to post the saved video on a user's wall; '0' — not to post the saved video on a user's wall
+     * '1' — to post the saved video on a user's wall, '0' — not to post the saved video on a user's wall
      */
     wallpost?: boolean,
     /**
@@ -4659,65 +4332,65 @@ export interface VideoSaveParams {
     /**
      * ID of the community in which the video will be saved. By default, the current user's page.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * ID of the album to which the saved video will be added.
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * undefined
      */
-    privacyView?: string[],
+    privacy_view?: string[],
     /**
      * undefined
      */
-    privacyComment?: string[],
+    privacy_comment?: string[],
     /**
      * undefined
      */
-    noComments?: boolean,
+    no_comments?: boolean,
     /**
-     * '1' — to repeat the playback of the video; '0' — to play the video once;
+     * '1' — to repeat the playback of the video, '0' — to play the video once,
      */
     repeat?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoDeleteParams {
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * undefined
      */
-    targetId?: number,
+    target_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoRestoreParams {
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoSearchParams {
@@ -4726,7 +4399,7 @@ export interface VideoSearchParams {
      */
     q: string,
     /**
-     * Sort order:; '1' — by duration; '2' — by relevance; '0' — by date added
+     * Sort order: '1' — by duration, '2' — by relevance, '0' — by date added
      */
     sort?: number,
     /**
@@ -4734,17 +4407,17 @@ export interface VideoSearchParams {
      */
     hd?: number,
     /**
-     * '1' — to disable the Safe Search filter; '0' — to enable the Safe Search filter
+     * '1' — to disable the Safe Search filter, '0' — to enable the Safe Search filter
      */
     adult?: boolean,
     /**
-     * Filters to apply:; 'youtube' — return YouTube videos only; 'vimeo' — return Vimeo videos only; 'short' — return short videos only; 'long' — return long videos only
+     * Filters to apply: 'youtube' — return YouTube videos only, 'vimeo' — return Vimeo videos only, 'short' — return short videos only, 'long' — return long videos only
      */
     filters?: string[],
     /**
      *
      */
-    searchOwn?: boolean,
+    search_own?: boolean,
     /**
      * Offset needed to return a specific subset of videos.
      */
@@ -4768,14 +4441,14 @@ export interface VideoSearchParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetUserVideosParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Offset needed to return a specific subset of videos.
      */
@@ -4791,14 +4464,14 @@ export interface VideoGetUserVideosParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetAlbumsParams {
     /**
      * ID of the user or community that owns the video album(s).
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Offset needed to return a specific subset of video albums.
      */
@@ -4814,90 +4487,90 @@ export interface VideoGetAlbumsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetAlbumByIdParams {
     /**
-     * identifier of a user or community to add a video to. ; Use a negative value to designate a community ID.
+     * identifier of a user or community to add a video to. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Album ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoAddAlbumParams {
     /**
      * Community ID (if the album will be created in a community).
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * Album title.
      */
     title?: string,
     /**
-     * new access permissions for the album.; Possible values: ; *'0' – all users;; *'1' – friends only;; *'2' – friends and friends of friends;; *'3' – "only me".
+     * new access permissions for the album. Possible values: , *'0' – all users,, *'1' – friends only,, *'2' – friends and friends of friends,, *'3' – "only me".
      */
     privacy?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoEditAlbumParams {
     /**
      * Community ID (if the album edited is owned by a community).
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * Album ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * New album title.
      */
     title: string,
     /**
-     * new access permissions for the album.; Possible values: ; *'0' – all users;; *'1' – friends only;; *'2' – friends and friends of friends;; *'3' – "only me".
+     * new access permissions for the album. Possible values: , *'0' – all users,, *'1' – friends only,, *'2' – friends and friends of friends,, *'3' – "only me".
      */
     privacy?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoDeleteAlbumParams {
     /**
      * Community ID (if the album is owned by a community).
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * Album ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoReorderAlbumsParams {
     /**
      * ID of the user or community that owns the albums..
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Album ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * ID of the album before which the album in question shall be placed.
      */
@@ -4909,115 +4582,115 @@ export interface VideoReorderAlbumsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoReorderVideosParams {
     /**
      * ID of the user or community that owns the album with videos.
      */
-    targetId?: number,
+    target_id?: number,
     /**
      * ID of the video album.
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * ID of the video.
      */
-    videoId: number,
+    video_id: number,
     /**
      * ID of the user or community that owns the video before which the video in question shall be placed.
      */
-    beforeOwnerId?: number,
+    before_owner_id?: number,
     /**
      * ID of the video before which the video in question shall be placed.
      */
-    beforeVideoId?: number,
+    before_video_id?: number,
     /**
      * ID of the user or community that owns the video after which the photo in question shall be placed.
      */
-    afterOwnerId?: number,
+    after_owner_id?: number,
     /**
      * ID of the video after which the photo in question shall be placed.
      */
-    afterVideoId?: number,
+    after_video_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoAddToAlbumParams {
     /**
      * undefined
      */
-    targetId?: number,
+    target_id?: number,
     /**
      * undefined
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * undefined
      */
-    albumIds?: number[],
+    album_ids?: number[],
     /**
      * undefined
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * undefined
      */
-    videoId: number,
+    video_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoRemoveFromAlbumParams {
     /**
      * undefined
      */
-    targetId?: number,
+    target_id?: number,
     /**
      * undefined
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * undefined
      */
-    albumIds?: number[],
+    album_ids?: number[],
     /**
      * undefined
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * undefined
      */
-    videoId: number,
+    video_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetAlbumsByVideoParams {
     /**
      * undefined
      */
-    targetId?: number,
+    target_id?: number,
     /**
      * undefined
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * undefined
      */
-    videoId: number,
+    video_id: number,
     /**
      *
      */
@@ -5025,26 +4698,26 @@ export interface VideoGetAlbumsByVideoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetCommentsParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
      * '1' — to return an additional 'likes' field
      */
-    needLikes?: boolean,
+    need_likes?: boolean,
     /**
      * undefined
      */
-    startCommentId?: number,
+    start_comment_id?: number,
     /**
      * Offset needed to return a specific subset of comments.
      */
@@ -5054,7 +4727,7 @@ export interface VideoGetCommentsParams {
      */
     count?: number,
     /**
-     * Sort order:; 'asc' — oldest comment first; 'desc' — newest comment first
+     * Sort order: 'asc' — oldest comment first, 'desc' — newest comment first
      */
     sort?: string,
     /**
@@ -5064,38 +4737,38 @@ export interface VideoGetCommentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoCreateCommentParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
      * New comment text.
      */
     message?: string,
     /**
-     * List of objects attached to the comment, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media attachment:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — ID of the media attachment owner.; '<media_id>' — Media attachment ID. ; ; Example:; "photo100172_166443618,photo66748_265827614"
+     * List of objects attached to the comment, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media attachment owner. '<media_id>' — Media attachment ID. Example: "photo100172_166443618,photo66748_265827614"
      */
     attachments?: string[],
     /**
      * '1' — to post the comment from a community name (only if 'owner_id'<0)
      */
-    fromGroup?: boolean,
+    from_group?: boolean,
     /**
      *
      */
-    replyToComment?: number,
+    reply_to_comment?: number,
     /**
      * undefined
      */
-    stickerId?: number,
+    sticker_id?: number,
     /**
      * undefined
      */
@@ -5103,117 +4776,117 @@ export interface VideoCreateCommentParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoDeleteCommentParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * ID of the comment to be deleted.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoRestoreCommentParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * ID of the deleted comment.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoEditCommentParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * New comment text.
      */
     message?: string,
     /**
-     * List of objects attached to the comment, in the following format:; "<owner_id>_<media_id>,<owner_id>_<media_id>"; '' — Type of media attachment:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; '<owner_id>' — ID of the media attachment owner.; '<media_id>' — Media attachment ID. ; ; Example:; "photo100172_166443618,photo66748_265827614"
+     * List of objects attached to the comment, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, '<owner_id>' — ID of the media attachment owner. '<media_id>' — Media attachment ID. Example: "photo100172_166443618,photo66748_265827614"
      */
     attachments?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetTagsParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoPutTagParams {
     /**
      * ID of the user to be tagged.
      */
-    userId: number,
+    user_id: number,
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
      * Tag text.
      */
-    taggedName?: string,
+    tagged_name?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoRemoveTagParams {
     /**
      * Tag ID.
      */
-    tagId: number,
+    tag_id: number,
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetNewTagsParams {
@@ -5228,20 +4901,20 @@ export interface VideoGetNewTagsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoReportParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Video ID.
      */
-    videoId: number,
+    video_id: number,
     /**
-     * Reason for the complaint:; '0' – spam; '1' – child pornography; '2' – extremism; '3' – violence; '4' – drug propaganda; '5' – adult material; '6' – insult; abuse
+     * Reason for the complaint: '0' – spam, '1' – child pornography, '2' – extremism, '3' – violence, '4' – drug propaganda, '5' – adult material, '6' – insult, abuse
      */
     reason?: number,
     /**
@@ -5251,30 +4924,30 @@ export interface VideoReportParams {
     /**
      * (If the video was found in search results.) Search query string.
      */
-    searchQuery?: string,
+    search_query?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoReportCommentParams {
     /**
      * ID of the user or community that owns the video.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * ID of the comment being reported.
      */
-    commentId: number,
+    comment_id: number,
     /**
-     * Reason for the complaint: ; 0 – spam ; 1 – child pornography ; 2 – extremism ; 3 – violence ; 4 – drug propaganda ; 5 – adult material ; 6 – insult; abuse
+     * Reason for the complaint: , 0 – spam , 1 – child pornography , 2 – extremism , 3 – violence , 4 – drug propaganda , 5 – adult material , 6 – insult, abuse
      */
     reason?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetCatalogParams {
@@ -5285,7 +4958,7 @@ export interface VideoGetCatalogParams {
     /**
      * number of videos in each block.
      */
-    itemsCount?: number,
+    items_count?: number,
     /**
      * parameter for requesting the next results page. Value for transmitting here is returned in the 'next' field in a reply.
      */
@@ -5301,14 +4974,14 @@ export interface VideoGetCatalogParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoGetCatalogSectionParams {
     /**
      * 'id' value returned with a block by the '' method.
      */
-    sectionId: string,
+    section_id: string,
     /**
      * 'next' value returned with a block by the '' method.
      */
@@ -5324,29 +4997,29 @@ export interface VideoGetCatalogSectionParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface VideoHideCatalogSectionParams {
     /**
      * 'id' value returned with a block to hide by the '' method.
      */
-    sectionId: number,
+    section_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesGetParams {
     /**
      * Note IDs.
      */
-    noteIds?: number[],
+    note_ids?: number[],
     /**
      * Note owner ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Number of notes to return.
      */
@@ -5354,22 +5027,22 @@ export interface NotesGetParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesGetByIdParams {
     /**
      * Note ID.
      */
-    noteId: number,
+    note_id: number,
     /**
      * Note owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesAddParams {
@@ -5384,22 +5057,22 @@ export interface NotesAddParams {
     /**
      * undefined
      */
-    privacyView?: string[],
+    privacy_view?: string[],
     /**
      * undefined
      */
-    privacyComment?: string[],
+    privacy_comment?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesEditParams {
     /**
      * Note ID.
      */
-    noteId: number,
+    note_id: number,
     /**
      * Note title.
      */
@@ -5411,37 +5084,37 @@ export interface NotesEditParams {
     /**
      * undefined
      */
-    privacyView?: string[],
+    privacy_view?: string[],
     /**
      * undefined
      */
-    privacyComment?: string[],
+    privacy_comment?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesDeleteParams {
     /**
      * Note ID.
      */
-    noteId: number,
+    note_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesGetCommentsParams {
     /**
      * Note ID.
      */
-    noteId: number,
+    note_id: number,
     /**
      * Note owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Number of comments to return.
      */
@@ -5449,22 +5122,22 @@ export interface NotesGetCommentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesCreateCommentParams {
     /**
      * Note ID.
      */
-    noteId: number,
+    note_id: number,
     /**
      * Note owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
-     * ID of the user to whom the reply is addressed (if the comment is a reply to another comment).;
+     * ID of the user to whom the reply is addressed (if the comment is a reply to another comment).
      */
-    replyTo?: number,
+    reply_to?: number,
     /**
      * Comment text.
      */
@@ -5476,18 +5149,18 @@ export interface NotesCreateCommentParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesEditCommentParams {
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * Note owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * New comment text.
      */
@@ -5495,37 +5168,37 @@ export interface NotesEditCommentParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesDeleteCommentParams {
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * Note owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotesRestoreCommentParams {
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
      * Note owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PlacesAddParams {
@@ -5560,7 +5233,7 @@ export interface PlacesAddParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PlacesGetByIdParams {
@@ -5571,7 +5244,7 @@ export interface PlacesGetByIdParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PlacesSearchParams {
@@ -5592,7 +5265,7 @@ export interface PlacesSearchParams {
      */
     longitude: number,
     /**
-     * Radius of the search zone:; '1' — 100 m. (default); '2' — 800 m.; '3' — 6 km.; '4' — 50 km.
+     * Radius of the search zone: '1' — 100 m. (default), '2' — 800 m. '3' — 6 km. '4' — 50 km.
      */
     radius?: number,
     /**
@@ -5606,16 +5279,16 @@ export interface PlacesSearchParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PlacesCheckinParams {
     /**
      * Location ID.
      */
-    placeId?: number,
+    place_id?: number,
     /**
-     * Text of the comment on the check-in (255 characters maximum; line breaks not supported).
+     * Text of the comment on the check-in (255 characters maximum, line breaks not supported).
      */
     text?: string,
     /**
@@ -5627,9 +5300,9 @@ export interface PlacesCheckinParams {
      */
     longitude?: number,
     /**
-     * '1' — Check-in will be available only for friends.; '0' — Check-in will be available for all users (default).
+     * '1' — Check-in will be available only for friends. '0' — Check-in will be available for all users (default).
      */
-    friendsOnly?: boolean,
+    friends_only?: boolean,
     /**
      * List of services or websites (e.g., 'twitter', 'facebook') to which the check-in will be exported, if the user has set up the respective option.
      */
@@ -5637,7 +5310,7 @@ export interface PlacesCheckinParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PlacesGetCheckinsParams {
@@ -5656,7 +5329,7 @@ export interface PlacesGetCheckinsParams {
     /**
      * undefined
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Offset needed to return a specific subset of check-ins. (Ignored if 'timestamp' is not null.)
      */
@@ -5672,22 +5345,22 @@ export interface PlacesGetCheckinsParams {
     /**
      * '1' — to return only check-ins with set geographical coordinates. (Ignored if 'latitude' and 'longitude' are not set.)
      */
-    friendsOnly?: boolean,
+    friends_only?: boolean,
     /**
-     * '1' — to return location information with the check-ins. (Ignored if 'place' is not set.);
+     * '1' — to return location information with the check-ins. (Ignored if 'place' is not set.),
      */
-    needPlaces?: boolean,
+    need_places?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PlacesGetTypesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountGetCountersParams {
@@ -5698,14 +5371,14 @@ export interface AccountGetCountersParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountSetNameInMenuParams {
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * Application screen name.
      */
@@ -5713,7 +5386,7 @@ export interface AccountSetNameInMenuParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountSetOnlineParams {
@@ -5724,14 +5397,14 @@ export interface AccountSetOnlineParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountSetOfflineParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountLookupContactsParams {
@@ -5740,7 +5413,7 @@ export interface AccountLookupContactsParams {
      */
     contacts?: string[],
     /**
-     * String identifier of a service which contacts are used for searching. Possible values: ; * email; * phone; * twitter; * facebook; * odnoklassniki; * instagram; * google
+     * String identifier of a service which contacts are used for searching. Possible values: , * email, * phone, * twitter, * facebook, * odnoklassniki, * instagram, * google
      */
     service: string,
     /**
@@ -5750,7 +5423,7 @@ export interface AccountLookupContactsParams {
     /**
      * '1' – also return contacts found using this service before, '0' – return only contacts found using 'contacts' field.
      */
-    returnAll?: boolean,
+    return_all?: boolean,
     /**
      * Profile fields to return. Possible values: 'nickname, domain, sex, bdate, city, country, timezone, photo_50, photo_100, photo_200_orig, has_mobile, contacts, education, online, relation, last_seen, status, can_write_private_message, can_see_all_posts, can_post, universities'.
      */
@@ -5758,7 +5431,7 @@ export interface AccountLookupContactsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountRegisterDeviceParams {
@@ -5769,19 +5442,19 @@ export interface AccountRegisterDeviceParams {
     /**
      * String name of device model.
      */
-    deviceModel?: string,
+    device_model?: string,
     /**
      * Device year.
      */
-    deviceYear?: number,
+    device_year?: number,
     /**
      * Unique device ID.
      */
-    deviceId: string,
+    device_id: string,
     /**
      * String version of device operating system.
      */
-    systemVersion?: string,
+    system_version?: string,
     /**
      * Push settings in a [vk.com/dev/push_settings|special format].
      */
@@ -5789,33 +5462,33 @@ export interface AccountRegisterDeviceParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountUnregisterDeviceParams {
     /**
      * Unique device ID.
      */
-    deviceId?: string,
+    device_id?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountSetSilenceModeParams {
     /**
      * Unique device ID.
      */
-    deviceId?: string,
+    device_id?: string,
     /**
      * Time in seconds for what notifications should be disabled. '-1' to disable forever.
      */
     time?: number,
     /**
-     * Destination ID.; "For user:; 'User ID', e.g. '12345'.; ; For chat:; '2000000000' + 'Chat ID', e.g. '2000000001'.; ; For community:; '- Community ID', e.g. '-12345'.; "
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'Chat ID', e.g. '2000000001'. For community: '- Community ID', e.g. '-12345'. "
      */
-    peerId?: number,
+    peer_id?: number,
     /**
      * '1' — to enable sound in this dialog, '0' — to disable sound. Only if 'peer_id' contains user or community ID.
      */
@@ -5823,25 +5496,25 @@ export interface AccountSetSilenceModeParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountGetPushSettingsParams {
     /**
      * Unique device ID.
      */
-    deviceId?: string,
+    device_id?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountSetPushSettingsParams {
     /**
      * Unique device ID.
      */
-    deviceId: string,
+    device_id: string,
     /**
      * Push settings in a [vk.com/dev/push_settings|special format].
      */
@@ -5857,18 +5530,18 @@ export interface AccountSetPushSettingsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountGetAppPermissionsParams {
     /**
      * User ID whose settings information shall be got. By default: current user.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountGetActiveOffersParams {
@@ -5879,29 +5552,29 @@ export interface AccountGetActiveOffersParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountBanUserParams {
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountUnbanUserParams {
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountGetBannedParams {
@@ -5916,18 +5589,18 @@ export interface AccountGetBannedParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountGetInfoParams {
     /**
-     * Fields to return. Possible values:; *'country' — user country;; *'https_required' — is "HTTPS only" option enabled;; *'own_posts_default' — is "Show my posts only" option is enabled;; *'no_wall_replies' — are wall replies disabled or not;; *'intro' — is intro passed by user or not;; *'lang' — user language.; ; By default: all.
+     * Fields to return. Possible values: *'country' — user country,, *'https_required' — is "HTTPS only" option enabled,, *'own_posts_default' — is "Show my posts only" option is enabled,, *'no_wall_replies' — are wall replies disabled or not,, *'intro' — is intro passed by user or not,, *'lang' — user language. By default: all.
      */
     fields?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountSetInfoParams {
@@ -5942,92 +5615,92 @@ export interface AccountSetInfoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountChangePasswordParams {
     /**
-     * Session id received after the [vk.com/dev/auth.restore|auth.restore] method is executed.; (If the password is changed right after the access was restored)
+     * Session id received after the [vk.com/dev/auth.restore|auth.restore] method is executed. (If the password is changed right after the access was restored)
      */
-    restoreSid?: string,
+    restore_sid?: string,
     /**
-     * Hash received after a successful OAuth authorization with a code got by SMS.; (If the password is changed right after the access was restored)
+     * Hash received after a successful OAuth authorization with a code got by SMS. (If the password is changed right after the access was restored)
      */
-    changePasswordHash?: string,
+    change_password_hash?: string,
     /**
      * Current user password.
      */
-    oldPassword?: string,
+    old_password?: string,
     /**
      * New password that will be set as a current
      */
-    newPassword: string,
+    new_password: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountGetProfileInfoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AccountSaveProfileInfoParams {
     /**
      * User first name.
      */
-    firstName?: string,
+    first_name?: string,
     /**
      * User last name.
      */
-    lastName?: string,
+    last_name?: string,
     /**
      * User maiden name (female only)
      */
-    maidenName?: string,
+    maiden_name?: string,
     /**
      * User screen name.
      */
-    screenName?: string,
+    screen_name?: string,
     /**
      * ID of the name change request to be canceled. If this parameter is sent, all the others are ignored.
      */
-    cancelRequestId?: number,
+    cancel_request_id?: number,
     /**
-     * User sex. Possible values: ; * '1' – female;; * '2' – male.
+     * User sex. Possible values: , * '1' – female,, * '2' – male.
      */
     sex?: number,
     /**
-     * User relationship status. Possible values: ; * '1' – single;; * '2' – in a relationship;; * '3' – engaged;; * '4' – married;; * '5' – it's complicated;; * '6' – actively searching;; * '7' – in love;; * '0' – not specified.
+     * User relationship status. Possible values: , * '1' – single,, * '2' – in a relationship,, * '3' – engaged,, * '4' – married,, * '5' – it's complicated,, * '6' – actively searching,, * '7' – in love,, * '0' – not specified.
      */
     relation?: number,
     /**
      * ID of the relationship partner.
      */
-    relationPartnerId?: number,
+    relation_partner_id?: number,
     /**
      * User birth date, format: DD.MM.YYYY.
      */
     bdate?: string,
     /**
-     * Birth date visibility. Returned values: ; * '1' – show birth date;; * '2' – show only month and day;; * '0' – hide birth date.
+     * Birth date visibility. Returned values: , * '1' – show birth date,, * '2' – show only month and day,, * '0' – hide birth date.
      */
-    bdateVisibility?: number,
+    bdate_visibility?: number,
     /**
      * User home town.
      */
-    homeTown?: string,
+    home_town?: string,
     /**
      * User country.
      */
-    countryId?: number,
+    country_id?: number,
     /**
      * User city.
      */
-    cityId?: number,
+    city_id?: number,
     /**
      * Status text.
      */
@@ -6035,12 +5708,12 @@ export interface AccountSaveProfileInfoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesGetParams {
     /**
-     * '1' — to return outgoing messages; '0' — to return incoming messages (default)
+     * '1' — to return outgoing messages, '0' — to return incoming messages (default)
      */
     out?: boolean,
     /**
@@ -6052,24 +5725,90 @@ export interface MessagesGetParams {
      */
     count?: number,
     /**
+     * 8 - important messages
+     */
+    filter?: number,
+    /**
      * Maximum time since a message was sent, in seconds. To return messages without a time limitation, set as '0'.
      */
-    timeOffset?: number,
+    time_offset?: number,
     /**
-     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'.; "NOTE: Messages are not truncated by default. Messages are truncated by words."
+     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
      */
-    previewLength?: number,
+    preview_length?: number,
     /**
-     * ID of the message received before the message that will be returned last (provided that no more than 'count' messages were received before it; otherwise 'offset' parameter shall be used).
+     * ID of the message received before the message that will be returned last (provided that no more than 'count' messages were received before it, otherwise 'offset' parameter shall be used).
      */
-    lastMessageId?: number,
+    last_message_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesGetDialogsParams {
+    /**
+     * Offset needed to return a specific subset of conversations.
+     */
+    offset?: number,
+    /**
+     * Number of conversations to return.
+     */
+    count?: number,
+    /**
+     * ID of the message from what to return dialogs.
+     */
+    start_message_id?: number,
+    /**
+     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
+     */
+    preview_length?: number,
+    /**
+     * '1' — return conversations with unread messages only.
+     */
+    unread?: boolean,
+    /**
+     * '1' — return important conversations only.
+     */
+    important?: boolean,
+    /**
+     * '1' — return unanswered conversations only.
+     */
+    unanswered?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MessagesGetByIdParams {
+    /**
+     * Message IDs.
+     */
+    message_ids: number[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MessagesSearchParams {
+    /**
+     * Search query string.
+     */
+    q?: string,
+    /**
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
+     */
+    peer_id?: number,
+    /**
+     * Date to search message before in Unixtime.
+     */
+    date?: number,
+    /**
+     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
+     */
+    preview_length?: number,
     /**
      * Offset needed to return a specific subset of messages.
      */
@@ -6079,55 +5818,9 @@ export interface MessagesGetDialogsParams {
      */
     count?: number,
     /**
-     * ID of the message from what to return dialogs.
-     */
-    startMessageId?: number,
-    /**
-     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'.; "NOTE: Messages are not truncated by default. Messages are truncated by words."
-     */
-    previewLength?: number,
-    /**
-     * '1' — return unread messages only.
-     */
-    unread?: boolean,
-    /**
      * access token
      */
-    accessToken?: string
-}
-
-export interface MessagesGetByIdParams {
-    /**
-     * Message IDs.
-     */
-    messageIds: number[],
-    /**
-     * access token
-     */
-    accessToken?: string
-}
-
-export interface MessagesSearchParams {
-    /**
-     * Search query string.
-     */
-    q?: string,
-    /**
-     * Destination ID.; ; "For user:; 'User ID', e.g. '12345'.; ; For chat:; '2000000000' + 'chat_id', e.g. '2000000001'.; ; For community:; '- community ID', e.g. '-12345'.; "
-     */
-    peerId?: number,
-    /**
-     * Date to search message before in Unixtime.
-     */
-    date?: number,
-    /**
-     * Number of messages to return.
-     */
-    count?: number,
-    /**
-     * access token
-     */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesGetHistoryParams {
@@ -6142,38 +5835,38 @@ export interface MessagesGetHistoryParams {
     /**
      * ID of the user whose message history you want to return.
      */
-    userId?: string,
+    user_id?: number,
     /**
      * undefined
      */
-    peerId?: number,
+    peer_id?: number,
     /**
      * Starting message ID from which to return history.
      */
-    startMessageId?: number,
+    start_message_id?: number,
     /**
-     * Sort order:; '1' — return messages in chronological order.; '0' — return messages in reverse chronological order.
+     * Sort order: '1' — return messages in chronological order. '0' — return messages in reverse chronological order.
      */
     rev?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesGetHistoryAttachmentsParams {
     /**
-     * Peer ID.; ; "; For group chat:; '2000000000 + chat ID' ; ; For community:; '-community ID'"
+     * Peer ID. ", For group chat: '2000000000 + chat ID' , , For community: '-community ID'"
      */
-    peerId: number,
+    peer_id: number,
     /**
-     * Type of media files to return:; *'photo';; *'video';; *'audio';; *'doc';; *'link'.;;*'market'.;;*'wall'.;;*'share'
+     * Type of media files to return: *'photo',, *'video',, *'audio',, *'doc',, *'link'.,*'market'.,*'wall'.,*'share'
      */
-    mediaType?: string,
+    media_type?: string,
     /**
      * Message ID to start return results from.
      */
-    startFrom?: string,
+    start_from?: string,
     /**
      * Number of objects to return.
      */
@@ -6181,7 +5874,7 @@ export interface MessagesGetHistoryAttachmentsParams {
     /**
      * '1' — to return photo sizes in a
      */
-    photoSizes?: boolean,
+    photo_sizes?: boolean,
     /**
      * Additional profile [vk.com/dev/fields|fields] to return.
      */
@@ -6189,22 +5882,22 @@ export interface MessagesGetHistoryAttachmentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesSendParams {
     /**
      * User ID (by default — current user).
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Unique identifier to avoid resending the message.
      */
-    randomId?: number,
+    random_id?: number,
     /**
-     * Destination ID.; ; "For user:; 'User ID', e.g. '12345'.; ; For chat:; '2000000000' + 'chat_id', e.g. '2000000001'.; ; For community:; '- community ID', e.g. '-12345'.; "
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
      */
-    peerId?: number,
+    peer_id?: number,
     /**
      * User's short address (for example, 'illarionov').
      */
@@ -6212,11 +5905,11 @@ export interface MessagesSendParams {
     /**
      * ID of conversation the message will relate to.
      */
-    chatId?: number,
+    chat_id?: number,
     /**
      * IDs of message recipients (if new conversation shall be started).
      */
-    userIds?: number[],
+    user_ids?: number[],
     /**
      * (Required if 'attachments' is not set.) Text of the message.
      */
@@ -6230,17 +5923,17 @@ export interface MessagesSendParams {
      */
     long?: number,
     /**
-     * (Required if 'message' is not set.) List of objects attached to the message, separated by commas, in the following format:; "<owner_id>_<media_id>"; '' — Type of media attachment:; 'photo' — photo; 'video' — video; 'audio' — audio; 'doc' — document; 'wall' — wall post; '<owner_id>' — ID of the media attachment owner.; '<media_id>' — media attachment ID.; ; Example:; "photo100172_166443618"
+     * (Required if 'message' is not set.) List of objects attached to the message, separated by commas, in the following format: "<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, 'wall' — wall post, '<owner_id>' — ID of the media attachment owner. '<media_id>' — media attachment ID. Example: "photo100172_166443618"
      */
     attachment?: string,
     /**
-     * ID of forwarded messages, separated with a comma. Listed messages of the sender will be shown in the message body at the recipient's.; ; Example:; "123,431,544"
+     * ID of forwarded messages, separated with a comma. Listed messages of the sender will be shown in the message body at the recipient's. Example: "123,431,544"
      */
-    forwardMessages?: string,
+    forward_messages?: string,
     /**
      * Sticker id.
      */
-    stickerId?: number,
+    sticker_id?: number,
     /**
      * '1' if the message is a notification (for community messages).
      */
@@ -6248,14 +5941,14 @@ export interface MessagesSendParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesDeleteParams {
     /**
      * Message IDs.
      */
-    messageIds?: number[],
+    message_ids?: number[],
     /**
      * '1' — to mark message as spam.
      */
@@ -6263,90 +5956,120 @@ export interface MessagesDeleteParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesDeleteDialogParams {
     /**
      * User ID. To clear a chat history use 'chat_id'
      */
-    userId?: string,
+    user_id?: string,
     /**
-     * Destination ID.; ; "For user:; 'User ID', e.g. '12345'.; ; For chat:; '2000000000' + 'chat_id', e.g. '2000000001'.; ; For community:; '- community ID', e.g. '-12345'.; "
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
      */
-    peerId?: number,
+    peer_id?: number,
     /**
      * Offset needed to return a specific subset of messages.
      */
     offset?: number,
     /**
-     * Number of messages to delete.; "NOTE: If the number of messages exceeds the maximum, the method shall be called several times."
+     * Number of messages to delete. "NOTE: If the number of messages exceeds the maximum, the method shall be called several times."
      */
     count?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesRestoreParams {
     /**
      * ID of a previously-deleted message to restore.
      */
-    messageId: number,
+    message_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesMarkAsReadParams {
     /**
      * IDs of messages to mark as read.
      */
-    messageIds?: number[],
+    message_ids?: number[],
     /**
-     * Destination ID.; ; "For user:; 'User ID', e.g. '12345'.; ; For chat:; '2000000000' + 'chat_id', e.g. '2000000001'.; ; For community:; '- community ID', e.g. '-12345'.; "
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
      */
-    peerId?: string,
+    peer_id?: string,
     /**
      * Message ID to start from.
      */
-    startMessageId?: number,
+    start_message_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesMarkAsImportantParams {
     /**
      * IDs of messages to mark as important.
      */
-    messageIds?: number[],
+    message_ids?: number[],
     /**
-     * '1' — to add a star (mark as important); '0' — to remove the star
+     * '1' — to add a star (mark as important), '0' — to remove the star
      */
-    important?: number,
+    important?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
+}
+
+export interface MessagesMarkAsImportantDialogParams {
+    /**
+     * IDs of messages to mark as important.
+     */
+    peer_id?: number[],
+    /**
+     * '1' — to add a star (mark as important), '0' — to remove the star
+     */
+    important?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MessagesMarkAsUnansweredDialogParams {
+    /**
+     * IDs of messages to mark as important.
+     */
+    peer_id?: number[],
+    /**
+     * '1' — to add a star (mark as important), '0' — to remove the star
+     */
+    important?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
 }
 
 export interface MessagesGetLongPollServerParams {
     /**
-     * '1' — to use SSL.
+     * Long poll version
      */
-    useSsl?: boolean,
+    lp_version?: number,
     /**
      * '1' — to return the 'pts' field, needed for the [vk.com/dev/messages.getLongPollHistory|messages.getLongPollHistory] method.
      */
-    needPts?: boolean,
+    need_pts?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesGetLongPollHistoryParams {
@@ -6359,9 +6082,9 @@ export interface MessagesGetLongPollHistoryParams {
      */
     pts?: number,
     /**
-     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'.; "NOTE: Messages are not truncated by default. Messages are truncated by words."
+     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
      */
-    previewLength?: number,
+    preview_length?: number,
     /**
      * '1' — to return history with online users only.
      */
@@ -6373,49 +6096,49 @@ export interface MessagesGetLongPollHistoryParams {
     /**
      * Maximum number of events to return.
      */
-    eventsLimit?: number,
+    events_limit?: number,
     /**
      * Maximum number of messages to return.
      */
-    msgsLimit?: number,
+    msgs_limit?: number,
     /**
      * Maximum ID of the message among existing ones in the local copy. Both messages received with API methods (for example, , ), and data received from a Long Poll server (events with code 4) are taken into account.
      */
-    maxMsgId?: number,
+    max_msg_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesGetChatParams {
     /**
      * Chat ID.
      */
-    chatId?: number,
+    chat_id?: number,
     /**
      * Chat IDs.
      */
-    chatIds?: number[],
+    chat_ids?: number[],
     /**
-     * Profile fields to return.;
+     * Profile fields to return.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname:; 'nom' — nominative (default); 'gen' — genitive ; 'dat' — dative; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive , 'dat' — dative, 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesCreateChatParams {
     /**
      * IDs of the users to be added to the chat.
      */
-    userIds: number[],
+    user_ids: number[],
     /**
      * Chat title.
      */
@@ -6423,14 +6146,14 @@ export interface MessagesCreateChatParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesEditChatParams {
     /**
      * Chat ID.
      */
-    chatId: number,
+    chat_id: number,
     /**
      * New title of the chat.
      */
@@ -6438,49 +6161,49 @@ export interface MessagesEditChatParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesGetChatUsersParams {
     /**
      * Chat ID.
      */
-    chatId?: number,
+    chat_id?: number,
     /**
      * Chat IDs.
      */
-    chatIds?: number[],
+    chat_ids?: number[],
     /**
-     * Profile fields to return.;
+     * Profile fields to return.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname:; 'nom' — nominative (default); 'gen' — genitive; 'dat' — dative; 'acc' — accusative; 'ins' — instrumental; 'abl' — prepositional
+     * Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive, 'dat' — dative, 'acc' — accusative, 'ins' — instrumental, 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesSetActivityParams {
     /**
      * User ID.
      */
-    userId?: string,
+    user_id?: string,
     /**
      * 'typing' — user has started to type.
      */
     type?: string,
     /**
-     * Destination ID.; ; "For user:; 'User ID', e.g. '12345'.; ; For chat:; '2000000000' + 'chat_id', e.g. '2000000001'.; ; For community:; '- community ID', e.g. '-12345'.; "
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
      */
-    peerId?: number,
+    peer_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesSearchDialogsParams {
@@ -6493,54 +6216,54 @@ export interface MessagesSearchDialogsParams {
      */
     limit?: number,
     /**
-     * Profile fields to return.;
+     * Profile fields to return.
      */
     fields?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesAddChatUserParams {
     /**
      * Chat ID.
      */
-    chatId: number,
+    chat_id: number,
     /**
      * ID of the user to be added to the chat.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesRemoveChatUserParams {
     /**
      * Chat ID.
      */
-    chatId: number,
+    chat_id: number,
     /**
      * ID of the user to be removed from the chat.
      */
-    userId: string,
+    user_id: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesGetLastActivityParams {
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesSetChatPhotoParams {
@@ -6551,88 +6274,88 @@ export interface MessagesSetChatPhotoParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesDeleteChatPhotoParams {
     /**
      * Chat ID.
      */
-    chatId: number,
+    chat_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesDenyMessagesFromGroupParams {
     /**
      * Group ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesAllowMessagesFromGroupParams {
     /**
      * Group ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MessagesIsMessagesFromGroupAllowedParams {
     /**
      * Group ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * User ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedGetParams {
     /**
-     * Filters to apply:; 'post' — new wall posts; 'photo' — new photos; 'photo_tag' — new photo tags; 'wall_photo' — new wall photos; 'friend' — new friends; 'note' — new notes
+     * Filters to apply: 'post' — new wall posts, 'photo' — new photos, 'photo_tag' — new photo tags, 'wall_photo' — new wall photos, 'friend' — new friends, 'note' — new notes
      */
     filters?: string[],
     /**
      * '1' — to return news items from banned sources
      */
-    returnBanned?: boolean,
+    return_banned?: boolean,
     /**
      * Earliest timestamp (in Unix time) of a news item to return. By default, 24 hours ago.
      */
-    startTime?: number,
+    start_time?: number,
     /**
      * Latest timestamp (in Unix time) of a news item to return. By default, the current time.
      */
-    endTime?: number,
+    end_time?: number,
     /**
      * Maximum number of photos to return. By default, '5'.
      */
-    maxPhotos?: number,
+    max_photos?: number,
     /**
-     * Sources to obtain news from, separated by commas.; ; User IDs can be specified in formats '' or 'u' ; where '' is the user's friend ID.; ; Community IDs can be specified in formats '-' or 'g' ; where '' is the community ID.; ; If the parameter is not set, all of the user's friends and communities are returned, except for banned sources, which can be obtained with the [vk.com/dev/newsfeed.getBanned|newsfeed.getBanned] method.;
+     * Sources to obtain news from, separated by commas. User IDs can be specified in formats '' or 'u' , where '' is the user's friend ID. Community IDs can be specified in formats '-' or 'g' , where '' is the community ID. If the parameter is not set, all of the user's friends and communities are returned, except for banned sources, which can be obtained with the [vk.com/dev/newsfeed.getBanned|newsfeed.getBanned] method.
      */
-    sourceIds?: string,
+    source_ids?: string[],
     /**
-     * identifier required to get the next page of results. ; Value for this parameter is returned in 'next_from' field in a reply.
+     * identifier required to get the next page of results. Value for this parameter is returned in 'next_from' field in a reply.
      */
-    startFrom?: string,
+    start_from?: string,
     /**
-     * Number of news items to return (default 50; maximum 100). For auto feed, you can use the 'new_offset' parameter returned by this method.
+     * Number of news items to return (default 50, maximum 100). For auto feed, you can use the 'new_offset' parameter returned by this method.
      */
     count?: number,
     /**
@@ -6642,26 +6365,26 @@ export interface NewsfeedGetParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedGetRecommendedParams {
     /**
      * Earliest timestamp (in Unix time) of a news item to return. By default, 24 hours ago.
      */
-    startTime?: number,
+    start_time?: number,
     /**
      * Latest timestamp (in Unix time) of a news item to return. By default, the current time.
      */
-    endTime?: number,
+    end_time?: number,
     /**
      * Maximum number of photos to return. By default, '5'.
      */
-    maxPhotos?: number,
+    max_photos?: number,
     /**
      * 'new_from' value obtained in previous call.
      */
-    startFrom?: string,
+    start_from?: string,
     /**
      * Number of news items to return.
      */
@@ -6673,7 +6396,7 @@ export interface NewsfeedGetRecommendedParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedGetCommentsParams {
@@ -6682,25 +6405,25 @@ export interface NewsfeedGetCommentsParams {
      */
     count?: number,
     /**
-     * Filters to apply:; 'post' — new comments on wall posts; 'photo' — new comments on photos; 'video' — new comments on videos; 'topic' — new comments on discussions; 'note' — new comments on notes;
+     * Filters to apply: 'post' — new comments on wall posts, 'photo' — new comments on photos, 'video' — new comments on videos, 'topic' — new comments on discussions, 'note' — new comments on notes,
      */
     filters?: string[],
     /**
-     * Object ID, comments on repost of which shall be returned, e.g. 'wall1_45486'. (If the parameter is set, the 'filters' parameter is optional.);
+     * Object ID, comments on repost of which shall be returned, e.g. 'wall1_45486'. (If the parameter is set, the 'filters' parameter is optional.),
      */
     reposts?: string,
     /**
      * Earliest timestamp (in Unix time) of a comment to return. By default, 24 hours ago.
      */
-    startTime?: number,
+    start_time?: number,
     /**
      * Latest timestamp (in Unix time) of a comment to return. By default, the current time.
      */
-    endTime?: number,
+    end_time?: number,
     /**
      * Identificator needed to return the next page with results. Value for this parameter returns in 'next_from' field.
      */
-    startFrom?: string,
+    start_from?: string,
     /**
      * Additional fields of [vk.com/dev/fields|profiles] and [vk.com/dev/fields_groups|communities] to return.
      */
@@ -6708,22 +6431,22 @@ export interface NewsfeedGetCommentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedGetMentionsParams {
     /**
      * Owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
-     * Earliest timestamp (in Unix time) of a post to return. By default, 24 hours ago.;
+     * Earliest timestamp (in Unix time) of a post to return. By default, 24 hours ago.
      */
-    startTime?: number,
+    start_time?: number,
     /**
-     * Latest timestamp (in Unix time) of a post to return. By default, the current time.;
+     * Latest timestamp (in Unix time) of a post to return. By default, the current time.
      */
-    endTime?: number,
+    end_time?: number,
     /**
      * Offset needed to return a specific subset of posts.
      */
@@ -6735,7 +6458,7 @@ export interface NewsfeedGetMentionsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedGetBannedParams {
@@ -6744,85 +6467,85 @@ export interface NewsfeedGetBannedParams {
      */
     extended?: boolean,
     /**
-     * Profile fields to return.; ;
+     * Profile fields to return.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname:; 'nom' — nominative (default); 'gen' — genitive ; 'dat' — dative; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive , 'dat' — dative, 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedAddBanParams {
     /**
      * undefined
      */
-    userIds?: number[],
+    user_ids?: number[],
     /**
      * undefined
      */
-    groupIds?: number[],
+    group_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedDeleteBanParams {
     /**
      * undefined
      */
-    userIds?: number[],
+    user_ids?: number[],
     /**
      * undefined
      */
-    groupIds?: number[],
+    group_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedIgnoreItemParams {
     /**
-     * Item type. Possible values:; *'wall' – post on the wall;; *'tag' – tag on a photo;; *'profilephoto' – profile photo;; *'video' – video;; *'audio' – audio.
+     * Item type. Possible values: *'wall' – post on the wall,, *'tag' – tag on a photo,, *'profilephoto' – profile photo,, *'video' – video,, *'audio' – audio.
      */
     type: string,
     /**
-     * Item owner's identifier (user or community); "Note that community id must be negative. ; 'owner_id=1' – user ; 'owner_id=-1' – community "
+     * Item owner's identifier (user or community), "Note that community id must be negative. 'owner_id=1' – user , 'owner_id=-1' – community "
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item identifier
      */
-    itemId: number,
+    item_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedUnignoreItemParams {
     /**
-     * Item type. Possible values:; *'wall' – post on the wall;; *'tag' – tag on a photo;; *'profilephoto' – profile photo;; *'video' – video;; *'audio' – audio.
+     * Item type. Possible values: *'wall' – post on the wall,, *'tag' – tag on a photo,, *'profilephoto' – profile photo,, *'video' – video,, *'audio' – audio.
      */
     type: string,
     /**
-     * Item owner's identifier (user or community); "Note that community id must be negative. ; 'owner_id=1' – user ; 'owner_id=-1' – community "
+     * Item owner's identifier (user or community), "Note that community id must be negative. 'owner_id=1' – user , 'owner_id=-1' – community "
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item identifier
      */
-    itemId: number,
+    item_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedSearchParams {
@@ -6839,25 +6562,25 @@ export interface NewsfeedSearchParams {
      */
     count?: number,
     /**
-     * Geographical latitude point (in degrees, -90 to 90) within which to search.;
+     * Geographical latitude point (in degrees, -90 to 90) within which to search.
      */
     latitude?: number,
     /**
-     * Geographical longitude point (in degrees, -180 to 180) within which to search.;
+     * Geographical longitude point (in degrees, -180 to 180) within which to search.
      */
     longitude?: number,
     /**
      * Earliest timestamp (in Unix time) of a news item to return. By default, 24 hours ago.
      */
-    startTime?: number,
+    start_time?: number,
     /**
      * Latest timestamp (in Unix time) of a news item to return. By default, the current time.
      */
-    endTime?: number,
+    end_time?: number,
     /**
      * undefined
      */
-    startFrom?: string,
+    start_from?: string,
     /**
      * Additional fields of [vk.com/dev/fields|profiles] and [vk.com/dev/fields_groups|communities] to return.
      */
@@ -6865,25 +6588,29 @@ export interface NewsfeedSearchParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedGetListsParams {
     /**
      * numeric list identifiers.
      */
-    listIds?: number[],
+    list_ids?: number[],
+    /**
+     * Return additional list info
+     */
+    extended?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedSaveListParams {
     /**
      * numeric list identifier (if not sent, will be set automatically).
      */
-    listId?: number,
+    list_id?: number,
     /**
      * list name.
      */
@@ -6891,45 +6618,45 @@ export interface NewsfeedSaveListParams {
     /**
      * users and communities identifiers to be added to the list. Community identifiers must be negative numbers.
      */
-    sourceIds?: number[],
+    source_ids?: number[],
     /**
      * reposts display on and off ('1' is for off).
      */
-    noReposts?: boolean,
+    no_reposts?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedDeleteListParams {
     /**
      * undefined
      */
-    listId: number,
+    list_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedUnsubscribeParams {
     /**
-     * Type of object from which to unsubscribe:; 'note' — note; 'photo' — photo; 'post' — post on user wall or community wall; 'topic' — topic; 'video' — video
+     * Type of object from which to unsubscribe: 'note' — note, 'photo' — photo, 'post' — post on user wall or community wall, 'topic' — topic, 'video' — video
      */
     type: string,
     /**
      * Object owner ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Object ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NewsfeedGetSuggestedSourcesParams {
@@ -6952,36 +6679,36 @@ export interface NewsfeedGetSuggestedSourcesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LikesGetListParams {
     /**
-     * ; Object type:; 'post' — post on user or community wall; 'comment' — comment on a wall post; 'photo' — photo; 'audio' — audio; 'video' — video; 'note' — note; 'photo_comment' — comment on the photo; 'video_comment' — comment on the video; 'topic_comment' — comment in the discussion; 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
+     * , Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
      */
     type: string,
     /**
-     * ID of the user, community, or application that owns the object. If the 'type' parameter is set as 'sitepage', the application ID is passed as 'owner_id'. Use negative value for a community id. If the 'type' parameter is not set, the 'owner_id' is assumed to be either the current user or the same application ID as if the 'type' parameter was set to 'sitepage'.; ;
+     * ID of the user, community, or application that owns the object. If the 'type' parameter is set as 'sitepage', the application ID is passed as 'owner_id'. Use negative value for a community id. If the 'type' parameter is not set, the 'owner_id' is assumed to be either the current user or the same application ID as if the 'type' parameter was set to 'sitepage'.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Object ID. If 'type' is set as 'sitepage', 'item_id' can include the 'page_id' parameter value used during initialization of the [vk.com/dev/Like|Like widget].
      */
-    itemId?: number,
+    item_id?: number,
     /**
      * URL of the page where the [vk.com/dev/Like|Like widget] is installed. Used instead of the 'item_id' parameter.
      */
-    pageUrl?: string,
+    page_url?: string,
     /**
-     * Filters to apply:; 'likes' — returns information about all users who liked the object (default); 'copies' — returns information only about users who told their friends about the object
+     * Filters to apply: 'likes' — returns information about all users who liked the object (default), 'copies' — returns information only about users who told their friends about the object
      */
     filter?: string,
     /**
-     * Specifies which users are returned:; '1' — to return only the current user's friends; '0' — to return all users (default)
+     * Specifies which users are returned: '1' — to return only the current user's friends, '0' — to return all users (default)
      */
-    friendsOnly?: boolean,
+    friends_only?: boolean,
     /**
-     * Specifies whether extended information will be returned.; '1' — to return extended information about users and communities from the 'Likes' list; '0' — to return no additional information (default)
+     * Specifies whether extended information will be returned. '1' — to return extended information about users and communities from the 'Likes' list, '0' — to return no additional information (default)
      */
     extended?: boolean,
     /**
@@ -6989,190 +6716,190 @@ export interface LikesGetListParams {
      */
     offset?: number,
     /**
-     * Number of user IDs to return (maximum '1000').; Default is '100' if 'friends_only' is set to '0'; otherwise, the default is '10' if 'friends_only' is set to '1'.;
+     * Number of user IDs to return (maximum '1000'). Default is '100' if 'friends_only' is set to '0', otherwise, the default is '10' if 'friends_only' is set to '1'.
      */
     count?: number,
     /**
      * undefined
      */
-    skipOwn?: boolean,
+    skip_own?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LikesAddParams {
     /**
-     * Object type:; 'post' — post on user or community wall; 'comment' — comment on a wall post; 'photo' — photo; 'audio' — audio; 'video' — video; 'note' — note; 'photo_comment' — comment on the photo; 'video_comment' — comment on the video; 'topic_comment' — comment in the discussion; 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
+     * Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
      */
     type: string,
     /**
      * ID of the user or community that owns the object.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Object ID.
      */
-    itemId: number,
+    item_id: number,
     /**
-     * Access key required for an object owned by a private entity.;
+     * Access key required for an object owned by a private entity.
      */
-    accessKey?: string,
+    access_key?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LikesDeleteParams {
     /**
-     * Object type:; 'post' — post on user or community wall; 'comment' — comment on a wall post; 'photo' — photo; 'audio' — audio; 'video' — video; 'note' — note; 'photo_comment' — comment on the photo; 'video_comment' — comment on the video; 'topic_comment' — comment in the discussion; 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
+     * Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
      */
     type: string,
     /**
      * ID of the user or community that owns the object.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Object ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface LikesIsLikedParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
-     * Object type:; 'post' — post on user or community wall; 'comment' — comment on a wall post; 'photo' — photo; 'audio' — audio; 'video' — video; 'note' — note; 'photo_comment' — comment on the photo; 'video_comment' — comment on the video; 'topic_comment' — comment in the discussion
+     * Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion
      */
     type: string,
     /**
      * ID of the user or community that owns the object.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Object ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PollsGetByIdParams {
     /**
      * ID of the user or community that owns the poll. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
-     * '1' – poll is in a board, '0' – poll is on a wall. ; '0' by default.
+     * '1' – poll is in a board, '0' – poll is on a wall. '0' by default.
      */
-    isBoard?: boolean,
+    is_board?: boolean,
     /**
      * Poll ID.
      */
-    pollId: number,
+    poll_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PollsAddVoteParams {
     /**
      * ID of the user or community that owns the poll. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Poll ID.
      */
-    pollId: number,
+    poll_id: number,
     /**
      * Answer ID.
      */
-    answerId: number,
+    answer_id: number,
     /**
      * undefined
      */
-    isBoard?: boolean,
+    is_board?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PollsDeleteVoteParams {
     /**
      * ID of the user or community that owns the poll. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Poll ID.
      */
-    pollId: number,
+    poll_id: number,
     /**
      * Answer ID.
      */
-    answerId: number,
+    answer_id: number,
     /**
      * undefined
      */
-    isBoard?: boolean,
+    is_board?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PollsGetVotersParams {
     /**
      * ID of the user or community that owns the poll. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * Poll ID.
      */
-    pollId: number,
+    poll_id: number,
     /**
      * Answer IDs.
      */
-    answerIds: number[],
+    answer_ids: number[],
     /**
      * undefined
      */
-    isBoard?: boolean,
+    is_board?: boolean,
     /**
-     * '1' — to return only current user's friends; '0' — to return all users (default);
+     * '1' — to return only current user's friends, '0' — to return all users (default),
      */
-    friendsOnly?: boolean,
+    friends_only?: boolean,
     /**
-     * Offset needed to return a specific subset of voters.; '0' — (default)
+     * Offset needed to return a specific subset of voters. '0' — (default)
      */
     offset?: number,
     /**
-     * Number of user IDs to return (if the 'friends_only' parameter is not set, maximum '1000'; otherwise '10').; '100' — (default)
+     * Number of user IDs to return (if the 'friends_only' parameter is not set, maximum '1000', otherwise '10'). '100' — (default)
      */
     count?: number,
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate (birthdate)', 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online', 'counters'.;
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate (birthdate)', 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'rate', 'contacts', 'education', 'online', 'counters'.
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname: ; 'nom' — nominative (default) ; 'gen' — genitive ; 'dat' — dative ; 'acc' — accusative ; 'ins' — instrumental ; 'abl' — prepositional
+     * Case for declension of user name and surname: , 'nom' — nominative (default) , 'gen' — genitive , 'dat' — dative , 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PollsCreateParams {
@@ -7181,52 +6908,52 @@ export interface PollsCreateParams {
      */
     question?: string,
     /**
-     * '1' – anonymous poll, participants list is hidden;; '0' – public poll, participants list is available;; Default value is '0'.
+     * '1' – anonymous poll, participants list is hidden,, '0' – public poll, participants list is available,, Default value is '0'.
      */
-    isAnonymous?: boolean,
+    is_anonymous?: boolean,
     /**
      * If a poll will be added to a communty it is required to send a negative group identifier. Current user by default.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
-     * available answers list, for example:; " ["yes","no","maybe"]"; There can be from 1 to 10 answers.
+     * available answers list, for example: " ["yes","no","maybe"]", There can be from 1 to 10 answers.
      */
-    addAnswers?: string,
+    add_answers?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface PollsEditParams {
     /**
      * poll owner id
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * edited poll's id
      */
-    pollId: number,
+    poll_id: number,
     /**
      * new question text
      */
     question?: string,
     /**
-     * answers list, for example: ; "["yes","no","maybe"]"
+     * answers list, for example: , "["yes","no","maybe"]"
      */
-    addAnswers?: string,
+    add_answers?: string,
     /**
-     * object containing answers that need to be edited;; key – answer id, value – new answer text.; Example:; {"382967099":"option1", "382967103":"option2"}"
+     * object containing answers that need to be edited,, key – answer id, value – new answer text. Example: {"382967099":"option1", "382967103":"option2"}"
      */
-    editAnswers?: string,
+    edit_answers?: string,
     /**
-     * list of answer ids to be deleted. For example:; "[382967099, 382967103]"
+     * list of answer ids to be deleted. For example: "[382967099, 382967103]"
      */
-    deleteAnswers?: string,
+    delete_answers?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsGetParams {
@@ -7241,44 +6968,44 @@ export interface DocsGetParams {
     /**
      * ID of the user or community that owns the documents. Use a negative value to designate a community ID.
      */
-    ownerId?: number,
+    owner_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsGetByIdParams {
     /**
-     * Document IDs. Example: ; "66748_91488,66748_91455";
+     * Document IDs. Example: , "66748_91488,66748_91455",
      */
     docs: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsGetUploadServerParams {
     /**
      * Community ID (if the document will be uploaded to the community).
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsGetWallUploadServerParams {
     /**
      * Community ID (if the document will be uploaded to the community).
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsSaveParams {
@@ -7297,52 +7024,52 @@ export interface DocsSaveParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsDeleteParams {
     /**
      * ID of the user or community that owns the document. Use a negative value to designate a community ID.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Document ID.
      */
-    docId: number,
+    doc_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsAddParams {
     /**
      * ID of the user or community that owns the document. Use a negative value to designate a community ID.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Document ID.
      */
-    docId: number,
+    doc_id: number,
     /**
      * Access key. This parameter is required if 'access_key' was returned with the document's data.
      */
-    accessKey?: string,
+    access_key?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsGetTypesParams {
     /**
      * ID of the user or community that owns the documents. Use a negative value to designate a community ID.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsSearchParams {
@@ -7350,6 +7077,10 @@ export interface DocsSearchParams {
      * Search query string.
      */
     q: string,
+    /**
+     * undefined
+     */
+    search_own?: boolean,
     /**
      * Number of results to return.
      */
@@ -7361,18 +7092,18 @@ export interface DocsSearchParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DocsEditParams {
     /**
      * User ID or community ID. Use a negative value to designate a community ID.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Document ID.
      */
-    docId: number,
+    doc_id: number,
     /**
      * Document title.
      */
@@ -7384,7 +7115,7 @@ export interface DocsEditParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveGetUsersParams {
@@ -7399,7 +7130,7 @@ export interface FaveGetUsersParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveGetPhotosParams {
@@ -7414,11 +7145,11 @@ export interface FaveGetPhotosParams {
     /**
      * '1' — to return photo sizes in a [vk.com/dev/photo_sizes|special format].
      */
-    photoSizes?: boolean,
+    photo_sizes?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveGetPostsParams {
@@ -7431,13 +7162,13 @@ export interface FaveGetPostsParams {
      */
     count?: number,
     /**
-     * '1' — to return additional 'wall', 'profiles', and 'groups' fields.; ; By default: '0'.
+     * '1' — to return additional 'wall', 'profiles', and 'groups' fields. By default: '0'.
      */
     extended?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveGetVideosParams {
@@ -7456,7 +7187,7 @@ export interface FaveGetVideosParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveGetLinksParams {
@@ -7471,12 +7202,12 @@ export interface FaveGetLinksParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveGetMarketItemsParams {
     /**
-     * Number of results to return. ;
+     * Number of results to return.
      */
     count?: number,
     /**
@@ -7486,51 +7217,51 @@ export interface FaveGetMarketItemsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveAddUserParams {
     /**
      * Profile ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveRemoveUserParams {
     /**
      * Profile ID.
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveAddGroupParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveRemoveGroupParams {
     /**
      * Community ID.
      */
-    groupId: number,
+    group_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveAddLinkParams {
@@ -7545,18 +7276,18 @@ export interface FaveAddLinkParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface FaveRemoveLinkParams {
     /**
      * Link ID (can be obtained by [vk.com/dev/faves.getLinks|faves.getLinks] method).
      */
-    linkId: string,
+    link_id: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotificationsGetParams {
@@ -7567,75 +7298,75 @@ export interface NotificationsGetParams {
     /**
      * undefined
      */
-    startFrom?: string,
+    start_from?: string,
     /**
-     * Type of notifications to return:; 'wall' — wall posts; 'mentions' — mentions in wall posts, comments, or topics; 'comments' — comments to wall posts, photos, and videos; 'likes' — likes; 'reposted' — wall posts that are copied from the current user's wall; 'followers' — new followers; 'friends' — accepted friend requests
+     * Type of notifications to return: 'wall' — wall posts, 'mentions' — mentions in wall posts, comments, or topics, 'comments' — comments to wall posts, photos, and videos, 'likes' — likes, 'reposted' — wall posts that are copied from the current user's wall, 'followers' — new followers, 'friends' — accepted friend requests
      */
     filters?: string[],
     /**
      * Earliest timestamp (in Unix time) of a notification to return. By default, 24 hours ago.
      */
-    startTime?: number,
+    start_time?: number,
     /**
      * Latest timestamp (in Unix time) of a notification to return. By default, the current time.
      */
-    endTime?: number,
+    end_time?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface NotificationsMarkAsViewedParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface StatsGetParams {
     /**
      * Community ID.
      */
-    groupId?: number,
+    group_id?: number,
     /**
      * Application ID.
      */
-    appId?: number,
+    app_id?: number,
     /**
      * Latest datestamp (in Unix time) of statistics to return.
      */
-    dateFrom?: string,
+    date_from?: string,
     /**
      * End datestamp (in Unix time) of statistics to return.
      */
-    dateTo?: string,
+    date_to?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface StatsTrackVisitorParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface StatsGetPostReachParams {
     /**
      * post owner community id. Specify with "-" sign.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * wall post id. Note that stats are available only for '300' last (newest) posts on a community wall.
      */
-    postId: number,
+    post_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SearchGetHintsParams {
@@ -7643,6 +7374,10 @@ export interface SearchGetHintsParams {
      * Search query string.
      */
     q?: string,
+    /**
+     * Offset for querying specific result subset
+     */
+    offset?: number,
     /**
      * Maximum number of results to return.
      */
@@ -7654,16 +7389,16 @@ export interface SearchGetHintsParams {
     /**
      *
      */
-    searchGlobal?: boolean,
+    search_global?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AppsGetCatalogParams {
     /**
-     * Sort order:; 'popular_today' — popular for one day (default); 'visitors' — by visitors number ; 'create_date' — by creation date; 'growth_rate' — by growth rate; 'popular_week' — popular for one week
+     * Sort order: 'popular_today' — popular for one day (default), 'visitors' — by visitors number , 'create_date' — by creation date, 'growth_rate' — by growth rate, 'popular_week' — popular for one week
      */
     sort?: string,
     /**
@@ -7679,13 +7414,13 @@ export interface AppsGetCatalogParams {
      */
     platform?: string,
     /**
-     * '1' — to return additional fields 'screenshots', 'MAU', 'catalog_position', and 'international'. If set, 'count' must be less than or equal to '100'. ; '0' — not to return additional fields (default).
+     * '1' — to return additional fields 'screenshots', 'MAU', 'catalog_position', and 'international'. If set, 'count' must be less than or equal to '100'. '0' — not to return additional fields (default).
      */
     extended?: boolean,
     /**
      * undefined
      */
-    returnFriends?: boolean,
+    return_friends?: boolean,
     /**
      * undefined
      */
@@ -7693,7 +7428,7 @@ export interface AppsGetCatalogParams {
     /**
      * undefined
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * Search query string.
      */
@@ -7701,7 +7436,7 @@ export interface AppsGetCatalogParams {
     /**
      * undefined
      */
-    genreId?: number,
+    genre_id?: number,
     /**
      * 'installed' — to return list of installed apps (only for mobile platform).
      */
@@ -7709,47 +7444,47 @@ export interface AppsGetCatalogParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AppsGetParams {
     /**
      * Application ID
      */
-    appId?: number,
+    app_id?: number,
     /**
      * List of application ID
      */
-    appIds?: string[],
+    app_ids?: string[],
     /**
-     * platform. Possible values:; *'ios' — iOS;; *'android' — Android;; *'winphone' — Windows Phone;; *'web' — приложения на vk.com.; By default: 'web'.
+     * platform. Possible values: *'ios' — iOS,, *'android' — Android,, *'winphone' — Windows Phone,, *'web' — приложения на vk.com. By default: 'web'.
      */
     platform?: string,
     /**
-     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'contacts', 'education', 'online', 'counters', 'relation', 'last_seen', 'activity', 'can_write_private_message', 'can_see_all_posts', 'can_post', 'universities'; (only if return_friends - 1)
+     * Profile fields to return. Sample values: 'nickname', 'screen_name', 'sex', 'bdate' (birthdate), 'city', 'country', 'timezone', 'photo', 'photo_medium', 'photo_big', 'has_mobile', 'contacts', 'education', 'online', 'counters', 'relation', 'last_seen', 'activity', 'can_write_private_message', 'can_see_all_posts', 'can_post', 'universities', (only if return_friends - 1)
      */
     fields?: string[],
     /**
-     * Case for declension of user name and surname:; 'nom' — nominative (default);; 'gen' — genitive;; 'dat' — dative;; 'acc' — accusative;; 'ins' — instrumental;; 'abl' — prepositional.; ; (only if 'return_friends' = '1')
+     * Case for declension of user name and surname: 'nom' — nominative (default),, 'gen' — genitive,, 'dat' — dative,, 'acc' — accusative,, 'ins' — instrumental,, 'abl' — prepositional. (only if 'return_friends' = '1')
      */
-    nameCase?: string,
+    name_case?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AppsSendRequestParams {
     /**
      * id of the user to send a request
      */
-    userId: number,
+    user_id: number,
     /**
      * request text
      */
     text?: string,
     /**
-     * request type. Values:; 'invite' – if the request is sent to a user who does not have the app installed;; 'request' – if a user has already installed the app
+     * request type. Values: 'invite' – if the request is sent to a user who does not have the app installed,, 'request' – if a user has already installed the app
      */
     type?: string,
     /**
@@ -7767,14 +7502,14 @@ export interface AppsSendRequestParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AppsDeleteAppRequestsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AppsGetFriendsListParams {
@@ -7783,7 +7518,7 @@ export interface AppsGetFriendsListParams {
      */
     count?: number,
     /**
-     * List type. Possible values:; * 'invite' — available for invites (don't play the game);; * 'request' — available for request (play the game).; ; By default: 'invite'.
+     * List type. Possible values: * 'invite' — available for invites (don't play the game),, * 'request' — available for request (play the game). By default: 'invite'.
      */
     type?: string,
     /**
@@ -7793,16 +7528,16 @@ export interface AppsGetFriendsListParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AppsGetLeaderboardParams {
     /**
-     * Leaderboard type. Possible values:; *'level' — by level;; *'points' — by mission points;; *'score' — by score ().
+     * Leaderboard type. Possible values: *'level' — by level,, *'points' — by mission points,, *'score' — by score ().
      */
     type: string,
     /**
-     * Rating type. Possible values:; *'1' — global rating among all players;; *'0' — rating among user friends.
+     * Rating type. Possible values: *'1' — global rating among all players,, *'0' — rating among user friends.
      */
     global?: boolean,
     /**
@@ -7812,37 +7547,37 @@ export interface AppsGetLeaderboardParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureAddAppEventParams {
     /**
      * ID of a user to save the data
      */
-    userId: number,
+    user_id: number,
     /**
-     * there are 2 default activities: ; * 1 – level. Works similar to ;; * 2 – points, saves points amount; Any other value is for saving completed missions
+     * there are 2 default activities: , * 1 – level. Works similar to ,, * 2 – points, saves points amount, Any other value is for saving completed missions
      */
-    activityId: number,
+    activity_id: number,
     /**
-     * depends on activity_id:; * 1 – number, current level number;; * 2 – number, current user's points amount; ; Any other value is ignored
+     * depends on activity_id: * 1 – number, current level number,, * 2 – number, current user's points amount, , Any other value is ignored
      */
     value?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AppsGetScoreParams {
     /**
      * undefined
      */
-    userId: number,
+    user_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface UtilsCheckLinkParams {
@@ -7853,32 +7588,100 @@ export interface UtilsCheckLinkParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
+}
+
+export interface UtilsDeleteFromLastShortenedParams {
+    /**
+     * Link key (characters after vk.cc/).
+     */
+    key: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface UtilsGetLastShortenedLinksParams {
+    /**
+     * Number of links to return.
+     */
+    count?: number,
+    /**
+     * Offset needed to return a specific subset of links.
+     */
+    offset?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface UtilsGetLinkStatsParams {
+    /**
+     * Link key (characters after vk.cc/).
+     */
+    key: string,
+    /**
+     * Access key for private link stats.
+     */
+    access_key?: string,
+    /**
+     * Interval.
+     */
+    interval?: string,
+    /**
+     * Number of intervals to return.
+     */
+    intervals_count?: number,
+    /**
+     * 1 — to return extended stats data (sex, age, geo). 0 — to return views number only.
+     */
+    extended?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface UtilsGetShortLinkParams {
+    /**
+     * URL to be shortened.
+     */
+    url: string,
+    /**
+     * 1 — private stats, 0 — public stats.
+     */
+    private?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
 }
 
 export interface UtilsResolveScreenNameParams {
     /**
      * Screen name of the user, community (e.g., 'apiclub,' 'andrew', or 'rules_of_war'), or application.
      */
-    screenName: string,
+    screen_name: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface UtilsGetServerTimeParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetCountriesParams {
     /**
-     * '1' — to return a full list of all countries; '0' — to return a list of countries near the current user's country (default).;
+     * '1' — to return a full list of all countries, '0' — to return a list of countries near the current user's country (default).
      */
-    needAll?: boolean,
+    need_all?: boolean,
     /**
      * Country codes in [vk.com/dev/country_codes|ISO 3166-1 alpha-2] standard.
      */
@@ -7894,14 +7697,14 @@ export interface DatabaseGetCountriesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetRegionsParams {
     /**
      * Country ID, received in [vk.com/dev/database.getCountries|database.getCountries] method.
      */
-    countryId: number,
+    country_id: number,
     /**
      * Search query.
      */
@@ -7917,48 +7720,48 @@ export interface DatabaseGetRegionsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetStreetsByIdParams {
     /**
      * Street IDs.
      */
-    streetIds: number[],
+    street_ids: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetCountriesByIdParams {
     /**
      * Country IDs.
      */
-    countryIds?: number[],
+    country_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetCitiesParams {
     /**
      * Country ID.
      */
-    countryId: number,
+    country_id: number,
     /**
      * Region ID.
      */
-    regionId?: number,
+    region_id?: number,
     /**
      * Search query.
      */
     q?: string,
     /**
-     * '1' — to return all cities in the country; '0' — to return major cities in the country (default);
+     * '1' — to return all cities in the country, '0' — to return major cities in the country (default),
      */
-    needAll?: boolean,
+    need_all?: boolean,
     /**
      * Offset needed to return a specific subset of cities.
      */
@@ -7970,18 +7773,18 @@ export interface DatabaseGetCitiesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetCitiesByIdParams {
     /**
      * City IDs.
      */
-    cityIds?: number[],
+    city_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetUniversitiesParams {
@@ -7992,11 +7795,11 @@ export interface DatabaseGetUniversitiesParams {
     /**
      * Country ID.
      */
-    countryId?: number,
+    country_id?: number,
     /**
      * City ID.
      */
-    cityId?: number,
+    city_id?: number,
     /**
      * Offset needed to return a specific subset of universities.
      */
@@ -8008,7 +7811,7 @@ export interface DatabaseGetUniversitiesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetSchoolsParams {
@@ -8019,7 +7822,7 @@ export interface DatabaseGetSchoolsParams {
     /**
      * City ID.
      */
-    cityId: number,
+    city_id: number,
     /**
      * Offset needed to return a specific subset of schools.
      */
@@ -8031,25 +7834,25 @@ export interface DatabaseGetSchoolsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetSchoolClassesParams {
     /**
      * Country ID.
      */
-    countryId?: number,
+    country_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetFacultiesParams {
     /**
      * University ID.
      */
-    universityId: number,
+    university_id: number,
     /**
      * Offset needed to return a specific subset of faculties.
      */
@@ -8061,14 +7864,14 @@ export interface DatabaseGetFacultiesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface DatabaseGetChairsParams {
     /**
      * id of the faculty to get chairs from
      */
-    facultyId: number,
+    faculty_id: number,
     /**
      * offset required to get a certain subset of chairs
      */
@@ -8080,14 +7883,14 @@ export interface DatabaseGetChairsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface GiftsGetParams {
     /**
      * User ID.
      */
-    userId?: number,
+    user_id?: number,
     /**
      * Number of gifts to return.
      */
@@ -8099,32 +7902,32 @@ export interface GiftsGetParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetAccountsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetClientsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsCreateClientsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array of objects that describe created campaigns. Description of 'client_specification' objects see below.
      */
@@ -8132,14 +7935,14 @@ export interface AdsCreateClientsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsUpdateClientsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array of objects that describe changes in clients. Description of 'client_mod' objects see below.
      */
@@ -8147,14 +7950,14 @@ export interface AdsUpdateClientsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsDeleteClientsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array with IDs of deleted clients.
      */
@@ -8162,37 +7965,37 @@ export interface AdsDeleteClientsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetCampaignsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * 'For advertising agencies'. ID of the client advertising campaigns are retrieved from.
      */
-    clientId?: number,
+    client_id?: number,
     /**
-     * Flag that specifies whether archived ads shall be shown.; *0 — show only active campaigns;; *1 — show all campaigns.;
+     * Flag that specifies whether archived ads shall be shown. *0 — show only active campaigns,, *1 — show all campaigns.
      */
-    includeDeleted?: boolean,
+    include_deleted?: boolean,
     /**
-     * Filter of advertising campaigns to show. ; Serialized JSON array with campaign IDs. Only campaigns that exist in 'campaign_ids' and belong to the specified advertising account will be shown. If the parameter is null, all campaigns will be shown.;
+     * Filter of advertising campaigns to show. Serialized JSON array with campaign IDs. Only campaigns that exist in 'campaign_ids' and belong to the specified advertising account will be shown. If the parameter is null, all campaigns will be shown.
      */
-    campaignIds?: string,
+    campaign_ids?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsCreateCampaignsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array of objects that describe created campaigns. Description of 'campaign_specification' objects see below.
      */
@@ -8200,14 +8003,14 @@ export interface AdsCreateCampaignsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsUpdateCampaignsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array of objects that describe changes in campaigns. Description of 'campaign_mod' objects see below.
      */
@@ -8215,14 +8018,14 @@ export interface AdsUpdateCampaignsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsDeleteCampaignsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array with IDs of deleted campaigns.
      */
@@ -8230,30 +8033,30 @@ export interface AdsDeleteCampaignsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetAdsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * 'Available and required for advertising agencies.' ID of the client ads are retrieved from.
      */
-    clientId?: number,
+    client_id?: number,
     /**
-     * Flag that specifies whether archived ads shall be shown:; *0 — show only active ads;; *1 — show all ads.;
+     * Flag that specifies whether archived ads shall be shown: *0 — show only active ads,, *1 — show all ads.
      */
-    includeDeleted?: boolean,
+    include_deleted?: boolean,
     /**
-     * Filter by advertising campaigns. ; Serialized JSON array with campaign IDs. If the parameter is null, ads of all campaigns will be shown.;
+     * Filter by advertising campaigns. Serialized JSON array with campaign IDs. If the parameter is null, ads of all campaigns will be shown.
      */
-    campaignIds?: string,
+    campaign_ids?: string,
     /**
-     * Filter by ads. ; Serialized JSON array with ad IDs. If the parameter is null, all ads will be shown.;
+     * Filter by ads. Serialized JSON array with ad IDs. If the parameter is null, all ads will be shown.
      */
-    adIds?: string,
+    ad_ids?: string,
     /**
      * Limit of number of returned ads. Used only if ad_ids parameter is null, and 'campaign_ids' parameter contains ID of only one campaign.
      */
@@ -8265,30 +8068,30 @@ export interface AdsGetAdsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetAdsLayoutParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * 'For advertising agencies.' ID of the client ads are retrieved from.
      */
-    clientId?: number,
+    client_id?: number,
     /**
-     * Flag that specifies whether archived ads shall be shown.; *0 — show only active ads;; *1 — show all ads.;
+     * Flag that specifies whether archived ads shall be shown. *0 — show only active ads,, *1 — show all ads.
      */
-    includeDeleted?: boolean,
+    include_deleted?: boolean,
     /**
-     * Filter by advertising campaigns.; Serialized JSON array with campaign IDs. If the parameter is null, ads of all campaigns will be shown.;
+     * Filter by advertising campaigns. Serialized JSON array with campaign IDs. If the parameter is null, ads of all campaigns will be shown.
      */
-    campaignIds?: string,
+    campaign_ids?: string,
     /**
-     * Filter by ads.; Serialized JSON array with ad IDs. If the parameter is null, all ads will be shown.;
+     * Filter by ads. Serialized JSON array with ad IDs. If the parameter is null, all ads will be shown.
      */
-    adIds?: string,
+    ad_ids?: string,
     /**
      * Limit of number of returned ads. Used only if 'ad_ids' parameter is null, and 'campaign_ids' parameter contains ID of only one campaign.
      */
@@ -8300,30 +8103,30 @@ export interface AdsGetAdsLayoutParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetAdsTargetingParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * 'For advertising agencies.' ID of the client ads are retrieved from.
      */
-    clientId?: number,
+    client_id?: number,
     /**
-     * flag that specifies whether archived ads shall be shown:; *0 — show only active ads;; *1 — show all ads.
+     * flag that specifies whether archived ads shall be shown: *0 — show only active ads,, *1 — show all ads.
      */
-    includeDeleted?: boolean,
+    include_deleted?: boolean,
     /**
-     * Filter by advertising campaigns.; Serialized JSON array with campaign IDs. If the parameter is null, ads of all campaigns will be shown.;
+     * Filter by advertising campaigns. Serialized JSON array with campaign IDs. If the parameter is null, ads of all campaigns will be shown.
      */
-    campaignIds?: string,
+    campaign_ids?: string,
     /**
-     * Filter by ads.; Serialized JSON array with ad IDs. If the parameter is null, all ads will be shown.
+     * Filter by ads. Serialized JSON array with ad IDs. If the parameter is null, all ads will be shown.
      */
-    adIds?: string,
+    ad_ids?: string,
     /**
      * Limit of number of returned ads. Used only if 'ad_ids' parameter is null, and 'campaign_ids' parameter contains ID of only one campaign.
      */
@@ -8335,14 +8138,14 @@ export interface AdsGetAdsTargetingParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsCreateAdsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array of objects that describe created ads. Description of 'ad_specification' objects see below.
      */
@@ -8350,14 +8153,14 @@ export interface AdsCreateAdsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsUpdateAdsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array of objects that describe changes in ads. Description of 'ad_edit_specification' objects see below.
      */
@@ -8365,14 +8168,14 @@ export interface AdsUpdateAdsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsDeleteAdsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array with ad IDs.
      */
@@ -8380,136 +8183,136 @@ export interface AdsDeleteAdsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsCheckLinkParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
-     * Object type:; *'community' — community;; *'post' — community post;; *'application' — VK application;; *'video' — video;; *'site' — external site.
+     * Object type: *'community' — community,, *'post' — community post,, *'application' — VK application,, *'video' — video,, *'site' — external site.
      */
-    linkType: string,
+    link_type: string,
     /**
      * Object URL.
      */
-    linkUrl: string,
+    link_url: string,
     /**
      * Campaign ID
      */
-    campaignId?: number,
+    campaign_id?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetStatisticsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
-     * Type of requested objects listed in 'ids' parameter:; *ad — ads;; *campaign — campaigns;; *client — clients;; *office — account.;
+     * Type of requested objects listed in 'ids' parameter: *ad — ads,, *campaign — campaigns,, *client — clients,, *office — account.
      */
-    idsType: string,
+    ids_type: string,
     /**
      * IDs requested ads, campaigns, clients or account, separated with a comma, depending on the value set in 'ids_type'. Maximum 2000 objects.
      */
     ids: string,
     /**
-     * Data grouping by dates:; *day — statistics by days;; *month — statistics by months;; *overall — overall statistics.; 'date_from' and 'date_to' parameters set temporary limits.
+     * Data grouping by dates: *day — statistics by days,, *month — statistics by months,, *overall — overall statistics. 'date_from' and 'date_to' parameters set temporary limits.
      */
     period: string,
     /**
-     * Date to show statistics from. For different value of 'period' different date format is used:; *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011; **0 — day it was created on;; *month: YYYY-MM, example: 2011-09 — September 2011; **0 — month it was created in;; *overall: 0.;
+     * Date to show statistics from. For different value of 'period' different date format is used: *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011, **0 — day it was created on,, *month: YYYY-MM, example: 2011-09 — September 2011, **0 — month it was created in,, *overall: 0.
      */
-    dateFrom: string,
+    date_from: string,
     /**
-     * Date to show statistics to. For different value of 'period' different date format is used:; *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011; **0 — current day;; *month: YYYY-MM, example: 2011-09 — September 2011; **0 — current month;; *overall: 0.
+     * Date to show statistics to. For different value of 'period' different date format is used: *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011, **0 — current day,, *month: YYYY-MM, example: 2011-09 — September 2011, **0 — current month,, *overall: 0.
      */
-    dateTo: string,
+    date_to: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetDemographicsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
-     * Type of requested objects listed in 'ids' parameter:; *ad — ads;; *campaign — campaigns.;
+     * Type of requested objects listed in 'ids' parameter: *ad — ads,, *campaign — campaigns.
      */
-    idsType: string,
+    ids_type: string,
     /**
      * IDs requested ads or campaigns, separated with a comma, depending on the value set in 'ids_type'. Maximum 2000 objects.
      */
     ids: string,
     /**
-     * Data grouping by dates:; *day — statistics by days;; *month — statistics by months;; *overall — overall statistics.; 'date_from' and 'date_to' parameters set temporary limits.
+     * Data grouping by dates: *day — statistics by days,, *month — statistics by months,, *overall — overall statistics. 'date_from' and 'date_to' parameters set temporary limits.
      */
     period: string,
     /**
-     * Date to show statistics from. For different value of 'period' different date format is used:; *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011; **0 — day it was created on;; *month: YYYY-MM, example: 2011-09 — September 2011; **0 — month it was created in;; *overall: 0.
+     * Date to show statistics from. For different value of 'period' different date format is used: *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011, **0 — day it was created on,, *month: YYYY-MM, example: 2011-09 — September 2011, **0 — month it was created in,, *overall: 0.
      */
-    dateFrom: string,
+    date_from: string,
     /**
-     * Date to show statistics to. For different value of 'period' different date format is used:; *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011; **0 — current day;; *month: YYYY-MM, example: 2011-09 — September 2011; **0 — current month;; *overall: 0.
+     * Date to show statistics to. For different value of 'period' different date format is used: *day: YYYY-MM-DD, example: 2011-09-27 — September 27, 2011, **0 — current day,, *month: YYYY-MM, example: 2011-09 — September 2011, **0 — current month,, *overall: 0.
      */
-    dateTo: string,
+    date_to: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetAdsPostsReachParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Ads IDS separated by comma.
      */
-    adsIds: string,
+    ads_ids: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetBudgetParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetOfficeUsersParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsAddOfficeUsersParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array of objects that describe added managers. Description of 'user_specification' objects see below.
      */
@@ -8517,14 +8320,14 @@ export interface AdsAddOfficeUsersParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsRemoveOfficeUsersParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON array with IDs of deleted managers.
      */
@@ -8532,14 +8335,14 @@ export interface AdsRemoveOfficeUsersParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetTargetingStatsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Serialized JSON object that describes targeting parameters. Description of 'criteria' object see below.
      */
@@ -8547,32 +8350,32 @@ export interface AdsGetTargetingStatsParams {
     /**
      * ID of an ad which targeting parameters shall be analyzed.
      */
-    adId?: number,
+    ad_id?: number,
     /**
-     * Ad format. Possible values:; *'1' — image and text;; *'2' — big image;; *'3' — exclusive format;; *'4' — community, square image;; *'7' — special app format;; *'8' — special community format;; *'9' — post in community;; *'10' — app board.
+     * Ad format. Possible values: *'1' — image and text,, *'2' — big image,, *'3' — exclusive format,, *'4' — community, square image,, *'7' — special app format,, *'8' — special community format,, *'9' — post in community,, *'10' — app board.
      */
-    adFormat?: number,
+    ad_format?: number,
     /**
-     * Platforms to use for ad showing. Possible values:; (for 'ad_format' = '1'); *'0' — VK and partner sites;; *'1' — VK only.; (for 'ad_format' = '9'); *'all' — all platforms;; *'desktop' — desktop version;; *'mobile' — mobile version and apps.
+     * Platforms to use for ad showing. Possible values: (for 'ad_format' = '1'), *'0' — VK and partner sites,, *'1' — VK only. (for 'ad_format' = '9'), *'all' — all platforms,, *'desktop' — desktop version,, *'mobile' — mobile version and apps.
      */
-    adPlatform?: string,
+    ad_platform?: string,
     /**
      * URL for the advertised object.
      */
-    linkUrl: string,
+    link_url: string,
     /**
      * Domain of the advertised object.
      */
-    linkDomain?: string,
+    link_domain?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetSuggestionsParams {
     /**
-     * Section, suggestions are retrieved in. Available values:; *countries — request of a list of countries. If q is not set or blank, a short list of countries is shown. Otherwise, a full list of countries is shown.; *regions — requested list of regions. 'country' parameter is required.; *cities — requested list of cities. 'country' parameter is required.; *districts — requested list of districts. 'cities' parameter is required.; *stations — requested list of subway stations. 'cities' parameter is required.; *streets — requested list of streets. 'cities' parameter is required.; *schools — requested list of educational organizations. 'cities' parameter is required.; *interests — requested list of interests.; *positions — requested list of positions (professions).; *group_types — requested list of group types.; *religions — requested list of religious commitments.; *browsers — requested list of browsers and mobile devices.;
+     * Section, suggestions are retrieved in. Available values: *countries — request of a list of countries. If q is not set or blank, a short list of countries is shown. Otherwise, a full list of countries is shown. *regions — requested list of regions. 'country' parameter is required. *cities — requested list of cities. 'country' parameter is required. *districts — requested list of districts. 'cities' parameter is required. *stations — requested list of subway stations. 'cities' parameter is required. *streets — requested list of streets. 'cities' parameter is required. *schools — requested list of educational organizations. 'cities' parameter is required. *interests — requested list of interests. *positions — requested list of positions (professions). *group_types — requested list of group types. *religions — requested list of religious commitments. *browsers — requested list of browsers and mobile devices.
      */
     section: string,
     /**
@@ -8592,13 +8395,13 @@ export interface AdsGetSuggestionsParams {
      */
     cities?: string,
     /**
-     * Language of the returned string values. Supported languages:; *ru — Russian;; *ua — Ukrainian;; *en — English.;
+     * Language of the returned string values. Supported languages: *ru — Russian,, *ua — Ukrainian,, *en — English.
      */
     lang?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetCategoriesParams {
@@ -8609,62 +8412,62 @@ export interface AdsGetCategoriesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetUploadURLParams {
     /**
-     * Ad format:; *1 — image and text;; *2 — big image;; *3 — exclusive format;; *4 — community, square image;; *7 — special app format.
+     * Ad format: *1 — image and text,, *2 — big image,, *3 — exclusive format,, *4 — community, square image,, *7 — special app format.
      */
-    adFormat: number,
+    ad_format: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetVideoUploadURLParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetFloodStatsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetRejectionReasonParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
      * Ad ID.
      */
-    adId: number,
+    ad_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsCreateTargetGroupParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
-     * 'Only for advertising agencies.'; ID of the client with the advertising account where the group will be created.;
+     * 'Only for advertising agencies.', ID of the client with the advertising account where the group will be created.
      */
-    clientId?: number,
+    client_id?: number,
     /**
      * Name of the target group — a string up to 64 characters long.
      */
@@ -8674,28 +8477,28 @@ export interface AdsCreateTargetGroupParams {
      */
     domain?: string,
     /**
-     * 'For groups with auditory created with pixel code only.'; ; Number of days after that users will be automatically removed from the group. '0' — not to remove users.;
+     * 'For groups with auditory created with pixel code only.', , Number of days after that users will be automatically removed from the group. '0' — not to remove users.
      */
     lifetime?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsUpdateTargetGroupParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
-     * 'Only for advertising agencies.' ; ID of the client with the advertising account where the group will be created.;
+     * 'Only for advertising agencies.' , ID of the client with the advertising account where the group will be created.
      */
-    clientId?: number,
+    client_id?: number,
     /**
      * Group ID.
      */
-    targetGroupId: number,
+    target_group_id: number,
     /**
      * New name of the target group — a string up to 64 characters long.
      */
@@ -8705,43 +8508,43 @@ export interface AdsUpdateTargetGroupParams {
      */
     domain?: string,
     /**
-     * 'Only for the groups that get audience from sites with user accounting code.'; Time in days when users added to a retarget group will be automatically excluded from it. ; '0' – automatic exclusion is off.
+     * 'Only for the groups that get audience from sites with user accounting code.', Time in days when users added to a retarget group will be automatically excluded from it. '0' – automatic exclusion is off.
      */
     lifetime?: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsDeleteTargetGroupParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
-     * 'Only for advertising agencies.' ; ID of the client with the advertising account where the group will be created.;
+     * 'Only for advertising agencies.' , ID of the client with the advertising account where the group will be created.
      */
-    clientId?: number,
+    client_id?: number,
     /**
      * Group ID.
      */
-    targetGroupId: number,
+    target_group_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsGetTargetGroupsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
-     * 'Only for advertising agencies.'; ID of the client with the advertising account where the group will be created.;
+     * 'Only for advertising agencies.', ID of the client with the advertising account where the group will be created.
      */
-    clientId?: number,
+    client_id?: number,
     /**
      * '1' — to return pixel code.
      */
@@ -8749,22 +8552,22 @@ export interface AdsGetTargetGroupsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface AdsImportTargetContactsParams {
     /**
      * Advertising account ID.
      */
-    accountId: number,
+    account_id: number,
     /**
-     * 'Only for advertising agencies.' ; ID of the client with the advertising account where the group will be created.;
+     * 'Only for advertising agencies.' , ID of the client with the advertising account where the group will be created.
      */
-    clientId?: number,
+    client_id?: number,
     /**
      * Target group ID.
      */
-    targetGroupId: number,
+    target_group_id: number,
     /**
      * List of phone numbers, emails or user IDs separated with a comma.
      */
@@ -8772,7 +8575,7 @@ export interface AdsImportTargetContactsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface SecureCheckTokenParams {
@@ -8781,20 +8584,20 @@ export interface SecureCheckTokenParams {
      */
     token?: string,
     /**
-     * user 'ip address'. Note that user may access using the 'ipv6' address, in this case it is required to transmit the 'ipv6' address. ; If not transmitted, the address will not be checked.
+     * user 'ip address'. Note that user may access using the 'ipv6' address, in this case it is required to transmit the 'ipv6' address. If not transmitted, the address will not be checked.
      */
     ip?: string,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketGetParams {
     /**
-     * ID of an item owner community; "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
+     * ID of an item owner community, "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Number of items to return.
      */
@@ -8810,14 +8613,14 @@ export interface MarketGetParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketGetByIdParams {
     /**
-     * Comma-separated ids list: {user id}_{item id}.; If an item belongs to a community -{community id} is used. ; " 'Videos' value example: ; '-4363_136089719,13245770_137352259'"
+     * Comma-separated ids list: {user id}_{item id}. If an item belongs to a community -{community id} is used. " 'Videos' value example: , '-4363_136089719,13245770_137352259'"
      */
-    itemIds: string[],
+    item_ids: string[],
     /**
      * '1' – to return additional fields: 'likes, can_comment, car_repost, photos'. By default: '0'.
      */
@@ -8825,14 +8628,14 @@ export interface MarketGetByIdParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketSearchParams {
     /**
      * ID of an items owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Search query, for example "pink slippers".
      */
@@ -8840,11 +8643,11 @@ export interface MarketSearchParams {
     /**
      * Minimum item price value.
      */
-    priceFrom?: number,
+    price_from?: number,
     /**
      * Maximum item price value.
      */
-    priceTo?: number,
+    price_to?: number,
     /**
      * Comma-separated tag IDs list.
      */
@@ -8868,14 +8671,14 @@ export interface MarketSearchParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketGetAlbumsParams {
     /**
      * ID of an items owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Offset needed to return a specific subset of results.
      */
@@ -8887,53 +8690,53 @@ export interface MarketGetAlbumsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketGetAlbumByIdParams {
     /**
-     * identifier of an album owner community; "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
+     * identifier of an album owner community, "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * collections identifiers to obtain data from
      */
-    albumIds: number[],
+    album_ids: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketCreateCommentParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * Comment text (required if 'attachments' parameter is not specified)
      */
     message?: string,
     /**
-     * Comma-separated list of objects attached to a comment. The field is submitted the following way: ; "'<owner_id>_<media_id>,<owner_id>_<media_id>'"; ; '' - media attachment type:; "'photo' - photo; 'video' - video; 'audio' - audio; 'doc' - document"; ; '<owner_id>' - media owner id; '<media_id>' - media attachment id; ; For example:; "photo100172_166443618,photo66748_265827614";
+     * Comma-separated list of objects attached to a comment. The field is submitted the following way: , "'<owner_id>_<media_id>,<owner_id>_<media_id>'", , '' - media attachment type: "'photo' - photo, 'video' - video, 'audio' - audio, 'doc' - document", , '<owner_id>' - media owner id, '<media_id>' - media attachment id, , For example: "photo100172_166443618,photo66748_265827614",
      */
     attachments?: string[],
     /**
      * '1' - comment will be published on behalf of a community, '0' - on behalf of a user (by default).
      */
-    fromGroup?: boolean,
+    from_group?: boolean,
     /**
      * ID of a comment to reply with current comment to.
      */
-    replyToComment?: number,
+    reply_to_comment?: number,
     /**
      * Sticker ID.
      */
-    stickerId?: number,
+    sticker_id?: number,
     /**
      * Random value to avoid resending one comment.
      */
@@ -8941,26 +8744,26 @@ export interface MarketCreateCommentParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketGetCommentsParams {
     /**
      * ID of an item owner community
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * '1' — to return likes info.
      */
-    needLikes?: boolean,
+    need_likes?: boolean,
     /**
      * ID of a comment to start a list from (details below).
      */
-    startCommentId?: number,
+    start_comment_id?: number,
     /**
      * Number of results to return.
      */
@@ -8980,79 +8783,79 @@ export interface MarketGetCommentsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketDeleteCommentParams {
     /**
-     * identifier of an item owner community; "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
+     * identifier of an item owner community, "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * comment id
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketRestoreCommentParams {
     /**
-     * identifier of an item owner community; "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
+     * identifier of an item owner community, "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * deleted comment id
      */
-    commentId: number,
+    comment_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketEditCommentParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
-     * New comment text (required if 'attachments' are not specified); ; 2048 symbols maximum.
+     * New comment text (required if 'attachments' are not specified), , 2048 symbols maximum.
      */
     message?: string,
     /**
-     * Comma-separated list of objects attached to a comment. The field is submitted the following way: ; "'<owner_id>_<media_id>,<owner_id>_<media_id>'"; ; '' - media attachment type:; "'photo' - photo; 'video' - video; 'audio' - audio; 'doc' - document"; ; '<owner_id>' - media owner id; '<media_id>' - media attachment id; ; For example:; "photo100172_166443618,photo66748_265827614";
+     * Comma-separated list of objects attached to a comment. The field is submitted the following way: , "'<owner_id>_<media_id>,<owner_id>_<media_id>'", , '' - media attachment type: "'photo' - photo, 'video' - video, 'audio' - audio, 'doc' - document", , '<owner_id>' - media owner id, '<media_id>' - media attachment id, , For example: "photo100172_166443618,photo66748_265827614",
      */
     attachments?: string[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketReportCommentParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Comment ID.
      */
-    commentId: number,
+    comment_id: number,
     /**
-     * Complaint reason. Possible values:; *'0' — spam;; *'1' — child porn;; *'2' — extremism;; *'3' — violence;; *'4' — drugs propaganda;; *'5' — adult materials;; *'6' — insult.
+     * Complaint reason. Possible values: *'0' — spam,, *'1' — child porn,, *'2' — extremism,, *'3' — violence,, *'4' — drugs propaganda,, *'5' — adult materials,, *'6' — insult.
      */
     reason: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketGetCategoriesParams {
@@ -9067,33 +8870,33 @@ export interface MarketGetCategoriesParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketReportParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
-     * Complaint reason. Possible values:; *'0' — spam;; *'1' — child porn;; *'2' — extremism;; *'3' — violence;; *'4' — drugs propaganda;; *'5' — adult materials;; *'6' — insult.
+     * Complaint reason. Possible values: *'0' — spam,, *'1' — child porn,, *'2' — extremism,, *'3' — violence,, *'4' — drugs propaganda,, *'5' — adult materials,, *'6' — insult.
      */
     reason: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketAddParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item name.
      */
@@ -9105,7 +8908,7 @@ export interface MarketAddParams {
     /**
      * Item category ID.
      */
-    categoryId: number,
+    category_id: number,
     /**
      * Item price.
      */
@@ -9117,26 +8920,26 @@ export interface MarketAddParams {
     /**
      * Cover photo ID.
      */
-    mainPhotoId: number,
+    main_photo_id: number,
     /**
      * IDs of additional photos.
      */
-    photoIds?: number[],
+    photo_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketEditParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * Item name.
      */
@@ -9148,7 +8951,7 @@ export interface MarketEditParams {
     /**
      * Item category ID.
      */
-    categoryId: number,
+    category_id: number,
     /**
      * Item price.
      */
@@ -9160,60 +8963,60 @@ export interface MarketEditParams {
     /**
      * Cover photo ID.
      */
-    mainPhotoId: number,
+    main_photo_id: number,
     /**
      * IDs of additional photos.
      */
-    photoIds?: number[],
+    photo_ids?: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketDeleteParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketRestoreParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Deleted item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketReorderItemsParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * ID of a collection to reorder items in. Set 0 to reorder full items list.
      */
-    albumId?: number,
+    album_id?: number,
     /**
      * Item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * ID of an item to place current item before it.
      */
@@ -9225,18 +9028,18 @@ export interface MarketReorderItemsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketReorderAlbumsParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Collection ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * ID of a collection to place current collection before it.
      */
@@ -9248,14 +9051,14 @@ export interface MarketReorderAlbumsParams {
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketAddAlbumParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Collection title.
      */
@@ -9263,26 +9066,26 @@ export interface MarketAddAlbumParams {
     /**
      * Cover photo ID.
      */
-    photoId?: number,
+    photo_id?: number,
     /**
      * Set as main ('1' – set, '0' – no).
      */
-    mainAlbum?: boolean,
+    main_album?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketEditAlbumParams {
     /**
      * ID of an collection owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Collection ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * Collection title.
      */
@@ -9290,66 +9093,66 @@ export interface MarketEditAlbumParams {
     /**
      * Cover photo id
      */
-    photoId?: number,
+    photo_id?: number,
     /**
      * Set as main ('1' – set, '0' – no).
      */
-    mainAlbum?: boolean,
+    main_album?: boolean,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketDeleteAlbumParams {
     /**
      * ID of an collection owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Collection ID.
      */
-    albumId: number,
+    album_id: number,
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketRemoveFromAlbumParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * Collections IDs to remove item from.
      */
-    albumIds: number[],
+    album_ids: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
 
 export interface MarketAddToAlbumParams {
     /**
      * ID of an item owner community.
      */
-    ownerId: number,
+    owner_id: number,
     /**
      * Item ID.
      */
-    itemId: number,
+    item_id: number,
     /**
      * Collections IDs to add item to.
      */
-    albumIds: number[],
+    album_ids: number[],
     /**
      * access token
      */
-    accessToken?: string
+    access_token?: string
 }
