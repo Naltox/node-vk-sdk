@@ -2617,7 +2617,7 @@ export interface StoriesGetRepliesResponse {
     /**
      *
      */
-    items: Models.StoriesStory[]
+    items: Models.StoriesStory[][]
 }
 
 export interface StoriesGetRepliesExtendedResponse {
@@ -2628,7 +2628,7 @@ export interface StoriesGetRepliesExtendedResponse {
     /**
      *
      */
-    items: Models.StoriesStory[],
+    items: Models.StoriesStory[][],
     /**
      *
      */
