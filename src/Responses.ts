@@ -868,6 +868,10 @@ export interface GroupsGetCallbackSettingsResponse {
     group_leave: Models.BaseBoolInt
 }
 
+export type GroupsGetLongPollServerResponse = Models.GroupsLongPollServer
+
+export type GroupsGetLongPollSettingsResponse = Models.GroupsLongPollSettings
+
 export interface GroupsGetResponse {
     /**
      * Total communities number
@@ -1946,6 +1950,14 @@ export type PollsGetVotersResponse = Models.PollsVoters[]
 export type PollsCreateResponse = Models.PollsPoll
 
 export interface SearchGetHintsResponse {
+    /**
+     *
+     */
+    items: Models.SearchHint[],
+    /**
+     *
+     */
+    suggested_queries: string[]
 }
 
 export type SecureGetAppBalanceResponse = number
@@ -2494,4 +2506,170 @@ export interface WidgetsGetPagesResponse {
      *
      */
     pages: Models.WidgetsWidgetPage[]
+}
+
+export interface StoriesGetResponse {
+    /**
+     * Stories count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: Models.StoriesStory[][]
+}
+
+export interface StoriesGetExtendedResponse {
+    /**
+     * Stories count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: Models.StoriesStory[][],
+    /**
+     *
+     */
+    profiles: Models.UsersUser[],
+    /**
+     *
+     */
+    groups: Models.GroupsGroup[]
+}
+
+export interface StoriesGetBannedResponse {
+    /**
+     * Stories count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: number[]
+}
+
+export interface StoriesGetBannedExtendedResponse {
+    /**
+     * Stories count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: number[],
+    /**
+     *
+     */
+    profiles: Models.UsersUserFull[],
+    /**
+     *
+     */
+    groups: Models.GroupsGroupFull[]
+}
+
+export interface StoriesGetByIdResponse {
+    /**
+     * Stories count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: Models.StoriesStory[]
+}
+
+export interface StoriesGetByIdExtendedResponse {
+    /**
+     * Stories count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: Models.StoriesStory[],
+    /**
+     *
+     */
+    profiles: Models.UsersUserFull[],
+    /**
+     *
+     */
+    groups: Models.GroupsGroupFull[]
+}
+
+export interface StoriesGetPhotoUploadServerResponse {
+    /**
+     * Upload URL
+     */
+    upload_url: string,
+    /**
+     * Users ID who can to see story.
+     */
+    user_ids: number[]
+}
+
+export interface StoriesGetRepliesResponse {
+    /**
+     * Stories count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: Models.StoriesStory[]
+}
+
+export interface StoriesGetRepliesExtendedResponse {
+    /**
+     * Stories count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: Models.StoriesStory[],
+    /**
+     *
+     */
+    profiles: Models.UsersUserFull[],
+    /**
+     *
+     */
+    groups: Models.GroupsGroupFull[]
+}
+
+export type StoriesGetStatsResponse = Models.StoriesStoryStats
+
+export interface StoriesGetVideoUploadServerResponse {
+    /**
+     * Upload URL
+     */
+    upload_url: string,
+    /**
+     * Users ID who can to see story.
+     */
+    user_ids: number[]
+}
+
+export interface StoriesGetViewersResponse {
+    /**
+     * Viewers count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: number[]
+}
+
+export interface StoriesGetViewersExtendedResponse {
+    /**
+     * Viewers count
+     */
+    count: number,
+    /**
+     *
+     */
+    items: Models.UsersUserFull[]
 }

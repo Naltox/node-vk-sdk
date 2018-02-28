@@ -1202,6 +1202,214 @@ export class VKApi {
     }
 
     /**
+     * Allows to hide stories from chosen sources from current user's feed.
+     *
+     * @param {{
+     *   owners_ids: (number[]),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async storiesBanOwner(params: MethodsProps.StoriesBanOwnerParams): Promise<Responses.OkResponse> {
+        return this.call("stories.banOwner", params)
+    }
+
+    /**
+     * Allows to delete story.
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   story_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async storiesDelete(params: MethodsProps.StoriesDeleteParams): Promise<Responses.OkResponse> {
+        return this.call("stories.delete", params)
+    }
+
+    /**
+     * Returns stories available for current user.
+     *
+     * @param {{
+     *   owner_id: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesGetResponse>}
+     */
+    public async storiesGet(params: MethodsProps.StoriesGetParams): Promise<Responses.StoriesGetResponse> {
+        return this.call("stories.get", params)
+    }
+
+    /**
+     * Returns list of sources hidden from current user's feed.
+     *
+     * @param {{
+     *   fields: (string[]|undefined),
+     *   extended: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesGetBannedResponse>}
+     */
+    public async storiesGetBanned(params: MethodsProps.StoriesGetBannedParams): Promise<Responses.StoriesGetBannedResponse> {
+        return this.call("stories.getBanned", params)
+    }
+
+    /**
+     * Returns story by its ID.
+     *
+     * @param {{
+     *   stories: (string[]|undefined),
+     *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesGetByIdResponse>}
+     */
+    public async storiesGetById(params: MethodsProps.StoriesGetByIdParams): Promise<Responses.StoriesGetByIdResponse> {
+        return this.call("stories.getById", params)
+    }
+
+    /**
+     * Returns URL for uploading a story with photo.
+     *
+     * @param {{
+     *   add_to_news: (boolean|undefined),
+     *   user_ids: (number[]|undefined),
+     *   reply_to_story: (string|undefined),
+     *   link_text: (string|undefined),
+     *   link_url: (string|undefined),
+     *   group_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesGetPhotoUploadServerResponse>}
+     */
+    public async storiesGetPhotoUploadServer(params: MethodsProps.StoriesGetPhotoUploadServerParams): Promise<Responses.StoriesGetPhotoUploadServerResponse> {
+        return this.call("stories.getPhotoUploadServer", params)
+    }
+
+    /**
+     * Returns replies to the story.
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   story_id: (number),
+     *   access_key: (string|undefined),
+     *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesGetRepliesResponse>}
+     */
+    public async storiesGetReplies(params: MethodsProps.StoriesGetRepliesParams): Promise<Responses.StoriesGetRepliesResponse> {
+        return this.call("stories.getReplies", params)
+    }
+
+    /**
+     * Returns stories available for current user.
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   story_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesGetStatsResponse>}
+     */
+    public async storiesGetStats(params: MethodsProps.StoriesGetStatsParams): Promise<Responses.StoriesGetStatsResponse> {
+        return this.call("stories.getStats", params)
+    }
+
+    /**
+     * Allows to receive URL for uploading story with video.
+     *
+     * @param {{
+     *   add_to_news: (boolean|undefined),
+     *   user_ids: (number[]|undefined),
+     *   reply_to_story: (string|undefined),
+     *   link_text: (string|undefined),
+     *   link_url: (string|undefined),
+     *   group_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesGetVideoUploadServerResponse>}
+     */
+    public async storiesGetVideoUploadServer(params: MethodsProps.StoriesGetVideoUploadServerParams): Promise<Responses.StoriesGetVideoUploadServerResponse> {
+        return this.call("stories.getVideoUploadServer", params)
+    }
+
+    /**
+     * Returns a list of story viewers.
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   story_id: (number),
+     *   count: (number|undefined),
+     *   offset: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesGetViewersResponse>}
+     */
+    public async storiesGetViewers(params: MethodsProps.StoriesGetViewersParams): Promise<Responses.StoriesGetViewersResponse> {
+        return this.call("stories.getViewers", params)
+    }
+
+    /**
+     * Hides all replies in the last 24 hours from the user to current user's stories.
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async storiesHideAllReplies(params: MethodsProps.StoriesHideAllRepliesParams): Promise<Responses.OkResponse> {
+        return this.call("stories.hideAllReplies", params)
+    }
+
+    /**
+     * Hides the reply to the current user's story.
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   story_id: (number),
+     *   access_key: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async storiesHideReply(params: MethodsProps.StoriesHideReplyParams): Promise<Responses.OkResponse> {
+        return this.call("stories.hideReply", params)
+    }
+
+    /**
+     * Allows to show stories from hidden sources in current user's feed.
+     *
+     * @param {{
+     *   owners_ids: (number[]),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async storiesUnbanOwner(params: MethodsProps.StoriesUnbanOwnerParams): Promise<Responses.OkResponse> {
+        return this.call("stories.unbanOwner", params)
+    }
+
+    /**
      * Returns payment balance of the application in hundredth of a vote.
      *
      * @param {{
@@ -2953,6 +3161,84 @@ export class VKApi {
      */
     public async groupsSetCallbackSettings(params: MethodsProps.GroupsSetCallbackSettingsParams): Promise<Responses.OkResponse> {
         return this.call("groups.setCallbackSettings", params)
+    }
+
+    /**
+     * Returns the data needed to query a Long Poll server for events
+     *
+     * @param {{
+     *   group_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.GroupsGetLongPollServerResponse>}
+     */
+    public async groupsGetLongPollServer(params: MethodsProps.GroupsGetLongPollServerParams): Promise<Responses.GroupsGetLongPollServerResponse> {
+        return this.call("groups.getLongPollServer", params)
+    }
+
+    /**
+     * Returns Long Poll notification settings
+     *
+     * @param {{
+     *   group_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.GroupsGetLongPollSettingsResponse>}
+     */
+    public async groupsGetLongPollSettings(params: MethodsProps.GroupsGetLongPollSettingsParams): Promise<Responses.GroupsGetLongPollSettingsResponse> {
+        return this.call("groups.getLongPollSettings", params)
+    }
+
+    /**
+     * Sets Long Poll notification settings
+     *
+     * @param {{
+     *   group_id: (number),
+     *   enabled: (boolean|undefined),
+     *   message_new: (boolean|undefined),
+     *   message_reply: (boolean|undefined),
+     *   message_edit: (boolean|undefined),
+     *   message_allow: (boolean|undefined),
+     *   message_deny: (boolean|undefined),
+     *   photo_new: (boolean|undefined),
+     *   audio_new: (boolean|undefined),
+     *   video_new: (boolean|undefined),
+     *   wall_reply_new: (boolean|undefined),
+     *   wall_reply_edit: (boolean|undefined),
+     *   wall_reply_delete: (boolean|undefined),
+     *   wall_reply_restore: (boolean|undefined),
+     *   wall_post_new: (boolean|undefined),
+     *   wall_repost: (boolean|undefined),
+     *   board_post_new: (boolean|undefined),
+     *   board_post_edit: (boolean|undefined),
+     *   board_post_restore: (boolean|undefined),
+     *   board_post_delete: (boolean|undefined),
+     *   photo_comment_new: (boolean|undefined),
+     *   photo_comment_edit: (boolean|undefined),
+     *   photo_comment_delete: (boolean|undefined),
+     *   photo_comment_restore: (boolean|undefined),
+     *   video_comment_new: (boolean|undefined),
+     *   video_comment_edit: (boolean|undefined),
+     *   video_comment_delete: (boolean|undefined),
+     *   video_comment_restore: (boolean|undefined),
+     *   market_comment_new: (boolean|undefined),
+     *   market_comment_edit: (boolean|undefined),
+     *   market_comment_delete: (boolean|undefined),
+     *   market_comment_restore: (boolean|undefined),
+     *   poll_vote_new: (boolean|undefined),
+     *   group_join: (boolean|undefined),
+     *   group_leave: (boolean|undefined),
+     *   user_block: (boolean|undefined),
+     *   user_unblock: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async groupsSetLongPollSettings(params: MethodsProps.GroupsSetLongPollSettingsParams): Promise<Responses.OkResponse> {
+        return this.call("groups.setLongPollSettings", params)
     }
 
     /**

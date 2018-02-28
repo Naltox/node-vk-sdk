@@ -1449,6 +1449,253 @@ export interface WidgetsGetPagesParams {
     access_token?: string
 }
 
+export interface StoriesBanOwnerParams {
+    /**
+     * List of sources IDs
+     */
+    owners_ids: number[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesDeleteParams {
+    /**
+     * Story owner's ID. Current user id is used by default.
+     */
+    owner_id: number,
+    /**
+     * Story ID.
+     */
+    story_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesGetParams {
+    /**
+     * Owner ID.
+     */
+    owner_id?: number,
+    /**
+     * '1' — to return additional fields for users and communities. Default value is 0.
+     */
+    extended?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesGetBannedParams {
+    /**
+     * Additional fields to return
+     */
+    fields?: string[],
+    /**
+     * '1' — to return additional fields for users and communities. Default value is 0.
+     */
+    extended?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesGetByIdParams {
+    /**
+     * Stories IDs separated by commas. Use format {owner_id}+'_'+{story_id}, for example, 12345_54331.
+     */
+    stories?: string[],
+    /**
+     * '1' — to return additional fields for users and communities. Default value is 0.
+     */
+    extended?: boolean,
+    /**
+     * Additional fields to return
+     */
+    fields?: string[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesGetPhotoUploadServerParams {
+    /**
+     * 1 — to add the story to friend's feed.
+     */
+    add_to_news?: boolean,
+    /**
+     * List of users IDs who can see the story.
+     */
+    user_ids?: number[],
+    /**
+     * ID of the story to reply with the current.
+     */
+    reply_to_story?: string,
+    /**
+     * Link text (for community's stories only).
+     */
+    link_text?: string,
+    /**
+     * Link URL. Internal links on https://vk.com only.
+     */
+    link_url?: string,
+    /**
+     * ID of the community to upload the story (should be verified or with the "fire" icon).
+     */
+    group_id?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesGetRepliesParams {
+    /**
+     * Story owner ID.
+     */
+    owner_id: number,
+    /**
+     * Story ID.
+     */
+    story_id: number,
+    /**
+     * Access key for the private object.
+     */
+    access_key?: string,
+    /**
+     * '1' — to return additional fields for users and communities. Default value is 0.
+     */
+    extended?: boolean,
+    /**
+     * Additional fields to return
+     */
+    fields?: string[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesGetStatsParams {
+    /**
+     * Story owner ID.
+     */
+    owner_id: number,
+    /**
+     * Story ID.
+     */
+    story_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesGetVideoUploadServerParams {
+    /**
+     * 1 — to add the story to friend's feed.
+     */
+    add_to_news?: boolean,
+    /**
+     * List of users IDs who can see the story.
+     */
+    user_ids?: number[],
+    /**
+     * ID of the story to reply with the current.
+     */
+    reply_to_story?: string,
+    /**
+     * Link text (for community's stories only).
+     */
+    link_text?: string,
+    /**
+     * Link URL. Internal links on https://vk.com only.
+     */
+    link_url?: string,
+    /**
+     * ID of the community to upload the story (should be verified or with the "fire" icon).
+     */
+    group_id?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesGetViewersParams {
+    /**
+     * Story owner ID.
+     */
+    owner_id: number,
+    /**
+     * Story ID.
+     */
+    story_id: number,
+    /**
+     * Maximum number of results.
+     */
+    count?: number,
+    /**
+     * Offset needed to return a specific subset of results.
+     */
+    offset?: number,
+    /**
+     * '1' — to return detailed information about photos
+     */
+    extended?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesHideAllRepliesParams {
+    /**
+     * ID of the user whose replies should be hidden.
+     */
+    owner_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesHideReplyParams {
+    /**
+     * ID of the user whose replies should be hidden.
+     */
+    owner_id: number,
+    /**
+     * Story ID.
+     */
+    story_id: number,
+    /**
+     * Access key for the private object.
+     */
+    access_key?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesUnbanOwnerParams {
+    /**
+     * List of hidden sources to show stories from.
+     */
+    owners_ids: number[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface SecureGetAppBalanceParams {
     /**
      * access token
@@ -3786,6 +4033,179 @@ export interface GroupsSetCallbackSettingsParams {
      * A new outcoming message has been received ('0' — disabled, '1' — enabled).
      */
     message_reply?: boolean,
+    /**
+     * Allowed messages notifications ('0' — disabled, '1' — enabled).
+     */
+    message_allow?: boolean,
+    /**
+     * Denied messages notifications ('0' — disabled, '1' — enabled).
+     */
+    message_deny?: boolean,
+    /**
+     * New photos notifications ('0' — disabled, '1' — enabled).
+     */
+    photo_new?: boolean,
+    /**
+     * New audios notifications ('0' — disabled, '1' — enabled).
+     */
+    audio_new?: boolean,
+    /**
+     * New videos notifications ('0' — disabled, '1' — enabled).
+     */
+    video_new?: boolean,
+    /**
+     * New wall replies notifications ('0' — disabled, '1' — enabled).
+     */
+    wall_reply_new?: boolean,
+    /**
+     * Wall replies edited notifications ('0' — disabled, '1' — enabled).
+     */
+    wall_reply_edit?: boolean,
+    /**
+     * A wall comment has been deleted ('0' — disabled, '1' — enabled).
+     */
+    wall_reply_delete?: boolean,
+    /**
+     * A wall comment has been restored ('0' — disabled, '1' — enabled).
+     */
+    wall_reply_restore?: boolean,
+    /**
+     * New wall posts notifications ('0' — disabled, '1' — enabled).
+     */
+    wall_post_new?: boolean,
+    /**
+     * New wall posts notifications ('0' — disabled, '1' — enabled).
+     */
+    wall_repost?: boolean,
+    /**
+     * New board posts notifications ('0' — disabled, '1' — enabled).
+     */
+    board_post_new?: boolean,
+    /**
+     * Board posts edited notifications ('0' — disabled, '1' — enabled).
+     */
+    board_post_edit?: boolean,
+    /**
+     * Board posts restored notifications ('0' — disabled, '1' — enabled).
+     */
+    board_post_restore?: boolean,
+    /**
+     * Board posts deleted notifications ('0' — disabled, '1' — enabled).
+     */
+    board_post_delete?: boolean,
+    /**
+     * New comment to photo notifications ('0' — disabled, '1' — enabled).
+     */
+    photo_comment_new?: boolean,
+    /**
+     * A photo comment has been edited ('0' — disabled, '1' — enabled).
+     */
+    photo_comment_edit?: boolean,
+    /**
+     * A photo comment has been deleted ('0' — disabled, '1' — enabled).
+     */
+    photo_comment_delete?: boolean,
+    /**
+     * A photo comment has been restored ('0' — disabled, '1' — enabled).
+     */
+    photo_comment_restore?: boolean,
+    /**
+     * New comment to video notifications ('0' — disabled, '1' — enabled).
+     */
+    video_comment_new?: boolean,
+    /**
+     * A video comment has been edited ('0' — disabled, '1' — enabled).
+     */
+    video_comment_edit?: boolean,
+    /**
+     * A video comment has been deleted ('0' — disabled, '1' — enabled).
+     */
+    video_comment_delete?: boolean,
+    /**
+     * A video comment has been restored ('0' — disabled, '1' — enabled).
+     */
+    video_comment_restore?: boolean,
+    /**
+     * New comment to market item notifications ('0' — disabled, '1' — enabled).
+     */
+    market_comment_new?: boolean,
+    /**
+     * A market comment has been edited ('0' — disabled, '1' — enabled).
+     */
+    market_comment_edit?: boolean,
+    /**
+     * A market comment has been deleted ('0' — disabled, '1' — enabled).
+     */
+    market_comment_delete?: boolean,
+    /**
+     * A market comment has been restored ('0' — disabled, '1' — enabled).
+     */
+    market_comment_restore?: boolean,
+    /**
+     * A vote in a public poll has been added ('0' — disabled, '1' — enabled).
+     */
+    poll_vote_new?: boolean,
+    /**
+     * Joined community notifications ('0' — disabled, '1' — enabled).
+     */
+    group_join?: boolean,
+    /**
+     * Left community notifications ('0' — disabled, '1' — enabled).
+     */
+    group_leave?: boolean,
+    /**
+     * User added to community blacklist
+     */
+    user_block?: boolean,
+    /**
+     * User removed from community blacklist
+     */
+    user_unblock?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsGetLongPollServerParams {
+    /**
+     * Community ID
+     */
+    group_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsGetLongPollSettingsParams {
+    /**
+     * Community ID.
+     */
+    group_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsSetLongPollSettingsParams {
+    /**
+     * Community ID.
+     */
+    group_id: number,
+    /**
+     * A new incoming message has been received ('0' — disabled, '1' — enabled).
+     */
+    message_new?: boolean,
+    /**
+     * A new outcoming message has been received ('0' — disabled, '1' — enabled).
+     */
+    message_reply?: boolean,
+    /**
+     * A message has been edited ('0' — disabled, '1' — enabled).
+     */
+    message_edit?: boolean,
     /**
      * Allowed messages notifications ('0' — disabled, '1' — enabled).
      */

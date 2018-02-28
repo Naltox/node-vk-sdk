@@ -71,6 +71,7 @@ async function generate() {
         //
         // }
         let classScheme = jsonToClassScheme(className, responses.definitions[className].properties.response, true)
+
         //console.log(classScheme)
 
         //console.dir(classScheme, {depth: null})
@@ -174,11 +175,7 @@ function jsonToClassScheme(name: string, scheme: any, forResponses = false): Cla
         )
     }
 
-    /**
-     * hack for ads_getCategories_response:
-     * ads_getCategories_response.response don't have "type" prop for some reason
-     */
-    if (scheme.type !== 'object' && name !== 'ads_getCategories_response') {
+    if (scheme.type !== 'object') {
         return new CustomPrimitiveScheme(
             toCamelCase(name, true),
             parseType(scheme, forResponses)
@@ -253,11 +250,6 @@ function parseType(scheme: any, forResponses = false): Type {
         }
 
         if (scheme.items.$ref) {
-            // hack
-            if (normalizePath(scheme.items.$ref) == 'messages_fwd_message') {
-                scheme.items.$ref = 'messages_message'
-            }
-
             let primitive = isPrimitive(scheme.items.$ref)
             let name = toCamelCase(normalizePath(scheme.items.$ref), true)
 
