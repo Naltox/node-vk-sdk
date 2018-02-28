@@ -1,6 +1,6 @@
 {
   "name": "node-vk-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "./distr/index.js",
   "types": "./distr/index.d.ts",
