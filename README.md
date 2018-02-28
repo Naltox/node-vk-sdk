@@ -131,3 +131,22 @@ public async call(method: string, params: Object): Promise<any>
 public async callWithRetry(method: string, params: Object): Promise<any>
 ```
 
+## Bots Long Poll API
+
+To receive group updates using Bots Long Poll API use `BotsLongPollUpdatesProvider` class:
+
+```typescript
+import {VKApi, ConsoleLogger, BotsLongPollUpdatesProvider} from 'node-vk-sdk'
+
+let api = new VKApi({
+    token: 'GROUP_TOKEN_HERE',
+    logger: new ConsoleLogger()
+})
+
+let updatesProvider = new BotsLongPollUpdatesProvider(api, GROUP_ID_HERE)
+
+updatesProvider.getUpdates(updates => {
+    console.log('got updates: ', updates)
+})
+```
+
