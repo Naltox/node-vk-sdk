@@ -919,7 +919,11 @@ export interface PhotosGetMessagesUploadServerParams {
     /**
      * access token
      */
-    access_token?: string
+    access_token?: string,
+    /**
+     * Peer ID
+     */
+    peer_id?: number,
 }
 
 export interface PhotosSaveMessagesPhotoParams {
