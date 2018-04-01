@@ -779,7 +779,8 @@ export class VKApi {
      * Returns the server address for photo upload in a private message for a user.
      *
      * @param {{
-     *   access_token: (string|undefined)
+     *   access_token: (string|undefined),
+     *   peer_id: (number)
      * }} params
      *
      * @returns {Promise<Responses.PhotosGetMessagesUploadServerResponse>}
