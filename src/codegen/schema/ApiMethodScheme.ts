@@ -6,7 +6,8 @@ export default class ApiMethodScheme {
         readonly name: string,
         readonly params: ApiMethodParam[],
         readonly responseType: Type,
-        readonly description: string
+        readonly description: string,
+        readonly isSuperClass: boolean
     ) {
 
     }

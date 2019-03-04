@@ -1,4 +1,4 @@
-export { VKApi } from './src/VKApi'
-export { BaseLogger } from './src/logger/BaseLogger'
-export { ConsoleLogger } from './src/logger/ConsoleLogger'
-export { BotsLongPollUpdatesProvider } from './src/botsLongPoll/BotsLongPollUpdatesProvider'
+export { VKApi } from './src/generated/VKApi'
+export { BaseLogger } from './src/log/BaseLogger'
+export { ConsoleLogger } from './src/log/ConsoleLogger'
+export { BotsLongPollUpdatesProvider } from './src/api/botsLongPoll/BotsLongPollUpdatesProvider'

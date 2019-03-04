@@ -1,45 +1,64 @@
-import TypescriptCodeGenerator from "./codeGeneration/TypescriptCodeGenerator";
-import ClassScheme from "./codeGeneration/schema/ClassScheme";
-import ClassField from "./codeGeneration/schema/ClassField";
-import StringType from "./codeGeneration/types/StringType";
-import NumberType from "./codeGeneration/types/NumberType";
-import VectorType from "./codeGeneration/types/VectorType";
-import {toCamelCase} from "./codeGeneration/Utils";
-import CustomType from "./codeGeneration/types/CustomType";
-import ApiMethodScheme from "./codeGeneration/schema/ApiMethodScheme";
-import ApiMethodParam from "./codeGeneration/schema/ApiMethodParam";
-import {Type} from "./codeGeneration/types/Type";
-import AnyType from "./codeGeneration/types/AnyType";
-import IntBoolType from "./codeGeneration/types/IntBoolType";
-import BooleanType from "./codeGeneration/types/BooleanType";
+import TypescriptCodeGenerator from "../codegen/TypescriptCodeGenerator";
+import ClassScheme from "../codegen/schema/ClassScheme";
+import ClassField from "../codegen/schema/ClassField";
+import StringType from "../codegen/types/StringType";
+import NumberType from "../codegen/types/NumberType";
+import VectorType from "../codegen/types/VectorType";
+import {toCamelCase} from "../codegen/Utils";
+import CustomType from "../codegen/types/CustomType";
+import ApiMethodScheme from "../codegen/schema/ApiMethodScheme";
+import ApiMethodParam from "../codegen/schema/ApiMethodParam";
+import {Type} from "../codegen/types/Type";
+import AnyType from "../codegen/types/AnyType";
+import BooleanType from "../codegen/types/BooleanType";
 import {writeFile} from "fs";
-import SourceCode from "./codeGeneration/SourceCode";
-import {VKApi} from "./VKApi";
-import AliasClassScheme from "./codeGeneration/schema/AliasClassScheme";
-import CustomPrimitiveScheme from "./codeGeneration/schema/CustomPrimitiveScheme";
-import CustomPrimitiveType from "./codeGeneration/types/CustomPrimitiveType";
+import SourceCode from "../codegen/SourceCode";
+import AliasClassScheme from "../codegen/schema/AliasClassScheme";
+import CustomPrimitiveScheme from "../codegen/schema/CustomPrimitiveScheme";
+import CustomPrimitiveType from "../codegen/types/CustomPrimitiveType";
+import {ConsoleLogger} from "../log/ConsoleLogger";
 
-const objects = require('./vk-api-schema/objects.json')
-const responses = require('./vk-api-schema/responses.json')
-const methods = require('./vk-api-schema/methods.json')
+const objects = require('../vk-api-schema/objects.json')
+const responses = require('../vk-api-schema/responses.json')
+const methods = require('../vk-api-schema/methods.json')
 
-let codeGenerator = new TypescriptCodeGenerator()
+const codeGenerator = new TypescriptCodeGenerator()
+const logger = new ConsoleLogger()
 
 const MODELS_FILE = 'Models.ts'
 const RESPONSES_FILE = 'Responses.ts'
-const METHODS_FILE = 'Methods.ts'
+const VKAPI_FILE = 'VKApi.ts'
 const METHODS_PROPS_FILE = 'MethodsProps.ts'
+
+const GENERATED_PATH = __dirname + '/../generated/'
 
 generate()
 
 async function generate() {
     let modelsCode: SourceCode[] = []
 
-    for (let className in objects.definitions) {
-        // if (className == 'base_bool_int') {
-        //     continue
-        // }
+    // Hack types missing in schema
+    // messages_message_action_photo
+    // messages_fwd_message
+    // messages_conversation
+    // database_street
+    // messages_email
+    // messages_searchConversations_response
+    // messages_getConversationMembers_response
 
+    let anyType = { type: 'any', properties: { } }
+    objects.definitions['messages_fwd_message'] = anyType
+    objects.definitions['messages_message_action_photo'] = anyType
+    objects.definitions['database_street'] = anyType
+    objects.definitions['messages_email'] = anyType
+    objects.definitions['messages_conversation'] = objects.definitions.messages_conversation_with_message
+    responses.definitions['messages_searchConversations_response'] = { type: 'object', properties: { response: { type: 'any' } } }
+    responses.definitions['messages_getConversationMembers_response'] = { type: 'object', properties: { response: { type: 'any' } } }
+
+    //
+    //  Models
+    //
+    for (let className in objects.definitions) {
         let classScheme = jsonToClassScheme(className, objects.definitions[className])
 
 
@@ -49,50 +68,18 @@ async function generate() {
         if (classScheme instanceof CustomPrimitiveScheme) {
             modelsCode.push(codeGenerator.generateCustomPrimitive(classScheme, true))
         }
-
-
-        //modelsCode.push(codeGenerator.generateClass(classScheme))
     }
 
-    await saveToFile(__dirname + '/' + MODELS_FILE, modelsCode.map(c => c.render()).join('\n\n'))
-    console.log('models generated')
+    await saveToFile(GENERATED_PATH + MODELS_FILE, modelsCode.map(c => c.render()).join('\n\n'))
+    logger.log('models generated')
 
+    //
+    //  Responses
+    //
     let responsesCode: SourceCode[] = []
 
     for (let className in responses.definitions) {
-
-
-        //let classScheme
-
-
-
-        // if (responses.definitions[className].properties.response.type != 'object') {
-        //     console.log(responses.definitions[className].properties.response)
-        //
-        // }
         let classScheme = jsonToClassScheme(className, responses.definitions[className].properties.response, true)
-
-        //console.log(classScheme)
-
-        //console.dir(classScheme, {depth: null})
-
-        // if (responses.definitions[className].properties.response.type == undefined) {
-        //     console.log(className)
-        // }
-
-
-        // if (responses.definitions[className].properties.response.type == 'object') {
-        //     console.log(className)
-        //     classScheme = jsonToClassScheme(className, responses.definitions[className].properties.response, true)
-        // }
-        //
-        // else {
-        //     //console.log(className, responses.definitions[className])
-        //     classScheme = jsonToClassScheme(className, responses.definitions[className], true)
-        // }
-
-
-        //console.log(classScheme)
 
         if (classScheme instanceof ClassScheme) {
             responsesCode.push(codeGenerator.generateInterface(classScheme))
@@ -100,26 +87,18 @@ async function generate() {
         if (classScheme instanceof CustomPrimitiveScheme) {
             responsesCode.push(codeGenerator.generateCustomPrimitive(classScheme, true))
         }
-
-
-
-        //console.dir(classScheme, {depth: null})
-
     }
 
-    await saveToFile(__dirname + '/' + RESPONSES_FILE, responsesCode.map(c => c.render()).join('\n\n'))
-    console.log('responses generated')
+    let responsesFileCode = new SourceCode()
+    responsesFileCode.add('import * as Models from "./Models"')
+    responsesFileCode.add('')
+    responsesCode.forEach(c => responsesFileCode.append(c))
+    await saveToFile(GENERATED_PATH + RESPONSES_FILE, responsesFileCode.render())
+    logger.log('responses generated')
 
-    let methodsCode: SourceCode[] = []
-
-    methods.methods.forEach(method => {
-        let scheme = jsonToMethodScheme(method)
-        methodsCode.push(codeGenerator.generateApiMethod(scheme))
-    })
-
-    await saveToFile(__dirname + '/' + METHODS_FILE, methodsCode.map(c => c.render()).join('\n\n'))
-    console.log('methods generated')
-
+    //
+    //  Methods props
+    //
     let methodsPropsCode: SourceCode[] = []
 
     methods.methods.forEach(method => {
@@ -127,23 +106,51 @@ async function generate() {
         methodsPropsCode.push(codeGenerator.generateApiMethodParamsInterface(scheme))
     })
 
-    await saveToFile(__dirname + '/' + METHODS_PROPS_FILE, methodsPropsCode.map(c => c.render()).join('\n\n'))
-    console.log('methods props generated')
+    await saveToFile(GENERATED_PATH + METHODS_PROPS_FILE, methodsPropsCode.map(c => c.render()).join('\n\n'))
+    logger.log('methods props generated')
+
+    //
+    //  VKApi
+    //
+    let methodsCode: SourceCode[] = []
+
+    methods.methods.forEach(method => {
+        let scheme = jsonToMethodScheme(method)
+        methodsCode.push(codeGenerator.generateApiMethod(scheme))
+    })
+
+    let apiClassCode = new SourceCode()
+    apiClassCode.add('import {BaseVKApi} from "../api/BaseVKApi"')
+    apiClassCode.add('import * as MethodsProps from "./MethodsProps"')
+    apiClassCode.add('import * as Responses from "./Responses"')
+    apiClassCode.add('')
+    apiClassCode.add('export class VKApi extends BaseVKApi {')
+    methodsCode.forEach(c => apiClassCode.append(c, 1))
+    apiClassCode.add('}')
+    await saveToFile(GENERATED_PATH + VKAPI_FILE, apiClassCode.render())
+    logger.log('VKApi generated')
 }
 
 function jsonToMethodScheme(scheme: any): ApiMethodScheme {
     let params: ApiMethodParam[] = []
 
+    let paramsSet = new Set<string>()
 
-    if (scheme.parameters)
-        scheme.parameters.forEach(param => {
+    if (scheme.parameters) {
+        for (let param of scheme.parameters) {
+            if (paramsSet.has(param.name)) {
+                logger.warn(`Duplicate parameter ${param.name} in ${scheme.name}`)
+                continue
+            }
             params.push(new ApiMethodParam(
                 param.name,
                 parseType(param, true),
                 !!param.required,
-                param.description
+                param.description,
             ))
-        })
+            paramsSet.add(param.name)
+        }
+    }
 
     params.push(
         new ApiMethodParam(
@@ -158,7 +165,8 @@ function jsonToMethodScheme(scheme: any): ApiMethodScheme {
         scheme.name,
         params,
         new CustomType('Responses.' + toCamelCase(normalizePath(scheme.responses.response.$ref), true)),
-        scheme.description
+        scheme.description,
+        true
     )
 }
 
@@ -245,7 +253,6 @@ function parseType(scheme: any, forResponses = false): Type {
 
     if (type == 'array') {
         if (scheme.items.oneOf) {
-            // messages_searchDialogs_response || users_getSubscriptions_extended_response
             return new VectorType(new AnyType())
         }
 
@@ -260,7 +267,6 @@ function parseType(scheme: any, forResponses = false): Type {
                 return new VectorType(new CustomType('Models.' + name))
             }
 
-
             if (primitive)
                 return  new VectorType(new CustomPrimitiveType(name))
 
@@ -270,14 +276,11 @@ function parseType(scheme: any, forResponses = false): Type {
         return new VectorType(parseType(scheme.items, forResponses))
     }
 
-    if (scheme.$ref) {
-        // if (
-        //     scheme.$ref == '#/definitions/base_bool_int' ||
-        //     scheme.$ref == 'objects.json#/definitions/base_bool_int'
-        // ) {
-        //     return new IntBoolType()
-        // }
+    if (type == 'any') {
+        return new AnyType()
+    }
 
+    if (scheme.$ref) {
         let primitive = isPrimitive(scheme.$ref)
 
         let name = toCamelCase(normalizePath(scheme.$ref), true)
@@ -288,8 +291,6 @@ function parseType(scheme: any, forResponses = false): Type {
 
             return new CustomType('Models.' + name)
         }
-
-
 
         if (primitive)
             return new CustomPrimitiveType(name)
@@ -304,7 +305,6 @@ function parseType(scheme: any, forResponses = false): Type {
 
     if (scheme.properties && scheme.properties.count && scheme.properties.items) {
         // convert { cont, items } to array
-
         return parseType(scheme.properties.items, forResponses)
     }
 
@@ -338,14 +338,6 @@ function isPrimitive(ref: string): boolean {
     return false
 }
 
-function isPrimitiveResponse(ref: string): boolean {
-    let scheme = responses.definitions[normalizePath(ref)].properties.response
-
-    if (scheme.type !== 'object')
-        return true
-
-    return false
-}
 async function saveToFile(name: string, data: string): Promise<any> {
     return new Promise((resolve, reject) => {
         writeFile(name, data, err => {

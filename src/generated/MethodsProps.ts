@@ -722,11 +722,11 @@ export interface PhotosGetChatUploadServerParams {
      */
     chat_id: number,
     /**
-     *
+     * 
      */
     crop_x?: number,
     /**
-     *
+     * 
      */
     crop_y?: number,
     /**
@@ -917,6 +917,10 @@ export interface PhotosGetWallUploadServerParams {
 
 export interface PhotosGetMessagesUploadServerParams {
     /**
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'Chat ID', e.g. '2000000001'. For community: '- Community ID', e.g. '-12345'. "
+     */
+    peer_id?: number,
+    /**
      * access token
      */
     access_token?: string
@@ -993,11 +997,11 @@ export interface PhotosSearchParams {
      */
     long?: number,
     /**
-     *
+     * 
      */
     start_time?: number,
     /**
-     *
+     * 
      */
     end_time?: number,
     /**
@@ -1584,7 +1588,7 @@ export interface StoriesGetRepliesParams {
 
 export interface StoriesGetStatsParams {
     /**
-     * Story owner ID.
+     * Story owner ID. 
      */
     owner_id: number,
     /**
@@ -2355,7 +2359,7 @@ export interface PhotosCreateCommentParams {
      */
     from_group?: boolean,
     /**
-     *
+     * 
      */
     reply_to_comment?: number,
     /**
@@ -2603,6 +2607,61 @@ export interface WallPostParams {
     access_token?: string
 }
 
+export interface WallPostAdsStealthParams {
+    /**
+     * User ID or community ID. Use a negative value to designate a community ID.
+     */
+    owner_id: number,
+    /**
+     * (Required if 'attachments' is not set.) Text of the post.
+     */
+    message?: string,
+    /**
+     * (Required if 'message' is not set.) List of objects attached to the post, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, 'page' — wiki-page, 'note' — note, 'poll' — poll, 'album' — photo album, '<owner_id>' — ID of the media application owner. '<media_id>' — Media application ID. Example: "photo100172_166443618,photo66748_265827614", May contain a link to an external page to include in the post. Example: "photo66748_265827614,http://habrahabr.ru", "NOTE: If more than one link is being attached, an error will be thrown."
+     */
+    attachments?: string[],
+    /**
+     * Only for posts in communities with 'from_group' set to '1': '1' — post will be signed with the name of the posting user, '0' — post will not be signed (default)
+     */
+    signed?: boolean,
+    /**
+     * Geographical latitude of a check-in, in degrees (from -90 to 90).
+     */
+    lat?: number,
+    /**
+     * Geographical longitude of a check-in, in degrees (from -180 to 180).
+     */
+    long?: number,
+    /**
+     * ID of the location where the user was tagged.
+     */
+    place_id?: number,
+    /**
+     * Post ID. Used for publishing of scheduled and suggested posts.
+     */
+    post_id?: number,
+    /**
+     * Unique identifier to avoid duplication the same post.
+     */
+    guid?: string,
+    /**
+     * Link button ID
+     */
+    link_button?: string,
+    /**
+     * Link title
+     */
+    link_title?: string,
+    /**
+     * Link image url
+     */
+    link_image?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface WallRepostParams {
     /**
      * ID of the object to be reposted on the wall. Example: "wall66748_3675"
@@ -2698,6 +2757,57 @@ export interface WallEditParams {
      * undefined
      */
     mark_as_ads?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface WallEditAdsStealthParams {
+    /**
+     * User ID or community ID. Use a negative value to designate a community ID.
+     */
+    owner_id?: number,
+    /**
+     * Post ID
+     */
+    post_id: number,
+    /**
+     * (Required if 'attachments' is not set.) Text of the post.
+     */
+    message?: string,
+    /**
+     * (Required if 'message' is not set.) List of objects attached to the post, in the following format: "<owner_id>_<media_id>,<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, 'page' — wiki-page, 'note' — note, 'poll' — poll, 'album' — photo album, '<owner_id>' — ID of the media application owner. '<media_id>' — Media application ID. Example: "photo100172_166443618,photo66748_265827614", May contain a link to an external page to include in the post. Example: "photo66748_265827614,http://habrahabr.ru", "NOTE: If more than one link is being attached, an error will be thrown."
+     */
+    attachments?: string[],
+    /**
+     * Only for posts in communities with 'from_group' set to '1': '1' — post will be signed with the name of the posting user, '0' — post will not be signed (default)
+     */
+    signed?: boolean,
+    /**
+     * Geographical latitude of a check-in, in degrees (from -90 to 90).
+     */
+    lat?: number,
+    /**
+     * Geographical longitude of a check-in, in degrees (from -180 to 180).
+     */
+    long?: number,
+    /**
+     * ID of the location where the user was tagged.
+     */
+    place_id?: number,
+    /**
+     * Link button ID
+     */
+    link_button?: string,
+    /**
+     * Link title
+     */
+    link_title?: string,
+    /**
+     * Link image url
+     */
+    link_image?: string,
     /**
      * access token
      */
@@ -3138,7 +3248,7 @@ export interface PagesSaveParams {
      */
     group_id?: number,
     /**
-     *
+     * User ID
      */
     user_id?: number,
     /**
@@ -3161,7 +3271,7 @@ export interface PagesSaveAccessParams {
      */
     group_id?: number,
     /**
-     *
+     * 
      */
     user_id?: number,
     /**
@@ -3188,7 +3298,7 @@ export interface PagesGetHistoryParams {
      */
     group_id?: number,
     /**
-     *
+     * 
      */
     user_id?: number,
     /**
@@ -3210,7 +3320,7 @@ export interface PagesGetTitlesParams {
 
 export interface PagesGetVersionParams {
     /**
-     *
+     * 
      */
     version_id: number,
     /**
@@ -3218,7 +3328,7 @@ export interface PagesGetVersionParams {
      */
     group_id?: number,
     /**
-     *
+     * 
      */
     user_id?: number,
     /**
@@ -4162,6 +4272,10 @@ export interface GroupsSetCallbackSettingsParams {
      */
     user_unblock?: boolean,
     /**
+     * New form in lead forms
+     */
+    lead_forms_new?: boolean,
+    /**
      * access token
      */
     access_token?: string
@@ -4194,6 +4308,10 @@ export interface GroupsSetLongPollSettingsParams {
      * Community ID.
      */
     group_id: number,
+    /**
+     * Sets whether Long Poll is enabled ('0' — disabled, '1' — enabled).
+     */
+    enabled?: boolean,
     /**
      * A new incoming message has been received ('0' — disabled, '1' — enabled).
      */
@@ -4835,7 +4953,7 @@ export interface VideoSearchParams {
      */
     filters?: string[],
     /**
-     *
+     * 
      */
     search_own?: boolean,
     /**
@@ -4855,7 +4973,7 @@ export interface VideoSearchParams {
      */
     count?: number,
     /**
-     *
+     * 
      */
     extended?: boolean,
     /**
@@ -4878,7 +4996,7 @@ export interface VideoGetUserVideosParams {
      */
     count?: number,
     /**
-     *
+     * 
      */
     extended?: boolean,
     /**
@@ -5112,7 +5230,7 @@ export interface VideoGetAlbumsByVideoParams {
      */
     video_id: number,
     /**
-     *
+     * 
      */
     extended?: boolean,
     /**
@@ -5182,7 +5300,7 @@ export interface VideoCreateCommentParams {
      */
     from_group?: boolean,
     /**
-     *
+     * 
      */
     reply_to_comment?: number,
     /**
@@ -6131,42 +6249,11 @@ export interface AccountSaveProfileInfoParams {
     access_token?: string
 }
 
-export interface MessagesGetParams {
+export interface MessagesGetConversationsParams {
     /**
-     * '1' — to return outgoing messages, '0' — to return incoming messages (default)
+     * Group ID (for group messages with group access token)
      */
-    out?: boolean,
-    /**
-     * Offset needed to return a specific subset of messages.
-     */
-    offset?: number,
-    /**
-     * Number of messages to return.
-     */
-    count?: number,
-    /**
-     * 8 - important messages
-     */
-    filter?: number,
-    /**
-     * Maximum time since a message was sent, in seconds. To return messages without a time limitation, set as '0'.
-     */
-    time_offset?: number,
-    /**
-     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
-     */
-    preview_length?: number,
-    /**
-     * ID of the message received before the message that will be returned last (provided that no more than 'count' messages were received before it, otherwise 'offset' parameter shall be used).
-     */
-    last_message_id?: number,
-    /**
-     * access token
-     */
-    access_token?: string
-}
-
-export interface MessagesGetDialogsParams {
+    group_id?: number,
     /**
      * Offset needed to return a specific subset of conversations.
      */
@@ -6176,25 +6263,44 @@ export interface MessagesGetDialogsParams {
      */
     count?: number,
     /**
+     * Filter to apply: 'all' — all conversations, 'unread' — conversations with unread messages, 'important' — conversations, marked as important (only for community messages), 'unanswered' — conversations, marked as unanswered (only for community messages)
+     */
+    filter?: string,
+    /**
+     * '1' — return extra information about users and communities
+     */
+    extended?: boolean,
+    /**
      * ID of the message from what to return dialogs.
      */
     start_message_id?: number,
     /**
-     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
+     * Profile and communities fields to return.
      */
-    preview_length?: number,
+    fields?: string[],
     /**
-     * '1' — return conversations with unread messages only.
+     * access token
      */
-    unread?: boolean,
+    access_token?: string
+}
+
+export interface MessagesGetConversationsByIdParams {
     /**
-     * '1' — return important conversations only.
+     * Destination IDs. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
      */
-    important?: boolean,
+    peer_ids: number[],
     /**
-     * '1' — return unanswered conversations only.
+     * Return extended properties
      */
-    unanswered?: boolean,
+    extended?: boolean,
+    /**
+     * Profile and communities fields to return.
+     */
+    fields?: string[],
+    /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
     /**
      * access token
      */
@@ -6206,6 +6312,49 @@ export interface MessagesGetByIdParams {
      * Message IDs.
      */
     message_ids: number[],
+    /**
+     * Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
+     */
+    preview_length?: number,
+    /**
+     * Information whether the response should be extended
+     */
+    extended?: boolean,
+    /**
+     * Profile fields to return.
+     */
+    fields?: string[],
+    /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MessagesGetByConversationMessageIdParams {
+    /**
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
+     */
+    peer_id?: number,
+    /**
+     * Conversation message IDs.
+     */
+    conversation_message_ids: number[],
+    /**
+     * Information whether the response should be extended
+     */
+    extended?: boolean,
+    /**
+     * Profile fields to return.
+     */
+    fields?: string[],
+    /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
     /**
      * access token
      */
@@ -6238,6 +6387,10 @@ export interface MessagesSearchParams {
      */
     count?: number,
     /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
+    /**
      * access token
      */
     access_token?: string
@@ -6264,6 +6417,18 @@ export interface MessagesGetHistoryParams {
      * Starting message ID from which to return history.
      */
     start_message_id?: number,
+    /**
+     * Information whether the response should be extended
+     */
+    extended?: boolean,
+    /**
+     * Profile fields to return.
+     */
+    fields?: string[],
+    /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
     /**
      * Sort order: '1' — return messages in chronological order. '0' — return messages in reverse chronological order.
      */
@@ -6296,9 +6461,13 @@ export interface MessagesGetHistoryAttachmentsParams {
      */
     photo_sizes?: boolean,
     /**
-     * Additional profile [vk.com/dev/fields|fields] to return.
+     * Additional profile [vk.com/dev/fields|fields] to return. 
      */
     fields?: string[],
+    /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
     /**
      * access token
      */
@@ -6345,7 +6514,7 @@ export interface MessagesSendParams {
     /**
      * (Required if 'message' is not set.) List of objects attached to the message, separated by commas, in the following format: "<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, 'wall' — wall post, '<owner_id>' — ID of the media attachment owner. '<media_id>' — media attachment ID. Example: "photo100172_166443618"
      */
-    attachment?: string,
+    attachment?: string[],
     /**
      * ID of forwarded messages, separated with a comma. Listed messages of the sender will be shown in the message body at the recipient's. Example: "123,431,544"
      */
@@ -6358,6 +6527,49 @@ export interface MessagesSendParams {
      * '1' if the message is a notification (for community messages).
      */
     notification?: boolean,
+    /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MessagesEditParams {
+    /**
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
+     */
+    peer_id: number,
+    /**
+     * (Required if 'attachments' is not set.) Text of the message.
+     */
+    message?: string,
+    /**
+     * Geographical latitude of a check-in, in degrees (from -90 to 90).
+     */
+    lat?: number,
+    /**
+     * Geographical longitude of a check-in, in degrees (from -180 to 180).
+     */
+    long?: number,
+    /**
+     * (Required if 'message' is not set.) List of objects attached to the message, separated by commas, in the following format: "<owner_id>_<media_id>", '' — Type of media attachment: 'photo' — photo, 'video' — video, 'audio' — audio, 'doc' — document, 'wall' — wall post, '<owner_id>' — ID of the media attachment owner. '<media_id>' — media attachment ID. Example: "photo100172_166443618"
+     */
+    attachment?: string[],
+    /**
+     * '1' — to keep forwarded, messages.
+     */
+    keep_forward_messages?: boolean,
+    /**
+     * '1' — to keep attached snippets.
+     */
+    keep_snippets?: boolean,
+    /**
+     * Group ID (for group messages with user access token)
+     */
+    group_id?: number,
     /**
      * access token
      */
@@ -6374,26 +6586,38 @@ export interface MessagesDeleteParams {
      */
     spam?: boolean,
     /**
+     * '1' — delete message for for all.
+     */
+    delete_for_all?: boolean,
+    /**
+     * Group ID (for group messages with user access token)
+     */
+    group_id?: number,
+    /**
      * access token
      */
     access_token?: string
 }
 
-export interface MessagesDeleteDialogParams {
+export interface MessagesDeleteConversationParams {
     /**
      * User ID. To clear a chat history use 'chat_id'
      */
     user_id?: string,
     /**
+     * Group ID (for group messages with user access token)
+     */
+    group_id?: number,
+    /**
      * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
      */
     peer_id?: number,
     /**
-     * Offset needed to return a specific subset of messages.
+     * Offset needed to delete a specific subset of conversations.
      */
     offset?: number,
     /**
-     * Number of messages to delete. "NOTE: If the number of messages exceeds the maximum, the method shall be called several times."
+     * Number of conversations to delete. "NOTE: If the number of messages exceeds the maximum, the method shall be called several times."
      */
     count?: number,
     /**
@@ -6408,6 +6632,10 @@ export interface MessagesRestoreParams {
      */
     message_id: number,
     /**
+     * Group ID (for group messages with user access token)
+     */
+    group_id?: number,
+    /**
      * access token
      */
     access_token?: string
@@ -6421,11 +6649,15 @@ export interface MessagesMarkAsReadParams {
     /**
      * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
      */
-    peer_id?: string,
+    peer_id?: number,
     /**
      * Message ID to start from.
      */
     start_message_id?: number,
+    /**
+     * Group ID (for group messages with user access token)
+     */
+    group_id?: number,
     /**
      * access token
      */
@@ -6447,11 +6679,15 @@ export interface MessagesMarkAsImportantParams {
     access_token?: string
 }
 
-export interface MessagesMarkAsImportantDialogParams {
+export interface MessagesMarkAsImportantConversationParams {
     /**
-     * IDs of messages to mark as important.
+     * Group ID (for group messages with group access token)
      */
-    peer_id?: number[],
+    group_id?: number,
+    /**
+     * ID of conversation to mark as important.
+     */
+    peer_id: number,
     /**
      * '1' — to add a star (mark as important), '0' — to remove the star
      */
@@ -6462,15 +6698,19 @@ export interface MessagesMarkAsImportantDialogParams {
     access_token?: string
 }
 
-export interface MessagesMarkAsUnansweredDialogParams {
+export interface MessagesMarkAsAnsweredConversationParams {
     /**
-     * IDs of messages to mark as important.
+     * Group ID (for group messages with group access token)
      */
-    peer_id?: number[],
+    group_id?: number,
     /**
-     * '1' — to add a star (mark as important), '0' — to remove the star
+     * ID of conversation to mark as important.
      */
-    important?: boolean,
+    peer_id: number,
+    /**
+     * '1' — to mark as answered, '0' — to remove the mark
+     */
+    answered?: boolean,
     /**
      * access token
      */
@@ -6486,6 +6726,10 @@ export interface MessagesGetLongPollServerParams {
      * '1' — to return the 'pts' field, needed for the [vk.com/dev/messages.getLongPollHistory|messages.getLongPollHistory] method.
      */
     need_pts?: boolean,
+    /**
+     * Group ID (for group messages with user access token)
+     */
+    group_id?: number,
     /**
      * access token
      */
@@ -6526,28 +6770,9 @@ export interface MessagesGetLongPollHistoryParams {
      */
     max_msg_id?: number,
     /**
-     * access token
+     * Group ID (for group messages with user access token)
      */
-    access_token?: string
-}
-
-export interface MessagesGetChatParams {
-    /**
-     * Chat ID.
-     */
-    chat_id?: number,
-    /**
-     * Chat IDs.
-     */
-    chat_ids?: number[],
-    /**
-     * Profile fields to return.
-     */
-    fields?: string[],
-    /**
-     * Case for declension of user name and surname: 'nom' — nominative (default), 'gen' — genitive , 'dat' — dative, 'acc' — accusative , 'ins' — instrumental , 'abl' — prepositional
-     */
-    name_case?: string,
+    group_id?: number,
     /**
      * access token
      */
@@ -6584,15 +6809,15 @@ export interface MessagesEditChatParams {
     access_token?: string
 }
 
-export interface MessagesGetChatUsersParams {
+export interface MessagesGetConversationMembersParams {
     /**
-     * Chat ID.
+     * Group ID (for group messages with group access token)
      */
-    chat_id?: number,
+    group_id?: number,
     /**
-     * Chat IDs.
+     * Peer ID.
      */
-    chat_ids?: number[],
+    peer_id?: number,
     /**
      * Profile fields to return.
      */
@@ -6621,12 +6846,16 @@ export interface MessagesSetActivityParams {
      */
     peer_id?: number,
     /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
+    /**
      * access token
      */
     access_token?: string
 }
 
-export interface MessagesSearchDialogsParams {
+export interface MessagesSearchConversationsParams {
     /**
      * Search query string.
      */
@@ -6634,11 +6863,19 @@ export interface MessagesSearchDialogsParams {
     /**
      * Maximum number of results.
      */
-    limit?: number,
+    count?: number,
+    /**
+     * '1' — return extra information about users and communities
+     */
+    extended?: boolean,
     /**
      * Profile fields to return.
      */
     fields?: string[],
+    /**
+     * Group ID (for group messages with user access token)
+     */
+    group_id?: number,
     /**
      * access token
      */
@@ -7428,6 +7665,21 @@ export interface DocsGetWallUploadServerParams {
     access_token?: string
 }
 
+export interface DocsGetMessagesUploadServerParams {
+    /**
+     * Document type.
+     */
+    type?: string,
+    /**
+     * Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'Chat ID', e.g. '2000000001'. For community: '- Community ID', e.g. '-12345'. "
+     */
+    peer_id?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface DocsSaveParams {
     /**
      * This parameter is returned when the file is [vk.com/dev/upload_files_2|uploaded to the server].
@@ -7803,11 +8055,11 @@ export interface SearchGetHintsParams {
      */
     limit?: number,
     /**
-     *
+     * 
      */
     filters?: string[],
     /**
-     *
+     * 
      */
     search_global?: boolean,
     /**

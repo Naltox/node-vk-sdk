@@ -1,14 +1,12 @@
 import {CodeGenerator} from "./CodeGenerator";
 import ClassScheme from "./schema/ClassScheme";
 import SourceCode from "./SourceCode";
-import ClassField from "./schema/ClassField";
 import StringType from "./types/StringType";
 import NumberType from "./types/NumberType";
 import AnyType from "./types/AnyType";
 import BooleanType from "./types/BooleanType";
 import CustomType from "./types/CustomType";
 import {Type} from "./types/Type";
-import {type} from "os";
 import VectorType from "./types/VectorType";
 import {toCamelCase} from "./Utils";
 import ApiMethodScheme from "./schema/ApiMethodScheme";
@@ -113,17 +111,7 @@ export default class TypescriptCodeGenerator implements CodeGenerator {
         code.add(` * @returns {Promise<${responseName}>}`)
         code.add(` */`)
         code.add(`public async ${methodName}(params: ${propsName}): Promise<${responseName}> {`)
-        code.add(`return this.call("${scheme.name}", params)`, 1)
-        // code.add(`'${scheme.name}',`, 2)
-        // code.add(`{`, 2)
-        // scheme.params.forEach((param, index) => {
-        //     let coma = this.genComa(scheme.params, index)
-        //
-        //     code.add(`${param.name}: params.${toCamelCase(param.name)}${coma}`, 3)
-        // })
-        // code.add(`},`, 2)
-        // code.add(responseName, 2)
-        //code.add(')', 1)
+        code.add(`return ${scheme.isSuperClass ? 'super' : 'this'}.call("${scheme.name}", params)`, 1)
         code.add('}')
 
         return code

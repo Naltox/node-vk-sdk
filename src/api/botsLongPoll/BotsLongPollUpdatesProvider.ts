@@ -1,5 +1,5 @@
 import {BaseUpdateProvider} from "./BaseUpdateProvider";
-import {VKApi} from "../VKApi";
+import {VKApi} from "../../generated/VKApi";
 const req = require('tiny_request')
 
 export class BotsLongPollUpdatesProvider implements BaseUpdateProvider {

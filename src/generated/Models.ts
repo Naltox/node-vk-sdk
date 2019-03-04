@@ -43,11 +43,11 @@ export interface AccountAccountCounters {
 
 export interface AccountLookupResult {
     /**
-     *
+     * 
      */
     found: AccountUserXtrContact[],
     /**
-     *
+     * 
      */
     other: AccountOtherContact[]
 }
@@ -60,7 +60,7 @@ export interface AccountNameRequest {
      */
     id: number,
     /**
-     *
+     * 
      */
     status: AccountNameRequestStatus,
     /**
@@ -131,7 +131,7 @@ export interface AccountPushConversations {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: AccountPushConversationsItem[]
 }
@@ -157,83 +157,83 @@ export type AccountPushParamsSettings = string
 
 export interface AccountPushParams {
     /**
-     *
+     * 
      */
     msg: AccountPushParamsMode[],
     /**
-     *
+     * 
      */
     chat: AccountPushParamsMode[],
     /**
-     *
+     * 
      */
     friend: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     friend_found: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     friend_accepted: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     reply: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     comment: AccountPushParamsSettings[],
     /**
-     *
+     * 
      */
     mention: AccountPushParamsSettings[],
     /**
-     *
+     * 
      */
     like: AccountPushParamsSettings[],
     /**
-     *
+     * 
      */
     repost: AccountPushParamsSettings[],
     /**
-     *
+     * 
      */
     wall_post: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     wall_publish: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     group_invite: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     group_accepted: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     event_soon: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     photos_tag: AccountPushParamsSettings[],
     /**
-     *
+     * 
      */
     app_request: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     sdk_open: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     new_post: AccountOnoffOptions[],
     /**
-     *
+     * 
      */
     birthday: AccountOnoffOptions[]
 }
@@ -248,11 +248,11 @@ export interface AccountPushSettings {
      */
     disabled_until: number,
     /**
-     *
+     * 
      */
     conversations: AccountPushConversations,
     /**
-     *
+     * 
      */
     settings: AccountPushParams
 }
@@ -283,7 +283,7 @@ export interface AccountUserSettings {
      */
     relation: number,
     /**
-     *
+     * 
      */
     relation_partner: UsersUserMin,
     /**
@@ -291,7 +291,7 @@ export interface AccountUserSettings {
      */
     relation_pending: number,
     /**
-     *
+     * 
      */
     relation_requests: UsersUserMin[],
     /**
@@ -307,11 +307,11 @@ export interface AccountUserSettings {
      */
     home_town: string,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
@@ -323,7 +323,7 @@ export interface AccountUserSettings {
      */
     phone: string,
     /**
-     *
+     * 
      */
     name_request: AccountNameRequest
 }
@@ -394,11 +394,11 @@ export interface AccountUserXtrContact {
      */
     bdate: string,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
@@ -510,7 +510,7 @@ export interface AccountUserXtrContact {
      */
     site: string,
     /**
-     *
+     * 
      */
     status_audio: AudioAudioFull,
     /**
@@ -522,15 +522,15 @@ export interface AccountUserXtrContact {
      */
     activity: string,
     /**
-     *
+     * 
      */
     last_seen: UsersLastSeen,
     /**
-     *
+     * 
      */
     exports: UsersExports,
     /**
-     *
+     * 
      */
     crop_photo: UsersCropPhoto,
     /**
@@ -562,15 +562,15 @@ export interface AccountUserXtrContact {
      */
     common_count: number,
     /**
-     *
+     * 
      */
     occupation: UsersOccupation,
     /**
-     *
+     * 
      */
     career: UsersCareer[],
     /**
-     *
+     * 
      */
     military: UsersMilitary[],
     /**
@@ -610,11 +610,11 @@ export interface AccountUserXtrContact {
      */
     relation: number,
     /**
-     *
+     * 
      */
     relation_partner: UsersUserMin,
     /**
-     *
+     * 
      */
     personal: UsersPersonal,
     /**
@@ -646,11 +646,11 @@ export interface AccountUserXtrContact {
      */
     games: string,
     /**
-     *
+     * 
      */
     universities: UsersUniversity[],
     /**
-     *
+     * 
      */
     schools: UsersSchool[],
     /**
@@ -658,7 +658,7 @@ export interface AccountUserXtrContact {
      */
     about: string,
     /**
-     *
+     * 
      */
     relatives: UsersRelative[],
     /**
@@ -666,15 +666,15 @@ export interface AccountUserXtrContact {
      */
     quotes: string,
     /**
-     *
+     * 
      */
     contact: string,
     /**
-     *
+     * 
      */
     request_sent: number,
     /**
-     *
+     * 
      */
     sort_num: number
 }
@@ -718,7 +718,7 @@ export interface AdsAccesses {
      */
     client_id: string,
     /**
-     *
+     * 
      */
     role: AdsAccessRole
 }
@@ -731,7 +731,7 @@ export interface AdsAccount {
      */
     account_id: number,
     /**
-     *
+     * 
      */
     account_type: AdsAccountType,
     /**
@@ -739,7 +739,7 @@ export interface AdsAccount {
      */
     account_status: BaseBoolInt,
     /**
-     *
+     * 
      */
     access_role: AdsAccessRole
 }
@@ -764,7 +764,7 @@ export interface AdsAd {
      */
     ad_format: number,
     /**
-     *
+     * 
      */
     cost_type: AdsAdCostType,
     /**
@@ -800,7 +800,7 @@ export interface AdsAd {
      */
     category2_id: number,
     /**
-     *
+     * 
      */
     status: AdsAdStatus,
     /**
@@ -808,7 +808,7 @@ export interface AdsAd {
      */
     name: string,
     /**
-     *
+     * 
      */
     approved: AdsAdApproved,
     /**
@@ -845,7 +845,7 @@ export interface AdsAdLayout {
      */
     ad_format: number,
     /**
-     *
+     * 
      */
     cost_type: AdsAdLayoutCostType,
     /**
@@ -892,7 +892,7 @@ export interface AdsCampaign {
      */
     id: number,
     /**
-     *
+     * 
      */
     type: AdsCampaignType,
     /**
@@ -900,7 +900,7 @@ export interface AdsCampaign {
      */
     name: string,
     /**
-     *
+     * 
      */
     status: AdsCampaignStatus,
     /**
@@ -931,7 +931,7 @@ export interface AdsCategory {
      */
     name: string,
     /**
-     *
+     * 
      */
     subcategories: BaseObjectWithName[]
 }
@@ -959,7 +959,7 @@ export type AdsCriteriaSex = number
 
 export interface AdsCriteria {
     /**
-     *
+     * 
      */
     sex: AdsCriteriaSex,
     /**
@@ -1086,11 +1086,11 @@ export interface AdsDemoStats {
      */
     id: number,
     /**
-     *
+     * 
      */
     type: AdsObjectType,
     /**
-     *
+     * 
      */
     stats: AdsDemostatsFormat
 }
@@ -1109,19 +1109,19 @@ export interface AdsDemostatsFormat {
      */
     overall: number,
     /**
-     *
+     * 
      */
     sex: AdsStatsSex[],
     /**
-     *
+     * 
      */
     age: AdsStatsAge[],
     /**
-     *
+     * 
      */
     sex_age: AdsStatsSexAge[],
     /**
-     *
+     * 
      */
     cities: AdsStatsCities[]
 }
@@ -1167,7 +1167,7 @@ export interface AdsRejectReason {
      */
     comment: string,
     /**
-     *
+     * 
      */
     rules: AdsRules[]
 }
@@ -1178,7 +1178,7 @@ export interface AdsRules {
      */
     title: string,
     /**
-     *
+     * 
      */
     paragraphs: AdsParagraphs[]
 }
@@ -1189,11 +1189,11 @@ export interface AdsStats {
      */
     id: number,
     /**
-     *
+     * 
      */
     type: AdsObjectType,
     /**
-     *
+     * 
      */
     stats: AdsStatsFormat
 }
@@ -1224,7 +1224,7 @@ export interface AdsStatsFormat {
      */
     clicks: number,
     /**
-     * Reach
+     * Reach 
      */
     reach: number,
     /**
@@ -1295,7 +1295,7 @@ export interface AdsStatsSex {
      */
     clicks_rate: number,
     /**
-     *
+     * 
      */
     value: AdsStatsSexValue
 }
@@ -1387,7 +1387,7 @@ export interface AdsTargSuggestionsSchools {
      */
     desc: string,
     /**
-     *
+     * 
      */
     type: AdsTargSuggestionsSchoolsType,
     /**
@@ -1406,7 +1406,7 @@ export interface AdsTargSettings {
      */
     campaign_id: number,
     /**
-     *
+     * 
      */
     sex: AdsCriteriaSex,
     /**
@@ -1560,7 +1560,7 @@ export interface AdsUsers {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     accesses: AdsAccesses[]
 }
@@ -1650,7 +1650,7 @@ export interface AppsApp {
      */
     banner_1120: string,
     /**
-     *
+     * 
      */
     type: AppsAppType,
     /**
@@ -1682,7 +1682,7 @@ export interface AppsApp {
      */
     catalog_position: number,
     /**
-     *
+     * 
      */
     screenshots: PhotosPhoto[],
     /**
@@ -1690,7 +1690,7 @@ export interface AppsApp {
      */
     international: number,
     /**
-     *
+     * 
      */
     leaderboard_type: AppsAppLeaderboardType,
     /**
@@ -1706,7 +1706,7 @@ export interface AppsApp {
      */
     platform_id: number,
     /**
-     * Information whther application is in mobile catalog
+     * Information whether application is in mobile catalog
      */
     is_in_catalog: number
 }
@@ -1807,7 +1807,7 @@ export interface AudioAudioFull {
      */
     no_search: BaseBoolInt,
     /**
-     *
+     * 
      */
     is_hq: BaseBoolInt
 }
@@ -1844,6 +1844,13 @@ export interface AudioAudioUploadResponse {
 
 export type BaseBoolInt = number
 
+export interface BaseUploadServer {
+    /**
+     * Upload URL
+     */
+    upload_url: string
+}
+
 export interface BaseCommentsInfo {
     /**
      * Comments number
@@ -1870,6 +1877,17 @@ export interface BaseCountry {
     title: string
 }
 
+export interface BaseCity {
+    /**
+     * City ID
+     */
+    id: number,
+    /**
+     * City title
+     */
+    title: string
+}
+
 export interface BaseError {
     /**
      * Error code
@@ -1880,7 +1898,7 @@ export interface BaseError {
      */
     error_msg: string,
     /**
-     *
+     * 
      */
     request_params: BaseRequestParam[]
 }
@@ -1902,17 +1920,28 @@ export interface BaseGeo {
      */
     type: string,
     /**
-     * String with coordinates
+     * 
      */
-    coordinates: string,
+    coordinates: BaseGeoCoordinates,
     /**
-     *
+     * 
      */
     place: BasePlace,
     /**
      * Information whether a map is showed
      */
     showmap: number
+}
+
+export interface BaseGeoCoordinates {
+    /**
+     * 
+     */
+    latitude: number,
+    /**
+     * 
+     */
+    longitude: number
 }
 
 export interface BaseLikesInfo {
@@ -1963,7 +1992,7 @@ export interface BaseLink {
      */
     description: string,
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
@@ -1975,19 +2004,19 @@ export interface BaseLink {
      */
     preview_page: string,
     /**
-     *
+     * 
      */
     button: BaseLinkButton,
     /**
-     *
+     * 
      */
     product: BaseLinkProduct,
     /**
-     *
+     * 
      */
     rating: BaseLinkRating,
     /**
-     *
+     * 
      */
     application: BaseLinkApplication
 }
@@ -2005,7 +2034,7 @@ export interface BaseLinkButton {
 
 export interface BaseLinkButtonAction {
     /**
-     *
+     * 
      */
     type: BaseLinkButtonActionType,
     /**
@@ -2018,7 +2047,7 @@ export type BaseLinkButtonActionType = string
 
 export interface BaseLinkProduct {
     /**
-     *
+     * 
      */
     price: MarketPrice
 }
@@ -2029,7 +2058,7 @@ export interface BaseLinkApplication {
      */
     app_id: number,
     /**
-     *
+     * 
      */
     store: BaseLinkApplicationStore
 }
@@ -2151,35 +2180,19 @@ export interface BaseSticker {
     /**
      * Sticker ID
      */
-    id: number,
+    sticker_id: number,
     /**
      * Collection ID
      */
     product_id: number,
     /**
-     * URL of the preview image with 64 px in height
+     * 
      */
-    photo_64: string,
+    images: BaseImage[],
     /**
-     * URL of the preview image with 128 px in height
+     * 
      */
-    photo_128: string,
-    /**
-     * URL of the preview image with 256 px in height
-     */
-    photo_256: string,
-    /**
-     * URL of the preview image with 352 px in height
-     */
-    photo_352: string,
-    /**
-     * Width in px
-     */
-    width: number,
-    /**
-     * Hieght in px
-     */
-    height: number
+    images_with_background: BaseImage[]
 }
 
 export interface BaseUserId {
@@ -2190,6 +2203,21 @@ export interface BaseUserId {
 }
 
 export type BaseSex = number
+
+export interface BaseImage {
+    /**
+     * Image url
+     */
+    url: string,
+    /**
+     * Image width
+     */
+    width: number,
+    /**
+     * Image height
+     */
+    height: number
+}
 
 export type BoardDefaultOrder = number
 
@@ -2223,7 +2251,7 @@ export interface BoardTopicPoll {
      */
     answer_id: number,
     /**
-     *
+     * 
      */
     answers: PollsAnswer[]
 }
@@ -2285,28 +2313,13 @@ export interface BoardTopicComment {
      */
     text: string,
     /**
-     *
+     * 
      */
     attachments: WallCommentAttachment[],
     /**
      * Real position of the comment
      */
     real_offset: number
-}
-
-export interface BaseImage {
-    /**
-     * Image url
-     */
-    url: string,
-    /**
-     * Image width
-     */
-    width: number,
-    /**
-     * Image height
-     */
-    height: number
 }
 
 export interface DatabaseCity {
@@ -2365,17 +2378,6 @@ export interface DatabaseSchool {
     title: string
 }
 
-export interface DatabaseStreet {
-    /**
-     * Street ID
-     */
-    id: number,
-    /**
-     * Street title
-     */
-    title: string
-}
-
 export interface DatabaseUniversity {
     /**
      * University ID
@@ -2421,7 +2423,7 @@ export interface DocsDoc {
      */
     type: number,
     /**
-     *
+     * 
      */
     preview: DocsDocPreview,
     /**
@@ -2454,18 +2456,18 @@ export interface DocsDocUploadResponse {
 
 export interface DocsDocPreview {
     /**
-     *
+     * 
      */
     photo: DocsDocPreviewPhoto,
     /**
-     *
+     * 
      */
     video: DocsDocPreviewVideo
 }
 
 export interface DocsDocPreviewPhoto {
     /**
-     *
+     * 
      */
     sizes: PhotosPhotoSizes[]
 }
@@ -2541,7 +2543,7 @@ export interface FriendsRequests {
      */
     from: string,
     /**
-     *
+     * 
      */
     mutual: FriendsRequestsMutual
 }
@@ -2552,7 +2554,7 @@ export interface FriendsRequestsMutual {
      */
     count: number,
     /**
-     *
+     * 
      */
     users: number[]
 }
@@ -2567,7 +2569,7 @@ export interface FriendsRequestsXtrMessage {
      */
     from: string,
     /**
-     *
+     * 
      */
     mutual: FriendsRequestsMutual,
     /**
@@ -2586,7 +2588,7 @@ export interface FriendsMutualFriend {
      */
     common_count: number,
     /**
-     *
+     * 
      */
     common_friends: number[]
 }
@@ -2599,7 +2601,7 @@ export interface FriendsFriendStatus {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     friend_status: FriendsFriendStatusStatus,
     /**
@@ -2682,11 +2684,11 @@ export interface FriendsUserXtrLists {
      */
     bdate: string,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
@@ -2798,7 +2800,7 @@ export interface FriendsUserXtrLists {
      */
     site: string,
     /**
-     *
+     * 
      */
     status_audio: AudioAudioFull,
     /**
@@ -2810,15 +2812,15 @@ export interface FriendsUserXtrLists {
      */
     activity: string,
     /**
-     *
+     * 
      */
     last_seen: UsersLastSeen,
     /**
-     *
+     * 
      */
     exports: UsersExports,
     /**
-     *
+     * 
      */
     crop_photo: UsersCropPhoto,
     /**
@@ -2850,15 +2852,15 @@ export interface FriendsUserXtrLists {
      */
     common_count: number,
     /**
-     *
+     * 
      */
     occupation: UsersOccupation,
     /**
-     *
+     * 
      */
     career: UsersCareer[],
     /**
-     *
+     * 
      */
     military: UsersMilitary[],
     /**
@@ -2898,11 +2900,11 @@ export interface FriendsUserXtrLists {
      */
     relation: number,
     /**
-     *
+     * 
      */
     relation_partner: UsersUserMin,
     /**
-     *
+     * 
      */
     personal: UsersPersonal,
     /**
@@ -2934,11 +2936,11 @@ export interface FriendsUserXtrLists {
      */
     games: string,
     /**
-     *
+     * 
      */
     universities: UsersUniversity[],
     /**
-     *
+     * 
      */
     schools: UsersSchool[],
     /**
@@ -2946,7 +2948,7 @@ export interface FriendsUserXtrLists {
      */
     about: string,
     /**
-     *
+     * 
      */
     relatives: UsersRelative[],
     /**
@@ -2954,7 +2956,7 @@ export interface FriendsUserXtrLists {
      */
     quotes: string,
     /**
-     *
+     * 
      */
     lists: number[]
 }
@@ -3025,11 +3027,11 @@ export interface FriendsUserXtrPhone {
      */
     bdate: string,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
@@ -3141,7 +3143,7 @@ export interface FriendsUserXtrPhone {
      */
     site: string,
     /**
-     *
+     * 
      */
     status_audio: AudioAudioFull,
     /**
@@ -3153,15 +3155,15 @@ export interface FriendsUserXtrPhone {
      */
     activity: string,
     /**
-     *
+     * 
      */
     last_seen: UsersLastSeen,
     /**
-     *
+     * 
      */
     exports: UsersExports,
     /**
-     *
+     * 
      */
     crop_photo: UsersCropPhoto,
     /**
@@ -3193,15 +3195,15 @@ export interface FriendsUserXtrPhone {
      */
     common_count: number,
     /**
-     *
+     * 
      */
     occupation: UsersOccupation,
     /**
-     *
+     * 
      */
     career: UsersCareer[],
     /**
-     *
+     * 
      */
     military: UsersMilitary[],
     /**
@@ -3241,11 +3243,11 @@ export interface FriendsUserXtrPhone {
      */
     relation: number,
     /**
-     *
+     * 
      */
     relation_partner: UsersUserMin,
     /**
-     *
+     * 
      */
     personal: UsersPersonal,
     /**
@@ -3277,11 +3279,11 @@ export interface FriendsUserXtrPhone {
      */
     games: string,
     /**
-     *
+     * 
      */
     universities: UsersUniversity[],
     /**
-     *
+     * 
      */
     schools: UsersSchool[],
     /**
@@ -3289,7 +3291,7 @@ export interface FriendsUserXtrPhone {
      */
     about: string,
     /**
-     *
+     * 
      */
     relatives: UsersRelative[],
     /**
@@ -3341,11 +3343,11 @@ export interface GiftsGift {
      */
     date: number,
     /**
-     *
+     * 
      */
     gift: GiftsLayout,
     /**
-     *
+     * 
      */
     privacy: GiftsGiftPrivacy,
     /**
@@ -3366,7 +3368,7 @@ export interface GroupsBanInfo {
      */
     date: number,
     /**
-     *
+     * 
      */
     reason: GroupsBanInfoReason,
     /**
@@ -3385,7 +3387,7 @@ export interface GroupsGroupsArray {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: number[]
 }
@@ -3400,7 +3402,7 @@ export interface GroupsGroupCategory {
      */
     name: string,
     /**
-     *
+     * 
      */
     subcategories: BaseObjectWithName[]
 }
@@ -3415,7 +3417,7 @@ export interface GroupsGroupCategoryFull {
      */
     name: string,
     /**
-     *
+     * 
      */
     subcategories: GroupsGroupCategory[],
     /**
@@ -3423,7 +3425,7 @@ export interface GroupsGroupCategoryFull {
      */
     page_count: number,
     /**
-     *
+     * 
      */
     page_previews: GroupsGroup[]
 }
@@ -3484,7 +3486,7 @@ export interface GroupsCover {
      */
     enabled: BaseBoolInt,
     /**
-     *
+     * 
      */
     images: BaseImage[]
 }
@@ -3524,11 +3526,11 @@ export interface GroupsGroup {
      */
     deactivated: string,
     /**
-     *
+     * 
      */
     is_closed: GroupsGroupIsClosed,
     /**
-     *
+     * 
      */
     type: GroupsGroupType,
     /**
@@ -3536,7 +3538,7 @@ export interface GroupsGroup {
      */
     is_admin: BaseBoolInt,
     /**
-     *
+     * 
      */
     admin_level: GroupsGroupAdminLevel,
     /**
@@ -3581,11 +3583,11 @@ export interface GroupsGroupFull {
      */
     deactivated: string,
     /**
-     *
+     * 
      */
     is_closed: GroupsGroupIsClosed,
     /**
-     *
+     * 
      */
     type: GroupsGroupType,
     /**
@@ -3593,7 +3595,7 @@ export interface GroupsGroupFull {
      */
     is_admin: BaseBoolInt,
     /**
-     *
+     * 
      */
     admin_level: GroupsGroupAdminLevel,
     /**
@@ -3613,7 +3615,7 @@ export interface GroupsGroupFull {
      */
     photo_200: string,
     /**
-     *
+     * 
      */
     market: GroupsMarketInfo,
     /**
@@ -3629,11 +3631,11 @@ export interface GroupsGroupFull {
      */
     is_subscribed: BaseBoolInt,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
@@ -3653,11 +3655,11 @@ export interface GroupsGroupFull {
      */
     members_count: number,
     /**
-     *
+     * 
      */
     counters: GroupsCountersGroup,
     /**
-     *
+     * 
      */
     cover: GroupsCover,
     /**
@@ -3697,11 +3699,11 @@ export interface GroupsGroupFull {
      */
     main_album_id: number,
     /**
-     *
+     * 
      */
     links: GroupsLinksItem[],
     /**
-     *
+     * 
      */
     contacts: GroupsContactsItem[],
     /**
@@ -3709,7 +3711,7 @@ export interface GroupsGroupFull {
      */
     site: string,
     /**
-     *
+     * 
      */
     main_section: GroupsGroupFullMainSection,
     /**
@@ -3721,9 +3723,13 @@ export interface GroupsGroupFull {
      */
     can_message: BaseBoolInt,
     /**
-     * Information whether current user can send a message to community
+     * Information whether community can send a message to current user
      */
-    is_messages_allowed: BaseBoolInt,
+    is_messages_blocked: BaseBoolInt,
+    /**
+     * Status of replies in community messages
+     */
+    online_status: GroupsOnlineStatus,
     /**
      * Start date of event in Unixtime
      */
@@ -3764,7 +3770,7 @@ export interface GroupsGroupXtrInvitedBy {
      */
     is_closed: BaseBoolInt,
     /**
-     *
+     * 
      */
     type: GroupsGroupXtrInvitedByType,
     /**
@@ -3772,7 +3778,7 @@ export interface GroupsGroupXtrInvitedBy {
      */
     is_admin: BaseBoolInt,
     /**
-     *
+     * 
      */
     admin_level: GroupsGroupXtrInvitedByAdminLevel,
     /**
@@ -3873,7 +3879,7 @@ export interface GroupsMarketInfo {
      */
     contact_id: number,
     /**
-     *
+     * 
      */
     currency: MarketCurrency,
     /**
@@ -3890,7 +3896,7 @@ export interface GroupsMemberRole {
      */
     id: number,
     /**
-     *
+     * 
      */
     role: GroupsMemberRoleStatus
 }
@@ -3927,26 +3933,26 @@ export interface GroupsMemberStatusFull {
 
 export interface GroupsGroupCategoryType {
     /**
-     *
+     * 
      */
     id: number,
     /**
-     *
+     * 
      */
     name: string
 }
 
 export interface GroupsGroupPublicCategoryList {
     /**
-     *
+     * 
      */
     id: number,
     /**
-     *
+     * 
      */
     name: string,
     /**
-     *
+     * 
      */
     subtypes_list: GroupsGroupCategoryType[]
 }
@@ -3965,7 +3971,7 @@ export interface GroupsGroupSettings {
      */
     address: string,
     /**
-     *
+     * 
      */
     place: PlacesPlaceMin,
     /**
@@ -4009,7 +4015,7 @@ export interface GroupsGroupSettings {
      */
     public_subcategory: number,
     /**
-     *
+     * 
      */
     public_category_list: GroupsGroupPublicCategoryList[],
     /**
@@ -4029,7 +4035,7 @@ export interface GroupsGroupSettings {
      */
     subject: number,
     /**
-     *
+     * 
      */
     subject_list: GroupsSubjectItem[],
     /**
@@ -4057,7 +4063,7 @@ export type GroupsOwnerXtrBanInfoType = string
 
 export interface GroupsOwnerXtrBanInfo {
     /**
-     *
+     * 
      */
     type: GroupsOwnerXtrBanInfoType,
     /**
@@ -4069,7 +4075,7 @@ export interface GroupsOwnerXtrBanInfo {
      */
     profile: UsersUser,
     /**
-     *
+     * 
      */
     ban_info: GroupsBanInfo
 }
@@ -4142,11 +4148,11 @@ export interface GroupsUserXtrRole {
      */
     bdate: string,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
@@ -4258,7 +4264,7 @@ export interface GroupsUserXtrRole {
      */
     site: string,
     /**
-     *
+     * 
      */
     status_audio: AudioAudioFull,
     /**
@@ -4270,15 +4276,15 @@ export interface GroupsUserXtrRole {
      */
     activity: string,
     /**
-     *
+     * 
      */
     last_seen: UsersLastSeen,
     /**
-     *
+     * 
      */
     exports: UsersExports,
     /**
-     *
+     * 
      */
     crop_photo: UsersCropPhoto,
     /**
@@ -4310,15 +4316,15 @@ export interface GroupsUserXtrRole {
      */
     common_count: number,
     /**
-     *
+     * 
      */
     occupation: UsersOccupation,
     /**
-     *
+     * 
      */
     career: UsersCareer[],
     /**
-     *
+     * 
      */
     military: UsersMilitary[],
     /**
@@ -4358,11 +4364,11 @@ export interface GroupsUserXtrRole {
      */
     relation: number,
     /**
-     *
+     * 
      */
     relation_partner: UsersUserMin,
     /**
-     *
+     * 
      */
     personal: UsersPersonal,
     /**
@@ -4394,11 +4400,11 @@ export interface GroupsUserXtrRole {
      */
     games: string,
     /**
-     *
+     * 
      */
     universities: UsersUniversity[],
     /**
-     *
+     * 
      */
     schools: UsersSchool[],
     /**
@@ -4406,7 +4412,7 @@ export interface GroupsUserXtrRole {
      */
     about: string,
     /**
-     *
+     * 
      */
     relatives: UsersRelative[],
     /**
@@ -4414,29 +4420,29 @@ export interface GroupsUserXtrRole {
      */
     quotes: string,
     /**
-     *
+     * 
      */
     role: GroupsRoleOptions
 }
 
 export interface GroupsTokenPermissionSetting {
     /**
-     *
+     * 
      */
     setting: number,
     /**
-     *
+     * 
      */
     name: string
 }
 
 export interface GroupsTokenPermissions {
     /**
-     *
+     * 
      */
     mask: number,
     /**
-     *
+     * 
      */
     permissions: GroupsTokenPermissionSetting[]
 }
@@ -4462,164 +4468,200 @@ export interface GroupsLongPollSettings {
      */
     is_enabled: boolean,
     /**
-     *
+     * API version used for the events
+     */
+    api_version: string,
+    /**
+     * 
+     */
+    events: GroupsLongPollEvents
+}
+
+export interface GroupsCallbackSettings {
+    /**
+     * API version used for the events
+     */
+    api_version: string,
+    /**
+     * 
      */
     events: GroupsLongPollEvents
 }
 
 export interface GroupsLongPollEvents {
     /**
-     *
+     * 
      */
     message_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     message_reply: BaseBoolInt,
     /**
-     *
+     * 
      */
     photo_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     audio_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     video_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     wall_reply_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     wall_reply_edit: BaseBoolInt,
     /**
-     *
+     * 
      */
     wall_reply_delete: BaseBoolInt,
     /**
-     *
+     * 
      */
     wall_reply_restore: BaseBoolInt,
     /**
-     *
+     * 
      */
     wall_post_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     board_post_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     board_post_edit: BaseBoolInt,
     /**
-     *
+     * 
      */
     board_post_restore: BaseBoolInt,
     /**
-     *
+     * 
      */
     board_post_delete: BaseBoolInt,
     /**
-     *
+     * 
      */
     photo_comment_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     photo_comment_edit: BaseBoolInt,
     /**
-     *
+     * 
      */
     photo_comment_delete: BaseBoolInt,
     /**
-     *
+     * 
      */
     photo_comment_restore: BaseBoolInt,
     /**
-     *
+     * 
      */
     video_comment_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     video_comment_edit: BaseBoolInt,
     /**
-     *
+     * 
      */
     video_comment_delete: BaseBoolInt,
     /**
-     *
+     * 
      */
     video_comment_restore: BaseBoolInt,
     /**
-     *
+     * 
      */
     market_comment_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     market_comment_edit: BaseBoolInt,
     /**
-     *
+     * 
      */
     market_comment_delete: BaseBoolInt,
     /**
-     *
+     * 
      */
     market_comment_restore: BaseBoolInt,
     /**
-     *
+     * 
      */
     poll_vote_new: BaseBoolInt,
     /**
-     *
+     * 
      */
     group_join: BaseBoolInt,
     /**
-     *
+     * 
      */
     group_leave: BaseBoolInt,
     /**
-     *
+     * 
      */
     group_change_settings: BaseBoolInt,
     /**
-     *
+     * 
      */
     group_change_photo: BaseBoolInt,
     /**
-     *
+     * 
      */
     group_officers_edit: BaseBoolInt,
     /**
-     *
+     * 
      */
     message_allow: BaseBoolInt,
     /**
-     *
+     * 
      */
     message_deny: BaseBoolInt,
     /**
-     *
+     * 
      */
     wall_repost: BaseBoolInt,
     /**
-     *
+     * 
      */
     user_block: BaseBoolInt,
     /**
-     *
+     * 
      */
     user_unblock: BaseBoolInt,
     /**
-     *
+     * 
      */
-    messages_edit: BaseBoolInt
+    messages_edit: BaseBoolInt,
+    /**
+     * 
+     */
+    message_typing_state: BaseBoolInt,
+    /**
+     * 
+     */
+    lead_forms_new: BaseBoolInt
+}
+
+export type GroupsOnlineStatusType = string
+
+export interface GroupsOnlineStatus {
+    /**
+     * 
+     */
+    status: GroupsOnlineStatusType,
+    /**
+     * Estimated time of answer (for status = answer_mark)
+     */
+    minutes: number
 }
 
 export interface LeadsLead {
@@ -4648,7 +4690,7 @@ export interface LeadsLead {
      */
     completed: number,
     /**
-     *
+     * 
      */
     days: LeadsLeadDays
 }
@@ -4687,7 +4729,7 @@ export type LeadsCheckedResult = string
 
 export interface LeadsChecked {
     /**
-     *
+     * 
      */
     result: LeadsCheckedResult,
     /**
@@ -4722,7 +4764,7 @@ export interface LeadsComplete {
      */
     test_mode: BaseBoolInt,
     /**
-     *
+     * 
      */
     success: BaseOkResponse
 }
@@ -4784,7 +4826,7 @@ export interface MarketMarketAlbum {
      */
     updated_time: number,
     /**
-     *
+     * 
      */
     photo: PhotosPhoto
 }
@@ -4799,7 +4841,7 @@ export interface MarketMarketCategory {
      */
     name: string,
     /**
-     *
+     * 
      */
     section: MarketSection
 }
@@ -4835,11 +4877,11 @@ export interface MarketMarketItem {
      */
     description: string,
     /**
-     *
+     * 
      */
     price: MarketPrice,
     /**
-     *
+     * 
      */
     category: MarketMarketCategory,
     /**
@@ -4851,7 +4893,7 @@ export interface MarketMarketItem {
      */
     thumb_photo: string,
     /**
-     *
+     * 
      */
     availability: MarketMarketItemAvailability
 }
@@ -4874,11 +4916,11 @@ export interface MarketMarketItemFull {
      */
     description: string,
     /**
-     *
+     * 
      */
     price: MarketPrice,
     /**
-     *
+     * 
      */
     category: MarketMarketCategory,
     /**
@@ -4890,11 +4932,11 @@ export interface MarketMarketItemFull {
      */
     thumb_photo: string,
     /**
-     *
+     * 
      */
     availability: MarketMarketItemAvailability,
     /**
-     *
+     * 
      */
     photos: PhotosPhoto[],
     /**
@@ -4906,7 +4948,7 @@ export interface MarketMarketItemFull {
      */
     can_repost: BaseBoolInt,
     /**
-     *
+     * 
      */
     likes: BaseLikes,
     /**
@@ -4921,7 +4963,7 @@ export interface MarketPrice {
      */
     amount: string,
     /**
-     *
+     * 
      */
     currency: MarketCurrency,
     /**
@@ -4947,7 +4989,7 @@ export interface MessagesHistoryAttachment {
      */
     message_id: number,
     /**
-     *
+     * 
      */
     attachment: MessagesHistoryMessageAttachment
 }
@@ -4956,39 +4998,39 @@ export type MessagesHistoryMessageAttachmentType = string
 
 export interface MessagesHistoryMessageAttachment {
     /**
-     *
+     * 
      */
     type: MessagesHistoryMessageAttachmentType,
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
-     *
+     * 
      */
     video: VideoVideo,
     /**
-     *
+     * 
      */
     audio: AudioAudioFull,
     /**
-     *
+     * 
      */
     doc: DocsDoc,
     /**
-     *
+     * 
      */
     link: BaseLink,
     /**
-     *
+     * 
      */
     market: BaseLink,
     /**
-     *
+     * 
      */
     wall: BaseLink,
     /**
-     *
+     * 
      */
     share: BaseLink
 }
@@ -4997,51 +5039,51 @@ export type MessagesMessageAttachmentType = string
 
 export interface MessagesMessageAttachment {
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
-     *
+     * 
      */
     audio: AudioAudioFull,
     /**
-     *
+     * 
      */
     video: VideoVideo,
     /**
-     *
+     * 
      */
     doc: DocsDoc,
     /**
-     *
+     * 
      */
     link: BaseLink,
     /**
-     *
+     * 
      */
     market: MarketMarketItem,
     /**
-     *
+     * 
      */
     market_market_album: MarketMarketAlbum,
     /**
-     *
+     * 
      */
     gift: GiftsLayout,
     /**
-     *
+     * 
      */
     sticker: BaseSticker,
     /**
-     *
+     * 
      */
     wall: WallWallpostAttached,
     /**
-     *
+     * 
      */
     wall_reply: WallWallComment,
     /**
-     *
+     * 
      */
     type: MessagesMessageAttachmentType
 }
@@ -5064,11 +5106,11 @@ export interface MessagesChat {
      */
     admin_id: number,
     /**
-     *
+     * 
      */
     users: number[],
     /**
-     *
+     * 
      */
     push_settings: MessagesChatPushSettings,
     /**
@@ -5111,11 +5153,11 @@ export interface MessagesChatFull {
      */
     admin_id: number,
     /**
-     *
+     * 
      */
     users: MessagesUserXtrInvitedBy[],
     /**
-     *
+     * 
      */
     push_settings: MessagesChatPushSettings,
     /**
@@ -5157,7 +5199,7 @@ export interface MessagesDialog {
      */
     unread: number,
     /**
-     *
+     * 
      */
     message: MessagesMessage,
     /**
@@ -5214,9 +5256,50 @@ export interface MessagesLongpollMessages {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: MessagesMessage[]
+}
+
+export interface MessagesKeyboardButtonAction {
+    /**
+     * Button type
+     */
+    type: string,
+    /**
+     * Additional data sent along with message for developer convenience
+     */
+    payload: string,
+    /**
+     * Label for button
+     */
+    label: string
+}
+
+export interface MessagesKeyboardButton {
+    /**
+     * Button color
+     */
+    color: string,
+    /**
+     * 
+     */
+    action: MessagesKeyboardButtonAction
+}
+
+export interface MessagesKeyboard {
+    /**
+     * Should this keyboard disappear on first use
+     */
+    one_time: boolean,
+    /**
+     * Community or bot, which set this keyboard
+     */
+    author_id: number,
+    /**
+     * 
+     */
+    buttons: MessagesKeyboardButton[][]
 }
 
 export type MessagesMessageActionStatus = string
@@ -5227,17 +5310,17 @@ export interface MessagesMessage {
      */
     id: number,
     /**
+     * Unique auto-incremented number for all messages with this peer
+     */
+    conversation_message_id: number,
+    /**
      * Date when the message has been sent in Unixtime
      */
     date: number,
     /**
-     * Information whether the message is outcoming
+     * Peer ID
      */
-    out: BaseBoolInt,
-    /**
-     * Message author's ID
-     */
-    user_id: number,
+    peer_id: number,
     /**
      * Message author's ID
      */
@@ -5253,75 +5336,119 @@ export interface MessagesMessage {
     /**
      * Is it an important message
      */
-    important: BaseBoolInt,
+    important: boolean,
     /**
-     * Is it an deleted message
+     * 
      */
-    deleted: BaseBoolInt,
-    /**
-     * Whether the message contains smiles
-     */
-    emoji: BaseBoolInt,
+    payload: string,
     /**
      * Forwarded messages
      */
-    fwd_messages: MessagesMessage[],
-    /**
-     * Information whether the messages is read
-     */
-    read_state: BaseBoolInt,
-    /**
-     * Message title or chat title
-     */
-    title: string,
+    fwd_messages: MessagesFwdMessage[],
     /**
      * Message text
      */
-    body: string,
+    text: string,
     /**
-     *
+     * 
      */
     attachments: MessagesMessageAttachment[],
     /**
-     * Chat ID
-     */
-    chat_id: number,
-    /**
-     *
+     * 
      */
     geo: BaseGeo,
     /**
-     *
+     * 
      */
-    chat_active: number[],
+    action: MessagesMessageAction,
     /**
-     * Push settings for the chat
+     * 
      */
-    push_settings: MessagesChatPushSettings,
+    keyboard: MessagesKeyboard
+}
+
+export interface MessagesPinnedMessage {
     /**
-     *
+     * Message ID
      */
-    action: MessagesMessageActionStatus,
+    id: number,
     /**
-     * User or email ID has been invited to the chat or kicked from the chat
+     * Unique auto-incremented number for all messages with this peer
      */
-    action_mid: number,
+    conversation_message_id: number,
     /**
-     * Email has been invited or kicked
+     * Date when the message has been sent in Unixtime
      */
-    action_email: string,
+    date: number,
     /**
-     * Action text
+     * Peer ID
      */
-    action_text: string,
+    peer_id: number,
     /**
-     * Chat users number
+     * Message author's ID
      */
-    users_count: number,
+    from_id: number,
     /**
-     * Chat administrator ID
+     * Forwarded messages
      */
-    admin_id: number,
+    fwd_messages: MessagesFwdMessage[],
+    /**
+     * Message text
+     */
+    text: string,
+    /**
+     * 
+     */
+    attachments: MessagesMessageAttachment[],
+    /**
+     * 
+     */
+    geo: BaseGeo
+}
+
+export interface MessagesMessageAction {
+    /**
+     * 
+     */
+    type: MessagesMessageActionStatus,
+    /**
+     * User or email peer ID
+     */
+    member_id: number,
+    /**
+     * Message body of related message
+     */
+    message: string,
+    /**
+     * New chat title for chat_create and chat_title_update actions
+     */
+    text: string,
+    /**
+     * Message ID
+     */
+    conversation_message_id: number,
+    /**
+     * Email address for chat_invite_user or chat_kick_user actions
+     */
+    email: string,
+    /**
+     * 
+     */
+    photo: MessagesMessageActionPhoto
+}
+
+export interface MessagesConversationWithMessage {
+    /**
+     * 
+     */
+    conversation: MessagesConversation,
+    /**
+     * 
+     */
+    last_message: MessagesMessage
+}
+
+export interface MessagesChatSettingsPhoto {
     /**
      * URL of the preview image with 50px in width
      */
@@ -5388,7 +5515,7 @@ export interface MessagesUserXtrInvitedBy {
      */
     online_app: number,
     /**
-     *
+     * 
      */
     type: UsersUserType,
     /**
@@ -5401,7 +5528,7 @@ export type NewsfeedNewsfeedItemType = string
 
 export interface NewsfeedNewsfeedItem {
     /**
-     *
+     * 
      */
     type: NewsfeedNewsfeedItemType,
     /**
@@ -5416,7 +5543,7 @@ export interface NewsfeedNewsfeedItem {
 
 export interface NewsfeedItemAudio {
     /**
-     *
+     * 
      */
     audio: NewsfeedItemAudioAudio,
     /**
@@ -5431,7 +5558,7 @@ export interface NewsfeedItemAudioAudio {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: AudioAudioFull[]
 }
@@ -5442,21 +5569,21 @@ export interface NewsfeedItemFriendFriends {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: BaseUserId[]
 }
 
 export interface NewsfeedItemFriend {
     /**
-     *
+     * 
      */
     friends: NewsfeedItemFriendFriends
 }
 
 export interface NewsfeedItemNote {
     /**
-     *
+     * 
      */
     notes: NewsfeedItemNoteNotes
 }
@@ -5467,14 +5594,14 @@ export interface NewsfeedItemNoteNotes {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: NewsfeedNewsfeedNote[]
 }
 
 export interface NewsfeedItemPhoto {
     /**
-     *
+     * 
      */
     photos: NewsfeedItemPhotoPhotos,
     /**
@@ -5489,14 +5616,14 @@ export interface NewsfeedItemPhotoPhotos {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: NewsfeedNewsfeedPhoto[]
 }
 
 export interface NewsfeedItemPhotoTag {
     /**
-     *
+     * 
      */
     photo_tags: NewsfeedItemPhotoTagPhotoTags,
     /**
@@ -5511,7 +5638,7 @@ export interface NewsfeedItemPhotoTagPhotoTags {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: NewsfeedNewsfeedPhoto[]
 }
@@ -5526,18 +5653,18 @@ export interface NewsfeedItemTopic {
      */
     text: string,
     /**
-     *
+     * 
      */
     comments: BaseCommentsInfo,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo
 }
 
 export interface NewsfeedItemVideo {
     /**
-     *
+     * 
      */
     video: NewsfeedItemVideoVideo
 }
@@ -5548,7 +5675,7 @@ export interface NewsfeedItemVideoVideo {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: VideoVideo[]
 }
@@ -5561,7 +5688,7 @@ export interface NewsfeedItemWallpost {
      */
     post_id: number,
     /**
-     *
+     * 
      */
     post_type: NewsfeedItemWallpostType,
     /**
@@ -5569,31 +5696,31 @@ export interface NewsfeedItemWallpost {
      */
     text: string,
     /**
-     *
+     * 
      */
     copy_history: WallWallpost[],
     /**
-     *
+     * 
      */
     attachments: WallWallpostAttachment[],
     /**
-     *
+     * 
      */
     geo: BaseGeo,
     /**
-     *
+     * 
      */
     post_source: WallPostSource,
     /**
-     *
+     * 
      */
     comments: BaseCommentsInfo,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
-     *
+     * 
      */
     reposts: BaseRepostsInfo
 }
@@ -5623,7 +5750,7 @@ export interface NewsfeedListFull {
      */
     no_reposts: BaseBoolInt,
     /**
-     *
+     * 
      */
     source_ids: number[]
 }
@@ -5665,7 +5792,7 @@ export interface NewsfeedNewsfeedPhoto {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     images: PhotosImage[],
     /**
@@ -5701,11 +5828,11 @@ export interface NewsfeedNewsfeedPhoto {
      */
     access_key: string,
     /**
-     *
+     * 
      */
     likes: BaseLikes,
     /**
-     *
+     * 
      */
     comments: BaseObjectCount,
     /**
@@ -5744,7 +5871,7 @@ export interface NotesNoteComment {
      */
     message: string,
     /**
-     * ID of replied comment
+     * ID of replied comment 
      */
     reply_to: number
 }
@@ -5806,19 +5933,19 @@ export interface NotificationsNotificationsComment {
      */
     text: string,
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
-     *
+     * 
      */
     video: VideoVideo,
     /**
-     *
+     * 
      */
     post: WallWallpost,
     /**
-     *
+     * 
      */
     topic: BoardTopic
 }
@@ -5845,7 +5972,7 @@ export interface NotificationsNotificationParent {
      */
     post_id: number,
     /**
-     *
+     * 
      */
     post_type: WallPostType,
     /**
@@ -5857,15 +5984,15 @@ export interface NotificationsNotificationParent {
      */
     signer_id: number,
     /**
-     *
+     * 
      */
     attachments: WallWallpostAttachment[],
     /**
-     *
+     * 
      */
     geo: BaseGeo,
     /**
-     *
+     * 
      */
     post_source: WallPostSource,
     /**
@@ -5873,11 +6000,11 @@ export interface NotificationsNotificationParent {
      */
     comments: number,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
-     *
+     * 
      */
     reposts: BaseRepostsInfo,
     /**
@@ -5901,7 +6028,7 @@ export interface NotificationsNotificationParent {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     images: PhotosImage[],
     /**
@@ -6001,23 +6128,23 @@ export interface NotificationsNotificationParent {
      */
     live: BasePropertyExists,
     /**
-     *
+     * 
      */
     files: VideoVideoFiles,
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
-     *
+     * 
      */
     video: VideoVideo,
     /**
-     *
+     * 
      */
     post: WallWallpost,
     /**
-     *
+     * 
      */
     topic: BoardTopic
 }
@@ -6032,15 +6159,15 @@ export interface NotificationsNotification {
      */
     date: number,
     /**
-     *
+     * 
      */
     parent: NotificationsNotificationParent,
     /**
-     *
+     * 
      */
     feedback: NotificationsFeedback,
     /**
-     *
+     * 
      */
     reply: NotificationsReply
 }
@@ -6063,15 +6190,15 @@ export interface NotificationsFeedback {
      */
     text: string,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
-     *
+     * 
      */
     attachments: WallWallpostAttachment[],
     /**
-     *
+     * 
      */
     geo: BaseGeo
 }
@@ -6151,7 +6278,7 @@ export interface OrdersOrder {
 
 export interface OrdersAmount {
     /**
-     *
+     * 
      */
     amounts: OrdersAmountItem[],
     /**
@@ -6312,7 +6439,7 @@ export interface PhotosPhotoAlbum {
      */
     id: number,
     /**
-     *
+     * 
      */
     thumb: PhotosPhoto,
     /**
@@ -6379,11 +6506,11 @@ export interface PhotosPhotoAlbumFull {
      */
     size: number,
     /**
-     *
+     * 
      */
     privacy_view: string[],
     /**
-     *
+     * 
      */
     privacy_comment: string[],
     /**
@@ -6403,7 +6530,7 @@ export interface PhotosPhotoAlbumFull {
      */
     thumb_is_last: BaseBoolInt,
     /**
-     *
+     * 
      */
     sizes: PhotosPhotoSizes[]
 }
@@ -6426,7 +6553,7 @@ export interface PhotosCommentXtrPid {
      */
     text: string,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
@@ -6438,7 +6565,7 @@ export interface PhotosCommentXtrPid {
      */
     reply_to_comment: number,
     /**
-     *
+     * 
      */
     attachments: WallCommentAttachment[],
     /**
@@ -6527,7 +6654,7 @@ export type PhotosImageType = string
 
 export interface PhotosImage {
     /**
-     *
+     * 
      */
     type: PhotosImageType,
     /**
@@ -6562,7 +6689,7 @@ export interface PhotosPhoto {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     images: PhotosImage[],
     /**
@@ -6617,7 +6744,7 @@ export interface PhotosPhotoFull {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     images: PhotosImage[],
     /**
@@ -6653,15 +6780,15 @@ export interface PhotosPhotoFull {
      */
     access_key: string,
     /**
-     *
+     * 
      */
     likes: BaseLikes,
     /**
-     *
+     * 
      */
     reposts: BaseObjectCount,
     /**
-     *
+     * 
      */
     comments: BaseObjectCount,
     /**
@@ -6669,7 +6796,7 @@ export interface PhotosPhotoFull {
      */
     can_comment: BaseBoolInt,
     /**
-     *
+     * 
      */
     tags: BaseObjectCount
 }
@@ -6692,7 +6819,7 @@ export interface PhotosPhotoFullXtrRealOffset {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     sizes: PhotosPhotoSizes[],
     /**
@@ -6752,23 +6879,23 @@ export interface PhotosPhotoFullXtrRealOffset {
      */
     access_key: string,
     /**
-     *
+     * 
      */
     likes: BaseLikes,
     /**
-     *
+     * 
      */
     reposts: BaseObjectCount,
     /**
-     *
+     * 
      */
     comments: BaseObjectCount,
     /**
-     *
+     * 
      */
     can_comment: BaseBoolInt,
     /**
-     *
+     * 
      */
     tags: BaseObjectCount,
     /**
@@ -6799,7 +6926,7 @@ export interface PhotosPhotoXtrRealOffset {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     sizes: PhotosPhotoSizes[],
     /**
@@ -6886,7 +7013,7 @@ export interface PhotosPhotoXtrTagInfo {
      */
     user_id: number,
     /**
-     *
+     * 
      */
     sizes: PhotosPhotoSizes[],
     /**
@@ -6975,7 +7102,7 @@ export interface PhotosPhotoSizes {
      */
     height: number,
     /**
-     *
+     * 
      */
     type: PhotosPhotoSizesType
 }
@@ -7293,7 +7420,7 @@ export interface PollsPoll {
      */
     answer_id: number,
     /**
-     *
+     * 
      */
     answers: PollsAnswer[],
     /**
@@ -7308,7 +7435,7 @@ export interface PollsVoters {
      */
     answer_id: number,
     /**
-     *
+     * 
      */
     users: PollsVotersUsers
 }
@@ -7319,7 +7446,7 @@ export interface PollsVotersUsers {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: number[]
 }
@@ -7330,11 +7457,11 @@ export type SearchHintSection = string
 
 export interface SearchHint {
     /**
-     *
+     * 
      */
     type: SearchHintType,
     /**
-     *
+     * 
      */
     section: SearchHintSection,
     /**
@@ -7346,11 +7473,11 @@ export interface SearchHint {
      */
     global: BaseBoolInt,
     /**
-     *
+     * 
      */
     group: GroupsGroup,
     /**
-     *
+     * 
      */
     profile: UsersUserMin
 }
@@ -7435,43 +7562,23 @@ export interface StatsPeriod {
     /**
      * Day (YYYY-MM-DD)
      */
-    day: string,
+    period_from: string,
     /**
-     * Visitors number
+     * Day (YYYY-MM-DD)
      */
-    visitors: number,
+    period_to: string,
     /**
-     * Views number
+     * 
      */
-    views: number,
+    visitors: StatsViews,
     /**
-     * Reach count
+     * 
      */
-    reach: number,
+    reach: StatsReach,
     /**
-     * Reach subscribers count
+     * 
      */
-    reach_subscribers: number,
-    /**
-     *
-     */
-    sex: StatsSexAge[],
-    /**
-     *
-     */
-    age: StatsSexAge[],
-    /**
-     *
-     */
-    sex_age: StatsSexAge[],
-    /**
-     *
-     */
-    countries: StatsCountry[],
-    /**
-     *
-     */
-    cities: StatsCity[]
+    activity: StatsActivity
 }
 
 export interface StatsViews {
@@ -7488,23 +7595,23 @@ export interface StatsViews {
      */
     mobile_views: number,
     /**
-     *
+     * 
      */
     sex: StatsSexAge[],
     /**
-     *
+     * 
      */
     age: StatsSexAge[],
     /**
-     *
+     * 
      */
     sex_age: StatsSexAge[],
     /**
-     *
+     * 
      */
     countries: StatsCountry[],
     /**
-     *
+     * 
      */
     cities: StatsCity[]
 }
@@ -7521,25 +7628,25 @@ export interface StatsReach {
     /**
      * Reach count from mobile devices
      */
-    mobile_views: number,
+    mobile_reach: number,
     /**
-     *
+     * 
      */
     sex: StatsSexAge[],
     /**
-     *
+     * 
      */
     age: StatsSexAge[],
     /**
-     *
+     * 
      */
     sex_age: StatsSexAge[],
     /**
-     *
+     * 
      */
     countries: StatsCountry[],
     /**
-     *
+     * 
      */
     cities: StatsCity[]
 }
@@ -7575,7 +7682,7 @@ export interface StatsSexAge {
     /**
      * Visitors number
      */
-    visitors: number,
+    count: number,
     /**
      * Sex/age value
      */
@@ -7586,7 +7693,7 @@ export interface StatsCountry {
     /**
      * Visitors number
      */
-    visitors: number,
+    count: number,
     /**
      * Country ID
      */
@@ -7605,7 +7712,7 @@ export interface StatsCity {
     /**
      * Visitors number
      */
-    visitors: number,
+    count: number,
     /**
      * City ID
      */
@@ -7657,7 +7764,7 @@ export interface StatusStatus {
      */
     text: string,
     /**
-     *
+     * 
      */
     audio: AudioAudioFull
 }
@@ -7666,7 +7773,7 @@ export type StoriesStoryStatsState = string
 
 export interface StoriesStoryStatsStat {
     /**
-     *
+     * 
      */
     state: StoriesStoryStatsState,
     /**
@@ -7677,31 +7784,31 @@ export interface StoriesStoryStatsStat {
 
 export interface StoriesStoryStats {
     /**
-     *
+     * 
      */
     views: StoriesStoryStatsStat,
     /**
-     *
+     * 
      */
     replies: StoriesStoryStatsStat,
     /**
-     *
+     * 
      */
     answer: StoriesStoryStatsStat,
     /**
-     *
+     * 
      */
     shares: StoriesStoryStatsStat,
     /**
-     *
+     * 
      */
     subscribers: StoriesStoryStatsStat,
     /**
-     *
+     * 
      */
     bans: StoriesStoryStatsStat,
     /**
-     *
+     * 
      */
     open_link: StoriesStoryStatsStat
 }
@@ -7780,7 +7887,7 @@ export interface StoriesStoryVideo {
      */
     live: BasePropertyExists,
     /**
-     *
+     * 
      */
     files: VideoVideoFiles,
     /**
@@ -7836,15 +7943,15 @@ export interface StoriesStory {
      */
     seen: BaseBoolInt,
     /**
-     *
+     * 
      */
     type: StoriesStoryType,
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
-     *
+     * 
      */
     video: StoriesStoryVideo,
     /**
@@ -7892,19 +7999,11 @@ export interface StoriesStory {
      */
     parent_story_access_key: string,
     /**
-     *
+     * 
      */
     parent_story: StoriesStory,
     /**
-     * Story owner name (for promo stories).
-     */
-    owner_name: string,
-    /**
-     * Owner URL (for promo stories).
-     */
-    url: string,
-    /**
-     *
+     * 
      */
     link: StoriesStoryLink,
     /**
@@ -7976,7 +8075,7 @@ export interface UtilsLinkStats {
      */
     key: string,
     /**
-     *
+     * 
      */
     stats: UtilsStats[]
 }
@@ -7987,7 +8086,7 @@ export interface UtilsLinkStatsExtended {
      */
     key: string,
     /**
-     *
+     * 
      */
     stats: UtilsStatsExtended[]
 }
@@ -8013,15 +8112,15 @@ export interface UtilsStatsExtended {
      */
     views: number,
     /**
-     *
+     * 
      */
     sex_age: UtilsStatsSexAge[],
     /**
-     *
+     * 
      */
     countries: UtilsStatsCountry[],
     /**
-     *
+     * 
      */
     cities: UtilsStatsCity[]
 }
@@ -8067,7 +8166,7 @@ export type UtilsDomainResolvedType = string
 
 export interface UtilsDomainResolved {
     /**
-     *
+     * 
      */
     type: UtilsDomainResolvedType,
     /**
@@ -8080,7 +8179,7 @@ export type UtilsLinkCheckedStatus = string
 
 export interface UtilsLinkChecked {
     /**
-     *
+     * 
      */
     status: UtilsLinkCheckedStatus,
     /**
@@ -8095,7 +8194,7 @@ export interface UsersUsersArray {
      */
     count: number,
     /**
-     *
+     * 
      */
     items: number[]
 }
@@ -8278,11 +8377,11 @@ export interface UsersUserFullXtrType {
      */
     bdate: string,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
@@ -8394,7 +8493,7 @@ export interface UsersUserFullXtrType {
      */
     site: string,
     /**
-     *
+     * 
      */
     status_audio: AudioAudioFull,
     /**
@@ -8406,15 +8505,15 @@ export interface UsersUserFullXtrType {
      */
     activity: string,
     /**
-     *
+     * 
      */
     last_seen: UsersLastSeen,
     /**
-     *
+     * 
      */
     exports: UsersExports,
     /**
-     *
+     * 
      */
     crop_photo: UsersCropPhoto,
     /**
@@ -8446,15 +8545,15 @@ export interface UsersUserFullXtrType {
      */
     common_count: number,
     /**
-     *
+     * 
      */
     occupation: UsersOccupation,
     /**
-     *
+     * 
      */
     career: UsersCareer[],
     /**
-     *
+     * 
      */
     military: UsersMilitary[],
     /**
@@ -8494,11 +8593,11 @@ export interface UsersUserFullXtrType {
      */
     relation: number,
     /**
-     *
+     * 
      */
     relation_partner: UsersUserMin,
     /**
-     *
+     * 
      */
     personal: UsersPersonal,
     /**
@@ -8530,11 +8629,11 @@ export interface UsersUserFullXtrType {
      */
     games: string,
     /**
-     *
+     * 
      */
     universities: UsersUniversity[],
     /**
-     *
+     * 
      */
     schools: UsersSchool[],
     /**
@@ -8542,7 +8641,7 @@ export interface UsersUserFullXtrType {
      */
     about: string,
     /**
-     *
+     * 
      */
     relatives: UsersRelative[],
     /**
@@ -8550,7 +8649,7 @@ export interface UsersUserFullXtrType {
      */
     quotes: string,
     /**
-     *
+     * 
      */
     type: UsersUserType
 }
@@ -8605,7 +8704,7 @@ export interface UsersUserXtrType {
      */
     online_app: number,
     /**
-     *
+     * 
      */
     type: UsersUserType
 }
@@ -8655,7 +8754,7 @@ export interface UsersUserBroadcast {
      */
     hidden: number,
     /**
-     *
+     * 
      */
     status_audio: AudioAudioFull
 }
@@ -8726,11 +8825,11 @@ export interface UsersUserFull {
      */
     bdate: string,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
@@ -8842,7 +8941,7 @@ export interface UsersUserFull {
      */
     site: string,
     /**
-     *
+     * 
      */
     status_audio: AudioAudioFull,
     /**
@@ -8854,15 +8953,15 @@ export interface UsersUserFull {
      */
     activity: string,
     /**
-     *
+     * 
      */
     last_seen: UsersLastSeen,
     /**
-     *
+     * 
      */
     exports: UsersExports,
     /**
-     *
+     * 
      */
     crop_photo: UsersCropPhoto,
     /**
@@ -8894,15 +8993,15 @@ export interface UsersUserFull {
      */
     common_count: number,
     /**
-     *
+     * 
      */
     occupation: UsersOccupation,
     /**
-     *
+     * 
      */
     career: UsersCareer[],
     /**
-     *
+     * 
      */
     military: UsersMilitary[],
     /**
@@ -8942,11 +9041,11 @@ export interface UsersUserFull {
      */
     relation: number,
     /**
-     *
+     * 
      */
     relation_partner: UsersUserMin,
     /**
-     *
+     * 
      */
     personal: UsersPersonal,
     /**
@@ -8978,11 +9077,11 @@ export interface UsersUserFull {
      */
     games: string,
     /**
-     *
+     * 
      */
     universities: UsersUniversity[],
     /**
-     *
+     * 
      */
     schools: UsersSchool[],
     /**
@@ -8990,7 +9089,7 @@ export interface UsersUserFull {
      */
     about: string,
     /**
-     *
+     * 
      */
     relatives: UsersRelative[],
     /**
@@ -9032,15 +9131,15 @@ export interface UsersCareer {
 
 export interface UsersExports {
     /**
-     *
+     * 
      */
     twitter: number,
     /**
-     *
+     * 
      */
     facebook: number,
     /**
-     *
+     * 
      */
     livejournal: number
 }
@@ -9201,15 +9300,15 @@ export interface UsersSchool {
 
 export interface UsersCropPhoto {
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
-     *
+     * 
      */
     crop: UsersCropPhotoCrop,
     /**
-     *
+     * 
      */
     rect: UsersCropPhotoRect
 }
@@ -9273,7 +9372,7 @@ export interface UsersPersonal {
      */
     political: number,
     /**
-     *
+     * 
      */
     langs: string[],
     /**
@@ -9368,11 +9467,11 @@ export interface UsersUserXtrCounters {
      */
     bdate: string,
     /**
-     *
+     * 
      */
     city: BaseObject,
     /**
-     *
+     * 
      */
     country: BaseCountry,
     /**
@@ -9484,7 +9583,7 @@ export interface UsersUserXtrCounters {
      */
     site: string,
     /**
-     *
+     * 
      */
     status_audio: AudioAudioFull,
     /**
@@ -9496,15 +9595,15 @@ export interface UsersUserXtrCounters {
      */
     activity: string,
     /**
-     *
+     * 
      */
     last_seen: UsersLastSeen,
     /**
-     *
+     * 
      */
     exports: UsersExports,
     /**
-     *
+     * 
      */
     crop_photo: UsersCropPhoto,
     /**
@@ -9536,15 +9635,15 @@ export interface UsersUserXtrCounters {
      */
     common_count: number,
     /**
-     *
+     * 
      */
     occupation: UsersOccupation,
     /**
-     *
+     * 
      */
     career: UsersCareer[],
     /**
-     *
+     * 
      */
     military: UsersMilitary[],
     /**
@@ -9584,11 +9683,11 @@ export interface UsersUserXtrCounters {
      */
     relation: number,
     /**
-     *
+     * 
      */
     relation_partner: UsersUserMin,
     /**
-     *
+     * 
      */
     personal: UsersPersonal,
     /**
@@ -9620,11 +9719,11 @@ export interface UsersUserXtrCounters {
      */
     games: string,
     /**
-     *
+     * 
      */
     universities: UsersUniversity[],
     /**
-     *
+     * 
      */
     schools: UsersSchool[],
     /**
@@ -9632,7 +9731,7 @@ export interface UsersUserXtrCounters {
      */
     about: string,
     /**
-     *
+     * 
      */
     relatives: UsersRelative[],
     /**
@@ -9640,7 +9739,7 @@ export interface UsersUserXtrCounters {
      */
     quotes: string,
     /**
-     *
+     * 
      */
     counters: UsersUserCounters
 }
@@ -9699,7 +9798,7 @@ export type VideoCatBlockView = string
 
 export interface VideoCatBlock {
     /**
-     *
+     * 
      */
     items: VideoCatElement[],
     /**
@@ -9715,7 +9814,7 @@ export interface VideoCatBlock {
      */
     id: number,
     /**
-     *
+     * 
      */
     view: VideoCatBlockView,
     /**
@@ -9723,7 +9822,7 @@ export interface VideoCatBlock {
      */
     can_hide: BaseBoolInt,
     /**
-     *
+     * 
      */
     type: VideoCatBlockView
 }
@@ -9744,7 +9843,7 @@ export interface VideoCatElement {
      */
     title: string,
     /**
-     *
+     * 
      */
     type: VideoCatElementType,
     /**
@@ -9944,7 +10043,7 @@ export interface VideoVideo {
      */
     live: BasePropertyExists,
     /**
-     *
+     * 
      */
     files: VideoVideoFiles
 }
@@ -10050,7 +10149,7 @@ export interface VideoVideoTagInfo {
      */
     live: BasePropertyExists,
     /**
-     *
+     * 
      */
     files: VideoVideoFiles,
     /**
@@ -10141,15 +10240,15 @@ export interface VideoVideoFull {
      */
     live: BasePropertyExists,
     /**
-     *
+     * 
      */
     files: VideoVideoFiles,
     /**
-     *
+     * 
      */
     privacy_view: string[],
     /**
-     *
+     * 
      */
     privacy_comment: string[],
     /**
@@ -10161,7 +10260,7 @@ export interface VideoVideoFull {
      */
     can_repost: BaseBoolInt,
     /**
-     *
+     * 
      */
     likes: BaseLikes,
     /**
@@ -10224,47 +10323,47 @@ export type WallCommentAttachmentType = string
 
 export interface WallCommentAttachment {
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
-     *
+     * 
      */
     audio: AudioAudioFull,
     /**
-     *
+     * 
      */
     video: VideoVideo,
     /**
-     *
+     * 
      */
     doc: DocsDoc,
     /**
-     *
+     * 
      */
     link: BaseLink,
     /**
-     *
+     * 
      */
     note: WallAttachedNote,
     /**
-     *
+     * 
      */
     page: PagesWikipageFull,
     /**
-     *
+     * 
      */
     market_market_album: MarketMarketAlbum,
     /**
-     *
+     * 
      */
     market: MarketMarketItem,
     /**
-     *
+     * 
      */
     sticker: BaseSticker,
     /**
-     *
+     * 
      */
     type: WallCommentAttachmentType
 }
@@ -10292,7 +10391,7 @@ export type WallPostSourceType = string
 
 export interface WallPostSource {
     /**
-     *
+     * 
      */
     type: WallPostSourceType,
     /**
@@ -10348,7 +10447,7 @@ export interface WallWallComment {
      */
     text: string,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
@@ -10360,7 +10459,7 @@ export interface WallWallComment {
      */
     reply_to_comment: number,
     /**
-     *
+     * 
      */
     attachments: WallCommentAttachment[],
     /**
@@ -10402,7 +10501,7 @@ export interface WallWallpost {
      */
     access_key: string,
     /**
-     *
+     * 
      */
     post_type: WallPostType,
     /**
@@ -10414,15 +10513,15 @@ export interface WallWallpost {
      */
     signer_id: number,
     /**
-     *
+     * 
      */
     attachments: WallWallpostAttachment[],
     /**
-     *
+     * 
      */
     geo: BaseGeo,
     /**
-     *
+     * 
      */
     post_source: WallPostSource
 }
@@ -10445,7 +10544,7 @@ export interface WallWallpostAttached {
      */
     date: number,
     /**
-     *
+     * 
      */
     post_type: WallPostType,
     /**
@@ -10461,27 +10560,27 @@ export interface WallWallpostAttached {
      */
     signer_id: number,
     /**
-     *
+     * 
      */
     attachments: WallWallpostAttachment[],
     /**
-     *
+     * 
      */
     geo: BaseGeo,
     /**
-     *
+     * 
      */
     post_source: WallPostSource,
     /**
-     *
+     * 
      */
     comments: BaseCommentsInfo,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
-     *
+     * 
      */
     reposts: BaseRepostsInfo,
     /**
@@ -10502,67 +10601,67 @@ export type WallWallpostAttachmentType = string
 
 export interface WallWallpostAttachment {
     /**
-     *
+     * 
      */
     photo: PhotosPhoto,
     /**
-     *
+     * 
      */
     posted_photo: WallPostedPhoto,
     /**
-     *
+     * 
      */
     audio: AudioAudioFull,
     /**
-     *
+     * 
      */
     video: VideoVideo,
     /**
-     *
+     * 
      */
     doc: DocsDoc,
     /**
-     *
+     * 
      */
     link: BaseLink,
     /**
-     *
+     * 
      */
     graffiti: WallGraffiti,
     /**
-     *
+     * 
      */
     note: WallAttachedNote,
     /**
-     *
+     * 
      */
     app: WallAppPost,
     /**
-     *
+     * 
      */
     poll: PollsPoll,
     /**
-     *
+     * 
      */
     page: PagesWikipageFull,
     /**
-     *
+     * 
      */
     album: PhotosPhotoAlbum,
     /**
-     *
+     * 
      */
     photos_list: string[],
     /**
-     *
+     * 
      */
     market_market_album: MarketMarketAlbum,
     /**
-     *
+     * 
      */
     market: MarketMarketItem,
     /**
-     *
+     * 
      */
     type: WallWallpostAttachmentType
 }
@@ -10589,7 +10688,7 @@ export interface WallWallpostToId {
      */
     post_id: number,
     /**
-     *
+     * 
      */
     post_type: WallPostType,
     /**
@@ -10601,27 +10700,27 @@ export interface WallWallpostToId {
      */
     signer_id: number,
     /**
-     *
+     * 
      */
     attachments: WallWallpostAttachment[],
     /**
-     *
+     * 
      */
     geo: BaseGeo,
     /**
-     *
+     * 
      */
     post_source: WallPostSource,
     /**
-     *
+     * 
      */
     comments: BaseCommentsInfo,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
-     *
+     * 
      */
     reposts: BaseRepostsInfo,
     /**
@@ -10660,7 +10759,7 @@ export interface WallWallpostFull {
      */
     access_key: string,
     /**
-     *
+     * 
      */
     post_type: WallPostType,
     /**
@@ -10672,19 +10771,19 @@ export interface WallWallpostFull {
      */
     signer_id: number,
     /**
-     *
+     * 
      */
     attachments: WallWallpostAttachment[],
     /**
-     *
+     * 
      */
     geo: BaseGeo,
     /**
-     *
+     * 
      */
     post_source: WallPostSource,
     /**
-     *
+     * 
      */
     copy_history: WallWallpost[],
     /**
@@ -10708,15 +10807,15 @@ export interface WallWallpostFull {
      */
     is_pinned: number,
     /**
-     *
+     * 
      */
     comments: BaseCommentsInfo,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
-     *
+     * 
      */
     reposts: BaseRepostsInfo,
     /**
@@ -10743,7 +10842,7 @@ export interface WidgetsWidgetComment {
      */
     date: number,
     /**
-     *
+     * 
      */
     user: UsersUserFull,
     /**
@@ -10759,27 +10858,27 @@ export interface WidgetsWidgetComment {
      */
     can_delete: BaseBoolInt,
     /**
-     *
+     * 
      */
     media: WidgetsCommentMedia,
     /**
-     *
+     * 
      */
     attachments: WallCommentAttachment[],
     /**
-     *
+     * 
      */
     post_source: WallPostSource,
     /**
-     *
+     * 
      */
     comments: WidgetsCommentReplies,
     /**
-     *
+     * 
      */
     likes: BaseLikesInfo,
     /**
-     *
+     * 
      */
     reposts: BaseRepostsInfo
 }
@@ -10788,7 +10887,7 @@ export type WidgetsCommentMediaType = string
 
 export interface WidgetsCommentMedia {
     /**
-     *
+     * 
      */
     type: WidgetsCommentMediaType,
     /**
@@ -10815,7 +10914,7 @@ export interface WidgetsCommentReplies {
      */
     can_post: BaseBoolInt,
     /**
-     *
+     * 
      */
     replies: WidgetsCommentRepliesItem[]
 }
@@ -10838,11 +10937,11 @@ export interface WidgetsCommentRepliesItem {
      */
     text: string,
     /**
-     *
+     * 
      */
     likes: WidgetsWidgetLikes,
     /**
-     *
+     * 
      */
     user: UsersUserFull
 }
@@ -10876,11 +10975,11 @@ export interface WidgetsWidgetPage {
      */
     url: string,
     /**
-     *
+     * 
      */
     likes: BaseObjectCount,
     /**
-     *
+     * 
      */
     comments: BaseObjectCount,
     /**
@@ -10891,4 +10990,23 @@ export interface WidgetsWidgetPage {
      * page_id parameter value
      */
     page_id: string
+}
+
+export type MessagesFwdMessage = any
+
+export type MessagesMessageActionPhoto = any
+
+export type DatabaseStreet = any
+
+export type MessagesEmail = any
+
+export interface MessagesConversation {
+    /**
+     * 
+     */
+    conversation: MessagesConversation,
+    /**
+     * 
+     */
+    last_message: MessagesMessage
 }

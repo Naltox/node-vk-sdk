@@ -1,202 +1,8 @@
-import {BaseLogger} from "./logger/BaseLogger";
-import CallbackQueue from "./CallbackQueue";
-import VKApiError from "./VKApiError";
-import * as Responses from './Responses'
-import * as MethodsProps from './MethodsProps'
+import {BaseVKApi} from "../api/BaseVKApi"
+import * as MethodsProps from "./MethodsProps"
+import * as Responses from "./Responses"
 
-const req = require('tiny_request')
-
-const REQUESTS_PER_SECOND = 3
-const TIMEOUT = 5000 // 5 seconds
-const API_BASE_URL = 'https://api.vk.com/method/'
-const API_VERSION = '5.73'
-
-export interface VKApiOptions {
-    lang?: string | number,
-    testMode?: number,
-    logger?: BaseLogger,
-    token?: string,
-    timeout?: number,
-    requestsPerSecond?: number,
-    useQueue?: boolean
-}
-
-export class VKApi {
-    private _lang: string | number | undefined
-    private _testMode: number | undefined
-    private _logger: BaseLogger | undefined
-    private _queue: CallbackQueue | undefined
-    private _timeout: number
-    private _token
-
-    constructor(options: VKApiOptions) {
-        this._logger = options.logger
-        this._token = options.token
-        this._timeout = options.timeout || TIMEOUT
-        this._lang = options.lang
-        this._testMode = options.testMode
-
-        if (options.useQueue)
-            this._queue = new CallbackQueue(options.requestsPerSecond || REQUESTS_PER_SECOND)
-    }
-
-    public async call(method: string, params: Object): Promise<any> {
-        params = this.filterParams(params)
-
-        if (params['lang'] == undefined && this._lang != undefined)
-            params['lang'] = this._lang
-
-        if (params['testMode'] == undefined && this._testMode != undefined)
-            params['testMode'] = this._testMode
-
-        params['v'] = API_VERSION
-        params['access_token'] = params['access_token'] || this._token
-
-        if (params['access_token'] == undefined)
-            delete params['access_token']
-
-        return new Promise((resolve, reject) => {
-            let reqFunc = () => {
-                req.post({
-                    url: API_BASE_URL + method,
-                    query: params,
-                    json: true,
-                    timeout: this._timeout
-                }, (body, response, err) => {
-                    this.handleResponse(
-                        method,
-                        params,
-                        body,
-                        response,
-                        err,
-                        resolve,
-                        reject
-                    )
-                })
-            }
-
-            if (this._queue)
-                this._queue.push(reqFunc)
-            else
-                reqFunc()
-        })
-    }
-
-    /**
-     * Makes api call and if there was
-     * server-side error or requests limit was reached
-     * repeats the call after some timeout
-     */
-    public async callWithRetry(method: string, params: Object): Promise<any> {
-        return new Promise((resolve, reject) => {
-            let makeCall = (
-                resolve: any,
-                reject: any,
-                method: string,
-                params: Object,
-                useQueue = true
-            ) => {
-                this.call(method, params)
-                    .then(r => {
-                        resolve(r)
-                    })
-                    .catch(e => {
-                        if (e instanceof VKApiError) {
-                            /**
-                             * 6 - too many requests per second
-                             * 10 - internal server error
-                             */
-                            if (e.errorCode == 6 || e.errorCode == 10) {
-                                setTimeout(() => {
-                                    makeCall(
-                                        resolve,
-                                        reject,
-                                        method,
-                                        params,
-                                        useQueue
-                                    )
-                                }, 300)
-                            }
-
-                            reject(e)
-                        }
-                        else {
-                            /**
-                             * Networking error
-                             */
-                            setTimeout(() => {
-                                makeCall(
-                                    resolve,
-                                    reject,
-                                    method,
-                                    params,
-                                    useQueue
-                                )
-                            }, 300)
-                        }
-                    })
-            }
-
-            makeCall(
-                resolve,
-                reject,
-                method,
-                params,
-            )
-        })
-    }
-
-    private handleResponse(method, params, body, response, err, resolve, reject) {
-        if (!err && response.statusCode == 200 && !body.error) {
-            resolve(body.response)
-            return
-        }
-
-        if (body && body.error) {
-            reject(VKApiError.deserialize(body.error))
-
-            if (this._logger)
-                this._logger.warn('VK Api error\n', {
-                    response: JSON.stringify(body),
-                    error: VKApiError.deserialize(body.error),
-                    method,
-                    params
-                })
-
-            return
-        }
-
-        if (err) {
-            if (this._logger)
-                this._logger.error('VK Api:\n', {
-                    'Networking error:': err,
-                    method,
-                    params
-                })
-
-            reject(err)
-            return
-        }
-
-        if (this._logger)
-            this._logger.error('VK Api:\n', {
-                'api request error: Body:': body,
-                'Error:': err
-            })
-
-        reject(err)
-    }
-
-    private filterParams(params: Object): Object {
-        for (let paramName in params) {
-            if (params[paramName] == undefined) {
-                delete params[paramName]
-            }
-        }
-
-        return params
-    }
-
+export class VKApi extends BaseVKApi {
     /**
      * Returns detailed information on users.
      *
@@ -210,9 +16,8 @@ export class VKApi {
      * @returns {Promise<Responses.UsersGetResponse>}
      */
     public async usersGet(params: MethodsProps.UsersGetParams): Promise<Responses.UsersGetResponse> {
-        return this.call("users.get", params)
+        return super.call("users.get", params)
     }
-
     /**
      * Returns a list of users matching the search criteria.
      *
@@ -256,9 +61,8 @@ export class VKApi {
      * @returns {Promise<Responses.UsersSearchResponse>}
      */
     public async usersSearch(params: MethodsProps.UsersSearchParams): Promise<Responses.UsersSearchResponse> {
-        return this.call("users.search", params)
+        return super.call("users.search", params)
     }
-
     /**
      * Returns information whether a user installed the application.
      *
@@ -270,9 +74,8 @@ export class VKApi {
      * @returns {Promise<Responses.UsersIsAppUserResponse>}
      */
     public async usersIsAppUser(params: MethodsProps.UsersIsAppUserParams): Promise<Responses.UsersIsAppUserResponse> {
-        return this.call("users.isAppUser", params)
+        return super.call("users.isAppUser", params)
     }
-
     /**
      * Returns a list of IDs of users and communities followed by the user.
      *
@@ -288,9 +91,8 @@ export class VKApi {
      * @returns {Promise<Responses.UsersGetSubscriptionsResponse>}
      */
     public async usersGetSubscriptions(params: MethodsProps.UsersGetSubscriptionsParams): Promise<Responses.UsersGetSubscriptionsResponse> {
-        return this.call("users.getSubscriptions", params)
+        return super.call("users.getSubscriptions", params)
     }
-
     /**
      * Returns a list of IDs of followers of the user in question, sorted by date added, most recent first.
      *
@@ -306,9 +108,8 @@ export class VKApi {
      * @returns {Promise<Responses.UsersGetFollowersResponse>}
      */
     public async usersGetFollowers(params: MethodsProps.UsersGetFollowersParams): Promise<Responses.UsersGetFollowersResponse> {
-        return this.call("users.getFollowers", params)
+        return super.call("users.getFollowers", params)
     }
-
     /**
      * Reports (submits a complain about) a user.
      *
@@ -322,9 +123,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async usersReport(params: MethodsProps.UsersReportParams): Promise<Responses.OkResponse> {
-        return this.call("users.report", params)
+        return super.call("users.report", params)
     }
-
     /**
      * Indexes current user location and returns nearby users.
      *
@@ -342,9 +142,8 @@ export class VKApi {
      * @returns {Promise<Responses.UsersGetNearbyResponse>}
      */
     public async usersGetNearby(params: MethodsProps.UsersGetNearbyParams): Promise<Responses.UsersGetNearbyResponse> {
-        return this.call("users.getNearby", params)
+        return super.call("users.getNearby", params)
     }
-
     /**
      * Checks a user's phone number for correctness.
      *
@@ -359,9 +158,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async authCheckPhone(params: MethodsProps.AuthCheckPhoneParams): Promise<Responses.OkResponse> {
-        return this.call("auth.checkPhone", params)
+        return super.call("auth.checkPhone", params)
     }
-
     /**
      * Registers a new user by phone number.
      *
@@ -383,9 +181,8 @@ export class VKApi {
      * @returns {Promise<Responses.AuthSignupResponse>}
      */
     public async authSignup(params: MethodsProps.AuthSignupParams): Promise<Responses.AuthSignupResponse> {
-        return this.call("auth.signup", params)
+        return super.call("auth.signup", params)
     }
-
     /**
      * Completes a user's registration (begun with the [vk.com/dev/auth.signup|auth.signup] method) using an authorization code.
      *
@@ -403,9 +200,8 @@ export class VKApi {
      * @returns {Promise<Responses.AuthConfirmResponse>}
      */
     public async authConfirm(params: MethodsProps.AuthConfirmParams): Promise<Responses.AuthConfirmResponse> {
-        return this.call("auth.confirm", params)
+        return super.call("auth.confirm", params)
     }
-
     /**
      * Allows to restore account access using a code received via SMS. " This method is only available for apps with [vk.com/dev/auth_direct|Direct authorization] access. "
      *
@@ -418,9 +214,8 @@ export class VKApi {
      * @returns {Promise<Responses.AuthRestoreResponse>}
      */
     public async authRestore(params: MethodsProps.AuthRestoreParams): Promise<Responses.AuthRestoreResponse> {
-        return this.call("auth.restore", params)
+        return super.call("auth.restore", params)
     }
-
     /**
      * Returns a list of posts on a user wall or community wall.
      *
@@ -438,9 +233,8 @@ export class VKApi {
      * @returns {Promise<Responses.WallGetResponse>}
      */
     public async wallGet(params: MethodsProps.WallGetParams): Promise<Responses.WallGetResponse> {
-        return this.call("wall.get", params)
+        return super.call("wall.get", params)
     }
-
     /**
      * Allows to search posts on user or community walls.
      *
@@ -459,9 +253,8 @@ export class VKApi {
      * @returns {Promise<Responses.WallSearchResponse>}
      */
     public async wallSearch(params: MethodsProps.WallSearchParams): Promise<Responses.WallSearchResponse> {
-        return this.call("wall.search", params)
+        return super.call("wall.search", params)
     }
-
     /**
      * Creates an empty photo album.
      *
@@ -479,9 +272,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosCreateAlbumResponse>}
      */
     public async photosCreateAlbum(params: MethodsProps.PhotosCreateAlbumParams): Promise<Responses.PhotosCreateAlbumResponse> {
-        return this.call("photos.createAlbum", params)
+        return super.call("photos.createAlbum", params)
     }
-
     /**
      * Edits information about a photo album.
      *
@@ -500,9 +292,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosEditAlbum(params: MethodsProps.PhotosEditAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("photos.editAlbum", params)
+        return super.call("photos.editAlbum", params)
     }
-
     /**
      * Returns a list of a user's or community's photo albums.
      *
@@ -520,9 +311,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetAlbumsResponse>}
      */
     public async photosGetAlbums(params: MethodsProps.PhotosGetAlbumsParams): Promise<Responses.PhotosGetAlbumsResponse> {
-        return this.call("photos.getAlbums", params)
+        return super.call("photos.getAlbums", params)
     }
-
     /**
      * Returns a list of a user's or community's photos.
      *
@@ -543,9 +333,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetResponse>}
      */
     public async photosGet(params: MethodsProps.PhotosGetParams): Promise<Responses.PhotosGetResponse> {
-        return this.call("photos.get", params)
+        return super.call("photos.get", params)
     }
-
     /**
      * Returns the number of photo albums belonging to a user or community.
      *
@@ -558,9 +347,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetAlbumsCountResponse>}
      */
     public async photosGetAlbumsCount(params: MethodsProps.PhotosGetAlbumsCountParams): Promise<Responses.PhotosGetAlbumsCountResponse> {
-        return this.call("photos.getAlbumsCount", params)
+        return super.call("photos.getAlbumsCount", params)
     }
-
     /**
      * Returns information about photos by their IDs.
      *
@@ -574,9 +362,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetByIdResponse>}
      */
     public async photosGetById(params: MethodsProps.PhotosGetByIdParams): Promise<Responses.PhotosGetByIdResponse> {
-        return this.call("photos.getById", params)
+        return super.call("photos.getById", params)
     }
-
     /**
      * Returns the server address for photo upload.
      *
@@ -589,9 +376,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetUploadServerResponse>}
      */
     public async photosGetUploadServer(params: MethodsProps.PhotosGetUploadServerParams): Promise<Responses.PhotosGetUploadServerResponse> {
-        return this.call("photos.getUploadServer", params)
+        return super.call("photos.getUploadServer", params)
     }
-
     /**
      * Returns the server address for owner cover upload.
      *
@@ -604,12 +390,11 @@ export class VKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.PhotosGetOwnerCoverPhotoUploadServerResponse>}
+     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
      */
-    public async photosGetOwnerCoverPhotoUploadServer(params: MethodsProps.PhotosGetOwnerCoverPhotoUploadServerParams): Promise<Responses.PhotosGetOwnerCoverPhotoUploadServerResponse> {
-        return this.call("photos.getOwnerCoverPhotoUploadServer", params)
+    public async photosGetOwnerCoverPhotoUploadServer(params: MethodsProps.PhotosGetOwnerCoverPhotoUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+        return super.call("photos.getOwnerCoverPhotoUploadServer", params)
     }
-
     /**
      * Returns an upload server address for a profile or community photo.
      *
@@ -618,12 +403,11 @@ export class VKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.PhotosGetOwnerPhotoUploadServerResponse>}
+     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
      */
-    public async photosGetOwnerPhotoUploadServer(params: MethodsProps.PhotosGetOwnerPhotoUploadServerParams): Promise<Responses.PhotosGetOwnerPhotoUploadServerResponse> {
-        return this.call("photos.getOwnerPhotoUploadServer", params)
+    public async photosGetOwnerPhotoUploadServer(params: MethodsProps.PhotosGetOwnerPhotoUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+        return super.call("photos.getOwnerPhotoUploadServer", params)
     }
-
     /**
      * Returns an upload link for chat cover pictures.
      *
@@ -635,12 +419,11 @@ export class VKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.PhotosGetChatUploadServerResponse>}
+     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
      */
-    public async photosGetChatUploadServer(params: MethodsProps.PhotosGetChatUploadServerParams): Promise<Responses.PhotosGetChatUploadServerResponse> {
-        return this.call("photos.getChatUploadServer", params)
+    public async photosGetChatUploadServer(params: MethodsProps.PhotosGetChatUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+        return super.call("photos.getChatUploadServer", params)
     }
-
     /**
      * Returns the server address for market photo upload.
      *
@@ -653,12 +436,11 @@ export class VKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.PhotosGetMarketUploadServerResponse>}
+     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
      */
-    public async photosGetMarketUploadServer(params: MethodsProps.PhotosGetMarketUploadServerParams): Promise<Responses.PhotosGetMarketUploadServerResponse> {
-        return this.call("photos.getMarketUploadServer", params)
+    public async photosGetMarketUploadServer(params: MethodsProps.PhotosGetMarketUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+        return super.call("photos.getMarketUploadServer", params)
     }
-
     /**
      * Returns the server address for market album photo upload.
      *
@@ -667,12 +449,11 @@ export class VKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.PhotosGetMarketAlbumUploadServerResponse>}
+     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
      */
-    public async photosGetMarketAlbumUploadServer(params: MethodsProps.PhotosGetMarketAlbumUploadServerParams): Promise<Responses.PhotosGetMarketAlbumUploadServerResponse> {
-        return this.call("photos.getMarketAlbumUploadServer", params)
+    public async photosGetMarketAlbumUploadServer(params: MethodsProps.PhotosGetMarketAlbumUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+        return super.call("photos.getMarketAlbumUploadServer", params)
     }
-
     /**
      * Saves market photos after successful uploading.
      *
@@ -689,9 +470,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosSaveMarketPhotoResponse>}
      */
     public async photosSaveMarketPhoto(params: MethodsProps.PhotosSaveMarketPhotoParams): Promise<Responses.PhotosSaveMarketPhotoResponse> {
-        return this.call("photos.saveMarketPhoto", params)
+        return super.call("photos.saveMarketPhoto", params)
     }
-
     /**
      * Saves cover photo after successful uploading.
      *
@@ -704,9 +484,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosSaveOwnerCoverPhotoResponse>}
      */
     public async photosSaveOwnerCoverPhoto(params: MethodsProps.PhotosSaveOwnerCoverPhotoParams): Promise<Responses.PhotosSaveOwnerCoverPhotoResponse> {
-        return this.call("photos.saveOwnerCoverPhoto", params)
+        return super.call("photos.saveOwnerCoverPhoto", params)
     }
-
     /**
      * Saves market album photos after successful uploading.
      *
@@ -721,9 +500,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosSaveMarketAlbumPhotoResponse>}
      */
     public async photosSaveMarketAlbumPhoto(params: MethodsProps.PhotosSaveMarketAlbumPhotoParams): Promise<Responses.PhotosSaveMarketAlbumPhotoResponse> {
-        return this.call("photos.saveMarketAlbumPhoto", params)
+        return super.call("photos.saveMarketAlbumPhoto", params)
     }
-
     /**
      * Saves a profile or community photo. Upload URL can be got with the [vk.com/dev/photos.getOwnerPhotoUploadServer|photos.getOwnerPhotoUploadServer] method.
      *
@@ -737,9 +515,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosSaveOwnerPhotoResponse>}
      */
     public async photosSaveOwnerPhoto(params: MethodsProps.PhotosSaveOwnerPhotoParams): Promise<Responses.PhotosSaveOwnerPhotoResponse> {
-        return this.call("photos.saveOwnerPhoto", params)
+        return super.call("photos.saveOwnerPhoto", params)
     }
-
     /**
      * Saves a photo to a user's or community's wall after being uploaded.
      *
@@ -758,9 +535,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosSaveWallPhotoResponse>}
      */
     public async photosSaveWallPhoto(params: MethodsProps.PhotosSaveWallPhotoParams): Promise<Responses.PhotosSaveWallPhotoResponse> {
-        return this.call("photos.saveWallPhoto", params)
+        return super.call("photos.saveWallPhoto", params)
     }
-
     /**
      * Returns the server address for photo upload onto a user's wall.
      *
@@ -772,22 +548,21 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetWallUploadServerResponse>}
      */
     public async photosGetWallUploadServer(params: MethodsProps.PhotosGetWallUploadServerParams): Promise<Responses.PhotosGetWallUploadServerResponse> {
-        return this.call("photos.getWallUploadServer", params)
+        return super.call("photos.getWallUploadServer", params)
     }
-
     /**
      * Returns the server address for photo upload in a private message for a user.
      *
      * @param {{
+     *   peer_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.PhotosGetMessagesUploadServerResponse>}
      */
     public async photosGetMessagesUploadServer(params: MethodsProps.PhotosGetMessagesUploadServerParams): Promise<Responses.PhotosGetMessagesUploadServerResponse> {
-        return this.call("photos.getMessagesUploadServer", params)
+        return super.call("photos.getMessagesUploadServer", params)
     }
-
     /**
      * Saves a photo after being successfully uploaded. URL obtained with [vk.com/dev/photos.getMessagesUploadServer|photos.getMessagesUploadServer] method.
      *
@@ -801,9 +576,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosSaveMessagesPhotoResponse>}
      */
     public async photosSaveMessagesPhoto(params: MethodsProps.PhotosSaveMessagesPhotoParams): Promise<Responses.PhotosSaveMessagesPhotoResponse> {
-        return this.call("photos.saveMessagesPhoto", params)
+        return super.call("photos.saveMessagesPhoto", params)
     }
-
     /**
      * Reports (submits a complaint about) a photo.
      *
@@ -817,9 +591,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosReport(params: MethodsProps.PhotosReportParams): Promise<Responses.OkResponse> {
-        return this.call("photos.report", params)
+        return super.call("photos.report", params)
     }
-
     /**
      * Reports (submits a complaint about) a comment on a photo.
      *
@@ -833,9 +606,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosReportComment(params: MethodsProps.PhotosReportCommentParams): Promise<Responses.OkResponse> {
-        return this.call("photos.reportComment", params)
+        return super.call("photos.reportComment", params)
     }
-
     /**
      * Returns a list of photos.
      *
@@ -855,9 +627,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosSearchResponse>}
      */
     public async photosSearch(params: MethodsProps.PhotosSearchParams): Promise<Responses.PhotosSearchResponse> {
-        return this.call("photos.search", params)
+        return super.call("photos.search", params)
     }
-
     /**
      * Returns a list of user IDs or detailed information about a user's friends.
      *
@@ -875,9 +646,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetResponse>}
      */
     public async friendsGet(params: MethodsProps.FriendsGetParams): Promise<Responses.FriendsGetResponse> {
-        return this.call("friends.get", params)
+        return super.call("friends.get", params)
     }
-
     /**
      * Returns a list of user IDs of a user's friends who are online.
      *
@@ -894,9 +664,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetOnlineResponse>}
      */
     public async friendsGetOnline(params: MethodsProps.FriendsGetOnlineParams): Promise<Responses.FriendsGetOnlineResponse> {
-        return this.call("friends.getOnline", params)
+        return super.call("friends.getOnline", params)
     }
-
     /**
      * Returns a list of user IDs of the mutual friends of two users.
      *
@@ -913,9 +682,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetMutualResponse>}
      */
     public async friendsGetMutual(params: MethodsProps.FriendsGetMutualParams): Promise<Responses.FriendsGetMutualResponse> {
-        return this.call("friends.getMutual", params)
+        return super.call("friends.getMutual", params)
     }
-
     /**
      * Returns a list of user IDs of the current user's recently added friends.
      *
@@ -927,9 +695,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetRecentResponse>}
      */
     public async friendsGetRecent(params: MethodsProps.FriendsGetRecentParams): Promise<Responses.FriendsGetRecentResponse> {
-        return this.call("friends.getRecent", params)
+        return super.call("friends.getRecent", params)
     }
-
     /**
      * Returns information about the current user's incoming and outgoing friend requests.
      *
@@ -947,9 +714,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetRequestsResponse>}
      */
     public async friendsGetRequests(params: MethodsProps.FriendsGetRequestsParams): Promise<Responses.FriendsGetRequestsResponse> {
-        return this.call("friends.getRequests", params)
+        return super.call("friends.getRequests", params)
     }
-
     /**
      * Approves or creates a friend request.
      *
@@ -963,9 +729,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsAddResponse>}
      */
     public async friendsAdd(params: MethodsProps.FriendsAddParams): Promise<Responses.FriendsAddResponse> {
-        return this.call("friends.add", params)
+        return super.call("friends.add", params)
     }
-
     /**
      * Edits the friend lists of the selected user.
      *
@@ -978,9 +743,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async friendsEdit(params: MethodsProps.FriendsEditParams): Promise<Responses.OkResponse> {
-        return this.call("friends.edit", params)
+        return super.call("friends.edit", params)
     }
-
     /**
      * Declines a friend request or deletes a user from the current user's friend list.
      *
@@ -992,9 +756,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsDeleteResponse>}
      */
     public async friendsDelete(params: MethodsProps.FriendsDeleteParams): Promise<Responses.FriendsDeleteResponse> {
-        return this.call("friends.delete", params)
+        return super.call("friends.delete", params)
     }
-
     /**
      * Returns a list of the user's friend lists.
      *
@@ -1007,9 +770,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetListsResponse>}
      */
     public async friendsGetLists(params: MethodsProps.FriendsGetListsParams): Promise<Responses.FriendsGetListsResponse> {
-        return this.call("friends.getLists", params)
+        return super.call("friends.getLists", params)
     }
-
     /**
      * Creates a new friend list for the current user.
      *
@@ -1022,9 +784,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsAddListResponse>}
      */
     public async friendsAddList(params: MethodsProps.FriendsAddListParams): Promise<Responses.FriendsAddListResponse> {
-        return this.call("friends.addList", params)
+        return super.call("friends.addList", params)
     }
-
     /**
      * Edits a friend list of the current user.
      *
@@ -1040,9 +801,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async friendsEditList(params: MethodsProps.FriendsEditListParams): Promise<Responses.OkResponse> {
-        return this.call("friends.editList", params)
+        return super.call("friends.editList", params)
     }
-
     /**
      * Deletes a friend list of the current user.
      *
@@ -1054,9 +814,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async friendsDeleteList(params: MethodsProps.FriendsDeleteListParams): Promise<Responses.OkResponse> {
-        return this.call("friends.deleteList", params)
+        return super.call("friends.deleteList", params)
     }
-
     /**
      * Returns a list of IDs of the current user's friends who installed the application.
      *
@@ -1067,9 +826,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetAppUsersResponse>}
      */
     public async friendsGetAppUsers(params: MethodsProps.FriendsGetAppUsersParams): Promise<Responses.FriendsGetAppUsersResponse> {
-        return this.call("friends.getAppUsers", params)
+        return super.call("friends.getAppUsers", params)
     }
-
     /**
      * Returns a list of the current user's friends whose phone numbers, validated or specified in a profile, are in a given list.
      *
@@ -1082,9 +840,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetByPhonesResponse>}
      */
     public async friendsGetByPhones(params: MethodsProps.FriendsGetByPhonesParams): Promise<Responses.FriendsGetByPhonesResponse> {
-        return this.call("friends.getByPhones", params)
+        return super.call("friends.getByPhones", params)
     }
-
     /**
      * Marks all incoming friend requests as viewed.
      *
@@ -1095,9 +852,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async friendsDeleteAllRequests(params: MethodsProps.FriendsDeleteAllRequestsParams): Promise<Responses.OkResponse> {
-        return this.call("friends.deleteAllRequests", params)
+        return super.call("friends.deleteAllRequests", params)
     }
-
     /**
      * Returns a list of profiles of users whom the current user may know.
      *
@@ -1113,9 +869,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetSuggestionsResponse>}
      */
     public async friendsGetSuggestions(params: MethodsProps.FriendsGetSuggestionsParams): Promise<Responses.FriendsGetSuggestionsResponse> {
-        return this.call("friends.getSuggestions", params)
+        return super.call("friends.getSuggestions", params)
     }
-
     /**
      * Checks the current user's friendship status with other specified users.
      *
@@ -1128,9 +883,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsAreFriendsResponse>}
      */
     public async friendsAreFriends(params: MethodsProps.FriendsAreFriendsParams): Promise<Responses.FriendsAreFriendsResponse> {
-        return this.call("friends.areFriends", params)
+        return super.call("friends.areFriends", params)
     }
-
     /**
      * Returns a list of friends who can be called by the current user.
      *
@@ -1143,9 +897,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsGetAvailableForCallResponse>}
      */
     public async friendsGetAvailableForCall(params: MethodsProps.FriendsGetAvailableForCallParams): Promise<Responses.FriendsGetAvailableForCallResponse> {
-        return this.call("friends.getAvailableForCall", params)
+        return super.call("friends.getAvailableForCall", params)
     }
-
     /**
      * Returns a list of friends matching the search criteria.
      *
@@ -1162,9 +915,8 @@ export class VKApi {
      * @returns {Promise<Responses.FriendsSearchResponse>}
      */
     public async friendsSearch(params: MethodsProps.FriendsSearchParams): Promise<Responses.FriendsSearchResponse> {
-        return this.call("friends.search", params)
+        return super.call("friends.search", params)
     }
-
     /**
      * Gets a list of comments for the page added through the [vk.com/dev/Comments|Comments widget].
      *
@@ -1181,9 +933,8 @@ export class VKApi {
      * @returns {Promise<Responses.WidgetsGetCommentsResponse>}
      */
     public async widgetsGetComments(params: MethodsProps.WidgetsGetCommentsParams): Promise<Responses.WidgetsGetCommentsResponse> {
-        return this.call("widgets.getComments", params)
+        return super.call("widgets.getComments", params)
     }
-
     /**
      * Gets a list of application/site pages where the [vk.com/dev/Comments|Comments widget] or [vk.com/dev/Like|Like widget] is installed.
      *
@@ -1198,9 +949,8 @@ export class VKApi {
      * @returns {Promise<Responses.WidgetsGetPagesResponse>}
      */
     public async widgetsGetPages(params: MethodsProps.WidgetsGetPagesParams): Promise<Responses.WidgetsGetPagesResponse> {
-        return this.call("widgets.getPages", params)
+        return super.call("widgets.getPages", params)
     }
-
     /**
      * Allows to hide stories from chosen sources from current user's feed.
      *
@@ -1212,9 +962,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async storiesBanOwner(params: MethodsProps.StoriesBanOwnerParams): Promise<Responses.OkResponse> {
-        return this.call("stories.banOwner", params)
+        return super.call("stories.banOwner", params)
     }
-
     /**
      * Allows to delete story.
      *
@@ -1227,9 +976,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async storiesDelete(params: MethodsProps.StoriesDeleteParams): Promise<Responses.OkResponse> {
-        return this.call("stories.delete", params)
+        return super.call("stories.delete", params)
     }
-
     /**
      * Returns stories available for current user.
      *
@@ -1242,9 +990,8 @@ export class VKApi {
      * @returns {Promise<Responses.StoriesGetResponse>}
      */
     public async storiesGet(params: MethodsProps.StoriesGetParams): Promise<Responses.StoriesGetResponse> {
-        return this.call("stories.get", params)
+        return super.call("stories.get", params)
     }
-
     /**
      * Returns list of sources hidden from current user's feed.
      *
@@ -1257,9 +1004,8 @@ export class VKApi {
      * @returns {Promise<Responses.StoriesGetBannedResponse>}
      */
     public async storiesGetBanned(params: MethodsProps.StoriesGetBannedParams): Promise<Responses.StoriesGetBannedResponse> {
-        return this.call("stories.getBanned", params)
+        return super.call("stories.getBanned", params)
     }
-
     /**
      * Returns story by its ID.
      *
@@ -1273,9 +1019,8 @@ export class VKApi {
      * @returns {Promise<Responses.StoriesGetByIdResponse>}
      */
     public async storiesGetById(params: MethodsProps.StoriesGetByIdParams): Promise<Responses.StoriesGetByIdResponse> {
-        return this.call("stories.getById", params)
+        return super.call("stories.getById", params)
     }
-
     /**
      * Returns URL for uploading a story with photo.
      *
@@ -1292,9 +1037,8 @@ export class VKApi {
      * @returns {Promise<Responses.StoriesGetPhotoUploadServerResponse>}
      */
     public async storiesGetPhotoUploadServer(params: MethodsProps.StoriesGetPhotoUploadServerParams): Promise<Responses.StoriesGetPhotoUploadServerResponse> {
-        return this.call("stories.getPhotoUploadServer", params)
+        return super.call("stories.getPhotoUploadServer", params)
     }
-
     /**
      * Returns replies to the story.
      *
@@ -1310,9 +1054,8 @@ export class VKApi {
      * @returns {Promise<Responses.StoriesGetRepliesResponse>}
      */
     public async storiesGetReplies(params: MethodsProps.StoriesGetRepliesParams): Promise<Responses.StoriesGetRepliesResponse> {
-        return this.call("stories.getReplies", params)
+        return super.call("stories.getReplies", params)
     }
-
     /**
      * Returns stories available for current user.
      *
@@ -1325,9 +1068,8 @@ export class VKApi {
      * @returns {Promise<Responses.StoriesGetStatsResponse>}
      */
     public async storiesGetStats(params: MethodsProps.StoriesGetStatsParams): Promise<Responses.StoriesGetStatsResponse> {
-        return this.call("stories.getStats", params)
+        return super.call("stories.getStats", params)
     }
-
     /**
      * Allows to receive URL for uploading story with video.
      *
@@ -1344,9 +1086,8 @@ export class VKApi {
      * @returns {Promise<Responses.StoriesGetVideoUploadServerResponse>}
      */
     public async storiesGetVideoUploadServer(params: MethodsProps.StoriesGetVideoUploadServerParams): Promise<Responses.StoriesGetVideoUploadServerResponse> {
-        return this.call("stories.getVideoUploadServer", params)
+        return super.call("stories.getVideoUploadServer", params)
     }
-
     /**
      * Returns a list of story viewers.
      *
@@ -1362,9 +1103,8 @@ export class VKApi {
      * @returns {Promise<Responses.StoriesGetViewersResponse>}
      */
     public async storiesGetViewers(params: MethodsProps.StoriesGetViewersParams): Promise<Responses.StoriesGetViewersResponse> {
-        return this.call("stories.getViewers", params)
+        return super.call("stories.getViewers", params)
     }
-
     /**
      * Hides all replies in the last 24 hours from the user to current user's stories.
      *
@@ -1376,9 +1116,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async storiesHideAllReplies(params: MethodsProps.StoriesHideAllRepliesParams): Promise<Responses.OkResponse> {
-        return this.call("stories.hideAllReplies", params)
+        return super.call("stories.hideAllReplies", params)
     }
-
     /**
      * Hides the reply to the current user's story.
      *
@@ -1392,9 +1131,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async storiesHideReply(params: MethodsProps.StoriesHideReplyParams): Promise<Responses.OkResponse> {
-        return this.call("stories.hideReply", params)
+        return super.call("stories.hideReply", params)
     }
-
     /**
      * Allows to show stories from hidden sources in current user's feed.
      *
@@ -1406,9 +1144,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async storiesUnbanOwner(params: MethodsProps.StoriesUnbanOwnerParams): Promise<Responses.OkResponse> {
-        return this.call("stories.unbanOwner", params)
+        return super.call("stories.unbanOwner", params)
     }
-
     /**
      * Returns payment balance of the application in hundredth of a vote.
      *
@@ -1419,9 +1156,8 @@ export class VKApi {
      * @returns {Promise<Responses.SecureGetAppBalanceResponse>}
      */
     public async secureGetAppBalance(params: MethodsProps.SecureGetAppBalanceParams): Promise<Responses.SecureGetAppBalanceResponse> {
-        return this.call("secure.getAppBalance", params)
+        return super.call("secure.getAppBalance", params)
     }
-
     /**
      * Shows history of votes transaction between users and the application.
      *
@@ -1432,9 +1168,8 @@ export class VKApi {
      * @returns {Promise<Responses.SecureGetTransactionsHistoryResponse>}
      */
     public async secureGetTransactionsHistory(params: MethodsProps.SecureGetTransactionsHistoryParams): Promise<Responses.SecureGetTransactionsHistoryResponse> {
-        return this.call("secure.getTransactionsHistory", params)
+        return super.call("secure.getTransactionsHistory", params)
     }
-
     /**
      * Shows a list of SMS notifications sent by the application using [vk.com/dev/secure.sendSMSNotification|secure.sendSMSNotification] method.
      *
@@ -1449,9 +1184,8 @@ export class VKApi {
      * @returns {Promise<Responses.SecureGetSMSHistoryResponse>}
      */
     public async secureGetSMSHistory(params: MethodsProps.SecureGetSMSHistoryParams): Promise<Responses.SecureGetSMSHistoryResponse> {
-        return this.call("secure.getSMSHistory", params)
+        return super.call("secure.getSMSHistory", params)
     }
-
     /**
      * Sends 'SMS' notification to a user's mobile device.
      *
@@ -1464,9 +1198,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async secureSendSMSNotification(params: MethodsProps.SecureSendSMSNotificationParams): Promise<Responses.OkResponse> {
-        return this.call("secure.sendSMSNotification", params)
+        return super.call("secure.sendSMSNotification", params)
     }
-
     /**
      * Sends notification to the user.
      *
@@ -1480,9 +1213,8 @@ export class VKApi {
      * @returns {Promise<Responses.SecureSendNotificationResponse>}
      */
     public async secureSendNotification(params: MethodsProps.SecureSendNotificationParams): Promise<Responses.SecureSendNotificationResponse> {
-        return this.call("secure.sendNotification", params)
+        return super.call("secure.sendNotification", params)
     }
-
     /**
      * Sets a counter which is shown to the user in bold in the left menu.
      *
@@ -1496,9 +1228,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async secureSetCounter(params: MethodsProps.SecureSetCounterParams): Promise<Responses.OkResponse> {
-        return this.call("secure.setCounter", params)
+        return super.call("secure.setCounter", params)
     }
-
     /**
      * Sets user game level in the application which can be seen by his/her friends.
      *
@@ -1512,9 +1243,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async secureSetUserLevel(params: MethodsProps.SecureSetUserLevelParams): Promise<Responses.OkResponse> {
-        return this.call("secure.setUserLevel", params)
+        return super.call("secure.setUserLevel", params)
     }
-
     /**
      * Returns one of the previously set game levels of one or more users in the application.
      *
@@ -1526,9 +1256,8 @@ export class VKApi {
      * @returns {Promise<Responses.SecureGetUserLevelResponse>}
      */
     public async secureGetUserLevel(params: MethodsProps.SecureGetUserLevelParams): Promise<Responses.SecureGetUserLevelResponse> {
-        return this.call("secure.getUserLevel", params)
+        return super.call("secure.getUserLevel", params)
     }
-
     /**
      * Allows to receive data for the connection to Streaming API.
      *
@@ -1539,9 +1268,8 @@ export class VKApi {
      * @returns {Promise<Responses.StreamingGetServerUrlResponse>}
      */
     public async streamingGetServerUrl(params: MethodsProps.StreamingGetServerUrlParams): Promise<Responses.StreamingGetServerUrlResponse> {
-        return this.call("streaming.getServerUrl", params)
+        return super.call("streaming.getServerUrl", params)
     }
-
     /**
      * Returns a value of variable with the name set by key parameter.
      *
@@ -1555,9 +1283,8 @@ export class VKApi {
      * @returns {Promise<Responses.StorageGetResponse>}
      */
     public async storageGet(params: MethodsProps.StorageGetParams): Promise<Responses.StorageGetResponse> {
-        return this.call("storage.get", params)
+        return super.call("storage.get", params)
     }
-
     /**
      * Saves a value of variable with the name set by 'key' parameter.
      *
@@ -1571,9 +1298,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async storageSet(params: MethodsProps.StorageSetParams): Promise<Responses.OkResponse> {
-        return this.call("storage.set", params)
+        return super.call("storage.set", params)
     }
-
     /**
      * Returns the names of all variables.
      *
@@ -1586,9 +1312,8 @@ export class VKApi {
      * @returns {Promise<Responses.StorageGetKeysResponse>}
      */
     public async storageGetKeys(params: MethodsProps.StorageGetKeysParams): Promise<Responses.StorageGetKeysResponse> {
-        return this.call("storage.getKeys", params)
+        return super.call("storage.getKeys", params)
     }
-
     /**
      * Returns a list of orders.
      *
@@ -1601,9 +1326,8 @@ export class VKApi {
      * @returns {Promise<Responses.OrdersGetResponse>}
      */
     public async ordersGet(params: MethodsProps.OrdersGetParams): Promise<Responses.OrdersGetResponse> {
-        return this.call("orders.get", params)
+        return super.call("orders.get", params)
     }
-
     /**
      * Returns information about orders by their IDs.
      *
@@ -1617,9 +1341,8 @@ export class VKApi {
      * @returns {Promise<Responses.OrdersGetByIdResponse>}
      */
     public async ordersGetById(params: MethodsProps.OrdersGetByIdParams): Promise<Responses.OrdersGetByIdResponse> {
-        return this.call("orders.getById", params)
+        return super.call("orders.getById", params)
     }
-
     /**
      * Changes order status.
      *
@@ -1634,9 +1357,8 @@ export class VKApi {
      * @returns {Promise<Responses.OrdersChangeStateResponse>}
      */
     public async ordersChangeState(params: MethodsProps.OrdersChangeStateParams): Promise<Responses.OrdersChangeStateResponse> {
-        return this.call("orders.changeState", params)
+        return super.call("orders.changeState", params)
     }
-
     /**
      * undefined
      *
@@ -1649,9 +1371,8 @@ export class VKApi {
      * @returns {Promise<Responses.OrdersGetAmountResponse>}
      */
     public async ordersGetAmount(params: MethodsProps.OrdersGetAmountParams): Promise<Responses.OrdersGetAmountResponse> {
-        return this.call("orders.getAmount", params)
+        return super.call("orders.getAmount", params)
     }
-
     /**
      * Saves photos after successful uploading.
      *
@@ -1670,9 +1391,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosSaveResponse>}
      */
     public async photosSave(params: MethodsProps.PhotosSaveParams): Promise<Responses.PhotosSaveResponse> {
-        return this.call("photos.save", params)
+        return super.call("photos.save", params)
     }
-
     /**
      * Allows to copy a photo to the "Saved photos" album
      *
@@ -1686,9 +1406,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosCopyResponse>}
      */
     public async photosCopy(params: MethodsProps.PhotosCopyParams): Promise<Responses.PhotosCopyResponse> {
-        return this.call("photos.copy", params)
+        return super.call("photos.copy", params)
     }
-
     /**
      * Edits the caption of a photo.
      *
@@ -1707,9 +1426,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosEdit(params: MethodsProps.PhotosEditParams): Promise<Responses.OkResponse> {
-        return this.call("photos.edit", params)
+        return super.call("photos.edit", params)
     }
-
     /**
      * Moves a photo from one album to another.
      *
@@ -1723,9 +1441,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosMove(params: MethodsProps.PhotosMoveParams): Promise<Responses.OkResponse> {
-        return this.call("photos.move", params)
+        return super.call("photos.move", params)
     }
-
     /**
      * Makes a photo into an album cover.
      *
@@ -1739,9 +1456,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosMakeCover(params: MethodsProps.PhotosMakeCoverParams): Promise<Responses.OkResponse> {
-        return this.call("photos.makeCover", params)
+        return super.call("photos.makeCover", params)
     }
-
     /**
      * Reorders the album in the list of user albums.
      *
@@ -1756,9 +1472,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosReorderAlbums(params: MethodsProps.PhotosReorderAlbumsParams): Promise<Responses.OkResponse> {
-        return this.call("photos.reorderAlbums", params)
+        return super.call("photos.reorderAlbums", params)
     }
-
     /**
      * Reorders the photo in the list of photos of the user album.
      *
@@ -1773,9 +1488,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosReorderPhotos(params: MethodsProps.PhotosReorderPhotosParams): Promise<Responses.OkResponse> {
-        return this.call("photos.reorderPhotos", params)
+        return super.call("photos.reorderPhotos", params)
     }
-
     /**
      * Returns a list of photos belonging to a user or community, in reverse chronological order.
      *
@@ -1794,9 +1508,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetAllResponse>}
      */
     public async photosGetAll(params: MethodsProps.PhotosGetAllParams): Promise<Responses.PhotosGetAllResponse> {
-        return this.call("photos.getAll", params)
+        return super.call("photos.getAll", params)
     }
-
     /**
      * Returns a list of photos in which a user is tagged.
      *
@@ -1812,9 +1525,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetUserPhotosResponse>}
      */
     public async photosGetUserPhotos(params: MethodsProps.PhotosGetUserPhotosParams): Promise<Responses.PhotosGetUserPhotosResponse> {
-        return this.call("photos.getUserPhotos", params)
+        return super.call("photos.getUserPhotos", params)
     }
-
     /**
      * Deletes a photo album belonging to the current user.
      *
@@ -1827,9 +1539,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosDeleteAlbum(params: MethodsProps.PhotosDeleteAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("photos.deleteAlbum", params)
+        return super.call("photos.deleteAlbum", params)
     }
-
     /**
      * Deletes a photo.
      *
@@ -1842,9 +1553,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosDelete(params: MethodsProps.PhotosDeleteParams): Promise<Responses.OkResponse> {
-        return this.call("photos.delete", params)
+        return super.call("photos.delete", params)
     }
-
     /**
      * Restores a deleted photo.
      *
@@ -1857,9 +1567,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosRestore(params: MethodsProps.PhotosRestoreParams): Promise<Responses.OkResponse> {
-        return this.call("photos.restore", params)
+        return super.call("photos.restore", params)
     }
-
     /**
      * Confirms a tag on a photo.
      *
@@ -1873,9 +1582,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosConfirmTag(params: MethodsProps.PhotosConfirmTagParams): Promise<Responses.OkResponse> {
-        return this.call("photos.confirmTag", params)
+        return super.call("photos.confirmTag", params)
     }
-
     /**
      * Returns a list of comments on a photo.
      *
@@ -1896,9 +1604,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetCommentsResponse>}
      */
     public async photosGetComments(params: MethodsProps.PhotosGetCommentsParams): Promise<Responses.PhotosGetCommentsResponse> {
-        return this.call("photos.getComments", params)
+        return super.call("photos.getComments", params)
     }
-
     /**
      * Returns a list of comments on a specific photo album or all albums of the user sorted in reverse chronological order.
      *
@@ -1914,9 +1621,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetAllCommentsResponse>}
      */
     public async photosGetAllComments(params: MethodsProps.PhotosGetAllCommentsParams): Promise<Responses.PhotosGetAllCommentsResponse> {
-        return this.call("photos.getAllComments", params)
+        return super.call("photos.getAllComments", params)
     }
-
     /**
      * Adds a new comment on the photo.
      *
@@ -1936,9 +1642,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosCreateCommentResponse>}
      */
     public async photosCreateComment(params: MethodsProps.PhotosCreateCommentParams): Promise<Responses.PhotosCreateCommentResponse> {
-        return this.call("photos.createComment", params)
+        return super.call("photos.createComment", params)
     }
-
     /**
      * Deletes a comment on the photo.
      *
@@ -1951,9 +1656,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosDeleteCommentResponse>}
      */
     public async photosDeleteComment(params: MethodsProps.PhotosDeleteCommentParams): Promise<Responses.PhotosDeleteCommentResponse> {
-        return this.call("photos.deleteComment", params)
+        return super.call("photos.deleteComment", params)
     }
-
     /**
      * Restores a deleted comment on a photo.
      *
@@ -1966,9 +1670,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosRestoreCommentResponse>}
      */
     public async photosRestoreComment(params: MethodsProps.PhotosRestoreCommentParams): Promise<Responses.PhotosRestoreCommentResponse> {
-        return this.call("photos.restoreComment", params)
+        return super.call("photos.restoreComment", params)
     }
-
     /**
      * Edits a comment on a photo.
      *
@@ -1983,9 +1686,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosEditComment(params: MethodsProps.PhotosEditCommentParams): Promise<Responses.OkResponse> {
-        return this.call("photos.editComment", params)
+        return super.call("photos.editComment", params)
     }
-
     /**
      * Returns a list of tags on a photo.
      *
@@ -1999,9 +1701,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetTagsResponse>}
      */
     public async photosGetTags(params: MethodsProps.PhotosGetTagsParams): Promise<Responses.PhotosGetTagsResponse> {
-        return this.call("photos.getTags", params)
+        return super.call("photos.getTags", params)
     }
-
     /**
      * Adds a tag on the photo.
      *
@@ -2019,9 +1720,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosPutTagResponse>}
      */
     public async photosPutTag(params: MethodsProps.PhotosPutTagParams): Promise<Responses.PhotosPutTagResponse> {
-        return this.call("photos.putTag", params)
+        return super.call("photos.putTag", params)
     }
-
     /**
      * Removes a tag from a photo.
      *
@@ -2035,9 +1735,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async photosRemoveTag(params: MethodsProps.PhotosRemoveTagParams): Promise<Responses.OkResponse> {
-        return this.call("photos.removeTag", params)
+        return super.call("photos.removeTag", params)
     }
-
     /**
      * Returns a list of photos with tags that have not been viewed.
      *
@@ -2050,9 +1749,8 @@ export class VKApi {
      * @returns {Promise<Responses.PhotosGetNewTagsResponse>}
      */
     public async photosGetNewTags(params: MethodsProps.PhotosGetNewTagsParams): Promise<Responses.PhotosGetNewTagsResponse> {
-        return this.call("photos.getNewTags", params)
+        return super.call("photos.getNewTags", params)
     }
-
     /**
      * Returns a list of posts from user or community walls by their IDs.
      *
@@ -2067,9 +1765,8 @@ export class VKApi {
      * @returns {Promise<Responses.WallGetByIdResponse>}
      */
     public async wallGetById(params: MethodsProps.WallGetByIdParams): Promise<Responses.WallGetByIdResponse> {
-        return this.call("wall.getById", params)
+        return super.call("wall.getById", params)
     }
-
     /**
      * Adds a new post on a user wall or community wall. Can also be used to publish suggested or scheduled posts.
      *
@@ -2094,9 +1791,32 @@ export class VKApi {
      * @returns {Promise<Responses.WallPostResponse>}
      */
     public async wallPost(params: MethodsProps.WallPostParams): Promise<Responses.WallPostResponse> {
-        return this.call("wall.post", params)
+        return super.call("wall.post", params)
     }
-
+    /**
+     * Allows to create hidden post which will not be shown on the community's wall and can be used for creating an ad with type "Community post".
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   message: (string|undefined),
+     *   attachments: (string[]|undefined),
+     *   signed: (boolean|undefined),
+     *   lat: (number|undefined),
+     *   long: (number|undefined),
+     *   place_id: (number|undefined),
+     *   post_id: (number|undefined),
+     *   guid: (string|undefined),
+     *   link_button: (string|undefined),
+     *   link_title: (string|undefined),
+     *   link_image: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.WallPostAdsStealthResponse>}
+     */
+    public async wallPostAdsStealth(params: MethodsProps.WallPostAdsStealthParams): Promise<Responses.WallPostAdsStealthResponse> {
+        return super.call("wall.postAdsStealth", params)
+    }
     /**
      * Reposts (copies) an object to a user wall or community wall.
      *
@@ -2111,9 +1831,8 @@ export class VKApi {
      * @returns {Promise<Responses.WallRepostResponse>}
      */
     public async wallRepost(params: MethodsProps.WallRepostParams): Promise<Responses.WallRepostResponse> {
-        return this.call("wall.repost", params)
+        return super.call("wall.repost", params)
     }
-
     /**
      * Returns information about reposts of a post on user wall or community wall.
      *
@@ -2128,9 +1847,8 @@ export class VKApi {
      * @returns {Promise<Responses.WallGetRepostsResponse>}
      */
     public async wallGetReposts(params: MethodsProps.WallGetRepostsParams): Promise<Responses.WallGetRepostsResponse> {
-        return this.call("wall.getReposts", params)
+        return super.call("wall.getReposts", params)
     }
-
     /**
      * Edits a post on a user wall or community wall.
      *
@@ -2153,9 +1871,31 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallEdit(params: MethodsProps.WallEditParams): Promise<Responses.OkResponse> {
-        return this.call("wall.edit", params)
+        return super.call("wall.edit", params)
     }
-
+    /**
+     * Allows to edit hidden post.
+     *
+     * @param {{
+     *   owner_id: (number|undefined),
+     *   post_id: (number),
+     *   message: (string|undefined),
+     *   attachments: (string[]|undefined),
+     *   signed: (boolean|undefined),
+     *   lat: (number|undefined),
+     *   long: (number|undefined),
+     *   place_id: (number|undefined),
+     *   link_button: (string|undefined),
+     *   link_title: (string|undefined),
+     *   link_image: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async wallEditAdsStealth(params: MethodsProps.WallEditAdsStealthParams): Promise<Responses.OkResponse> {
+        return super.call("wall.editAdsStealth", params)
+    }
     /**
      * Deletes a post from a user wall or community wall.
      *
@@ -2168,9 +1908,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallDelete(params: MethodsProps.WallDeleteParams): Promise<Responses.OkResponse> {
-        return this.call("wall.delete", params)
+        return super.call("wall.delete", params)
     }
-
     /**
      * Restores a post deleted from a user wall or community wall.
      *
@@ -2183,9 +1922,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallRestore(params: MethodsProps.WallRestoreParams): Promise<Responses.OkResponse> {
-        return this.call("wall.restore", params)
+        return super.call("wall.restore", params)
     }
-
     /**
      * Pins the post on wall.
      *
@@ -2198,9 +1936,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallPin(params: MethodsProps.WallPinParams): Promise<Responses.OkResponse> {
-        return this.call("wall.pin", params)
+        return super.call("wall.pin", params)
     }
-
     /**
      * Unpins the post on wall.
      *
@@ -2213,9 +1950,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallUnpin(params: MethodsProps.WallUnpinParams): Promise<Responses.OkResponse> {
-        return this.call("wall.unpin", params)
+        return super.call("wall.unpin", params)
     }
-
     /**
      * Returns a list of comments on a post on a user wall or community wall.
      *
@@ -2235,9 +1971,8 @@ export class VKApi {
      * @returns {Promise<Responses.WallGetCommentsResponse>}
      */
     public async wallGetComments(params: MethodsProps.WallGetCommentsParams): Promise<Responses.WallGetCommentsResponse> {
-        return this.call("wall.getComments", params)
+        return super.call("wall.getComments", params)
     }
-
     /**
      * Adds a comment to a post on a user wall or community wall.
      *
@@ -2256,9 +1991,8 @@ export class VKApi {
      * @returns {Promise<Responses.WallCreateCommentResponse>}
      */
     public async wallCreateComment(params: MethodsProps.WallCreateCommentParams): Promise<Responses.WallCreateCommentResponse> {
-        return this.call("wall.createComment", params)
+        return super.call("wall.createComment", params)
     }
-
     /**
      * Edits a comment on a user wall or community wall.
      *
@@ -2273,9 +2007,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallEditComment(params: MethodsProps.WallEditCommentParams): Promise<Responses.OkResponse> {
-        return this.call("wall.editComment", params)
+        return super.call("wall.editComment", params)
     }
-
     /**
      * Deletes a comment on a post on a user wall or community wall.
      *
@@ -2288,9 +2021,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallDeleteComment(params: MethodsProps.WallDeleteCommentParams): Promise<Responses.OkResponse> {
-        return this.call("wall.deleteComment", params)
+        return super.call("wall.deleteComment", params)
     }
-
     /**
      * Restores a comment deleted from a user wall or community wall.
      *
@@ -2303,9 +2035,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallRestoreComment(params: MethodsProps.WallRestoreCommentParams): Promise<Responses.OkResponse> {
-        return this.call("wall.restoreComment", params)
+        return super.call("wall.restoreComment", params)
     }
-
     /**
      * Reports (submits a complaint about) a post on a user wall or community wall.
      *
@@ -2319,9 +2050,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallReportPost(params: MethodsProps.WallReportPostParams): Promise<Responses.OkResponse> {
-        return this.call("wall.reportPost", params)
+        return super.call("wall.reportPost", params)
     }
-
     /**
      * Reports (submits a complaint about) a comment on a post on a user wall or community wall.
      *
@@ -2335,9 +2065,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async wallReportComment(params: MethodsProps.WallReportCommentParams): Promise<Responses.OkResponse> {
-        return this.call("wall.reportComment", params)
+        return super.call("wall.reportComment", params)
     }
-
     /**
      * Returns data required to show the status of a user or community.
      *
@@ -2350,9 +2079,8 @@ export class VKApi {
      * @returns {Promise<Responses.StatusGetResponse>}
      */
     public async statusGet(params: MethodsProps.StatusGetParams): Promise<Responses.StatusGetResponse> {
-        return this.call("status.get", params)
+        return super.call("status.get", params)
     }
-
     /**
      * Sets a new status for the current user.
      *
@@ -2365,9 +2093,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async statusSet(params: MethodsProps.StatusSetParams): Promise<Responses.OkResponse> {
-        return this.call("status.set", params)
+        return super.call("status.set", params)
     }
-
     /**
      * Completes the lead started by user.
      *
@@ -2381,9 +2108,8 @@ export class VKApi {
      * @returns {Promise<Responses.LeadsCompleteResponse>}
      */
     public async leadsComplete(params: MethodsProps.LeadsCompleteParams): Promise<Responses.LeadsCompleteResponse> {
-        return this.call("leads.complete", params)
+        return super.call("leads.complete", params)
     }
-
     /**
      * Creates new session for the user passing the offer.
      *
@@ -2396,9 +2122,8 @@ export class VKApi {
      * @returns {Promise<Responses.LeadsStartResponse>}
      */
     public async leadsStart(params: MethodsProps.LeadsStartParams): Promise<Responses.LeadsStartResponse> {
-        return this.call("leads.start", params)
+        return super.call("leads.start", params)
     }
-
     /**
      * Returns lead stats data.
      *
@@ -2413,9 +2138,8 @@ export class VKApi {
      * @returns {Promise<Responses.LeadsGetStatsResponse>}
      */
     public async leadsGetStats(params: MethodsProps.LeadsGetStatsParams): Promise<Responses.LeadsGetStatsResponse> {
-        return this.call("leads.getStats", params)
+        return super.call("leads.getStats", params)
     }
-
     /**
      * Returns a list of last user actions for the offer.
      *
@@ -2432,9 +2156,8 @@ export class VKApi {
      * @returns {Promise<Responses.LeadsGetUsersResponse>}
      */
     public async leadsGetUsers(params: MethodsProps.LeadsGetUsersParams): Promise<Responses.LeadsGetUsersResponse> {
-        return this.call("leads.getUsers", params)
+        return super.call("leads.getUsers", params)
     }
-
     /**
      * Checks if the user can start the lead.
      *
@@ -2449,9 +2172,8 @@ export class VKApi {
      * @returns {Promise<Responses.LeadsCheckUserResponse>}
      */
     public async leadsCheckUser(params: MethodsProps.LeadsCheckUserParams): Promise<Responses.LeadsCheckUserResponse> {
-        return this.call("leads.checkUser", params)
+        return super.call("leads.checkUser", params)
     }
-
     /**
      * Counts the metric event.
      *
@@ -2463,9 +2185,8 @@ export class VKApi {
      * @returns {Promise<Responses.LeadsMetricHitResponse>}
      */
     public async leadsMetricHit(params: MethodsProps.LeadsMetricHitParams): Promise<Responses.LeadsMetricHitResponse> {
-        return this.call("leads.metricHit", params)
+        return super.call("leads.metricHit", params)
     }
-
     /**
      * Returns information about a wiki page.
      *
@@ -2483,9 +2204,8 @@ export class VKApi {
      * @returns {Promise<Responses.PagesGetResponse>}
      */
     public async pagesGet(params: MethodsProps.PagesGetParams): Promise<Responses.PagesGetResponse> {
-        return this.call("pages.get", params)
+        return super.call("pages.get", params)
     }
-
     /**
      * Saves the text of a wiki page.
      *
@@ -2501,9 +2221,8 @@ export class VKApi {
      * @returns {Promise<Responses.PagesSaveResponse>}
      */
     public async pagesSave(params: MethodsProps.PagesSaveParams): Promise<Responses.PagesSaveResponse> {
-        return this.call("pages.save", params)
+        return super.call("pages.save", params)
     }
-
     /**
      * Saves modified read and edit access settings for a wiki page.
      *
@@ -2519,9 +2238,8 @@ export class VKApi {
      * @returns {Promise<Responses.PagesSaveAccessResponse>}
      */
     public async pagesSaveAccess(params: MethodsProps.PagesSaveAccessParams): Promise<Responses.PagesSaveAccessResponse> {
-        return this.call("pages.saveAccess", params)
+        return super.call("pages.saveAccess", params)
     }
-
     /**
      * Returns a list of all previous versions of a wiki page.
      *
@@ -2535,9 +2253,8 @@ export class VKApi {
      * @returns {Promise<Responses.PagesGetHistoryResponse>}
      */
     public async pagesGetHistory(params: MethodsProps.PagesGetHistoryParams): Promise<Responses.PagesGetHistoryResponse> {
-        return this.call("pages.getHistory", params)
+        return super.call("pages.getHistory", params)
     }
-
     /**
      * Returns a list of wiki pages in a group.
      *
@@ -2549,9 +2266,8 @@ export class VKApi {
      * @returns {Promise<Responses.PagesGetTitlesResponse>}
      */
     public async pagesGetTitles(params: MethodsProps.PagesGetTitlesParams): Promise<Responses.PagesGetTitlesResponse> {
-        return this.call("pages.getTitles", params)
+        return super.call("pages.getTitles", params)
     }
-
     /**
      * Returns the text of one of the previous versions of a wiki page.
      *
@@ -2566,9 +2282,8 @@ export class VKApi {
      * @returns {Promise<Responses.PagesGetVersionResponse>}
      */
     public async pagesGetVersion(params: MethodsProps.PagesGetVersionParams): Promise<Responses.PagesGetVersionResponse> {
-        return this.call("pages.getVersion", params)
+        return super.call("pages.getVersion", params)
     }
-
     /**
      * Returns HTML representation of the wiki markup.
      *
@@ -2581,9 +2296,8 @@ export class VKApi {
      * @returns {Promise<Responses.PagesParseWikiResponse>}
      */
     public async pagesParseWiki(params: MethodsProps.PagesParseWikiParams): Promise<Responses.PagesParseWikiResponse> {
-        return this.call("pages.parseWiki", params)
+        return super.call("pages.parseWiki", params)
     }
-
     /**
      * Allows to clear the cache of particular 'external' pages which may be attached to VK posts.
      *
@@ -2595,9 +2309,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async pagesClearCache(params: MethodsProps.PagesClearCacheParams): Promise<Responses.OkResponse> {
-        return this.call("pages.clearCache", params)
+        return super.call("pages.clearCache", params)
     }
-
     /**
      * Returns information specifying whether a user is a member of a community.
      *
@@ -2612,9 +2325,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsIsMemberResponse>}
      */
     public async groupsIsMember(params: MethodsProps.GroupsIsMemberParams): Promise<Responses.GroupsIsMemberResponse> {
-        return this.call("groups.isMember", params)
+        return super.call("groups.isMember", params)
     }
-
     /**
      * Returns information about communities by their IDs.
      *
@@ -2628,9 +2340,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetByIdResponse>}
      */
     public async groupsGetById(params: MethodsProps.GroupsGetByIdParams): Promise<Responses.GroupsGetByIdResponse> {
-        return this.call("groups.getById", params)
+        return super.call("groups.getById", params)
     }
-
     /**
      * Returns a list of the communities to which a user belongs.
      *
@@ -2647,9 +2358,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetResponse>}
      */
     public async groupsGet(params: MethodsProps.GroupsGetParams): Promise<Responses.GroupsGetResponse> {
-        return this.call("groups.get", params)
+        return super.call("groups.get", params)
     }
-
     /**
      * Returns a list of community members.
      *
@@ -2666,9 +2376,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetMembersResponse>}
      */
     public async groupsGetMembers(params: MethodsProps.GroupsGetMembersParams): Promise<Responses.GroupsGetMembersResponse> {
-        return this.call("groups.getMembers", params)
+        return super.call("groups.getMembers", params)
     }
-
     /**
      * With this method you can join the group or public page, and also confirm your participation in an event.
      *
@@ -2681,9 +2390,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsJoin(params: MethodsProps.GroupsJoinParams): Promise<Responses.OkResponse> {
-        return this.call("groups.join", params)
+        return super.call("groups.join", params)
     }
-
     /**
      * With this method you can leave a group, public page, or event.
      *
@@ -2695,9 +2403,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsLeave(params: MethodsProps.GroupsLeaveParams): Promise<Responses.OkResponse> {
-        return this.call("groups.leave", params)
+        return super.call("groups.leave", params)
     }
-
     /**
      * Returns a list of communities matching the search criteria.
      *
@@ -2717,9 +2424,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsSearchResponse>}
      */
     public async groupsSearch(params: MethodsProps.GroupsSearchParams): Promise<Responses.GroupsSearchResponse> {
-        return this.call("groups.search", params)
+        return super.call("groups.search", params)
     }
-
     /**
      * Returns communities list for a catalog category.
      *
@@ -2732,9 +2438,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetCatalogResponse>}
      */
     public async groupsGetCatalog(params: MethodsProps.GroupsGetCatalogParams): Promise<Responses.GroupsGetCatalogResponse> {
-        return this.call("groups.getCatalog", params)
+        return super.call("groups.getCatalog", params)
     }
-
     /**
      * Returns categories list for communities catalog
      *
@@ -2747,9 +2452,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetCatalogInfoResponse>}
      */
     public async groupsGetCatalogInfo(params: MethodsProps.GroupsGetCatalogInfoParams): Promise<Responses.GroupsGetCatalogInfoResponse> {
-        return this.call("groups.getCatalogInfo", params)
+        return super.call("groups.getCatalogInfo", params)
     }
-
     /**
      * Returns a list of invitations to join communities and events.
      *
@@ -2763,9 +2467,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetInvitesResponse>}
      */
     public async groupsGetInvites(params: MethodsProps.GroupsGetInvitesParams): Promise<Responses.GroupsGetInvitesResponse> {
-        return this.call("groups.getInvites", params)
+        return super.call("groups.getInvites", params)
     }
-
     /**
      * Returns invited users list of a community
      *
@@ -2781,9 +2484,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetInvitedUsersResponse>}
      */
     public async groupsGetInvitedUsers(params: MethodsProps.GroupsGetInvitedUsersParams): Promise<Responses.GroupsGetInvitedUsersResponse> {
-        return this.call("groups.getInvitedUsers", params)
+        return super.call("groups.getInvitedUsers", params)
     }
-
     /**
      * Adds a user to a community blacklist.
      *
@@ -2800,9 +2502,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsBanUser(params: MethodsProps.GroupsBanUserParams): Promise<Responses.OkResponse> {
-        return this.call("groups.banUser", params)
+        return super.call("groups.banUser", params)
     }
-
     /**
      * Removes a user from a community blacklist.
      *
@@ -2815,9 +2516,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsUnbanUser(params: MethodsProps.GroupsUnbanUserParams): Promise<Responses.OkResponse> {
-        return this.call("groups.unbanUser", params)
+        return super.call("groups.unbanUser", params)
     }
-
     /**
      * Returns a list of users on a community blacklist.
      *
@@ -2833,9 +2533,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetBannedResponse>}
      */
     public async groupsGetBanned(params: MethodsProps.GroupsGetBannedParams): Promise<Responses.GroupsGetBannedResponse> {
-        return this.call("groups.getBanned", params)
+        return super.call("groups.getBanned", params)
     }
-
     /**
      * Creates a new community.
      *
@@ -2851,9 +2550,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsCreateResponse>}
      */
     public async groupsCreate(params: MethodsProps.GroupsCreateParams): Promise<Responses.GroupsCreateResponse> {
-        return this.call("groups.create", params)
+        return super.call("groups.create", params)
     }
-
     /**
      * Edits a community.
      *
@@ -2903,9 +2601,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsEdit(params: MethodsProps.GroupsEditParams): Promise<Responses.OkResponse> {
-        return this.call("groups.edit", params)
+        return super.call("groups.edit", params)
     }
-
     /**
      * Edits the place in community.
      *
@@ -2923,9 +2620,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsEditPlaceResponse>}
      */
     public async groupsEditPlace(params: MethodsProps.GroupsEditPlaceParams): Promise<Responses.GroupsEditPlaceResponse> {
-        return this.call("groups.editPlace", params)
+        return super.call("groups.editPlace", params)
     }
-
     /**
      * Returns community settings.
      *
@@ -2937,9 +2633,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetSettingsResponse>}
      */
     public async groupsGetSettings(params: MethodsProps.GroupsGetSettingsParams): Promise<Responses.GroupsGetSettingsResponse> {
-        return this.call("groups.getSettings", params)
+        return super.call("groups.getSettings", params)
     }
-
     /**
      * Returns a list of requests to the community.
      *
@@ -2954,9 +2649,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetRequestsResponse>}
      */
     public async groupsGetRequests(params: MethodsProps.GroupsGetRequestsParams): Promise<Responses.GroupsGetRequestsResponse> {
-        return this.call("groups.getRequests", params)
+        return super.call("groups.getRequests", params)
     }
-
     /**
      * Allows to add, remove or edit the community manager.
      *
@@ -2974,9 +2668,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsEditManager(params: MethodsProps.GroupsEditManagerParams): Promise<Responses.OkResponse> {
-        return this.call("groups.editManager", params)
+        return super.call("groups.editManager", params)
     }
-
     /**
      * Allows to invite friends to the community.
      *
@@ -2989,9 +2682,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsInvite(params: MethodsProps.GroupsInviteParams): Promise<Responses.OkResponse> {
-        return this.call("groups.invite", params)
+        return super.call("groups.invite", params)
     }
-
     /**
      * Allows to add a link to the community.
      *
@@ -3005,9 +2697,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsAddLink(params: MethodsProps.GroupsAddLinkParams): Promise<Responses.OkResponse> {
-        return this.call("groups.addLink", params)
+        return super.call("groups.addLink", params)
     }
-
     /**
      * Allows to delete a link from the community.
      *
@@ -3020,9 +2711,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsDeleteLink(params: MethodsProps.GroupsDeleteLinkParams): Promise<Responses.OkResponse> {
-        return this.call("groups.deleteLink", params)
+        return super.call("groups.deleteLink", params)
     }
-
     /**
      * Allows to edit a link in the community.
      *
@@ -3036,9 +2726,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsEditLink(params: MethodsProps.GroupsEditLinkParams): Promise<Responses.OkResponse> {
-        return this.call("groups.editLink", params)
+        return super.call("groups.editLink", params)
     }
-
     /**
      * Allows to reorder links in the community.
      *
@@ -3052,9 +2741,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsReorderLink(params: MethodsProps.GroupsReorderLinkParams): Promise<Responses.OkResponse> {
-        return this.call("groups.reorderLink", params)
+        return super.call("groups.reorderLink", params)
     }
-
     /**
      * Removes a user from the community.
      *
@@ -3067,9 +2755,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsRemoveUser(params: MethodsProps.GroupsRemoveUserParams): Promise<Responses.OkResponse> {
-        return this.call("groups.removeUser", params)
+        return super.call("groups.removeUser", params)
     }
-
     /**
      * Allows to approve join request to the community.
      *
@@ -3082,9 +2769,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsApproveRequest(params: MethodsProps.GroupsApproveRequestParams): Promise<Responses.OkResponse> {
-        return this.call("groups.approveRequest", params)
+        return super.call("groups.approveRequest", params)
     }
-
     /**
      * Returns Callback API confirmation code for the community.
      *
@@ -3096,9 +2782,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetCallbackConfirmationCodeResponse>}
      */
     public async groupsGetCallbackConfirmationCode(params: MethodsProps.GroupsGetCallbackConfirmationCodeParams): Promise<Responses.GroupsGetCallbackConfirmationCodeResponse> {
-        return this.call("groups.getCallbackConfirmationCode", params)
+        return super.call("groups.getCallbackConfirmationCode", params)
     }
-
     /**
      * Returns [vk.com/dev/callback_api|Callback API] notifications settings.
      *
@@ -3111,9 +2796,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetCallbackSettingsResponse>}
      */
     public async groupsGetCallbackSettings(params: MethodsProps.GroupsGetCallbackSettingsParams): Promise<Responses.GroupsGetCallbackSettingsResponse> {
-        return this.call("groups.getCallbackSettings", params)
+        return super.call("groups.getCallbackSettings", params)
     }
-
     /**
      * Allow to set notifications settings for group.
      *
@@ -3154,15 +2838,15 @@ export class VKApi {
      *   group_leave: (boolean|undefined),
      *   user_block: (boolean|undefined),
      *   user_unblock: (boolean|undefined),
+     *   lead_forms_new: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsSetCallbackSettings(params: MethodsProps.GroupsSetCallbackSettingsParams): Promise<Responses.OkResponse> {
-        return this.call("groups.setCallbackSettings", params)
+        return super.call("groups.setCallbackSettings", params)
     }
-
     /**
      * Returns the data needed to query a Long Poll server for events
      *
@@ -3174,9 +2858,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetLongPollServerResponse>}
      */
     public async groupsGetLongPollServer(params: MethodsProps.GroupsGetLongPollServerParams): Promise<Responses.GroupsGetLongPollServerResponse> {
-        return this.call("groups.getLongPollServer", params)
+        return super.call("groups.getLongPollServer", params)
     }
-
     /**
      * Returns Long Poll notification settings
      *
@@ -3188,9 +2871,8 @@ export class VKApi {
      * @returns {Promise<Responses.GroupsGetLongPollSettingsResponse>}
      */
     public async groupsGetLongPollSettings(params: MethodsProps.GroupsGetLongPollSettingsParams): Promise<Responses.GroupsGetLongPollSettingsResponse> {
-        return this.call("groups.getLongPollSettings", params)
+        return super.call("groups.getLongPollSettings", params)
     }
-
     /**
      * Sets Long Poll notification settings
      *
@@ -3238,9 +2920,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async groupsSetLongPollSettings(params: MethodsProps.GroupsSetLongPollSettingsParams): Promise<Responses.OkResponse> {
-        return this.call("groups.setLongPollSettings", params)
+        return super.call("groups.setLongPollSettings", params)
     }
-
     /**
      * Returns a list of topics on a community's discussion board.
      *
@@ -3259,9 +2940,8 @@ export class VKApi {
      * @returns {Promise<Responses.BoardGetTopicsResponse>}
      */
     public async boardGetTopics(params: MethodsProps.BoardGetTopicsParams): Promise<Responses.BoardGetTopicsResponse> {
-        return this.call("board.getTopics", params)
+        return super.call("board.getTopics", params)
     }
-
     /**
      * Returns a list of comments on a topic on a community's discussion board.
      *
@@ -3280,9 +2960,8 @@ export class VKApi {
      * @returns {Promise<Responses.BoardGetCommentsResponse>}
      */
     public async boardGetComments(params: MethodsProps.BoardGetCommentsParams): Promise<Responses.BoardGetCommentsResponse> {
-        return this.call("board.getComments", params)
+        return super.call("board.getComments", params)
     }
-
     /**
      * Creates a new topic on a community's discussion board.
      *
@@ -3298,9 +2977,8 @@ export class VKApi {
      * @returns {Promise<Responses.BoardAddTopicResponse>}
      */
     public async boardAddTopic(params: MethodsProps.BoardAddTopicParams): Promise<Responses.BoardAddTopicResponse> {
-        return this.call("board.addTopic", params)
+        return super.call("board.addTopic", params)
     }
-
     /**
      * Adds a comment on a topic on a community's discussion board.
      *
@@ -3318,9 +2996,8 @@ export class VKApi {
      * @returns {Promise<Responses.BoardCreateCommentResponse>}
      */
     public async boardCreateComment(params: MethodsProps.BoardCreateCommentParams): Promise<Responses.BoardCreateCommentResponse> {
-        return this.call("board.createComment", params)
+        return super.call("board.createComment", params)
     }
-
     /**
      * Deletes a topic from a community's discussion board.
      *
@@ -3333,9 +3010,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardDeleteTopic(params: MethodsProps.BoardDeleteTopicParams): Promise<Responses.OkResponse> {
-        return this.call("board.deleteTopic", params)
+        return super.call("board.deleteTopic", params)
     }
-
     /**
      * Edits the title of a topic on a community's discussion board.
      *
@@ -3349,9 +3025,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardEditTopic(params: MethodsProps.BoardEditTopicParams): Promise<Responses.OkResponse> {
-        return this.call("board.editTopic", params)
+        return super.call("board.editTopic", params)
     }
-
     /**
      * Edits a comment on a topic on a community's discussion board.
      *
@@ -3367,9 +3042,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardEditComment(params: MethodsProps.BoardEditCommentParams): Promise<Responses.OkResponse> {
-        return this.call("board.editComment", params)
+        return super.call("board.editComment", params)
     }
-
     /**
      * Restores a comment deleted from a topic on a community's discussion board.
      *
@@ -3383,9 +3057,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardRestoreComment(params: MethodsProps.BoardRestoreCommentParams): Promise<Responses.OkResponse> {
-        return this.call("board.restoreComment", params)
+        return super.call("board.restoreComment", params)
     }
-
     /**
      * Deletes a comment on a topic on a community's discussion board.
      *
@@ -3399,9 +3072,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardDeleteComment(params: MethodsProps.BoardDeleteCommentParams): Promise<Responses.OkResponse> {
-        return this.call("board.deleteComment", params)
+        return super.call("board.deleteComment", params)
     }
-
     /**
      * Re-opens a previously closed topic on a community's discussion board.
      *
@@ -3414,9 +3086,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardOpenTopic(params: MethodsProps.BoardOpenTopicParams): Promise<Responses.OkResponse> {
-        return this.call("board.openTopic", params)
+        return super.call("board.openTopic", params)
     }
-
     /**
      * Closes a topic on a community's discussion board so that comments cannot be posted.
      *
@@ -3429,9 +3100,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardCloseTopic(params: MethodsProps.BoardCloseTopicParams): Promise<Responses.OkResponse> {
-        return this.call("board.closeTopic", params)
+        return super.call("board.closeTopic", params)
     }
-
     /**
      * Pins a topic (fixes its place) to the top of a community's discussion board.
      *
@@ -3444,9 +3114,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardFixTopic(params: MethodsProps.BoardFixTopicParams): Promise<Responses.OkResponse> {
-        return this.call("board.fixTopic", params)
+        return super.call("board.fixTopic", params)
     }
-
     /**
      * Unpins a pinned topic from the top of a community's discussion board.
      *
@@ -3459,9 +3128,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async boardUnfixTopic(params: MethodsProps.BoardUnfixTopicParams): Promise<Responses.OkResponse> {
-        return this.call("board.unfixTopic", params)
+        return super.call("board.unfixTopic", params)
     }
-
     /**
      * Returns detailed information about videos.
      *
@@ -3478,9 +3146,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetResponse>}
      */
     public async videoGet(params: MethodsProps.VideoGetParams): Promise<Responses.VideoGetResponse> {
-        return this.call("video.get", params)
+        return super.call("video.get", params)
     }
-
     /**
      * Edits information about a video on a user or community page.
      *
@@ -3499,9 +3166,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoEdit(params: MethodsProps.VideoEditParams): Promise<Responses.OkResponse> {
-        return this.call("video.edit", params)
+        return super.call("video.edit", params)
     }
-
     /**
      * Adds a video to a user or community page.
      *
@@ -3515,9 +3181,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoAdd(params: MethodsProps.VideoAddParams): Promise<Responses.OkResponse> {
-        return this.call("video.add", params)
+        return super.call("video.add", params)
     }
-
     /**
      * Returns a server address (required for upload) and video data.
      *
@@ -3539,9 +3204,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoSaveResponse>}
      */
     public async videoSave(params: MethodsProps.VideoSaveParams): Promise<Responses.VideoSaveResponse> {
-        return this.call("video.save", params)
+        return super.call("video.save", params)
     }
-
     /**
      * Deletes a video from a user or community page.
      *
@@ -3555,9 +3219,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoDelete(params: MethodsProps.VideoDeleteParams): Promise<Responses.OkResponse> {
-        return this.call("video.delete", params)
+        return super.call("video.delete", params)
     }
-
     /**
      * Restores a previously deleted video.
      *
@@ -3570,9 +3233,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoRestore(params: MethodsProps.VideoRestoreParams): Promise<Responses.OkResponse> {
-        return this.call("video.restore", params)
+        return super.call("video.restore", params)
     }
-
     /**
      * Returns a list of videos under the set search criterion.
      *
@@ -3594,9 +3256,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoSearchResponse>}
      */
     public async videoSearch(params: MethodsProps.VideoSearchParams): Promise<Responses.VideoSearchResponse> {
-        return this.call("video.search", params)
+        return super.call("video.search", params)
     }
-
     /**
      * Returns list of videos in which the user is tagged.
      *
@@ -3611,9 +3272,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetUserVideosResponse>}
      */
     public async videoGetUserVideos(params: MethodsProps.VideoGetUserVideosParams): Promise<Responses.VideoGetUserVideosResponse> {
-        return this.call("video.getUserVideos", params)
+        return super.call("video.getUserVideos", params)
     }
-
     /**
      * Returns a list of video albums owned by a user or community.
      *
@@ -3628,9 +3288,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetAlbumsResponse>}
      */
     public async videoGetAlbums(params: MethodsProps.VideoGetAlbumsParams): Promise<Responses.VideoGetAlbumsResponse> {
-        return this.call("video.getAlbums", params)
+        return super.call("video.getAlbums", params)
     }
-
     /**
      * Returns video album info
      *
@@ -3643,9 +3302,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetAlbumByIdResponse>}
      */
     public async videoGetAlbumById(params: MethodsProps.VideoGetAlbumByIdParams): Promise<Responses.VideoGetAlbumByIdResponse> {
-        return this.call("video.getAlbumById", params)
+        return super.call("video.getAlbumById", params)
     }
-
     /**
      * Creates an empty album for videos.
      *
@@ -3659,9 +3317,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoAddAlbumResponse>}
      */
     public async videoAddAlbum(params: MethodsProps.VideoAddAlbumParams): Promise<Responses.VideoAddAlbumResponse> {
-        return this.call("video.addAlbum", params)
+        return super.call("video.addAlbum", params)
     }
-
     /**
      * Edits the title of a video album.
      *
@@ -3676,9 +3333,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoEditAlbum(params: MethodsProps.VideoEditAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("video.editAlbum", params)
+        return super.call("video.editAlbum", params)
     }
-
     /**
      * Deletes a video album.
      *
@@ -3691,9 +3347,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoDeleteAlbum(params: MethodsProps.VideoDeleteAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("video.deleteAlbum", params)
+        return super.call("video.deleteAlbum", params)
     }
-
     /**
      * Reorders the album in the list of user video albums.
      *
@@ -3708,9 +3363,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoReorderAlbums(params: MethodsProps.VideoReorderAlbumsParams): Promise<Responses.OkResponse> {
-        return this.call("video.reorderAlbums", params)
+        return super.call("video.reorderAlbums", params)
     }
-
     /**
      * Reorders the video in the video album.
      *
@@ -3729,9 +3383,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoReorderVideos(params: MethodsProps.VideoReorderVideosParams): Promise<Responses.OkResponse> {
-        return this.call("video.reorderVideos", params)
+        return super.call("video.reorderVideos", params)
     }
-
     /**
      * undefined
      *
@@ -3747,9 +3400,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoAddToAlbum(params: MethodsProps.VideoAddToAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("video.addToAlbum", params)
+        return super.call("video.addToAlbum", params)
     }
-
     /**
      * undefined
      *
@@ -3765,9 +3417,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoRemoveFromAlbum(params: MethodsProps.VideoRemoveFromAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("video.removeFromAlbum", params)
+        return super.call("video.removeFromAlbum", params)
     }
-
     /**
      * undefined
      *
@@ -3782,9 +3433,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetAlbumsByVideoResponse>}
      */
     public async videoGetAlbumsByVideo(params: MethodsProps.VideoGetAlbumsByVideoParams): Promise<Responses.VideoGetAlbumsByVideoResponse> {
-        return this.call("video.getAlbumsByVideo", params)
+        return super.call("video.getAlbumsByVideo", params)
     }
-
     /**
      * Returns a list of comments on a video.
      *
@@ -3803,9 +3453,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetCommentsResponse>}
      */
     public async videoGetComments(params: MethodsProps.VideoGetCommentsParams): Promise<Responses.VideoGetCommentsResponse> {
-        return this.call("video.getComments", params)
+        return super.call("video.getComments", params)
     }
-
     /**
      * Adds a new comment on a video.
      *
@@ -3824,9 +3473,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoCreateCommentResponse>}
      */
     public async videoCreateComment(params: MethodsProps.VideoCreateCommentParams): Promise<Responses.VideoCreateCommentResponse> {
-        return this.call("video.createComment", params)
+        return super.call("video.createComment", params)
     }
-
     /**
      * Deletes a comment on a video.
      *
@@ -3839,9 +3487,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoDeleteComment(params: MethodsProps.VideoDeleteCommentParams): Promise<Responses.OkResponse> {
-        return this.call("video.deleteComment", params)
+        return super.call("video.deleteComment", params)
     }
-
     /**
      * Restores a previously deleted comment on a video.
      *
@@ -3854,9 +3501,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoRestoreCommentResponse>}
      */
     public async videoRestoreComment(params: MethodsProps.VideoRestoreCommentParams): Promise<Responses.VideoRestoreCommentResponse> {
-        return this.call("video.restoreComment", params)
+        return super.call("video.restoreComment", params)
     }
-
     /**
      * Edits the text of a comment on a video.
      *
@@ -3871,9 +3517,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoEditComment(params: MethodsProps.VideoEditCommentParams): Promise<Responses.OkResponse> {
-        return this.call("video.editComment", params)
+        return super.call("video.editComment", params)
     }
-
     /**
      * Returns a list of tags on a video.
      *
@@ -3886,9 +3531,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetTagsResponse>}
      */
     public async videoGetTags(params: MethodsProps.VideoGetTagsParams): Promise<Responses.VideoGetTagsResponse> {
-        return this.call("video.getTags", params)
+        return super.call("video.getTags", params)
     }
-
     /**
      * Adds a tag on a video.
      *
@@ -3903,9 +3547,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoPutTagResponse>}
      */
     public async videoPutTag(params: MethodsProps.VideoPutTagParams): Promise<Responses.VideoPutTagResponse> {
-        return this.call("video.putTag", params)
+        return super.call("video.putTag", params)
     }
-
     /**
      * Removes a tag from a video.
      *
@@ -3919,9 +3562,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoRemoveTag(params: MethodsProps.VideoRemoveTagParams): Promise<Responses.OkResponse> {
-        return this.call("video.removeTag", params)
+        return super.call("video.removeTag", params)
     }
-
     /**
      * Returns a list of videos with tags that have not been viewed.
      *
@@ -3934,9 +3576,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetNewTagsResponse>}
      */
     public async videoGetNewTags(params: MethodsProps.VideoGetNewTagsParams): Promise<Responses.VideoGetNewTagsResponse> {
-        return this.call("video.getNewTags", params)
+        return super.call("video.getNewTags", params)
     }
-
     /**
      * Reports (submits a complaint about) a video.
      *
@@ -3952,9 +3593,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoReport(params: MethodsProps.VideoReportParams): Promise<Responses.OkResponse> {
-        return this.call("video.report", params)
+        return super.call("video.report", params)
     }
-
     /**
      * Reports (submits a complaint about) a comment on a video.
      *
@@ -3968,9 +3608,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoReportComment(params: MethodsProps.VideoReportCommentParams): Promise<Responses.OkResponse> {
-        return this.call("video.reportComment", params)
+        return super.call("video.reportComment", params)
     }
-
     /**
      * Returns video catalog
      *
@@ -3986,9 +3625,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetCatalogResponse>}
      */
     public async videoGetCatalog(params: MethodsProps.VideoGetCatalogParams): Promise<Responses.VideoGetCatalogResponse> {
-        return this.call("video.getCatalog", params)
+        return super.call("video.getCatalog", params)
     }
-
     /**
      * Returns a separate catalog section
      *
@@ -4003,9 +3641,8 @@ export class VKApi {
      * @returns {Promise<Responses.VideoGetCatalogSectionResponse>}
      */
     public async videoGetCatalogSection(params: MethodsProps.VideoGetCatalogSectionParams): Promise<Responses.VideoGetCatalogSectionResponse> {
-        return this.call("video.getCatalogSection", params)
+        return super.call("video.getCatalogSection", params)
     }
-
     /**
      * Hides a video catalog section from a user.
      *
@@ -4017,9 +3654,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async videoHideCatalogSection(params: MethodsProps.VideoHideCatalogSectionParams): Promise<Responses.OkResponse> {
-        return this.call("video.hideCatalogSection", params)
+        return super.call("video.hideCatalogSection", params)
     }
-
     /**
      * Returns a list of notes created by a user.
      *
@@ -4033,9 +3669,8 @@ export class VKApi {
      * @returns {Promise<Responses.NotesGetResponse>}
      */
     public async notesGet(params: MethodsProps.NotesGetParams): Promise<Responses.NotesGetResponse> {
-        return this.call("notes.get", params)
+        return super.call("notes.get", params)
     }
-
     /**
      * Returns a note by its ID.
      *
@@ -4048,9 +3683,8 @@ export class VKApi {
      * @returns {Promise<Responses.NotesGetByIdResponse>}
      */
     public async notesGetById(params: MethodsProps.NotesGetByIdParams): Promise<Responses.NotesGetByIdResponse> {
-        return this.call("notes.getById", params)
+        return super.call("notes.getById", params)
     }
-
     /**
      * Creates a new note for the current user.
      *
@@ -4065,9 +3699,8 @@ export class VKApi {
      * @returns {Promise<Responses.NotesAddResponse>}
      */
     public async notesAdd(params: MethodsProps.NotesAddParams): Promise<Responses.NotesAddResponse> {
-        return this.call("notes.add", params)
+        return super.call("notes.add", params)
     }
-
     /**
      * Edits a note of the current user.
      *
@@ -4083,9 +3716,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async notesEdit(params: MethodsProps.NotesEditParams): Promise<Responses.OkResponse> {
-        return this.call("notes.edit", params)
+        return super.call("notes.edit", params)
     }
-
     /**
      * Deletes a note of the current user.
      *
@@ -4097,9 +3729,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async notesDelete(params: MethodsProps.NotesDeleteParams): Promise<Responses.OkResponse> {
-        return this.call("notes.delete", params)
+        return super.call("notes.delete", params)
     }
-
     /**
      * Returns a list of comments on a note.
      *
@@ -4113,9 +3744,8 @@ export class VKApi {
      * @returns {Promise<Responses.NotesGetCommentsResponse>}
      */
     public async notesGetComments(params: MethodsProps.NotesGetCommentsParams): Promise<Responses.NotesGetCommentsResponse> {
-        return this.call("notes.getComments", params)
+        return super.call("notes.getComments", params)
     }
-
     /**
      * Adds a new comment on a note.
      *
@@ -4131,9 +3761,8 @@ export class VKApi {
      * @returns {Promise<Responses.NotesCreateCommentResponse>}
      */
     public async notesCreateComment(params: MethodsProps.NotesCreateCommentParams): Promise<Responses.NotesCreateCommentResponse> {
-        return this.call("notes.createComment", params)
+        return super.call("notes.createComment", params)
     }
-
     /**
      * Edits a comment on a note.
      *
@@ -4147,9 +3776,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async notesEditComment(params: MethodsProps.NotesEditCommentParams): Promise<Responses.OkResponse> {
-        return this.call("notes.editComment", params)
+        return super.call("notes.editComment", params)
     }
-
     /**
      * Deletes a comment on a note.
      *
@@ -4162,9 +3790,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async notesDeleteComment(params: MethodsProps.NotesDeleteCommentParams): Promise<Responses.OkResponse> {
-        return this.call("notes.deleteComment", params)
+        return super.call("notes.deleteComment", params)
     }
-
     /**
      * Restores a deleted comment on a note.
      *
@@ -4177,9 +3804,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async notesRestoreComment(params: MethodsProps.NotesRestoreCommentParams): Promise<Responses.OkResponse> {
-        return this.call("notes.restoreComment", params)
+        return super.call("notes.restoreComment", params)
     }
-
     /**
      * Adds a new location to the location database.
      *
@@ -4197,9 +3823,8 @@ export class VKApi {
      * @returns {Promise<Responses.PlacesAddResponse>}
      */
     public async placesAdd(params: MethodsProps.PlacesAddParams): Promise<Responses.PlacesAddResponse> {
-        return this.call("places.add", params)
+        return super.call("places.add", params)
     }
-
     /**
      * Returns information about locations by their IDs.
      *
@@ -4211,9 +3836,8 @@ export class VKApi {
      * @returns {Promise<Responses.PlacesGetByIdResponse>}
      */
     public async placesGetById(params: MethodsProps.PlacesGetByIdParams): Promise<Responses.PlacesGetByIdResponse> {
-        return this.call("places.getById", params)
+        return super.call("places.getById", params)
     }
-
     /**
      * Returns a list of locations that match the search criteria.
      *
@@ -4231,9 +3855,8 @@ export class VKApi {
      * @returns {Promise<Responses.PlacesSearchResponse>}
      */
     public async placesSearch(params: MethodsProps.PlacesSearchParams): Promise<Responses.PlacesSearchResponse> {
-        return this.call("places.search", params)
+        return super.call("places.search", params)
     }
-
     /**
      * Checks a user in at the specified location.
      *
@@ -4250,9 +3873,8 @@ export class VKApi {
      * @returns {Promise<Responses.PlacesCheckinResponse>}
      */
     public async placesCheckin(params: MethodsProps.PlacesCheckinParams): Promise<Responses.PlacesCheckinResponse> {
-        return this.call("places.checkin", params)
+        return super.call("places.checkin", params)
     }
-
     /**
      * Returns a list of user check-ins at locations according to the set parameters.
      *
@@ -4272,9 +3894,8 @@ export class VKApi {
      * @returns {Promise<Responses.PlacesGetCheckinsResponse>}
      */
     public async placesGetCheckins(params: MethodsProps.PlacesGetCheckinsParams): Promise<Responses.PlacesGetCheckinsResponse> {
-        return this.call("places.getCheckins", params)
+        return super.call("places.getCheckins", params)
     }
-
     /**
      * Returns a list of all types of locations.
      *
@@ -4285,9 +3906,8 @@ export class VKApi {
      * @returns {Promise<Responses.PlacesGetTypesResponse>}
      */
     public async placesGetTypes(params: MethodsProps.PlacesGetTypesParams): Promise<Responses.PlacesGetTypesResponse> {
-        return this.call("places.getTypes", params)
+        return super.call("places.getTypes", params)
     }
-
     /**
      * Returns non-null values of user counters.
      *
@@ -4299,9 +3919,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountGetCountersResponse>}
      */
     public async accountGetCounters(params: MethodsProps.AccountGetCountersParams): Promise<Responses.AccountGetCountersResponse> {
-        return this.call("account.getCounters", params)
+        return super.call("account.getCounters", params)
     }
-
     /**
      * Sets an application screen name (up to 17 characters), that is shown to the user in the left menu.
      *
@@ -4314,9 +3933,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountSetNameInMenu(params: MethodsProps.AccountSetNameInMenuParams): Promise<Responses.OkResponse> {
-        return this.call("account.setNameInMenu", params)
+        return super.call("account.setNameInMenu", params)
     }
-
     /**
      * Marks the current user as online for 15 minutes.
      *
@@ -4328,9 +3946,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountSetOnline(params: MethodsProps.AccountSetOnlineParams): Promise<Responses.OkResponse> {
-        return this.call("account.setOnline", params)
+        return super.call("account.setOnline", params)
     }
-
     /**
      * Marks a current user as offline.
      *
@@ -4341,9 +3958,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountSetOffline(params: MethodsProps.AccountSetOfflineParams): Promise<Responses.OkResponse> {
-        return this.call("account.setOffline", params)
+        return super.call("account.setOffline", params)
     }
-
     /**
      * Allows to search the VK users using phone numbers, e-mail addresses and user IDs on other services.
      *
@@ -4359,9 +3975,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountLookupContactsResponse>}
      */
     public async accountLookupContacts(params: MethodsProps.AccountLookupContactsParams): Promise<Responses.AccountLookupContactsResponse> {
-        return this.call("account.lookupContacts", params)
+        return super.call("account.lookupContacts", params)
     }
-
     /**
      * Subscribes an iOS/Android/Windows Phone-based device to receive push notifications
      *
@@ -4378,9 +3993,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountRegisterDevice(params: MethodsProps.AccountRegisterDeviceParams): Promise<Responses.OkResponse> {
-        return this.call("account.registerDevice", params)
+        return super.call("account.registerDevice", params)
     }
-
     /**
      * Unsubscribes a device from push notifications.
      *
@@ -4392,9 +4006,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountUnregisterDevice(params: MethodsProps.AccountUnregisterDeviceParams): Promise<Responses.OkResponse> {
-        return this.call("account.unregisterDevice", params)
+        return super.call("account.unregisterDevice", params)
     }
-
     /**
      * Mutes push notifications for the set period of time.
      *
@@ -4409,9 +4022,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountSetSilenceMode(params: MethodsProps.AccountSetSilenceModeParams): Promise<Responses.OkResponse> {
-        return this.call("account.setSilenceMode", params)
+        return super.call("account.setSilenceMode", params)
     }
-
     /**
      * Gets settings of push notifications.
      *
@@ -4423,9 +4035,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountGetPushSettingsResponse>}
      */
     public async accountGetPushSettings(params: MethodsProps.AccountGetPushSettingsParams): Promise<Responses.AccountGetPushSettingsResponse> {
-        return this.call("account.getPushSettings", params)
+        return super.call("account.getPushSettings", params)
     }
-
     /**
      * Change push settings.
      *
@@ -4440,9 +4051,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountSetPushSettings(params: MethodsProps.AccountSetPushSettingsParams): Promise<Responses.OkResponse> {
-        return this.call("account.setPushSettings", params)
+        return super.call("account.setPushSettings", params)
     }
-
     /**
      * Gets settings of the user in this application.
      *
@@ -4454,9 +4064,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountGetAppPermissionsResponse>}
      */
     public async accountGetAppPermissions(params: MethodsProps.AccountGetAppPermissionsParams): Promise<Responses.AccountGetAppPermissionsResponse> {
-        return this.call("account.getAppPermissions", params)
+        return super.call("account.getAppPermissions", params)
     }
-
     /**
      * Returns a list of active ads (offers) which executed by the user will bring him/her respective number of votes to his balance in the application.
      *
@@ -4468,9 +4077,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountGetActiveOffersResponse>}
      */
     public async accountGetActiveOffers(params: MethodsProps.AccountGetActiveOffersParams): Promise<Responses.AccountGetActiveOffersResponse> {
-        return this.call("account.getActiveOffers", params)
+        return super.call("account.getActiveOffers", params)
     }
-
     /**
      * Adds user to the banlist.
      *
@@ -4482,9 +4090,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountBanUser(params: MethodsProps.AccountBanUserParams): Promise<Responses.OkResponse> {
-        return this.call("account.banUser", params)
+        return super.call("account.banUser", params)
     }
-
     /**
      * Deletes user from the blacklist.
      *
@@ -4496,9 +4103,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountUnbanUser(params: MethodsProps.AccountUnbanUserParams): Promise<Responses.OkResponse> {
-        return this.call("account.unbanUser", params)
+        return super.call("account.unbanUser", params)
     }
-
     /**
      * Returns a user's blacklist.
      *
@@ -4511,9 +4117,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountGetBannedResponse>}
      */
     public async accountGetBanned(params: MethodsProps.AccountGetBannedParams): Promise<Responses.AccountGetBannedResponse> {
-        return this.call("account.getBanned", params)
+        return super.call("account.getBanned", params)
     }
-
     /**
      * Returns current account info.
      *
@@ -4525,9 +4130,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountGetInfoResponse>}
      */
     public async accountGetInfo(params: MethodsProps.AccountGetInfoParams): Promise<Responses.AccountGetInfoResponse> {
-        return this.call("account.getInfo", params)
+        return super.call("account.getInfo", params)
     }
-
     /**
      * Allows to edit the current account info.
      *
@@ -4540,9 +4144,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async accountSetInfo(params: MethodsProps.AccountSetInfoParams): Promise<Responses.OkResponse> {
-        return this.call("account.setInfo", params)
+        return super.call("account.setInfo", params)
     }
-
     /**
      * Changes a user password after access is successfully restored with the [vk.com/dev/auth.restore|auth.restore] method.
      *
@@ -4557,9 +4160,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountChangePasswordResponse>}
      */
     public async accountChangePassword(params: MethodsProps.AccountChangePasswordParams): Promise<Responses.AccountChangePasswordResponse> {
-        return this.call("account.changePassword", params)
+        return super.call("account.changePassword", params)
     }
-
     /**
      * Returns the current account info.
      *
@@ -4570,9 +4172,8 @@ export class VKApi {
      * @returns {Promise<Responses.AccountGetProfileInfoResponse>}
      */
     public async accountGetProfileInfo(params: MethodsProps.AccountGetProfileInfoParams): Promise<Responses.AccountGetProfileInfoResponse> {
-        return this.call("account.getProfileInfo", params)
+        return super.call("account.getProfileInfo", params)
     }
-
     /**
      * Edits current profile info.
      *
@@ -4597,63 +4198,77 @@ export class VKApi {
      * @returns {Promise<Responses.AccountSaveProfileInfoResponse>}
      */
     public async accountSaveProfileInfo(params: MethodsProps.AccountSaveProfileInfoParams): Promise<Responses.AccountSaveProfileInfoResponse> {
-        return this.call("account.saveProfileInfo", params)
+        return super.call("account.saveProfileInfo", params)
     }
-
-    /**
-     * Returns a list of the current user's incoming or outgoing private messages.
-     *
-     * @param {{
-     *   out: (boolean|undefined),
-     *   offset: (number|undefined),
-     *   count: (number|undefined),
-     *   filter: (number|undefined),
-     *   time_offset: (number|undefined),
-     *   preview_length: (number|undefined),
-     *   last_message_id: (number|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.MessagesGetResponse>}
-     */
-    public async messagesGet(params: MethodsProps.MessagesGetParams): Promise<Responses.MessagesGetResponse> {
-        return this.call("messages.get", params)
-    }
-
     /**
      * Returns a list of the current user's conversations.
      *
      * @param {{
+     *   group_id: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
+     *   filter: (string|undefined),
+     *   extended: (boolean|undefined),
      *   start_message_id: (number|undefined),
-     *   preview_length: (number|undefined),
-     *   unread: (boolean|undefined),
-     *   important: (boolean|undefined),
-     *   unanswered: (boolean|undefined),
+     *   fields: (string[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.MessagesGetDialogsResponse>}
+     * @returns {Promise<Responses.MessagesGetConversationsResponse>}
      */
-    public async messagesGetDialogs(params: MethodsProps.MessagesGetDialogsParams): Promise<Responses.MessagesGetDialogsResponse> {
-        return this.call("messages.getDialogs", params)
+    public async messagesGetConversations(params: MethodsProps.MessagesGetConversationsParams): Promise<Responses.MessagesGetConversationsResponse> {
+        return super.call("messages.getConversations", params)
     }
-
+    /**
+     * Returns conversations by their IDs
+     *
+     * @param {{
+     *   peer_ids: (number[]),
+     *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
+     *   group_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesGetConversationsByIdResponse>}
+     */
+    public async messagesGetConversationsById(params: MethodsProps.MessagesGetConversationsByIdParams): Promise<Responses.MessagesGetConversationsByIdResponse> {
+        return super.call("messages.getConversationsById", params)
+    }
     /**
      * Returns messages by their IDs.
      *
      * @param {{
      *   message_ids: (number[]),
+     *   preview_length: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.MessagesGetByIdResponse>}
      */
     public async messagesGetById(params: MethodsProps.MessagesGetByIdParams): Promise<Responses.MessagesGetByIdResponse> {
-        return this.call("messages.getById", params)
+        return super.call("messages.getById", params)
     }
-
+    /**
+     * Returns messages by their IDs within the conversation.
+     *
+     * @param {{
+     *   peer_id: (number|undefined),
+     *   conversation_message_ids: (number[]),
+     *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
+     *   group_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesGetByConversationMessageIdResponse>}
+     */
+    public async messagesGetByConversationMessageId(params: MethodsProps.MessagesGetByConversationMessageIdParams): Promise<Responses.MessagesGetByConversationMessageIdResponse> {
+        return super.call("messages.getByConversationMessageId", params)
+    }
     /**
      * Returns a list of the current user's private messages that match search criteria.
      *
@@ -4664,15 +4279,15 @@ export class VKApi {
      *   preview_length: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.MessagesSearchResponse>}
      */
     public async messagesSearch(params: MethodsProps.MessagesSearchParams): Promise<Responses.MessagesSearchResponse> {
-        return this.call("messages.search", params)
+        return super.call("messages.search", params)
     }
-
     /**
      * Returns message history for the specified user or group chat.
      *
@@ -4682,6 +4297,9 @@ export class VKApi {
      *   user_id: (number|undefined),
      *   peer_id: (number|undefined),
      *   start_message_id: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
+     *   group_id: (number|undefined),
      *   rev: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4689,9 +4307,8 @@ export class VKApi {
      * @returns {Promise<Responses.MessagesGetHistoryResponse>}
      */
     public async messagesGetHistory(params: MethodsProps.MessagesGetHistoryParams): Promise<Responses.MessagesGetHistoryResponse> {
-        return this.call("messages.getHistory", params)
+        return super.call("messages.getHistory", params)
     }
-
     /**
      * Returns media files from the dialog or group chat.
      *
@@ -4702,15 +4319,15 @@ export class VKApi {
      *   count: (number|undefined),
      *   photo_sizes: (boolean|undefined),
      *   fields: (string[]|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.MessagesGetHistoryAttachmentsResponse>}
      */
     public async messagesGetHistoryAttachments(params: MethodsProps.MessagesGetHistoryAttachmentsParams): Promise<Responses.MessagesGetHistoryAttachmentsResponse> {
-        return this.call("messages.getHistoryAttachments", params)
+        return super.call("messages.getHistoryAttachments", params)
     }
-
     /**
      * Sends a message.
      *
@@ -4724,39 +4341,61 @@ export class VKApi {
      *   message: (string|undefined),
      *   lat: (number|undefined),
      *   long: (number|undefined),
-     *   attachment: (string|undefined),
+     *   attachment: (string[]|undefined),
      *   forward_messages: (string|undefined),
      *   sticker_id: (number|undefined),
      *   notification: (boolean|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.MessagesSendResponse>}
      */
     public async messagesSend(params: MethodsProps.MessagesSendParams): Promise<Responses.MessagesSendResponse> {
-        return this.call("messages.send", params)
+        return super.call("messages.send", params)
     }
-
+    /**
+     * Edits the message.
+     *
+     * @param {{
+     *   peer_id: (number),
+     *   message: (string|undefined),
+     *   lat: (number|undefined),
+     *   long: (number|undefined),
+     *   attachment: (string[]|undefined),
+     *   keep_forward_messages: (boolean|undefined),
+     *   keep_snippets: (boolean|undefined),
+     *   group_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesEditResponse>}
+     */
+    public async messagesEdit(params: MethodsProps.MessagesEditParams): Promise<Responses.MessagesEditResponse> {
+        return super.call("messages.edit", params)
+    }
     /**
      * Deletes one or more messages.
      *
      * @param {{
      *   message_ids: (number[]|undefined),
      *   spam: (boolean|undefined),
+     *   delete_for_all: (boolean|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.MessagesDeleteResponse>}
      */
     public async messagesDelete(params: MethodsProps.MessagesDeleteParams): Promise<Responses.MessagesDeleteResponse> {
-        return this.call("messages.delete", params)
+        return super.call("messages.delete", params)
     }
-
     /**
      * Deletes all private messages in a conversation.
      *
      * @param {{
      *   user_id: (string|undefined),
+     *   group_id: (number|undefined),
      *   peer_id: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
@@ -4765,40 +4404,39 @@ export class VKApi {
      *
      * @returns {Promise<Responses.OkResponse>}
      */
-    public async messagesDeleteDialog(params: MethodsProps.MessagesDeleteDialogParams): Promise<Responses.OkResponse> {
-        return this.call("messages.deleteDialog", params)
+    public async messagesDeleteConversation(params: MethodsProps.MessagesDeleteConversationParams): Promise<Responses.OkResponse> {
+        return super.call("messages.deleteConversation", params)
     }
-
     /**
      * Restores a deleted message.
      *
      * @param {{
      *   message_id: (number),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.OkResponse>}
      */
     public async messagesRestore(params: MethodsProps.MessagesRestoreParams): Promise<Responses.OkResponse> {
-        return this.call("messages.restore", params)
+        return super.call("messages.restore", params)
     }
-
     /**
      * Marks messages as read.
      *
      * @param {{
      *   message_ids: (number[]|undefined),
-     *   peer_id: (string|undefined),
+     *   peer_id: (number|undefined),
      *   start_message_id: (number|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.OkResponse>}
      */
     public async messagesMarkAsRead(params: MethodsProps.MessagesMarkAsReadParams): Promise<Responses.OkResponse> {
-        return this.call("messages.markAsRead", params)
+        return super.call("messages.markAsRead", params)
     }
-
     /**
      * Marks and unmarks messages as important (starred).
      *
@@ -4811,54 +4449,53 @@ export class VKApi {
      * @returns {Promise<Responses.MessagesMarkAsImportantResponse>}
      */
     public async messagesMarkAsImportant(params: MethodsProps.MessagesMarkAsImportantParams): Promise<Responses.MessagesMarkAsImportantResponse> {
-        return this.call("messages.markAsImportant", params)
+        return super.call("messages.markAsImportant", params)
     }
-
     /**
-     * Marks and unmarks dialogs as important.
+     * Marks and unmarks conversations as important.
      *
      * @param {{
-     *   peer_id: (number[]|undefined),
+     *   group_id: (number|undefined),
+     *   peer_id: (number),
      *   important: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.OkResponse>}
      */
-    public async messagesMarkAsImportantDialog(params: MethodsProps.MessagesMarkAsImportantDialogParams): Promise<Responses.OkResponse> {
-        return this.call("messages.markAsImportantDialog", params)
+    public async messagesMarkAsImportantConversation(params: MethodsProps.MessagesMarkAsImportantConversationParams): Promise<Responses.OkResponse> {
+        return super.call("messages.markAsImportantConversation", params)
     }
-
     /**
-     * Marks and unmarks dialogs as unanswered.
+     * Marks and unmarks conversations as unanswered.
      *
      * @param {{
-     *   peer_id: (number[]|undefined),
-     *   important: (boolean|undefined),
+     *   group_id: (number|undefined),
+     *   peer_id: (number),
+     *   answered: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.OkResponse>}
      */
-    public async messagesMarkAsUnansweredDialog(params: MethodsProps.MessagesMarkAsUnansweredDialogParams): Promise<Responses.OkResponse> {
-        return this.call("messages.markAsUnansweredDialog", params)
+    public async messagesMarkAsAnsweredConversation(params: MethodsProps.MessagesMarkAsAnsweredConversationParams): Promise<Responses.OkResponse> {
+        return super.call("messages.markAsAnsweredConversation", params)
     }
-
     /**
      * Returns data required for connection to a Long Poll server.
      *
      * @param {{
      *   lp_version: (number|undefined),
      *   need_pts: (boolean|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.MessagesGetLongPollServerResponse>}
      */
     public async messagesGetLongPollServer(params: MethodsProps.MessagesGetLongPollServerParams): Promise<Responses.MessagesGetLongPollServerResponse> {
-        return this.call("messages.getLongPollServer", params)
+        return super.call("messages.getLongPollServer", params)
     }
-
     /**
      * Returns updates in user's private messages.
      *
@@ -4871,32 +4508,15 @@ export class VKApi {
      *   events_limit: (number|undefined),
      *   msgs_limit: (number|undefined),
      *   max_msg_id: (number|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.MessagesGetLongPollHistoryResponse>}
      */
     public async messagesGetLongPollHistory(params: MethodsProps.MessagesGetLongPollHistoryParams): Promise<Responses.MessagesGetLongPollHistoryResponse> {
-        return this.call("messages.getLongPollHistory", params)
+        return super.call("messages.getLongPollHistory", params)
     }
-
-    /**
-     * Returns information about a chat.
-     *
-     * @param {{
-     *   chat_id: (number|undefined),
-     *   chat_ids: (number[]|undefined),
-     *   fields: (string[]|undefined),
-     *   name_case: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.MessagesGetChatResponse>}
-     */
-    public async messagesGetChat(params: MethodsProps.MessagesGetChatParams): Promise<Responses.MessagesGetChatResponse> {
-        return this.call("messages.getChat", params)
-    }
-
     /**
      * Creates a chat with several participants.
      *
@@ -4909,9 +4529,8 @@ export class VKApi {
      * @returns {Promise<Responses.MessagesCreateChatResponse>}
      */
     public async messagesCreateChat(params: MethodsProps.MessagesCreateChatParams): Promise<Responses.MessagesCreateChatResponse> {
-        return this.call("messages.createChat", params)
+        return super.call("messages.createChat", params)
     }
-
     /**
      * Edits the title of a chat.
      *
@@ -4924,26 +4543,24 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async messagesEditChat(params: MethodsProps.MessagesEditChatParams): Promise<Responses.OkResponse> {
-        return this.call("messages.editChat", params)
+        return super.call("messages.editChat", params)
     }
-
     /**
      * Returns a list of IDs of users participating in a chat.
      *
      * @param {{
-     *   chat_id: (number|undefined),
-     *   chat_ids: (number[]|undefined),
+     *   group_id: (number|undefined),
+     *   peer_id: (number|undefined),
      *   fields: (string[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.MessagesGetChatUsersResponse>}
+     * @returns {Promise<Responses.MessagesGetConversationMembersResponse>}
      */
-    public async messagesGetChatUsers(params: MethodsProps.MessagesGetChatUsersParams): Promise<Responses.MessagesGetChatUsersResponse> {
-        return this.call("messages.getChatUsers", params)
+    public async messagesGetConversationMembers(params: MethodsProps.MessagesGetConversationMembersParams): Promise<Responses.MessagesGetConversationMembersResponse> {
+        return super.call("messages.getConversationMembers", params)
     }
-
     /**
      * Changes the status of a user as typing in a conversation.
      *
@@ -4951,31 +4568,32 @@ export class VKApi {
      *   user_id: (string|undefined),
      *   type: (string|undefined),
      *   peer_id: (number|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
      * @returns {Promise<Responses.OkResponse>}
      */
     public async messagesSetActivity(params: MethodsProps.MessagesSetActivityParams): Promise<Responses.OkResponse> {
-        return this.call("messages.setActivity", params)
+        return super.call("messages.setActivity", params)
     }
-
     /**
      * Returns a list of the current user's conversations that match search criteria.
      *
      * @param {{
      *   q: (string|undefined),
-     *   limit: (number|undefined),
+     *   count: (number|undefined),
+     *   extended: (boolean|undefined),
      *   fields: (string[]|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.MessagesSearchDialogsResponse>}
+     * @returns {Promise<Responses.MessagesSearchConversationsResponse>}
      */
-    public async messagesSearchDialogs(params: MethodsProps.MessagesSearchDialogsParams): Promise<Responses.MessagesSearchDialogsResponse> {
-        return this.call("messages.searchDialogs", params)
+    public async messagesSearchConversations(params: MethodsProps.MessagesSearchConversationsParams): Promise<Responses.MessagesSearchConversationsResponse> {
+        return super.call("messages.searchConversations", params)
     }
-
     /**
      * Adds a new user to a chat.
      *
@@ -4988,9 +4606,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async messagesAddChatUser(params: MethodsProps.MessagesAddChatUserParams): Promise<Responses.OkResponse> {
-        return this.call("messages.addChatUser", params)
+        return super.call("messages.addChatUser", params)
     }
-
     /**
      * Allows the current user to leave a chat or, if the current user started the chat, allows the user to remove another user from the chat.
      *
@@ -5003,9 +4620,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async messagesRemoveChatUser(params: MethodsProps.MessagesRemoveChatUserParams): Promise<Responses.OkResponse> {
-        return this.call("messages.removeChatUser", params)
+        return super.call("messages.removeChatUser", params)
     }
-
     /**
      * Returns a user's current status and date of last activity.
      *
@@ -5017,9 +4633,8 @@ export class VKApi {
      * @returns {Promise<Responses.MessagesGetLastActivityResponse>}
      */
     public async messagesGetLastActivity(params: MethodsProps.MessagesGetLastActivityParams): Promise<Responses.MessagesGetLastActivityResponse> {
-        return this.call("messages.getLastActivity", params)
+        return super.call("messages.getLastActivity", params)
     }
-
     /**
      * Sets a previously-uploaded picture as the cover picture of a chat.
      *
@@ -5031,9 +4646,8 @@ export class VKApi {
      * @returns {Promise<Responses.MessagesSetChatPhotoResponse>}
      */
     public async messagesSetChatPhoto(params: MethodsProps.MessagesSetChatPhotoParams): Promise<Responses.MessagesSetChatPhotoResponse> {
-        return this.call("messages.setChatPhoto", params)
+        return super.call("messages.setChatPhoto", params)
     }
-
     /**
      * Deletes a chat's cover picture.
      *
@@ -5045,9 +4659,8 @@ export class VKApi {
      * @returns {Promise<Responses.MessagesDeleteChatPhotoResponse>}
      */
     public async messagesDeleteChatPhoto(params: MethodsProps.MessagesDeleteChatPhotoParams): Promise<Responses.MessagesDeleteChatPhotoResponse> {
-        return this.call("messages.deleteChatPhoto", params)
+        return super.call("messages.deleteChatPhoto", params)
     }
-
     /**
      * Denies sending message from community to the current user.
      *
@@ -5059,9 +4672,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async messagesDenyMessagesFromGroup(params: MethodsProps.MessagesDenyMessagesFromGroupParams): Promise<Responses.OkResponse> {
-        return this.call("messages.denyMessagesFromGroup", params)
+        return super.call("messages.denyMessagesFromGroup", params)
     }
-
     /**
      * Allows sending messages from community to the current user.
      *
@@ -5073,9 +4685,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async messagesAllowMessagesFromGroup(params: MethodsProps.MessagesAllowMessagesFromGroupParams): Promise<Responses.OkResponse> {
-        return this.call("messages.allowMessagesFromGroup", params)
+        return super.call("messages.allowMessagesFromGroup", params)
     }
-
     /**
      * Returns information whether sending messages from the community to current user is allowed.
      *
@@ -5088,9 +4699,8 @@ export class VKApi {
      * @returns {Promise<Responses.MessagesIsMessagesFromGroupAllowedResponse>}
      */
     public async messagesIsMessagesFromGroupAllowed(params: MethodsProps.MessagesIsMessagesFromGroupAllowedParams): Promise<Responses.MessagesIsMessagesFromGroupAllowedResponse> {
-        return this.call("messages.isMessagesFromGroupAllowed", params)
+        return super.call("messages.isMessagesFromGroupAllowed", params)
     }
-
     /**
      * Returns data required to show newsfeed for the current user.
      *
@@ -5110,9 +4720,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedGetResponse>}
      */
     public async newsfeedGet(params: MethodsProps.NewsfeedGetParams): Promise<Responses.NewsfeedGetResponse> {
-        return this.call("newsfeed.get", params)
+        return super.call("newsfeed.get", params)
     }
-
     /**
      * , Returns a list of newsfeeds recommended to the current user.
      *
@@ -5129,9 +4738,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedGetRecommendedResponse>}
      */
     public async newsfeedGetRecommended(params: MethodsProps.NewsfeedGetRecommendedParams): Promise<Responses.NewsfeedGetRecommendedResponse> {
-        return this.call("newsfeed.getRecommended", params)
+        return super.call("newsfeed.getRecommended", params)
     }
-
     /**
      * Returns a list of comments in the current user's newsfeed.
      *
@@ -5149,9 +4757,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedGetCommentsResponse>}
      */
     public async newsfeedGetComments(params: MethodsProps.NewsfeedGetCommentsParams): Promise<Responses.NewsfeedGetCommentsResponse> {
-        return this.call("newsfeed.getComments", params)
+        return super.call("newsfeed.getComments", params)
     }
-
     /**
      * Returns a list of posts on user walls in which the current user is mentioned.
      *
@@ -5167,9 +4774,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedGetMentionsResponse>}
      */
     public async newsfeedGetMentions(params: MethodsProps.NewsfeedGetMentionsParams): Promise<Responses.NewsfeedGetMentionsResponse> {
-        return this.call("newsfeed.getMentions", params)
+        return super.call("newsfeed.getMentions", params)
     }
-
     /**
      * Returns a list of users and communities banned from the current user's newsfeed.
      *
@@ -5183,9 +4789,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedGetBannedResponse>}
      */
     public async newsfeedGetBanned(params: MethodsProps.NewsfeedGetBannedParams): Promise<Responses.NewsfeedGetBannedResponse> {
-        return this.call("newsfeed.getBanned", params)
+        return super.call("newsfeed.getBanned", params)
     }
-
     /**
      * Prevents news from specified users and communities from appearing in the current user's newsfeed.
      *
@@ -5198,9 +4803,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async newsfeedAddBan(params: MethodsProps.NewsfeedAddBanParams): Promise<Responses.OkResponse> {
-        return this.call("newsfeed.addBan", params)
+        return super.call("newsfeed.addBan", params)
     }
-
     /**
      * Allows news from previously banned users and communities to be shown in the current user's newsfeed.
      *
@@ -5213,9 +4817,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async newsfeedDeleteBan(params: MethodsProps.NewsfeedDeleteBanParams): Promise<Responses.OkResponse> {
-        return this.call("newsfeed.deleteBan", params)
+        return super.call("newsfeed.deleteBan", params)
     }
-
     /**
      * Hides an item from the newsfeed.
      *
@@ -5229,9 +4832,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async newsfeedIgnoreItem(params: MethodsProps.NewsfeedIgnoreItemParams): Promise<Responses.OkResponse> {
-        return this.call("newsfeed.ignoreItem", params)
+        return super.call("newsfeed.ignoreItem", params)
     }
-
     /**
      * Returns a hidden item to the newsfeed.
      *
@@ -5245,9 +4847,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async newsfeedUnignoreItem(params: MethodsProps.NewsfeedUnignoreItemParams): Promise<Responses.OkResponse> {
-        return this.call("newsfeed.unignoreItem", params)
+        return super.call("newsfeed.unignoreItem", params)
     }
-
     /**
      * Returns search results by statuses.
      *
@@ -5267,9 +4868,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedSearchResponse>}
      */
     public async newsfeedSearch(params: MethodsProps.NewsfeedSearchParams): Promise<Responses.NewsfeedSearchResponse> {
-        return this.call("newsfeed.search", params)
+        return super.call("newsfeed.search", params)
     }
-
     /**
      * Returns a list of newsfeeds followed by the current user.
      *
@@ -5282,9 +4882,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedGetListsResponse>}
      */
     public async newsfeedGetLists(params: MethodsProps.NewsfeedGetListsParams): Promise<Responses.NewsfeedGetListsResponse> {
-        return this.call("newsfeed.getLists", params)
+        return super.call("newsfeed.getLists", params)
     }
-
     /**
      * Creates and edits user newsfeed lists
      *
@@ -5299,9 +4898,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedSaveListResponse>}
      */
     public async newsfeedSaveList(params: MethodsProps.NewsfeedSaveListParams): Promise<Responses.NewsfeedSaveListResponse> {
-        return this.call("newsfeed.saveList", params)
+        return super.call("newsfeed.saveList", params)
     }
-
     /**
      * undefined
      *
@@ -5313,9 +4911,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async newsfeedDeleteList(params: MethodsProps.NewsfeedDeleteListParams): Promise<Responses.OkResponse> {
-        return this.call("newsfeed.deleteList", params)
+        return super.call("newsfeed.deleteList", params)
     }
-
     /**
      * Unsubscribes the current user from specified newsfeeds.
      *
@@ -5329,9 +4926,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async newsfeedUnsubscribe(params: MethodsProps.NewsfeedUnsubscribeParams): Promise<Responses.OkResponse> {
-        return this.call("newsfeed.unsubscribe", params)
+        return super.call("newsfeed.unsubscribe", params)
     }
-
     /**
      * Returns communities and users that current user is suggested to follow.
      *
@@ -5346,9 +4942,8 @@ export class VKApi {
      * @returns {Promise<Responses.NewsfeedGetSuggestedSourcesResponse>}
      */
     public async newsfeedGetSuggestedSources(params: MethodsProps.NewsfeedGetSuggestedSourcesParams): Promise<Responses.NewsfeedGetSuggestedSourcesResponse> {
-        return this.call("newsfeed.getSuggestedSources", params)
+        return super.call("newsfeed.getSuggestedSources", params)
     }
-
     /**
      * Returns a list of IDs of users who added the specified object to their 'Likes' list.
      *
@@ -5369,9 +4964,8 @@ export class VKApi {
      * @returns {Promise<Responses.LikesGetListResponse>}
      */
     public async likesGetList(params: MethodsProps.LikesGetListParams): Promise<Responses.LikesGetListResponse> {
-        return this.call("likes.getList", params)
+        return super.call("likes.getList", params)
     }
-
     /**
      * Adds the specified object to the 'Likes' list of the current user.
      *
@@ -5386,9 +4980,8 @@ export class VKApi {
      * @returns {Promise<Responses.LikesAddResponse>}
      */
     public async likesAdd(params: MethodsProps.LikesAddParams): Promise<Responses.LikesAddResponse> {
-        return this.call("likes.add", params)
+        return super.call("likes.add", params)
     }
-
     /**
      * Deletes the specified object from the 'Likes' list of the current user.
      *
@@ -5402,9 +4995,8 @@ export class VKApi {
      * @returns {Promise<Responses.LikesDeleteResponse>}
      */
     public async likesDelete(params: MethodsProps.LikesDeleteParams): Promise<Responses.LikesDeleteResponse> {
-        return this.call("likes.delete", params)
+        return super.call("likes.delete", params)
     }
-
     /**
      * Checks for the object in the 'Likes' list of the specified user.
      *
@@ -5419,9 +5011,8 @@ export class VKApi {
      * @returns {Promise<Responses.LikesIsLikedResponse>}
      */
     public async likesIsLiked(params: MethodsProps.LikesIsLikedParams): Promise<Responses.LikesIsLikedResponse> {
-        return this.call("likes.isLiked", params)
+        return super.call("likes.isLiked", params)
     }
-
     /**
      * Returns detailed information about a poll by its ID.
      *
@@ -5435,9 +5026,8 @@ export class VKApi {
      * @returns {Promise<Responses.PollsGetByIdResponse>}
      */
     public async pollsGetById(params: MethodsProps.PollsGetByIdParams): Promise<Responses.PollsGetByIdResponse> {
-        return this.call("polls.getById", params)
+        return super.call("polls.getById", params)
     }
-
     /**
      * Adds the current user's vote to the selected answer in the poll.
      *
@@ -5452,9 +5042,8 @@ export class VKApi {
      * @returns {Promise<Responses.PollsAddVoteResponse>}
      */
     public async pollsAddVote(params: MethodsProps.PollsAddVoteParams): Promise<Responses.PollsAddVoteResponse> {
-        return this.call("polls.addVote", params)
+        return super.call("polls.addVote", params)
     }
-
     /**
      * Deletes the current user's vote from the selected answer in the poll.
      *
@@ -5469,9 +5058,8 @@ export class VKApi {
      * @returns {Promise<Responses.PollsDeleteVoteResponse>}
      */
     public async pollsDeleteVote(params: MethodsProps.PollsDeleteVoteParams): Promise<Responses.PollsDeleteVoteResponse> {
-        return this.call("polls.deleteVote", params)
+        return super.call("polls.deleteVote", params)
     }
-
     /**
      * Returns a list of IDs of users who selected specific answers in the poll.
      *
@@ -5491,9 +5079,8 @@ export class VKApi {
      * @returns {Promise<Responses.PollsGetVotersResponse>}
      */
     public async pollsGetVoters(params: MethodsProps.PollsGetVotersParams): Promise<Responses.PollsGetVotersResponse> {
-        return this.call("polls.getVoters", params)
+        return super.call("polls.getVoters", params)
     }
-
     /**
      * Creates polls that can be attached to the users' or communities' posts.
      *
@@ -5508,9 +5095,8 @@ export class VKApi {
      * @returns {Promise<Responses.PollsCreateResponse>}
      */
     public async pollsCreate(params: MethodsProps.PollsCreateParams): Promise<Responses.PollsCreateResponse> {
-        return this.call("polls.create", params)
+        return super.call("polls.create", params)
     }
-
     /**
      * Edits created polls
      *
@@ -5527,9 +5113,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async pollsEdit(params: MethodsProps.PollsEditParams): Promise<Responses.OkResponse> {
-        return this.call("polls.edit", params)
+        return super.call("polls.edit", params)
     }
-
     /**
      * Returns detailed information about user or community documents.
      *
@@ -5543,9 +5128,8 @@ export class VKApi {
      * @returns {Promise<Responses.DocsGetResponse>}
      */
     public async docsGet(params: MethodsProps.DocsGetParams): Promise<Responses.DocsGetResponse> {
-        return this.call("docs.get", params)
+        return super.call("docs.get", params)
     }
-
     /**
      * Returns information about documents by their IDs.
      *
@@ -5557,9 +5141,8 @@ export class VKApi {
      * @returns {Promise<Responses.DocsGetByIdResponse>}
      */
     public async docsGetById(params: MethodsProps.DocsGetByIdParams): Promise<Responses.DocsGetByIdResponse> {
-        return this.call("docs.getById", params)
+        return super.call("docs.getById", params)
     }
-
     /**
      * Returns the server address for document upload.
      *
@@ -5568,12 +5151,11 @@ export class VKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.DocsGetUploadServerResponse>}
+     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
      */
-    public async docsGetUploadServer(params: MethodsProps.DocsGetUploadServerParams): Promise<Responses.DocsGetUploadServerResponse> {
-        return this.call("docs.getUploadServer", params)
+    public async docsGetUploadServer(params: MethodsProps.DocsGetUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+        return super.call("docs.getUploadServer", params)
     }
-
     /**
      * Returns the server address for document upload onto a user's or community's wall.
      *
@@ -5582,12 +5164,25 @@ export class VKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.DocsGetWallUploadServerResponse>}
+     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
      */
-    public async docsGetWallUploadServer(params: MethodsProps.DocsGetWallUploadServerParams): Promise<Responses.DocsGetWallUploadServerResponse> {
-        return this.call("docs.getWallUploadServer", params)
+    public async docsGetWallUploadServer(params: MethodsProps.DocsGetWallUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+        return super.call("docs.getWallUploadServer", params)
     }
-
+    /**
+     * Returns the server address for document upload.
+     *
+     * @param {{
+     *   type: (string|undefined),
+     *   peer_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
+     */
+    public async docsGetMessagesUploadServer(params: MethodsProps.DocsGetMessagesUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+        return super.call("docs.getMessagesUploadServer", params)
+    }
     /**
      * Saves a document after [vk.com/dev/upload_files_2|uploading it to a server].
      *
@@ -5601,9 +5196,8 @@ export class VKApi {
      * @returns {Promise<Responses.DocsSaveResponse>}
      */
     public async docsSave(params: MethodsProps.DocsSaveParams): Promise<Responses.DocsSaveResponse> {
-        return this.call("docs.save", params)
+        return super.call("docs.save", params)
     }
-
     /**
      * Deletes a user or community document.
      *
@@ -5616,9 +5210,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async docsDelete(params: MethodsProps.DocsDeleteParams): Promise<Responses.OkResponse> {
-        return this.call("docs.delete", params)
+        return super.call("docs.delete", params)
     }
-
     /**
      * Copies a document to a user's or community's document list.
      *
@@ -5632,9 +5225,8 @@ export class VKApi {
      * @returns {Promise<Responses.DocsAddResponse>}
      */
     public async docsAdd(params: MethodsProps.DocsAddParams): Promise<Responses.DocsAddResponse> {
-        return this.call("docs.add", params)
+        return super.call("docs.add", params)
     }
-
     /**
      * Returns documents types available for current user.
      *
@@ -5646,9 +5238,8 @@ export class VKApi {
      * @returns {Promise<Responses.DocsGetTypesResponse>}
      */
     public async docsGetTypes(params: MethodsProps.DocsGetTypesParams): Promise<Responses.DocsGetTypesResponse> {
-        return this.call("docs.getTypes", params)
+        return super.call("docs.getTypes", params)
     }
-
     /**
      * Returns a list of documents matching the search criteria.
      *
@@ -5663,9 +5254,8 @@ export class VKApi {
      * @returns {Promise<Responses.DocsSearchResponse>}
      */
     public async docsSearch(params: MethodsProps.DocsSearchParams): Promise<Responses.DocsSearchResponse> {
-        return this.call("docs.search", params)
+        return super.call("docs.search", params)
     }
-
     /**
      * Edits a document.
      *
@@ -5680,9 +5270,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async docsEdit(params: MethodsProps.DocsEditParams): Promise<Responses.OkResponse> {
-        return this.call("docs.edit", params)
+        return super.call("docs.edit", params)
     }
-
     /**
      * Returns a list of users whom the current user has bookmarked.
      *
@@ -5695,9 +5284,8 @@ export class VKApi {
      * @returns {Promise<Responses.FaveGetUsersResponse>}
      */
     public async faveGetUsers(params: MethodsProps.FaveGetUsersParams): Promise<Responses.FaveGetUsersResponse> {
-        return this.call("fave.getUsers", params)
+        return super.call("fave.getUsers", params)
     }
-
     /**
      * Returns a list of photos that the current user has liked.
      *
@@ -5711,9 +5299,8 @@ export class VKApi {
      * @returns {Promise<Responses.FaveGetPhotosResponse>}
      */
     public async faveGetPhotos(params: MethodsProps.FaveGetPhotosParams): Promise<Responses.FaveGetPhotosResponse> {
-        return this.call("fave.getPhotos", params)
+        return super.call("fave.getPhotos", params)
     }
-
     /**
      * Returns a list of wall posts that the current user has liked.
      *
@@ -5727,9 +5314,8 @@ export class VKApi {
      * @returns {Promise<Responses.FaveGetPostsResponse>}
      */
     public async faveGetPosts(params: MethodsProps.FaveGetPostsParams): Promise<Responses.FaveGetPostsResponse> {
-        return this.call("fave.getPosts", params)
+        return super.call("fave.getPosts", params)
     }
-
     /**
      * Returns a list of videos that the current user has liked.
      *
@@ -5743,9 +5329,8 @@ export class VKApi {
      * @returns {Promise<Responses.FaveGetVideosResponse>}
      */
     public async faveGetVideos(params: MethodsProps.FaveGetVideosParams): Promise<Responses.FaveGetVideosResponse> {
-        return this.call("fave.getVideos", params)
+        return super.call("fave.getVideos", params)
     }
-
     /**
      * Returns a list of links that the current user has bookmarked.
      *
@@ -5758,9 +5343,8 @@ export class VKApi {
      * @returns {Promise<Responses.FaveGetLinksResponse>}
      */
     public async faveGetLinks(params: MethodsProps.FaveGetLinksParams): Promise<Responses.FaveGetLinksResponse> {
-        return this.call("fave.getLinks", params)
+        return super.call("fave.getLinks", params)
     }
-
     /**
      * Returns market items bookmarked by current user.
      *
@@ -5773,9 +5357,8 @@ export class VKApi {
      * @returns {Promise<Responses.FaveGetMarketItemsResponse>}
      */
     public async faveGetMarketItems(params: MethodsProps.FaveGetMarketItemsParams): Promise<Responses.FaveGetMarketItemsResponse> {
-        return this.call("fave.getMarketItems", params)
+        return super.call("fave.getMarketItems", params)
     }
-
     /**
      * Adds a profile to user faves.
      *
@@ -5787,9 +5370,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async faveAddUser(params: MethodsProps.FaveAddUserParams): Promise<Responses.OkResponse> {
-        return this.call("fave.addUser", params)
+        return super.call("fave.addUser", params)
     }
-
     /**
      * Removes a profile from user faves.
      *
@@ -5801,9 +5383,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async faveRemoveUser(params: MethodsProps.FaveRemoveUserParams): Promise<Responses.OkResponse> {
-        return this.call("fave.removeUser", params)
+        return super.call("fave.removeUser", params)
     }
-
     /**
      * Adds a community to user faves.
      *
@@ -5815,9 +5396,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async faveAddGroup(params: MethodsProps.FaveAddGroupParams): Promise<Responses.OkResponse> {
-        return this.call("fave.addGroup", params)
+        return super.call("fave.addGroup", params)
     }
-
     /**
      * Removes a community from user faves.
      *
@@ -5829,9 +5409,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async faveRemoveGroup(params: MethodsProps.FaveRemoveGroupParams): Promise<Responses.OkResponse> {
-        return this.call("fave.removeGroup", params)
+        return super.call("fave.removeGroup", params)
     }
-
     /**
      * Adds a link to user faves.
      *
@@ -5844,9 +5423,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async faveAddLink(params: MethodsProps.FaveAddLinkParams): Promise<Responses.OkResponse> {
-        return this.call("fave.addLink", params)
+        return super.call("fave.addLink", params)
     }
-
     /**
      * Removes link from the user's faves.
      *
@@ -5858,9 +5436,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async faveRemoveLink(params: MethodsProps.FaveRemoveLinkParams): Promise<Responses.OkResponse> {
-        return this.call("fave.removeLink", params)
+        return super.call("fave.removeLink", params)
     }
-
     /**
      * Returns a list of notifications about other users' feedback to the current user's wall posts.
      *
@@ -5876,9 +5453,8 @@ export class VKApi {
      * @returns {Promise<Responses.NotificationsGetResponse>}
      */
     public async notificationsGet(params: MethodsProps.NotificationsGetParams): Promise<Responses.NotificationsGetResponse> {
-        return this.call("notifications.get", params)
+        return super.call("notifications.get", params)
     }
-
     /**
      * Resets the counter of new notifications about other users' feedback to the current user's wall posts.
      *
@@ -5889,9 +5465,8 @@ export class VKApi {
      * @returns {Promise<Responses.NotificationsMarkAsViewedResponse>}
      */
     public async notificationsMarkAsViewed(params: MethodsProps.NotificationsMarkAsViewedParams): Promise<Responses.NotificationsMarkAsViewedResponse> {
-        return this.call("notifications.markAsViewed", params)
+        return super.call("notifications.markAsViewed", params)
     }
-
     /**
      * Returns statistics of a community or an application.
      *
@@ -5906,9 +5481,8 @@ export class VKApi {
      * @returns {Promise<Responses.StatsGetResponse>}
      */
     public async statsGet(params: MethodsProps.StatsGetParams): Promise<Responses.StatsGetResponse> {
-        return this.call("stats.get", params)
+        return super.call("stats.get", params)
     }
-
     /**
      * undefined
      *
@@ -5919,9 +5493,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async statsTrackVisitor(params: MethodsProps.StatsTrackVisitorParams): Promise<Responses.OkResponse> {
-        return this.call("stats.trackVisitor", params)
+        return super.call("stats.trackVisitor", params)
     }
-
     /**
      * Returns stats for a wall post.
      *
@@ -5934,9 +5507,8 @@ export class VKApi {
      * @returns {Promise<Responses.StatsGetPostReachResponse>}
      */
     public async statsGetPostReach(params: MethodsProps.StatsGetPostReachParams): Promise<Responses.StatsGetPostReachResponse> {
-        return this.call("stats.getPostReach", params)
+        return super.call("stats.getPostReach", params)
     }
-
     /**
      * Allows the programmer to do a quick search for any substring.
      *
@@ -5952,9 +5524,8 @@ export class VKApi {
      * @returns {Promise<Responses.SearchGetHintsResponse>}
      */
     public async searchGetHints(params: MethodsProps.SearchGetHintsParams): Promise<Responses.SearchGetHintsResponse> {
-        return this.call("search.getHints", params)
+        return super.call("search.getHints", params)
     }
-
     /**
      * Returns a list of applications (apps) available to users in the App Catalog.
      *
@@ -5976,9 +5547,8 @@ export class VKApi {
      * @returns {Promise<Responses.AppsGetCatalogResponse>}
      */
     public async appsGetCatalog(params: MethodsProps.AppsGetCatalogParams): Promise<Responses.AppsGetCatalogResponse> {
-        return this.call("apps.getCatalog", params)
+        return super.call("apps.getCatalog", params)
     }
-
     /**
      * Returns applications data.
      *
@@ -5994,9 +5564,8 @@ export class VKApi {
      * @returns {Promise<Responses.AppsGetResponse>}
      */
     public async appsGet(params: MethodsProps.AppsGetParams): Promise<Responses.AppsGetResponse> {
-        return this.call("apps.get", params)
+        return super.call("apps.get", params)
     }
-
     /**
      * Sends a request to another user in an app that uses VK authorization.
      *
@@ -6013,9 +5582,8 @@ export class VKApi {
      * @returns {Promise<Responses.AppsSendRequestResponse>}
      */
     public async appsSendRequest(params: MethodsProps.AppsSendRequestParams): Promise<Responses.AppsSendRequestResponse> {
-        return this.call("apps.sendRequest", params)
+        return super.call("apps.sendRequest", params)
     }
-
     /**
      * Deletes all request notifications from the current app.
      *
@@ -6026,9 +5594,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async appsDeleteAppRequests(params: MethodsProps.AppsDeleteAppRequestsParams): Promise<Responses.OkResponse> {
-        return this.call("apps.deleteAppRequests", params)
+        return super.call("apps.deleteAppRequests", params)
     }
-
     /**
      * Creates friends list for requests and invites in current app.
      *
@@ -6042,9 +5609,8 @@ export class VKApi {
      * @returns {Promise<Responses.AppsGetFriendsListResponse>}
      */
     public async appsGetFriendsList(params: MethodsProps.AppsGetFriendsListParams): Promise<Responses.AppsGetFriendsListResponse> {
-        return this.call("apps.getFriendsList", params)
+        return super.call("apps.getFriendsList", params)
     }
-
     /**
      * Returns players rating in the game.
      *
@@ -6058,9 +5624,8 @@ export class VKApi {
      * @returns {Promise<Responses.AppsGetLeaderboardResponse>}
      */
     public async appsGetLeaderboard(params: MethodsProps.AppsGetLeaderboardParams): Promise<Responses.AppsGetLeaderboardResponse> {
-        return this.call("apps.getLeaderboard", params)
+        return super.call("apps.getLeaderboard", params)
     }
-
     /**
      * Adds user activity information to an application
      *
@@ -6074,9 +5639,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async secureAddAppEvent(params: MethodsProps.SecureAddAppEventParams): Promise<Responses.OkResponse> {
-        return this.call("secure.addAppEvent", params)
+        return super.call("secure.addAppEvent", params)
     }
-
     /**
      * Returns user score in app
      *
@@ -6088,9 +5652,8 @@ export class VKApi {
      * @returns {Promise<Responses.AppsGetScoreResponse>}
      */
     public async appsGetScore(params: MethodsProps.AppsGetScoreParams): Promise<Responses.AppsGetScoreResponse> {
-        return this.call("apps.getScore", params)
+        return super.call("apps.getScore", params)
     }
-
     /**
      * Checks whether a link is blocked in VK.
      *
@@ -6102,9 +5665,8 @@ export class VKApi {
      * @returns {Promise<Responses.UtilsCheckLinkResponse>}
      */
     public async utilsCheckLink(params: MethodsProps.UtilsCheckLinkParams): Promise<Responses.UtilsCheckLinkResponse> {
-        return this.call("utils.checkLink", params)
+        return super.call("utils.checkLink", params)
     }
-
     /**
      * Deletes shortened link from user's list.
      *
@@ -6116,9 +5678,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async utilsDeleteFromLastShortened(params: MethodsProps.UtilsDeleteFromLastShortenedParams): Promise<Responses.OkResponse> {
-        return this.call("utils.deleteFromLastShortened", params)
+        return super.call("utils.deleteFromLastShortened", params)
     }
-
     /**
      * Returns a list of user's shortened links.
      *
@@ -6131,9 +5692,8 @@ export class VKApi {
      * @returns {Promise<Responses.UtilsGetLastShortenedLinksResponse>}
      */
     public async utilsGetLastShortenedLinks(params: MethodsProps.UtilsGetLastShortenedLinksParams): Promise<Responses.UtilsGetLastShortenedLinksResponse> {
-        return this.call("utils.getLastShortenedLinks", params)
+        return super.call("utils.getLastShortenedLinks", params)
     }
-
     /**
      * Returns stats data for shortened link.
      *
@@ -6149,9 +5709,8 @@ export class VKApi {
      * @returns {Promise<Responses.UtilsGetLinkStatsResponse>}
      */
     public async utilsGetLinkStats(params: MethodsProps.UtilsGetLinkStatsParams): Promise<Responses.UtilsGetLinkStatsResponse> {
-        return this.call("utils.getLinkStats", params)
+        return super.call("utils.getLinkStats", params)
     }
-
     /**
      * Allows to receive a link shortened via vk.cc.
      *
@@ -6164,9 +5723,8 @@ export class VKApi {
      * @returns {Promise<Responses.UtilsGetShortLinkResponse>}
      */
     public async utilsGetShortLink(params: MethodsProps.UtilsGetShortLinkParams): Promise<Responses.UtilsGetShortLinkResponse> {
-        return this.call("utils.getShortLink", params)
+        return super.call("utils.getShortLink", params)
     }
-
     /**
      * Detects a type of object (e.g., user, community, application) and its ID by screen name.
      *
@@ -6178,9 +5736,8 @@ export class VKApi {
      * @returns {Promise<Responses.UtilsResolveScreenNameResponse>}
      */
     public async utilsResolveScreenName(params: MethodsProps.UtilsResolveScreenNameParams): Promise<Responses.UtilsResolveScreenNameResponse> {
-        return this.call("utils.resolveScreenName", params)
+        return super.call("utils.resolveScreenName", params)
     }
-
     /**
      * Returns the current time of the VK server.
      *
@@ -6191,9 +5748,8 @@ export class VKApi {
      * @returns {Promise<Responses.UtilsGetServerTimeResponse>}
      */
     public async utilsGetServerTime(params: MethodsProps.UtilsGetServerTimeParams): Promise<Responses.UtilsGetServerTimeResponse> {
-        return this.call("utils.getServerTime", params)
+        return super.call("utils.getServerTime", params)
     }
-
     /**
      * Returns a list of countries.
      *
@@ -6208,9 +5764,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetCountriesResponse>}
      */
     public async databaseGetCountries(params: MethodsProps.DatabaseGetCountriesParams): Promise<Responses.DatabaseGetCountriesResponse> {
-        return this.call("database.getCountries", params)
+        return super.call("database.getCountries", params)
     }
-
     /**
      * Returns a list of regions.
      *
@@ -6225,9 +5780,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetRegionsResponse>}
      */
     public async databaseGetRegions(params: MethodsProps.DatabaseGetRegionsParams): Promise<Responses.DatabaseGetRegionsResponse> {
-        return this.call("database.getRegions", params)
+        return super.call("database.getRegions", params)
     }
-
     /**
      * Returns information about streets by their IDs.
      *
@@ -6239,9 +5793,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetStreetsByIdResponse>}
      */
     public async databaseGetStreetsById(params: MethodsProps.DatabaseGetStreetsByIdParams): Promise<Responses.DatabaseGetStreetsByIdResponse> {
-        return this.call("database.getStreetsById", params)
+        return super.call("database.getStreetsById", params)
     }
-
     /**
      * Returns information about countries by their IDs.
      *
@@ -6253,9 +5806,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetCountriesByIdResponse>}
      */
     public async databaseGetCountriesById(params: MethodsProps.DatabaseGetCountriesByIdParams): Promise<Responses.DatabaseGetCountriesByIdResponse> {
-        return this.call("database.getCountriesById", params)
+        return super.call("database.getCountriesById", params)
     }
-
     /**
      * Returns a list of cities.
      *
@@ -6272,9 +5824,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetCitiesResponse>}
      */
     public async databaseGetCities(params: MethodsProps.DatabaseGetCitiesParams): Promise<Responses.DatabaseGetCitiesResponse> {
-        return this.call("database.getCities", params)
+        return super.call("database.getCities", params)
     }
-
     /**
      * Returns information about cities by their IDs.
      *
@@ -6286,9 +5837,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetCitiesByIdResponse>}
      */
     public async databaseGetCitiesById(params: MethodsProps.DatabaseGetCitiesByIdParams): Promise<Responses.DatabaseGetCitiesByIdResponse> {
-        return this.call("database.getCitiesById", params)
+        return super.call("database.getCitiesById", params)
     }
-
     /**
      * Returns a list of higher education institutions.
      *
@@ -6304,9 +5854,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetUniversitiesResponse>}
      */
     public async databaseGetUniversities(params: MethodsProps.DatabaseGetUniversitiesParams): Promise<Responses.DatabaseGetUniversitiesResponse> {
-        return this.call("database.getUniversities", params)
+        return super.call("database.getUniversities", params)
     }
-
     /**
      * Returns a list of schools.
      *
@@ -6321,9 +5870,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetSchoolsResponse>}
      */
     public async databaseGetSchools(params: MethodsProps.DatabaseGetSchoolsParams): Promise<Responses.DatabaseGetSchoolsResponse> {
-        return this.call("database.getSchools", params)
+        return super.call("database.getSchools", params)
     }
-
     /**
      * Returns a list of school classes specified for the country.
      *
@@ -6335,9 +5883,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetSchoolClassesResponse>}
      */
     public async databaseGetSchoolClasses(params: MethodsProps.DatabaseGetSchoolClassesParams): Promise<Responses.DatabaseGetSchoolClassesResponse> {
-        return this.call("database.getSchoolClasses", params)
+        return super.call("database.getSchoolClasses", params)
     }
-
     /**
      * Returns a list of faculties (i.e., university departments).
      *
@@ -6351,9 +5898,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetFacultiesResponse>}
      */
     public async databaseGetFaculties(params: MethodsProps.DatabaseGetFacultiesParams): Promise<Responses.DatabaseGetFacultiesResponse> {
-        return this.call("database.getFaculties", params)
+        return super.call("database.getFaculties", params)
     }
-
     /**
      * Returns list of chairs on a specified faculty.
      *
@@ -6367,9 +5913,8 @@ export class VKApi {
      * @returns {Promise<Responses.DatabaseGetChairsResponse>}
      */
     public async databaseGetChairs(params: MethodsProps.DatabaseGetChairsParams): Promise<Responses.DatabaseGetChairsResponse> {
-        return this.call("database.getChairs", params)
+        return super.call("database.getChairs", params)
     }
-
     /**
      * Returns a list of user gifts.
      *
@@ -6383,9 +5928,8 @@ export class VKApi {
      * @returns {Promise<Responses.GiftsGetResponse>}
      */
     public async giftsGet(params: MethodsProps.GiftsGetParams): Promise<Responses.GiftsGetResponse> {
-        return this.call("gifts.get", params)
+        return super.call("gifts.get", params)
     }
-
     /**
      * Returns a list of advertising accounts.
      *
@@ -6396,9 +5940,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetAccountsResponse>}
      */
     public async adsGetAccounts(params: MethodsProps.AdsGetAccountsParams): Promise<Responses.AdsGetAccountsResponse> {
-        return this.call("ads.getAccounts", params)
+        return super.call("ads.getAccounts", params)
     }
-
     /**
      * Returns a list of advertising agency's clients.
      *
@@ -6410,9 +5953,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetClientsResponse>}
      */
     public async adsGetClients(params: MethodsProps.AdsGetClientsParams): Promise<Responses.AdsGetClientsResponse> {
-        return this.call("ads.getClients", params)
+        return super.call("ads.getClients", params)
     }
-
     /**
      * Creates clients of an advertising agency.
      *
@@ -6425,9 +5967,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsCreateClientsResponse>}
      */
     public async adsCreateClients(params: MethodsProps.AdsCreateClientsParams): Promise<Responses.AdsCreateClientsResponse> {
-        return this.call("ads.createClients", params)
+        return super.call("ads.createClients", params)
     }
-
     /**
      * Edits clients of an advertising agency.
      *
@@ -6440,9 +5981,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsUpdateClientsResponse>}
      */
     public async adsUpdateClients(params: MethodsProps.AdsUpdateClientsParams): Promise<Responses.AdsUpdateClientsResponse> {
-        return this.call("ads.updateClients", params)
+        return super.call("ads.updateClients", params)
     }
-
     /**
      * Archives clients of an advertising agency.
      *
@@ -6455,9 +5995,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsDeleteClientsResponse>}
      */
     public async adsDeleteClients(params: MethodsProps.AdsDeleteClientsParams): Promise<Responses.AdsDeleteClientsResponse> {
-        return this.call("ads.deleteClients", params)
+        return super.call("ads.deleteClients", params)
     }
-
     /**
      * Returns a list of campaigns in an advertising account.
      *
@@ -6472,9 +6011,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetCampaignsResponse>}
      */
     public async adsGetCampaigns(params: MethodsProps.AdsGetCampaignsParams): Promise<Responses.AdsGetCampaignsResponse> {
-        return this.call("ads.getCampaigns", params)
+        return super.call("ads.getCampaigns", params)
     }
-
     /**
      * Creates advertising campaigns.
      *
@@ -6487,9 +6025,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsCreateCampaignsResponse>}
      */
     public async adsCreateCampaigns(params: MethodsProps.AdsCreateCampaignsParams): Promise<Responses.AdsCreateCampaignsResponse> {
-        return this.call("ads.createCampaigns", params)
+        return super.call("ads.createCampaigns", params)
     }
-
     /**
      * Edits advertising campaigns.
      *
@@ -6502,9 +6039,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsUpdateCampaignsResponse>}
      */
     public async adsUpdateCampaigns(params: MethodsProps.AdsUpdateCampaignsParams): Promise<Responses.AdsUpdateCampaignsResponse> {
-        return this.call("ads.updateCampaigns", params)
+        return super.call("ads.updateCampaigns", params)
     }
-
     /**
      * Archives advertising campaigns.
      *
@@ -6517,9 +6053,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsDeleteCampaignsResponse>}
      */
     public async adsDeleteCampaigns(params: MethodsProps.AdsDeleteCampaignsParams): Promise<Responses.AdsDeleteCampaignsResponse> {
-        return this.call("ads.deleteCampaigns", params)
+        return super.call("ads.deleteCampaigns", params)
     }
-
     /**
      * Returns number of ads.
      *
@@ -6537,9 +6072,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetAdsResponse>}
      */
     public async adsGetAds(params: MethodsProps.AdsGetAdsParams): Promise<Responses.AdsGetAdsResponse> {
-        return this.call("ads.getAds", params)
+        return super.call("ads.getAds", params)
     }
-
     /**
      * Returns descriptions of ad layouts.
      *
@@ -6557,9 +6091,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetAdsLayoutResponse>}
      */
     public async adsGetAdsLayout(params: MethodsProps.AdsGetAdsLayoutParams): Promise<Responses.AdsGetAdsLayoutResponse> {
-        return this.call("ads.getAdsLayout", params)
+        return super.call("ads.getAdsLayout", params)
     }
-
     /**
      * Returns ad targeting parameters.
      *
@@ -6577,9 +6110,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetAdsTargetingResponse>}
      */
     public async adsGetAdsTargeting(params: MethodsProps.AdsGetAdsTargetingParams): Promise<Responses.AdsGetAdsTargetingResponse> {
-        return this.call("ads.getAdsTargeting", params)
+        return super.call("ads.getAdsTargeting", params)
     }
-
     /**
      * Creates ads.
      *
@@ -6592,9 +6124,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsCreateAdsResponse>}
      */
     public async adsCreateAds(params: MethodsProps.AdsCreateAdsParams): Promise<Responses.AdsCreateAdsResponse> {
-        return this.call("ads.createAds", params)
+        return super.call("ads.createAds", params)
     }
-
     /**
      * Edits ads.
      *
@@ -6607,9 +6138,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsUpdateAdsResponse>}
      */
     public async adsUpdateAds(params: MethodsProps.AdsUpdateAdsParams): Promise<Responses.AdsUpdateAdsResponse> {
-        return this.call("ads.updateAds", params)
+        return super.call("ads.updateAds", params)
     }
-
     /**
      * Archives ads.
      *
@@ -6622,9 +6152,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsDeleteAdsResponse>}
      */
     public async adsDeleteAds(params: MethodsProps.AdsDeleteAdsParams): Promise<Responses.AdsDeleteAdsResponse> {
-        return this.call("ads.deleteAds", params)
+        return super.call("ads.deleteAds", params)
     }
-
     /**
      * Allows to check the ad link.
      *
@@ -6639,9 +6168,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsCheckLinkResponse>}
      */
     public async adsCheckLink(params: MethodsProps.AdsCheckLinkParams): Promise<Responses.AdsCheckLinkResponse> {
-        return this.call("ads.checkLink", params)
+        return super.call("ads.checkLink", params)
     }
-
     /**
      * Returns statistics of performance indicators for ads, campaigns, clients or the whole account.
      *
@@ -6658,9 +6186,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetStatisticsResponse>}
      */
     public async adsGetStatistics(params: MethodsProps.AdsGetStatisticsParams): Promise<Responses.AdsGetStatisticsResponse> {
-        return this.call("ads.getStatistics", params)
+        return super.call("ads.getStatistics", params)
     }
-
     /**
      * Returns demographics for ads or campaigns.
      *
@@ -6677,9 +6204,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetDemographicsResponse>}
      */
     public async adsGetDemographics(params: MethodsProps.AdsGetDemographicsParams): Promise<Responses.AdsGetDemographicsResponse> {
-        return this.call("ads.getDemographics", params)
+        return super.call("ads.getDemographics", params)
     }
-
     /**
      * Allows to get detailed information about the ad post reach.
      *
@@ -6692,9 +6218,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetAdsPostsReachResponse>}
      */
     public async adsGetAdsPostsReach(params: MethodsProps.AdsGetAdsPostsReachParams): Promise<Responses.AdsGetAdsPostsReachResponse> {
-        return this.call("ads.getAdsPostsReach", params)
+        return super.call("ads.getAdsPostsReach", params)
     }
-
     /**
      * Returns current budget of the advertising account.
      *
@@ -6706,9 +6231,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetBudgetResponse>}
      */
     public async adsGetBudget(params: MethodsProps.AdsGetBudgetParams): Promise<Responses.AdsGetBudgetResponse> {
-        return this.call("ads.getBudget", params)
+        return super.call("ads.getBudget", params)
     }
-
     /**
      * Returns a list of managers and supervisors of advertising account.
      *
@@ -6720,9 +6244,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetOfficeUsersResponse>}
      */
     public async adsGetOfficeUsers(params: MethodsProps.AdsGetOfficeUsersParams): Promise<Responses.AdsGetOfficeUsersResponse> {
-        return this.call("ads.getOfficeUsers", params)
+        return super.call("ads.getOfficeUsers", params)
     }
-
     /**
      * Adds managers and/or supervisors to advertising account.
      *
@@ -6735,9 +6258,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsAddOfficeUsersResponse>}
      */
     public async adsAddOfficeUsers(params: MethodsProps.AdsAddOfficeUsersParams): Promise<Responses.AdsAddOfficeUsersResponse> {
-        return this.call("ads.addOfficeUsers", params)
+        return super.call("ads.addOfficeUsers", params)
     }
-
     /**
      * Removes managers and/or supervisors from advertising account.
      *
@@ -6750,9 +6272,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsRemoveOfficeUsersResponse>}
      */
     public async adsRemoveOfficeUsers(params: MethodsProps.AdsRemoveOfficeUsersParams): Promise<Responses.AdsRemoveOfficeUsersResponse> {
-        return this.call("ads.removeOfficeUsers", params)
+        return super.call("ads.removeOfficeUsers", params)
     }
-
     /**
      * Returns the size of targeting audience, and also recommended values for CPC and CPM.
      *
@@ -6770,9 +6291,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetTargetingStatsResponse>}
      */
     public async adsGetTargetingStats(params: MethodsProps.AdsGetTargetingStatsParams): Promise<Responses.AdsGetTargetingStatsResponse> {
-        return this.call("ads.getTargetingStats", params)
+        return super.call("ads.getTargetingStats", params)
     }
-
     /**
      * Returns a set of auto-suggestions for various targeting parameters.
      *
@@ -6789,9 +6309,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetSuggestionsResponse>}
      */
     public async adsGetSuggestions(params: MethodsProps.AdsGetSuggestionsParams): Promise<Responses.AdsGetSuggestionsResponse> {
-        return this.call("ads.getSuggestions", params)
+        return super.call("ads.getSuggestions", params)
     }
-
     /**
      * Returns a list of possible ad categories.
      *
@@ -6803,9 +6322,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetCategoriesResponse>}
      */
     public async adsGetCategories(params: MethodsProps.AdsGetCategoriesParams): Promise<Responses.AdsGetCategoriesResponse> {
-        return this.call("ads.getCategories", params)
+        return super.call("ads.getCategories", params)
     }
-
     /**
      * Returns URL to upload an ad photo to.
      *
@@ -6817,9 +6335,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetUploadURLResponse>}
      */
     public async adsGetUploadURL(params: MethodsProps.AdsGetUploadURLParams): Promise<Responses.AdsGetUploadURLResponse> {
-        return this.call("ads.getUploadURL", params)
+        return super.call("ads.getUploadURL", params)
     }
-
     /**
      * Returns URL to upload an ad video to.
      *
@@ -6830,9 +6347,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetVideoUploadURLResponse>}
      */
     public async adsGetVideoUploadURL(params: MethodsProps.AdsGetVideoUploadURLParams): Promise<Responses.AdsGetVideoUploadURLResponse> {
-        return this.call("ads.getVideoUploadURL", params)
+        return super.call("ads.getVideoUploadURL", params)
     }
-
     /**
      * Returns information about current state of a counter — number of remaining runs of methods and time to the next counter nulling in seconds.
      *
@@ -6844,9 +6360,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetFloodStatsResponse>}
      */
     public async adsGetFloodStats(params: MethodsProps.AdsGetFloodStatsParams): Promise<Responses.AdsGetFloodStatsResponse> {
-        return this.call("ads.getFloodStats", params)
+        return super.call("ads.getFloodStats", params)
     }
-
     /**
      * Returns a reason of ad rejection for pre-moderation.
      *
@@ -6859,9 +6374,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetRejectionReasonResponse>}
      */
     public async adsGetRejectionReason(params: MethodsProps.AdsGetRejectionReasonParams): Promise<Responses.AdsGetRejectionReasonResponse> {
-        return this.call("ads.getRejectionReason", params)
+        return super.call("ads.getRejectionReason", params)
     }
-
     /**
      * Creates a group to re-target ads for users who visited advertiser's site (viewed information about the product, registered, etc.).
      *
@@ -6877,9 +6391,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsCreateTargetGroupResponse>}
      */
     public async adsCreateTargetGroup(params: MethodsProps.AdsCreateTargetGroupParams): Promise<Responses.AdsCreateTargetGroupResponse> {
-        return this.call("ads.createTargetGroup", params)
+        return super.call("ads.createTargetGroup", params)
     }
-
     /**
      * Edits a retarget group.
      *
@@ -6896,9 +6409,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async adsUpdateTargetGroup(params: MethodsProps.AdsUpdateTargetGroupParams): Promise<Responses.OkResponse> {
-        return this.call("ads.updateTargetGroup", params)
+        return super.call("ads.updateTargetGroup", params)
     }
-
     /**
      * Deletes a retarget group.
      *
@@ -6912,9 +6424,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async adsDeleteTargetGroup(params: MethodsProps.AdsDeleteTargetGroupParams): Promise<Responses.OkResponse> {
-        return this.call("ads.deleteTargetGroup", params)
+        return super.call("ads.deleteTargetGroup", params)
     }
-
     /**
      * Returns a list of target groups.
      *
@@ -6928,9 +6439,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsGetTargetGroupsResponse>}
      */
     public async adsGetTargetGroups(params: MethodsProps.AdsGetTargetGroupsParams): Promise<Responses.AdsGetTargetGroupsResponse> {
-        return this.call("ads.getTargetGroups", params)
+        return super.call("ads.getTargetGroups", params)
     }
-
     /**
      * Imports a list of advertiser's contacts to count VK registered users against the target group.
      *
@@ -6945,9 +6455,8 @@ export class VKApi {
      * @returns {Promise<Responses.AdsImportTargetContactsResponse>}
      */
     public async adsImportTargetContacts(params: MethodsProps.AdsImportTargetContactsParams): Promise<Responses.AdsImportTargetContactsResponse> {
-        return this.call("ads.importTargetContacts", params)
+        return super.call("ads.importTargetContacts", params)
     }
-
     /**
      * Checks the user authentication in 'IFrame' and 'Flash' apps using the 'access_token' parameter.
      *
@@ -6960,9 +6469,8 @@ export class VKApi {
      * @returns {Promise<Responses.SecureCheckTokenResponse>}
      */
     public async secureCheckToken(params: MethodsProps.SecureCheckTokenParams): Promise<Responses.SecureCheckTokenResponse> {
-        return this.call("secure.checkToken", params)
+        return super.call("secure.checkToken", params)
     }
-
     /**
      * Returns items list for a community.
      *
@@ -6977,9 +6485,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketGetResponse>}
      */
     public async marketGet(params: MethodsProps.MarketGetParams): Promise<Responses.MarketGetResponse> {
-        return this.call("market.get", params)
+        return super.call("market.get", params)
     }
-
     /**
      * Returns information about market items by their ids.
      *
@@ -6992,9 +6499,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketGetByIdResponse>}
      */
     public async marketGetById(params: MethodsProps.MarketGetByIdParams): Promise<Responses.MarketGetByIdResponse> {
-        return this.call("market.getById", params)
+        return super.call("market.getById", params)
     }
-
     /**
      * Searches market items in a community's catalog
      *
@@ -7014,9 +6520,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketSearchResponse>}
      */
     public async marketSearch(params: MethodsProps.MarketSearchParams): Promise<Responses.MarketSearchResponse> {
-        return this.call("market.search", params)
+        return super.call("market.search", params)
     }
-
     /**
      * Returns community's collections list.
      *
@@ -7030,9 +6535,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketGetAlbumsResponse>}
      */
     public async marketGetAlbums(params: MethodsProps.MarketGetAlbumsParams): Promise<Responses.MarketGetAlbumsResponse> {
-        return this.call("market.getAlbums", params)
+        return super.call("market.getAlbums", params)
     }
-
     /**
      * Returns items album's data
      *
@@ -7045,9 +6549,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketGetAlbumByIdResponse>}
      */
     public async marketGetAlbumById(params: MethodsProps.MarketGetAlbumByIdParams): Promise<Responses.MarketGetAlbumByIdResponse> {
-        return this.call("market.getAlbumById", params)
+        return super.call("market.getAlbumById", params)
     }
-
     /**
      * Creates a new comment for an item.
      *
@@ -7066,9 +6569,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketCreateCommentResponse>}
      */
     public async marketCreateComment(params: MethodsProps.MarketCreateCommentParams): Promise<Responses.MarketCreateCommentResponse> {
-        return this.call("market.createComment", params)
+        return super.call("market.createComment", params)
     }
-
     /**
      * Returns comments list for an item.
      *
@@ -7087,9 +6589,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketGetCommentsResponse>}
      */
     public async marketGetComments(params: MethodsProps.MarketGetCommentsParams): Promise<Responses.MarketGetCommentsResponse> {
-        return this.call("market.getComments", params)
+        return super.call("market.getComments", params)
     }
-
     /**
      * Deletes an item's comment
      *
@@ -7102,9 +6603,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketDeleteCommentResponse>}
      */
     public async marketDeleteComment(params: MethodsProps.MarketDeleteCommentParams): Promise<Responses.MarketDeleteCommentResponse> {
-        return this.call("market.deleteComment", params)
+        return super.call("market.deleteComment", params)
     }
-
     /**
      * Restores a recently deleted comment
      *
@@ -7117,9 +6617,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketRestoreCommentResponse>}
      */
     public async marketRestoreComment(params: MethodsProps.MarketRestoreCommentParams): Promise<Responses.MarketRestoreCommentResponse> {
-        return this.call("market.restoreComment", params)
+        return super.call("market.restoreComment", params)
     }
-
     /**
      * Chages item comment's text
      *
@@ -7134,9 +6633,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketEditComment(params: MethodsProps.MarketEditCommentParams): Promise<Responses.OkResponse> {
-        return this.call("market.editComment", params)
+        return super.call("market.editComment", params)
     }
-
     /**
      * Sends a complaint to the item's comment.
      *
@@ -7150,9 +6648,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketReportComment(params: MethodsProps.MarketReportCommentParams): Promise<Responses.OkResponse> {
-        return this.call("market.reportComment", params)
+        return super.call("market.reportComment", params)
     }
-
     /**
      * Returns a list of market categories.
      *
@@ -7165,9 +6662,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketGetCategoriesResponse>}
      */
     public async marketGetCategories(params: MethodsProps.MarketGetCategoriesParams): Promise<Responses.MarketGetCategoriesResponse> {
-        return this.call("market.getCategories", params)
+        return super.call("market.getCategories", params)
     }
-
     /**
      * Sends a complaint to the item.
      *
@@ -7181,9 +6677,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketReport(params: MethodsProps.MarketReportParams): Promise<Responses.OkResponse> {
-        return this.call("market.report", params)
+        return super.call("market.report", params)
     }
-
     /**
      * Ads a new item to the market.
      *
@@ -7202,9 +6697,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketAddResponse>}
      */
     public async marketAdd(params: MethodsProps.MarketAddParams): Promise<Responses.MarketAddResponse> {
-        return this.call("market.add", params)
+        return super.call("market.add", params)
     }
-
     /**
      * Edits an item.
      *
@@ -7224,9 +6718,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketEdit(params: MethodsProps.MarketEditParams): Promise<Responses.OkResponse> {
-        return this.call("market.edit", params)
+        return super.call("market.edit", params)
     }
-
     /**
      * Deletes an item.
      *
@@ -7239,9 +6732,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketDelete(params: MethodsProps.MarketDeleteParams): Promise<Responses.OkResponse> {
-        return this.call("market.delete", params)
+        return super.call("market.delete", params)
     }
-
     /**
      * Restores recently deleted item
      *
@@ -7254,9 +6746,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketRestore(params: MethodsProps.MarketRestoreParams): Promise<Responses.OkResponse> {
-        return this.call("market.restore", params)
+        return super.call("market.restore", params)
     }
-
     /**
      * Changes item place in a collection.
      *
@@ -7272,9 +6763,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketReorderItems(params: MethodsProps.MarketReorderItemsParams): Promise<Responses.OkResponse> {
-        return this.call("market.reorderItems", params)
+        return super.call("market.reorderItems", params)
     }
-
     /**
      * Reorders the collections list.
      *
@@ -7289,9 +6779,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketReorderAlbums(params: MethodsProps.MarketReorderAlbumsParams): Promise<Responses.OkResponse> {
-        return this.call("market.reorderAlbums", params)
+        return super.call("market.reorderAlbums", params)
     }
-
     /**
      * Creates new collection of items
      *
@@ -7306,9 +6795,8 @@ export class VKApi {
      * @returns {Promise<Responses.MarketAddAlbumResponse>}
      */
     public async marketAddAlbum(params: MethodsProps.MarketAddAlbumParams): Promise<Responses.MarketAddAlbumResponse> {
-        return this.call("market.addAlbum", params)
+        return super.call("market.addAlbum", params)
     }
-
     /**
      * Edits a collection of items
      *
@@ -7324,9 +6812,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketEditAlbum(params: MethodsProps.MarketEditAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("market.editAlbum", params)
+        return super.call("market.editAlbum", params)
     }
-
     /**
      * Deletes a collection of items.
      *
@@ -7339,9 +6826,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketDeleteAlbum(params: MethodsProps.MarketDeleteAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("market.deleteAlbum", params)
+        return super.call("market.deleteAlbum", params)
     }
-
     /**
      * Removes an item from one or multiple collections.
      *
@@ -7355,9 +6841,8 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketRemoveFromAlbum(params: MethodsProps.MarketRemoveFromAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("market.removeFromAlbum", params)
+        return super.call("market.removeFromAlbum", params)
     }
-
     /**
      * Adds an item to one or multiple collections.
      *
@@ -7371,6 +6856,6 @@ export class VKApi {
      * @returns {Promise<Responses.OkResponse>}
      */
     public async marketAddToAlbum(params: MethodsProps.MarketAddToAlbumParams): Promise<Responses.OkResponse> {
-        return this.call("market.addToAlbum", params)
+        return super.call("market.addToAlbum", params)
     }
 }

@@ -1,7 +1,6 @@
 import ClassScheme from "./schema/ClassScheme";
 import SourceCode from "./SourceCode";
 import ApiMethodScheme from "./schema/ApiMethodScheme";
-import CustomPrimitiveType from "./types/CustomPrimitiveType";
 import CustomPrimitiveScheme from "./schema/CustomPrimitiveScheme";
 
 export interface CodeGenerator {
