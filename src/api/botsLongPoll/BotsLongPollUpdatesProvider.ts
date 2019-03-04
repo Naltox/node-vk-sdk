@@ -39,6 +39,10 @@ export class BotsLongPollUpdatesProvider implements BaseUpdateProvider {
             },
             (body, response, err) => {
                 if (!err && response.statusCode == 200) {
+                    if (body.failed && (body.failed == 2 || body.failed == 3)) {
+                        this.init()
+                        return
+                    }
                     this.ts = body.ts
 
                     if (this.updatesCallback)
