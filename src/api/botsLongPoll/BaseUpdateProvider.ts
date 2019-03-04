@@ -1,3 +1,3 @@
 export interface BaseUpdateProvider {
-    getUpdates(callback: (update: any) => void)
+    getUpdates(callback: (update: any) => void): void
 }

@@ -3,10 +3,10 @@ import {VKApi} from "../../generated/VKApi";
 const req = require('tiny_request')
 
 export class BotsLongPollUpdatesProvider implements BaseUpdateProvider {
-    private server: string
-    private key: string
-    private ts: number
-    private updatesCallback: (update: any) => void
+    private server?: string
+    private key?: string
+    private ts?: number
+    private updatesCallback?: (update: any) => void
 
     constructor(
         private api: VKApi,
@@ -37,7 +37,7 @@ export class BotsLongPollUpdatesProvider implements BaseUpdateProvider {
                 url: `${this.server}?act=a_check&key=${this.key}&ts=${this.ts}&wait=25`,
                 json: true
             },
-            (body, response, err) => {
+            (body: any, response: any, err: any) => {
                 if (!err && response.statusCode == 200) {
                     if (body.failed && (body.failed == 2 || body.failed == 3)) {
                         this.init()
