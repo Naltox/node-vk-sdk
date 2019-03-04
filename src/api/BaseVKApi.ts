@@ -74,9 +74,26 @@ export class BaseVKApi {
      * repeats the call after some timeout
      */
     public async callWithRetry(method: string, params: GenericParams, timeout: number = 300): Promise<any> {
+        return this.doCallWithRetry(method, params, timeout)
+    }
+
+    /**
+     * Stops calls queue if have one
+     */
+    public stopQueue() {
+        if (this.queue)
+            this.queue.stop()
+    }
+
+    private async doCallWithRetry(method: string, params: GenericParams, timeout: number = 300, maxRetryCount: number = 7, retryCounter = 0): Promise<any> {
         try {
             return await this.call(method, params)
         } catch (e) {
+            retryCounter++
+            if (retryCounter === maxRetryCount) {
+                throw e
+            }
+
             if (e instanceof VKApiError) {
                 //
                 // 6 - too many requests per second
@@ -84,7 +101,7 @@ export class BaseVKApi {
                 //
                 if (e.errorCode == 6 || e.errorCode == 10) {
                     await delay(timeout)
-                    return await this.callWithRetry(method, params)
+                    return await this.doCallWithRetry(method, params, timeout, maxRetryCount, retryCounter)
                 }
 
                 throw e
@@ -93,7 +110,7 @@ export class BaseVKApi {
                 //  Network error
                 //
                 await delay(timeout)
-                return await this.callWithRetry(method, params)
+                return await this.doCallWithRetry(method, params, timeout, maxRetryCount, retryCounter)
             }
         }
     }

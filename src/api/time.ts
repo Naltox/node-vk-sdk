@@ -1,9 +1,9 @@
-export type AsyncQueue<T> = { run(handler: () => Promise<T>): Promise<T> }
+export type AsyncQueue<T> = { run(handler: () => Promise<T> ): Promise<T>, stop(): void }
 
 export function createQueue<T>(callsPerSec: number): AsyncQueue<T> {
     let queue: (() => void)[] = []
 
-    setInterval(() => {
+    let interval = setInterval(() => {
         if (queue.length !== 0) {
             const handler = queue.shift()
             if (handler)
@@ -15,6 +15,9 @@ export function createQueue<T>(callsPerSec: number): AsyncQueue<T> {
         run: async function(handler: () => Promise<T>): Promise<T> {
             await new Promise(resolve => queue.push(resolve))
             return handler()
+        },
+        stop: async () => {
+            clearInterval(interval)
         }
     }
 }
