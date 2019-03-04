@@ -11,7 +11,8 @@
     "emitDecoratorMetadata": true,
     "types": ["node"],
     "allowJs": false,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "strict": true
   },
   "exclude": [
     "node_modules",

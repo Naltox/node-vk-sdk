@@ -1,13 +1,13 @@
-export default class VKApiError {
+export default class VKApiError extends Error {
     constructor(
         readonly errorCode: number,
-        readonly errorMsg: number,
+        readonly errorMsg: string,
         readonly requestParams: any
     ) {
-
+        super(errorMsg || errorCode.toString())
     }
 
-    static deserialize(raw: Object): VKApiError {
+    static deserialize(raw: any): VKApiError {
         return new VKApiError(
             raw['error_code'],
             raw['error_msg'],
