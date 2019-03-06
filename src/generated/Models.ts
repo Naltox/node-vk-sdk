@@ -41,17 +41,6 @@ export interface AccountAccountCounters {
     friends_suggestions: number
 }
 
-export interface AccountLookupResult {
-    /**
-     * 
-     */
-    found: AccountUserXtrContact[],
-    /**
-     * 
-     */
-    other: AccountOtherContact[]
-}
-
 export type AccountNameRequestStatus = string
 
 export interface AccountNameRequest {
@@ -113,17 +102,6 @@ export interface AccountOffer {
 }
 
 export type AccountOnoffOptions = string
-
-export interface AccountOtherContact {
-    /**
-     * Contact
-     */
-    contact: string,
-    /**
-     * Mutual friends count
-     */
-    common_count: number
-}
 
 export interface AccountPushConversations {
     /**
@@ -326,357 +304,6 @@ export interface AccountUserSettings {
      * 
      */
     name_request: AccountNameRequest
-}
-
-export interface AccountUserXtrContact {
-    /**
-     * User ID
-     */
-    id: number,
-    /**
-     * User first name
-     */
-    first_name: string,
-    /**
-     * User last name
-     */
-    last_name: string,
-    /**
-     * Returns if a profile is deleted or blocked
-     */
-    deactivated: string,
-    /**
-     * Returns if a profile is hidden.
-     */
-    hidden: number,
-    /**
-     * User sex
-     */
-    sex: BaseSex,
-    /**
-     * Domain name of the user's page
-     */
-    screen_name: string,
-    /**
-     * URL of square photo of the user with 50 pixels in width
-     */
-    photo_50: string,
-    /**
-     * URL of square photo of the user with 100 pixels in width
-     */
-    photo_100: string,
-    /**
-     * Information whether the user is online
-     */
-    online: BaseBoolInt,
-    /**
-     * Information whether the user is online in mobile site or application
-     */
-    online_mobile: BaseBoolInt,
-    /**
-     * Application ID
-     */
-    online_app: number,
-    /**
-     * User nickname
-     */
-    nickname: string,
-    /**
-     * User maiden name
-     */
-    maiden_name: string,
-    /**
-     * Domain name of the user's page
-     */
-    domain: string,
-    /**
-     * User's date of birth
-     */
-    bdate: string,
-    /**
-     * 
-     */
-    city: BaseObject,
-    /**
-     * 
-     */
-    country: BaseCountry,
-    /**
-     * User's timezone
-     */
-    timezone: number,
-    /**
-     * URL of square photo of the user with 200 pixels in width
-     */
-    photo_200: string,
-    /**
-     * URL of square photo of the user with maximum width
-     */
-    photo_max: string,
-    /**
-     * URL of user's photo with 200 pixels in width
-     */
-    photo_200_orig: string,
-    /**
-     * URL of user's photo with 400 pixels in width
-     */
-    photo_400_orig: string,
-    /**
-     * URL of user's photo of maximum size
-     */
-    photo_max_orig: string,
-    /**
-     * ID of the user's main photo
-     */
-    photo_id: string,
-    /**
-     * Information whether the user has main photo
-     */
-    has_photo: BaseBoolInt,
-    /**
-     * Information whether the community has a "fire" pictogram.
-     */
-    trending: BaseBoolInt,
-    /**
-     * Information whether the user specified his phone number
-     */
-    has_mobile: BaseBoolInt,
-    /**
-     * Information whether the user is a friend of current user
-     */
-    is_friend: BaseBoolInt,
-    /**
-     * Friend status for current user
-     */
-    friend_status: number,
-    /**
-     * Information whether current user can comment wall posts
-     */
-    wall_comments: BaseBoolInt,
-    /**
-     * Information whether current user can post on the user's wall
-     */
-    can_post: BaseBoolInt,
-    /**
-     * Information whether current user can see other users' audio on the wall
-     */
-    can_see_all_posts: BaseBoolInt,
-    /**
-     * Information whether current user can see the user's audio
-     */
-    can_see_audio: BaseBoolInt,
-    /**
-     * Information whether current user can write private message
-     */
-    can_write_private_message: BaseBoolInt,
-    /**
-     * Information whether current user can send a friend request
-     */
-    can_send_friend_request: BaseBoolInt,
-    /**
-     * Information whether current user can see
-     */
-    mobile_phone: string,
-    /**
-     * User's mobile phone number
-     */
-    home_phone: string,
-    /**
-     * User's Skype nickname
-     */
-    skype: string,
-    /**
-     * User's Facebook account
-     */
-    facebook: string,
-    /**
-     * User's Facebook name
-     */
-    facebook_name: string,
-    /**
-     * User's Twitter account
-     */
-    twitter: string,
-    /**
-     * User's Livejournal account
-     */
-    livejournal: string,
-    /**
-     * User's Instagram account
-     */
-    instagram: string,
-    /**
-     * User's website
-     */
-    site: string,
-    /**
-     * 
-     */
-    status_audio: AudioAudioFull,
-    /**
-     * User's status
-     */
-    status: string,
-    /**
-     * User's status
-     */
-    activity: string,
-    /**
-     * 
-     */
-    last_seen: UsersLastSeen,
-    /**
-     * 
-     */
-    exports: UsersExports,
-    /**
-     * 
-     */
-    crop_photo: UsersCropPhoto,
-    /**
-     * Information whether the user is verified
-     */
-    verified: BaseBoolInt,
-    /**
-     * Number of user's followers
-     */
-    followers_count: number,
-    /**
-     * Information whether current user is in the requested user's blacklist.
-     */
-    blacklisted: BaseBoolInt,
-    /**
-     * Information whether the requested user is in current user's blacklist
-     */
-    blacklisted_by_me: BaseBoolInt,
-    /**
-     * Information whether the requested user is in faves of current user
-     */
-    is_favorite: BaseBoolInt,
-    /**
-     * Information whether the requested user is hidden from current user's newsfeed
-     */
-    is_hidden_from_feed: BaseBoolInt,
-    /**
-     * Number of common friends with current user
-     */
-    common_count: number,
-    /**
-     * 
-     */
-    occupation: UsersOccupation,
-    /**
-     * 
-     */
-    career: UsersCareer[],
-    /**
-     * 
-     */
-    military: UsersMilitary[],
-    /**
-     * University ID
-     */
-    university: number,
-    /**
-     * University name
-     */
-    university_name: string,
-    /**
-     * Faculty ID
-     */
-    faculty: number,
-    /**
-     * Faculty name
-     */
-    faculty_name: string,
-    /**
-     * Graduation year
-     */
-    graduation: number,
-    /**
-     * Education form
-     */
-    education_form: string,
-    /**
-     * User's education status
-     */
-    education_status: string,
-    /**
-     * User hometown
-     */
-    home_town: string,
-    /**
-     * User relationship status
-     */
-    relation: number,
-    /**
-     * 
-     */
-    relation_partner: UsersUserMin,
-    /**
-     * 
-     */
-    personal: UsersPersonal,
-    /**
-     * User's interests
-     */
-    interests: string,
-    /**
-     * User's favorite music
-     */
-    music: string,
-    /**
-     * User's activities
-     */
-    activities: string,
-    /**
-     * User's favorite movies
-     */
-    movies: string,
-    /**
-     * User's favorite tv shows
-     */
-    tv: string,
-    /**
-     * User's favorite books
-     */
-    books: string,
-    /**
-     * User's favorite games
-     */
-    games: string,
-    /**
-     * 
-     */
-    universities: UsersUniversity[],
-    /**
-     * 
-     */
-    schools: UsersSchool[],
-    /**
-     * About me field
-     */
-    about: string,
-    /**
-     * 
-     */
-    relatives: UsersRelative[],
-    /**
-     * Favorite quotes
-     */
-    quotes: string,
-    /**
-     * 
-     */
-    contact: string,
-    /**
-     * 
-     */
-    request_sent: number,
-    /**
-     * 
-     */
-    sort_num: number
 }
 
 export interface AccountInfo {
@@ -1565,46 +1192,18 @@ export interface AdsUsers {
     accesses: AdsAccesses[]
 }
 
-export interface AdsPostStats {
-    /**
-     * Object ID
-     */
-    ad_id: number,
-    /**
-     * Subscribers reach
-     */
-    reach_subscribers: number,
-    /**
-     * Total reach
-     */
-    reach_total: number,
-    /**
-     * Link clickthrough
-     */
-    links: number,
-    /**
-     * Clickthrough to community
-     */
-    to_group: number,
-    /**
-     * People have joined the group
-     */
-    join_group: number,
-    /**
-     * Reports number
-     */
-    report: number,
-    /**
-     * Hidings number
-     */
-    hide: number,
-    /**
-     * Unsubscribed members
-     */
-    unsubscribe: number
-}
-
 export type AppsAppType = string
+
+export interface AppsScope {
+    /**
+     * Scope name
+     */
+    name: string,
+    /**
+     * Scope title
+     */
+    title: string
+}
 
 export type AppsAppLeaderboardType = number
 
@@ -1812,36 +1411,6 @@ export interface AudioAudioFull {
     is_hq: BaseBoolInt
 }
 
-export interface AudioLyrics {
-    /**
-     * Lyrics ID
-     */
-    lyrics_id: number,
-    /**
-     * Lyrics text
-     */
-    text: string
-}
-
-export interface AudioAudioUploadResponse {
-    /**
-     * Redirect URL
-     */
-    redirect: string,
-    /**
-     * Upload server number
-     */
-    server: number,
-    /**
-     * Uploaded aduio data
-     */
-    audio: string,
-    /**
-     * Uploading hash
-     */
-    hash: string
-}
-
 export type BaseBoolInt = number
 
 export interface BaseUploadServer {
@@ -1875,43 +1444,6 @@ export interface BaseCountry {
      * Country title
      */
     title: string
-}
-
-export interface BaseCity {
-    /**
-     * City ID
-     */
-    id: number,
-    /**
-     * City title
-     */
-    title: string
-}
-
-export interface BaseError {
-    /**
-     * Error code
-     */
-    error_code: number,
-    /**
-     * Error message
-     */
-    error_msg: string,
-    /**
-     * 
-     */
-    request_params: BaseRequestParam[]
-}
-
-export interface BaseRequestParam {
-    /**
-     * Parameter name
-     */
-    key: string,
-    /**
-     * Parameter value
-     */
-    value: string
 }
 
 export interface BaseGeo {
@@ -2447,13 +1979,6 @@ export interface DocsDocTypes {
     count: number
 }
 
-export interface DocsDocUploadResponse {
-    /**
-     * Uploaded file data
-     */
-    file: string
-}
-
 export interface DocsDocPreview {
     /**
      * 
@@ -2956,6 +2481,18 @@ export interface FriendsUserXtrLists {
      */
     quotes: string,
     /**
+     * Information whether current user is subscribed to podcasts
+     */
+    is_subscribed_podcasts: boolean,
+    /**
+     * Owner in whitelist or not
+     */
+    can_subscribe_podcasts: boolean,
+    /**
+     * Can subscribe to wall
+     */
+    can_subscribe_posts: boolean,
+    /**
      * 
      */
     lists: number[]
@@ -3299,6 +2836,18 @@ export interface FriendsUserXtrPhone {
      */
     quotes: string,
     /**
+     * Information whether current user is subscribed to podcasts
+     */
+    is_subscribed_podcasts: boolean,
+    /**
+     * Owner in whitelist or not
+     */
+    can_subscribe_podcasts: boolean,
+    /**
+     * Can subscribe to wall
+     */
+    can_subscribe_posts: boolean,
+    /**
      * User phone
      */
     phone: string
@@ -3477,7 +3026,11 @@ export interface GroupsCountersGroup {
     /**
      * Market items number
      */
-    market: number
+    market: number,
+    /**
+     * Addresses number
+     */
+    addresses: number
 }
 
 export interface GroupsCover {
@@ -3490,6 +3043,8 @@ export interface GroupsCover {
      */
     images: BaseImage[]
 }
+
+export type GroupsFilter = string
 
 export interface GroupsGroupBanInfo {
     /**
@@ -3546,6 +3101,10 @@ export interface GroupsGroup {
      */
     is_member: BaseBoolInt,
     /**
+     * Information whether current user is advertiser
+     */
+    is_advertiser: BaseBoolInt,
+    /**
      * URL of square photo of the community with 50 pixels in width
      */
     photo_50: string,
@@ -3556,7 +3115,15 @@ export interface GroupsGroup {
     /**
      * URL of square photo of the community with 200 pixels in width
      */
-    photo_200: string
+    photo_200: string,
+    /**
+     * Start date in Unixtime format
+     */
+    start_date: number,
+    /**
+     * Finish date in Unixtime format
+     */
+    finish_date: number
 }
 
 export type GroupsGroupFullMemberStatus = number
@@ -3603,6 +3170,10 @@ export interface GroupsGroupFull {
      */
     is_member: BaseBoolInt,
     /**
+     * Information whether current user is advertiser
+     */
+    is_advertiser: BaseBoolInt,
+    /**
      * URL of square photo of the community with 50 pixels in width
      */
     photo_50: string,
@@ -3614,6 +3185,14 @@ export interface GroupsGroupFull {
      * URL of square photo of the community with 200 pixels in width
      */
     photo_200: string,
+    /**
+     * Start date in Unixtime format
+     */
+    start_date: number,
+    /**
+     * Finish date in Unixtime format
+     */
+    finish_date: number,
     /**
      * 
      */
@@ -3731,21 +3310,29 @@ export interface GroupsGroupFull {
      */
     online_status: GroupsOnlineStatus,
     /**
-     * Start date of event in Unixtime
-     */
-    start_date: number,
-    /**
-     * Finish date of event in Unixtime
-     */
-    finish_date: number,
-    /**
      * Information whether age limit
      */
     age_limits: GroupsGroupFullAgeLimits,
     /**
      * User ban info
      */
-    ban_info: GroupsGroupBanInfo
+    ban_info: GroupsGroupBanInfo,
+    /**
+     * Info about addresses in groups
+     */
+    addresses: GroupsAddressesInfo,
+    /**
+     * Information whether current user is subscribed to podcasts
+     */
+    is_subscribed_podcasts: boolean,
+    /**
+     * Owner in whitelist or not
+     */
+    can_subscribe_podcasts: boolean,
+    /**
+     * Can subscribe to wall
+     */
+    can_subscribe_posts: boolean
 }
 
 export type GroupsGroupXtrInvitedByType = string
@@ -3970,10 +3557,6 @@ export interface GroupsGroupSettings {
      * Community's page domain
      */
     address: string,
-    /**
-     * 
-     */
-    place: PlacesPlaceMin,
     /**
      * Wall settings
      */
@@ -4420,31 +4003,21 @@ export interface GroupsUserXtrRole {
      */
     quotes: string,
     /**
+     * Information whether current user is subscribed to podcasts
+     */
+    is_subscribed_podcasts: boolean,
+    /**
+     * Owner in whitelist or not
+     */
+    can_subscribe_podcasts: boolean,
+    /**
+     * Can subscribe to wall
+     */
+    can_subscribe_posts: boolean,
+    /**
      * 
      */
     role: GroupsRoleOptions
-}
-
-export interface GroupsTokenPermissionSetting {
-    /**
-     * 
-     */
-    setting: number,
-    /**
-     * 
-     */
-    name: string
-}
-
-export interface GroupsTokenPermissions {
-    /**
-     * 
-     */
-    mask: number,
-    /**
-     * 
-     */
-    permissions: GroupsTokenPermissionSetting[]
 }
 
 export interface GroupsLongPollServer {
@@ -4662,6 +4235,107 @@ export interface GroupsOnlineStatus {
      * Estimated time of answer (for status = answer_mark)
      */
     minutes: number
+}
+
+export interface GroupsAddressesInfo {
+    /**
+     * Information whether addresses is enabled
+     */
+    is_enabled: boolean,
+    /**
+     * Main address id for group
+     */
+    main_address_id: number
+}
+
+export interface GroupsAddress {
+    /**
+     * Address id
+     */
+    id: number,
+    /**
+     * Title of the place (Zinger, etc)
+     */
+    title: string,
+    /**
+     * String address to the place (Nevsky, 28)
+     */
+    address: string,
+    /**
+     * Additional address to the place (6 floor, left door)
+     */
+    additional_address: string,
+    /**
+     * Country id of address
+     */
+    country_id: number,
+    /**
+     * City id of address
+     */
+    city_id: number,
+    /**
+     * Metro id of address
+     */
+    metro_station_id: number,
+    /**
+     * Address latitude
+     */
+    latitude: number,
+    /**
+     * Address longitude
+     */
+    longitude: number,
+    /**
+     * Distance from the point
+     */
+    distance: number,
+    /**
+     * Status of information about timetable
+     */
+    work_info_status: GroupsAddressWorkInfoStatus,
+    /**
+     * Week timetable for the address
+     */
+    timetable: GroupsAddressTimetable,
+    /**
+     * Address phone
+     */
+    phone: string,
+    /**
+     * Time offset int minutes from utc time
+     */
+    time_offset: number
+}
+
+export interface GroupsAddressTimetable {
+    /**
+     * Timetable for monday
+     */
+    mon: GroupsAddressTimetableDay,
+    /**
+     * Timetable for tuesday
+     */
+    tue: GroupsAddressTimetableDay,
+    /**
+     * Timetable for wednesday
+     */
+    wed: GroupsAddressTimetableDay,
+    /**
+     * Timetable for thursday
+     */
+    thu: GroupsAddressTimetableDay,
+    /**
+     * Timetable for friday
+     */
+    fri: GroupsAddressTimetableDay,
+    /**
+     * Timetable for saturday
+     */
+    sat: GroupsAddressTimetableDay,
+    /**
+     * Timetable for sunday
+     */
+    sun: GroupsAddressTimetableDay
 }
 
 export interface LeadsLead {
@@ -5032,7 +4706,15 @@ export interface MessagesHistoryMessageAttachment {
     /**
      * 
      */
-    share: BaseLink
+    share: BaseLink,
+    /**
+     * 
+     */
+    graffiti: MessagesGraffiti,
+    /**
+     * 
+     */
+    audio_message: MessagesAudioMessage
 }
 
 export type MessagesMessageAttachmentType = string
@@ -5085,7 +4767,15 @@ export interface MessagesMessageAttachment {
     /**
      * 
      */
-    type: MessagesMessageAttachmentType
+    type: MessagesMessageAttachmentType,
+    /**
+     * 
+     */
+    graffiti: MessagesGraffiti,
+    /**
+     * 
+     */
+    audio_message: MessagesAudioMessage
 }
 
 export interface MessagesChat {
@@ -5193,33 +4883,6 @@ export interface MessagesChatPushSettings {
     disabled_until: number
 }
 
-export interface MessagesDialog {
-    /**
-     * Information whether unread messages are in the dialog
-     */
-    unread: number,
-    /**
-     * 
-     */
-    message: MessagesMessage,
-    /**
-     * ID of the last message read by current user
-     */
-    in_read: number,
-    /**
-     * ID of the last message read by the others
-     */
-    out_read: number,
-    /**
-     * Is it an important dialog
-     */
-    important: BaseBoolInt,
-    /**
-     * Is it an unanswered dialog
-     */
-    unanswered: BaseBoolInt
-}
-
 export interface MessagesLastActivity {
     /**
      * Information whether user is online
@@ -5259,6 +4922,149 @@ export interface MessagesLongpollMessages {
      * 
      */
     items: MessagesMessage[]
+}
+
+export interface MessagesConversationMember {
+    /**
+     * 
+     */
+    member_id: number,
+    /**
+     * 
+     */
+    join_date: number,
+    /**
+     * 
+     */
+    invited_by: number,
+    /**
+     * 
+     */
+    is_owner: boolean,
+    /**
+     * 
+     */
+    is_admin: boolean,
+    /**
+     * Is it possible for user to kick this member
+     */
+    can_kick: boolean
+}
+
+export interface MessagesConversationPeer {
+    /**
+     * 
+     */
+    id: number,
+    /**
+     * 
+     */
+    type: MessagesConversationPeerType,
+    /**
+     * 
+     */
+    local_id: number
+}
+
+export interface MessagesConversation {
+    /**
+     * 
+     */
+    peer: MessagesConversationPeer,
+    /**
+     * Last message user have read
+     */
+    in_read: number,
+    /**
+     * Last outcoming message have been read by the opponent
+     */
+    out_read: number,
+    /**
+     * Unread messages number
+     */
+    unread_count: number,
+    /**
+     * ID of the last message in conversation
+     */
+    last_message_id: number,
+    /**
+     * 
+     */
+    important: boolean,
+    /**
+     * 
+     */
+    unanswered: boolean,
+    /**
+     * 
+     */
+    current_keyboard: MessagesKeyboard,
+    /**
+     * Ids of messages with mentions
+     */
+    mentions: number[],
+    /**
+     * 
+     */
+    message_request: string
+}
+
+export interface MessagesGraffiti {
+    /**
+     * Graffiti ID
+     */
+    id: number,
+    /**
+     * Graffiti owner ID
+     */
+    owner_id: number,
+    /**
+     * Graffiti URL
+     */
+    url: string,
+    /**
+     * Graffiti width
+     */
+    width: number,
+    /**
+     * Graffiti height
+     */
+    height: number,
+    /**
+     * Access key for graffiti
+     */
+    access_key: string
+}
+
+export interface MessagesAudioMessage {
+    /**
+     * Audio message ID
+     */
+    id: number,
+    /**
+     * Audio message owner ID
+     */
+    owner_id: number,
+    /**
+     * Audio message duration in seconds
+     */
+    duration: number,
+    /**
+     * 
+     */
+    waveform: number[],
+    /**
+     * OGG file URL
+     */
+    link_ogg: string,
+    /**
+     * MP3 file URL
+     */
+    link_mp3: string,
+    /**
+     * Access key for audio message
+     */
+    access_key: string
 }
 
 export interface MessagesKeyboardButtonAction {
@@ -5302,6 +5108,53 @@ export interface MessagesKeyboard {
     buttons: MessagesKeyboardButton[][]
 }
 
+export interface MessagesForeignMessage {
+    /**
+     * Message ID
+     */
+    id: number,
+    /**
+     * Conversation message ID
+     */
+    conversation_message_id: number,
+    /**
+     * Peer ID
+     */
+    peer_id: number,
+    /**
+     * Message author's ID
+     */
+    from_id: number,
+    /**
+     * Date when the message was created
+     */
+    date: number,
+    /**
+     * Message text
+     */
+    text: string,
+    /**
+     * 
+     */
+    attachments: MessagesMessageAttachment[],
+    /**
+     * 
+     */
+    fwd_messages: MessagesForeignMessage[],
+    /**
+     * 
+     */
+    reply_message: MessagesForeignMessage,
+    /**
+     * 
+     */
+    geo: BaseGeo,
+    /**
+     * Date when the message has been updated in Unixtime
+     */
+    update_time: number
+}
+
 export type MessagesMessageActionStatus = string
 
 export interface MessagesMessage {
@@ -5338,13 +5191,25 @@ export interface MessagesMessage {
      */
     important: boolean,
     /**
+     * Is it an deleted message
+     */
+    deleted: BaseBoolInt,
+    /**
+     * 
+     */
+    is_hidden: boolean,
+    /**
      * 
      */
     payload: string,
     /**
      * Forwarded messages
      */
-    fwd_messages: MessagesFwdMessage[],
+    fwd_messages: MessagesForeignMessage[],
+    /**
+     * 
+     */
+    reply_message: MessagesForeignMessage,
     /**
      * Message text
      */
@@ -5361,6 +5226,14 @@ export interface MessagesMessage {
      * 
      */
     action: MessagesMessageAction,
+    /**
+     * Members number
+     */
+    members_count: number,
+    /**
+     * Only for messages from community. Contains user ID of community admin, who sent this message.
+     */
+    admin_author_id: number,
     /**
      * 
      */
@@ -5391,7 +5264,11 @@ export interface MessagesPinnedMessage {
     /**
      * Forwarded messages
      */
-    fwd_messages: MessagesFwdMessage[],
+    fwd_messages: MessagesForeignMessage[],
+    /**
+     * 
+     */
+    reply_message: MessagesForeignMessage,
     /**
      * Message text
      */
@@ -5437,18 +5314,7 @@ export interface MessagesMessageAction {
     photo: MessagesMessageActionPhoto
 }
 
-export interface MessagesConversationWithMessage {
-    /**
-     * 
-     */
-    conversation: MessagesConversation,
-    /**
-     * 
-     */
-    last_message: MessagesMessage
-}
-
-export interface MessagesChatSettingsPhoto {
+export interface MessagesMessageActionPhoto {
     /**
      * URL of the preview image with 50px in width
      */
@@ -5463,7 +5329,39 @@ export interface MessagesChatSettingsPhoto {
     photo_200: string
 }
 
-export type MessagesChatSettingsState = string
+export interface MessagesConversationWithMessage {
+    /**
+     * 
+     */
+    conversation: MessagesConversation,
+    /**
+     * 
+     */
+    last_message: MessagesMessage
+}
+
+export interface MessagesChatRestrictions {
+    /**
+     * Only admins can invite users to this chat
+     */
+    only_admins_invite: boolean,
+    /**
+     * Only admins can kick users from this chat
+     */
+    only_admins_kick: boolean,
+    /**
+     * Only admins can change chat info
+     */
+    only_admins_edit_info: boolean,
+    /**
+     * Only admins can edit pinned message
+     */
+    only_admins_edit_pin: boolean,
+    /**
+     * Only admins can promote users to admins
+     */
+    admins_promote_users: boolean
+}
 
 export interface MessagesUserXtrInvitedBy {
     /**
@@ -5523,6 +5421,10 @@ export interface MessagesUserXtrInvitedBy {
      */
     invited_by: number
 }
+
+export type NewsfeedFilters = string
+
+export type NewsfeedCommentsFilters = string
 
 export type NewsfeedNewsfeedItemType = string
 
@@ -5661,6 +5563,8 @@ export interface NewsfeedItemTopic {
      */
     likes: BaseLikesInfo
 }
+
+export type LikesType = string
 
 export interface NewsfeedItemVideo {
     /**
@@ -6116,6 +6020,18 @@ export interface NotificationsNotificationParent {
      */
     can_edit: BaseBoolInt,
     /**
+     * Information whether current user can like the video
+     */
+    can_like: BaseBoolInt,
+    /**
+     * Information whether current user can comment the video
+     */
+    can_comment: BaseBoolInt,
+    /**
+     * Information whether current user can repost this video
+     */
+    can_repost: BaseBoolInt,
+    /**
      * Information whether current user can add the video
      */
     can_add: BaseBoolInt,
@@ -6124,13 +6040,17 @@ export interface NotificationsNotificationParent {
      */
     processing: BasePropertyExists,
     /**
-     * Returns if the video is live translation
+     * Returns if the video is a live stream
      */
     live: BasePropertyExists,
     /**
      * 
      */
     files: VideoVideoFiles,
+    /**
+     * 
+     */
+    is_favorite: boolean,
     /**
      * 
      */
@@ -6216,21 +6136,6 @@ export interface NotificationsReply {
      * Reply text
      */
     text: number
-}
-
-export interface OauthError {
-    /**
-     * Error type
-     */
-    error: string,
-    /**
-     * Error description
-     */
-    error_description: string,
-    /**
-     * URI for validation
-     */
-    redirect_uri: string
 }
 
 export interface OrdersOrder {
@@ -6572,82 +6477,6 @@ export interface PhotosCommentXtrPid {
      * Photo ID
      */
     pid: number
-}
-
-export interface PhotosMarketAlbumUploadResponse {
-    /**
-     * Community ID
-     */
-    gid: number,
-    /**
-     * Upload server number
-     */
-    server: number,
-    /**
-     * Uploaded photo data
-     */
-    photo: string,
-    /**
-     * Uploading hash
-     */
-    hash: string
-}
-
-export interface PhotosMarketUploadResponse {
-    /**
-     * Community ID
-     */
-    group_id: number,
-    /**
-     * Upload server number
-     */
-    server: number,
-    /**
-     * Uploaded photo data
-     */
-    photo: string,
-    /**
-     * Uploading hash
-     */
-    hash: string,
-    /**
-     * Crop data
-     */
-    crop_data: string,
-    /**
-     * Crop hash
-     */
-    crop_hash: string
-}
-
-export interface PhotosMessageUploadResponse {
-    /**
-     * Upload server number
-     */
-    server: number,
-    /**
-     * Uploaded photo data
-     */
-    photo: string,
-    /**
-     * Uploading hash
-     */
-    hash: string
-}
-
-export interface PhotosOwnerUploadResponse {
-    /**
-     * Upload server number
-     */
-    server: number,
-    /**
-     * Uploaded photo data
-     */
-    photo: string,
-    /**
-     * Uploading hash
-     */
-    hash: string
 }
 
 export type PhotosImageType = string
@@ -7165,216 +6994,6 @@ export interface PhotosPhotoUpload {
     user_id: number
 }
 
-export interface PhotosPhotoUploadResponse {
-    /**
-     * Upload server number
-     */
-    server: number,
-    /**
-     * Uploaded photos data
-     */
-    photos_list: string,
-    /**
-     * Album ID
-     */
-    aid: number,
-    /**
-     * Uploading hash
-     */
-    hash: string
-}
-
-export interface PhotosWallUploadResponse {
-    /**
-     * Upload server number
-     */
-    server: number,
-    /**
-     * Uploaded photo data
-     */
-    photo: string,
-    /**
-     * Uploading hash
-     */
-    hash: string
-}
-
-export interface PlacesCheckin {
-    /**
-     * Checkin ID
-     */
-    id: number,
-    /**
-     * User ID
-     */
-    user_id: number,
-    /**
-     * Date when the checkin has been added in Unixtime
-     */
-    date: number,
-    /**
-     * Place latitude
-     */
-    latitude: number,
-    /**
-     * Place longitude
-     */
-    longitude: number,
-    /**
-     * Place ID
-     */
-    place_id: number,
-    /**
-     * Comment text
-     */
-    text: string,
-    /**
-     * Distance to the place
-     */
-    distance: number,
-    /**
-     * Place title
-     */
-    place_title: string,
-    /**
-     * Country ID
-     */
-    place_country: number,
-    /**
-     * City ID
-     */
-    place_city: number,
-    /**
-     * Place type
-     */
-    place_type: string,
-    /**
-     * URL of the place's icon
-     */
-    place_icon: string
-}
-
-export interface PlacesPlaceMin {
-    /**
-     * Place ID
-     */
-    id: number,
-    /**
-     * Place title
-     */
-    title: string,
-    /**
-     * Place latitude
-     */
-    latitude: number,
-    /**
-     * Place longitude
-     */
-    longitude: number,
-    /**
-     * Date of the place creation in Unixtime
-     */
-    created: number,
-    /**
-     * URL of the place's icon
-     */
-    icon: string,
-    /**
-     * Checkins number
-     */
-    checkins: number,
-    /**
-     * Place type
-     */
-    type: string,
-    /**
-     * Country ID
-     */
-    country: number,
-    /**
-     * City ID
-     */
-    city: number,
-    /**
-     * Place address
-     */
-    address: string
-}
-
-export interface PlacesPlaceFull {
-    /**
-     * Place ID
-     */
-    id: number,
-    /**
-     * Place title
-     */
-    title: string,
-    /**
-     * Place latitude
-     */
-    latitude: number,
-    /**
-     * Place longitude
-     */
-    longitude: number,
-    /**
-     * Date of the place creation in Unixtime
-     */
-    created: number,
-    /**
-     * URL of the place's icon
-     */
-    icon: string,
-    /**
-     * Checkins number
-     */
-    checkins: number,
-    /**
-     * Place type
-     */
-    type: string,
-    /**
-     * Country ID
-     */
-    country: number,
-    /**
-     * City ID
-     */
-    city: number,
-    /**
-     * Place address
-     */
-    address: string,
-    /**
-     * Distance to the place
-     */
-    distance: number,
-    /**
-     * Community ID
-     */
-    group_id: number,
-    /**
-     * URL of the community's photo
-     */
-    group_photo: string
-}
-
-export interface PlacesTypes {
-    /**
-     * Place type ID
-     */
-    id: number,
-    /**
-     * Place type title
-     */
-    title: string,
-    /**
-     * URL of the place's icon
-     */
-    icon: string
-}
-
 export interface PollsAnswer {
     /**
      * Answer ID
@@ -7560,13 +7179,13 @@ export interface SecureTransaction {
 
 export interface StatsPeriod {
     /**
-     * Day (YYYY-MM-DD)
+     * Unix timestamp
      */
-    period_from: string,
+    period_from: number,
     /**
-     * Day (YYYY-MM-DD)
+     * Unix timestamp
      */
-    period_to: string,
+    period_to: number,
     /**
      * 
      */
@@ -7758,6 +7377,33 @@ export interface StatsWallpostStat {
     unsubscribe: number
 }
 
+export interface MessageChatPreview {
+    /**
+     * 
+     */
+    admin_id: number,
+    /**
+     * 
+     */
+    members_count: number,
+    /**
+     * 
+     */
+    members: number[],
+    /**
+     * 
+     */
+    title: string,
+    /**
+     * 
+     */
+    local_id: number,
+    /**
+     * 
+     */
+    joined: boolean
+}
+
 export interface StatusStatus {
     /**
      * Status text
@@ -7875,6 +7521,18 @@ export interface StoriesStoryVideo {
      */
     can_edit: BaseBoolInt,
     /**
+     * Information whether current user can like the video
+     */
+    can_like: BaseBoolInt,
+    /**
+     * Information whether current user can comment the video
+     */
+    can_comment: BaseBoolInt,
+    /**
+     * Information whether current user can repost this video
+     */
+    can_repost: BaseBoolInt,
+    /**
      * Information whether current user can add the video
      */
     can_add: BaseBoolInt,
@@ -7883,13 +7541,17 @@ export interface StoriesStoryVideo {
      */
     processing: BasePropertyExists,
     /**
-     * Returns if the video is live translation
+     * Returns if the video is a live stream
      */
     live: BasePropertyExists,
     /**
      * 
      */
     files: VideoVideoFiles,
+    /**
+     * 
+     */
+    is_favorite: boolean,
     /**
      * URL of the first frame for the corresponding width.
      */
@@ -8311,349 +7973,6 @@ export interface UsersUser {
 
 export type UsersUserType = string
 
-export interface UsersUserFullXtrType {
-    /**
-     * User ID
-     */
-    id: number,
-    /**
-     * User first name
-     */
-    first_name: string,
-    /**
-     * User last name
-     */
-    last_name: string,
-    /**
-     * Returns if a profile is deleted or blocked
-     */
-    deactivated: string,
-    /**
-     * Returns if a profile is hidden.
-     */
-    hidden: number,
-    /**
-     * User sex
-     */
-    sex: BaseSex,
-    /**
-     * Domain name of the user's page
-     */
-    screen_name: string,
-    /**
-     * URL of square photo of the user with 50 pixels in width
-     */
-    photo_50: string,
-    /**
-     * URL of square photo of the user with 100 pixels in width
-     */
-    photo_100: string,
-    /**
-     * Information whether the user is online
-     */
-    online: BaseBoolInt,
-    /**
-     * Information whether the user is online in mobile site or application
-     */
-    online_mobile: BaseBoolInt,
-    /**
-     * Application ID
-     */
-    online_app: number,
-    /**
-     * User nickname
-     */
-    nickname: string,
-    /**
-     * User maiden name
-     */
-    maiden_name: string,
-    /**
-     * Domain name of the user's page
-     */
-    domain: string,
-    /**
-     * User's date of birth
-     */
-    bdate: string,
-    /**
-     * 
-     */
-    city: BaseObject,
-    /**
-     * 
-     */
-    country: BaseCountry,
-    /**
-     * User's timezone
-     */
-    timezone: number,
-    /**
-     * URL of square photo of the user with 200 pixels in width
-     */
-    photo_200: string,
-    /**
-     * URL of square photo of the user with maximum width
-     */
-    photo_max: string,
-    /**
-     * URL of user's photo with 200 pixels in width
-     */
-    photo_200_orig: string,
-    /**
-     * URL of user's photo with 400 pixels in width
-     */
-    photo_400_orig: string,
-    /**
-     * URL of user's photo of maximum size
-     */
-    photo_max_orig: string,
-    /**
-     * ID of the user's main photo
-     */
-    photo_id: string,
-    /**
-     * Information whether the user has main photo
-     */
-    has_photo: BaseBoolInt,
-    /**
-     * Information whether the community has a "fire" pictogram.
-     */
-    trending: BaseBoolInt,
-    /**
-     * Information whether the user specified his phone number
-     */
-    has_mobile: BaseBoolInt,
-    /**
-     * Information whether the user is a friend of current user
-     */
-    is_friend: BaseBoolInt,
-    /**
-     * Friend status for current user
-     */
-    friend_status: number,
-    /**
-     * Information whether current user can comment wall posts
-     */
-    wall_comments: BaseBoolInt,
-    /**
-     * Information whether current user can post on the user's wall
-     */
-    can_post: BaseBoolInt,
-    /**
-     * Information whether current user can see other users' audio on the wall
-     */
-    can_see_all_posts: BaseBoolInt,
-    /**
-     * Information whether current user can see the user's audio
-     */
-    can_see_audio: BaseBoolInt,
-    /**
-     * Information whether current user can write private message
-     */
-    can_write_private_message: BaseBoolInt,
-    /**
-     * Information whether current user can send a friend request
-     */
-    can_send_friend_request: BaseBoolInt,
-    /**
-     * Information whether current user can see
-     */
-    mobile_phone: string,
-    /**
-     * User's mobile phone number
-     */
-    home_phone: string,
-    /**
-     * User's Skype nickname
-     */
-    skype: string,
-    /**
-     * User's Facebook account
-     */
-    facebook: string,
-    /**
-     * User's Facebook name
-     */
-    facebook_name: string,
-    /**
-     * User's Twitter account
-     */
-    twitter: string,
-    /**
-     * User's Livejournal account
-     */
-    livejournal: string,
-    /**
-     * User's Instagram account
-     */
-    instagram: string,
-    /**
-     * User's website
-     */
-    site: string,
-    /**
-     * 
-     */
-    status_audio: AudioAudioFull,
-    /**
-     * User's status
-     */
-    status: string,
-    /**
-     * User's status
-     */
-    activity: string,
-    /**
-     * 
-     */
-    last_seen: UsersLastSeen,
-    /**
-     * 
-     */
-    exports: UsersExports,
-    /**
-     * 
-     */
-    crop_photo: UsersCropPhoto,
-    /**
-     * Information whether the user is verified
-     */
-    verified: BaseBoolInt,
-    /**
-     * Number of user's followers
-     */
-    followers_count: number,
-    /**
-     * Information whether current user is in the requested user's blacklist.
-     */
-    blacklisted: BaseBoolInt,
-    /**
-     * Information whether the requested user is in current user's blacklist
-     */
-    blacklisted_by_me: BaseBoolInt,
-    /**
-     * Information whether the requested user is in faves of current user
-     */
-    is_favorite: BaseBoolInt,
-    /**
-     * Information whether the requested user is hidden from current user's newsfeed
-     */
-    is_hidden_from_feed: BaseBoolInt,
-    /**
-     * Number of common friends with current user
-     */
-    common_count: number,
-    /**
-     * 
-     */
-    occupation: UsersOccupation,
-    /**
-     * 
-     */
-    career: UsersCareer[],
-    /**
-     * 
-     */
-    military: UsersMilitary[],
-    /**
-     * University ID
-     */
-    university: number,
-    /**
-     * University name
-     */
-    university_name: string,
-    /**
-     * Faculty ID
-     */
-    faculty: number,
-    /**
-     * Faculty name
-     */
-    faculty_name: string,
-    /**
-     * Graduation year
-     */
-    graduation: number,
-    /**
-     * Education form
-     */
-    education_form: string,
-    /**
-     * User's education status
-     */
-    education_status: string,
-    /**
-     * User hometown
-     */
-    home_town: string,
-    /**
-     * User relationship status
-     */
-    relation: number,
-    /**
-     * 
-     */
-    relation_partner: UsersUserMin,
-    /**
-     * 
-     */
-    personal: UsersPersonal,
-    /**
-     * User's interests
-     */
-    interests: string,
-    /**
-     * User's favorite music
-     */
-    music: string,
-    /**
-     * User's activities
-     */
-    activities: string,
-    /**
-     * User's favorite movies
-     */
-    movies: string,
-    /**
-     * User's favorite tv shows
-     */
-    tv: string,
-    /**
-     * User's favorite books
-     */
-    books: string,
-    /**
-     * User's favorite games
-     */
-    games: string,
-    /**
-     * 
-     */
-    universities: UsersUniversity[],
-    /**
-     * 
-     */
-    schools: UsersSchool[],
-    /**
-     * About me field
-     */
-    about: string,
-    /**
-     * 
-     */
-    relatives: UsersRelative[],
-    /**
-     * Favorite quotes
-     */
-    quotes: string,
-    /**
-     * 
-     */
-    type: UsersUserType
-}
-
 export interface UsersUserXtrType {
     /**
      * User ID
@@ -8730,33 +8049,6 @@ export interface UsersUserMin {
      * Returns if a profile is hidden.
      */
     hidden: number
-}
-
-export interface UsersUserBroadcast {
-    /**
-     * User ID
-     */
-    id: number,
-    /**
-     * User first name
-     */
-    first_name: string,
-    /**
-     * User last name
-     */
-    last_name: string,
-    /**
-     * Returns if a profile is deleted or blocked
-     */
-    deactivated: string,
-    /**
-     * Returns if a profile is hidden.
-     */
-    hidden: number,
-    /**
-     * 
-     */
-    status_audio: AudioAudioFull
 }
 
 export interface UsersUserFull {
@@ -9095,10 +8387,26 @@ export interface UsersUserFull {
     /**
      * Favorite quotes
      */
-    quotes: string
+    quotes: string,
+    /**
+     * Information whether current user is subscribed to podcasts
+     */
+    is_subscribed_podcasts: boolean,
+    /**
+     * Owner in whitelist or not
+     */
+    can_subscribe_podcasts: boolean,
+    /**
+     * Can subscribe to wall
+     */
+    can_subscribe_posts: boolean
 }
 
 export interface UsersCareer {
+    /**
+     * Career ID
+     */
+    id: number,
     /**
      * Community ID
      */
@@ -9146,6 +8454,10 @@ export interface UsersExports {
 
 export interface UsersMilitary {
     /**
+     * Military ID
+     */
+    id: number,
+    /**
      * Unit name
      */
     unit: string,
@@ -9173,28 +8485,17 @@ export interface UsersRelative {
      */
     id: number,
     /**
-     * Relative type
+     * Date of child birthday (format dd.mm.yyyy)
      */
-    type: string
-}
-
-export interface UsersUserLim {
+    birth_date: string,
     /**
-     * User ID
-     */
-    id: number,
-    /**
-     * URL of square photo of the user with 50 pixels in width
-     */
-    photo: string,
-    /**
-     * User name and last name
+     * Name of relative
      */
     name: string,
     /**
-     * User name in genitive declension
+     * Relative type
      */
-    name_gen: string
+    type: string
 }
 
 export interface UsersLastSeen {
@@ -9739,24 +9040,21 @@ export interface UsersUserXtrCounters {
      */
     quotes: string,
     /**
+     * Information whether current user is subscribed to podcasts
+     */
+    is_subscribed_podcasts: boolean,
+    /**
+     * Owner in whitelist or not
+     */
+    can_subscribe_podcasts: boolean,
+    /**
+     * Can subscribe to wall
+     */
+    can_subscribe_posts: boolean,
+    /**
      * 
      */
     counters: UsersUserCounters
-}
-
-export interface VideoVideoAlbum {
-    /**
-     * Album ID
-     */
-    id: number,
-    /**
-     * Album owner's ID
-     */
-    owner_id: number,
-    /**
-     * Album title
-     */
-    title: string
 }
 
 export interface VideoVideoAlbumFull {
@@ -9791,121 +9089,11 @@ export interface VideoVideoAlbumFull {
     /**
      * Information whether album is system
      */
-    is_system: number
-}
-
-export type VideoCatBlockView = string
-
-export interface VideoCatBlock {
+    is_system: number,
     /**
      * 
      */
-    items: VideoCatElement[],
-    /**
-     * New value for _from_ parameter
-     */
-    next: string,
-    /**
-     * Block name
-     */
-    name: string,
-    /**
-     * Block ID
-     */
-    id: number,
-    /**
-     * 
-     */
-    view: VideoCatBlockView,
-    /**
-     * Information whether the block can be hidden
-     */
-    can_hide: BaseBoolInt,
-    /**
-     * 
-     */
-    type: VideoCatBlockView
-}
-
-export type VideoCatElementType = string
-
-export interface VideoCatElement {
-    /**
-     * Element ID
-     */
-    id: number,
-    /**
-     * Element owner's ID
-     */
-    owner_id: number,
-    /**
-     * Element title
-     */
-    title: string,
-    /**
-     * 
-     */
-    type: VideoCatElementType,
-    /**
-     * Element description
-     */
-    description: string,
-    /**
-     * Duration in seconds
-     */
-    duration: number,
-    /**
-     * URL of the preview image with 130 px in width
-     */
-    photo_130: string,
-    /**
-     * URL of the preview image with 160 px in width
-     */
-    photo_160: string,
-    /**
-     * URL of the preview image with 320 px in width
-     */
-    photo_320: string,
-    /**
-     * URL of the preview image with 640 px in width
-     */
-    photo_640: string,
-    /**
-     * URL of the preview image with 800 px in width
-     */
-    photo_800: string,
-    /**
-     * Date when the element has been created
-     */
-    date: number,
-    /**
-     * Views number
-     */
-    views: number,
-    /**
-     * Comments number
-     */
-    comments: number,
-    /**
-     * Information whether current user can add the video
-     */
-    can_add: BaseBoolInt,
-    /**
-     * Information whether current user can edit the video
-     */
-    can_edit: BaseBoolInt,
-    /**
-     * Information whether the video is private
-     */
-    is_private: BaseBoolInt,
-    /**
-     * Videos number (for album)
-     */
-    count: number,
-    /**
-     * Date of last update (for album) in Unixtime
-     */
-    updated_time: number
+    privacy: any
 }
 
 export interface VideoSaveResult {
@@ -9929,44 +9117,6 @@ export interface VideoSaveResult {
      * Video description
      */
     description: string
-}
-
-export interface VideoVideoTag {
-    /**
-     * Tagged user ID
-     */
-    user_id: number,
-    /**
-     * Tag ID
-     */
-    id: number,
-    /**
-     * ID of the tag creator
-     */
-    placer_id: number,
-    /**
-     * Tag description
-     */
-    tagged_name: string,
-    /**
-     * Date when tag has been added in Unixtime
-     */
-    date: number,
-    /**
-     * Information whether tha tag is reviewed
-     */
-    viewed: BaseBoolInt
-}
-
-export interface VideoUploadResponse {
-    /**
-     * Video size
-     */
-    size: number,
-    /**
-     * Video ID
-     */
-    video_id: number
 }
 
 export interface VideoVideo {
@@ -10031,6 +9181,18 @@ export interface VideoVideo {
      */
     can_edit: BaseBoolInt,
     /**
+     * Information whether current user can like the video
+     */
+    can_like: BaseBoolInt,
+    /**
+     * Information whether current user can comment the video
+     */
+    can_comment: BaseBoolInt,
+    /**
+     * Information whether current user can repost this video
+     */
+    can_repost: BaseBoolInt,
+    /**
      * Information whether current user can add the video
      */
     can_add: BaseBoolInt,
@@ -10039,13 +9201,17 @@ export interface VideoVideo {
      */
     processing: BasePropertyExists,
     /**
-     * Returns if the video is live translation
+     * Returns if the video is a live stream
      */
     live: BasePropertyExists,
     /**
      * 
      */
-    files: VideoVideoFiles
+    files: VideoVideoFiles,
+    /**
+     * 
+     */
+    is_favorite: boolean
 }
 
 export interface VideoVideoFiles {
@@ -10073,97 +9239,6 @@ export interface VideoVideoFiles {
      * URL of the external player
      */
     external: string
-}
-
-export interface VideoVideoTagInfo {
-    /**
-     * Video ID
-     */
-    id: number,
-    /**
-     * Video owner ID
-     */
-    owner_id: number,
-    /**
-     * Video title
-     */
-    title: string,
-    /**
-     * Video duration in seconds
-     */
-    duration: number,
-    /**
-     * Video description
-     */
-    description: string,
-    /**
-     * Date when video has been uploaded in Unixtime
-     */
-    date: number,
-    /**
-     * Number of views
-     */
-    views: number,
-    /**
-     * Number of comments
-     */
-    comments: number,
-    /**
-     * URL of the preview image with 130 px in width
-     */
-    photo_130: string,
-    /**
-     * URL of the preview image with 320 px in width
-     */
-    photo_320: string,
-    /**
-     * URL of the preview image with 800 px in width
-     */
-    photo_800: string,
-    /**
-     * Video access key
-     */
-    access_key: string,
-    /**
-     * Date when the video has been added in Unixtime
-     */
-    adding_date: number,
-    /**
-     * URL of the page with a player that can be used to play the video in the browser.
-     */
-    player: string,
-    /**
-     * Information whether current user can edit the video
-     */
-    can_edit: BaseBoolInt,
-    /**
-     * Information whether current user can add the video
-     */
-    can_add: BaseBoolInt,
-    /**
-     * Returns if the video is processing
-     */
-    processing: BasePropertyExists,
-    /**
-     * Returns if the video is live translation
-     */
-    live: BasePropertyExists,
-    /**
-     * 
-     */
-    files: VideoVideoFiles,
-    /**
-     * ID of the tag creator
-     */
-    placer_id: number,
-    /**
-     * Date when tag has been added in Unixtime
-     */
-    tag_created: number,
-    /**
-     * Tag ID
-     */
-    tag_id: number
 }
 
 export interface VideoVideoFull {
@@ -10465,7 +9540,34 @@ export interface WallWallComment {
     /**
      * Real position of the comment
      */
-    real_offset: number
+    real_offset: number,
+    /**
+     * 
+     */
+    thread: WallCommentThread,
+    /**
+     * 
+     */
+    timestamps: PodcastTimecode[]
+}
+
+export interface WallCommentThread {
+    /**
+     * Comments number
+     */
+    count: number,
+    /**
+     * Information whether current user can comment the post
+     */
+    can_post: BaseBoolInt,
+    /**
+     * Information whether groups can comment the post
+     */
+    groups_can_post: boolean,
+    /**
+     * 
+     */
+    items: WallWallComment[]
 }
 
 export interface WallViews {
@@ -10663,6 +9765,10 @@ export interface WallWallpostAttachment {
     /**
      * 
      */
+    event: EventsEventAttach,
+    /**
+     * 
+     */
     type: WallWallpostAttachmentType
 }
 
@@ -10807,6 +9913,10 @@ export interface WallWallpostFull {
      */
     is_pinned: number,
     /**
+     * Information whether the post in favorites list
+     */
+    is_favorite: boolean,
+    /**
      * 
      */
     comments: BaseCommentsInfo,
@@ -10821,7 +9931,11 @@ export interface WallWallpostFull {
     /**
      * Information whether the post is marked as ads
      */
-    marked_as_ads: BaseBoolInt
+    marked_as_ads: BaseBoolInt,
+    /**
+     * 
+     */
+    timestamps: PodcastTimecode[]
 }
 
 export interface WidgetsWidgetComment {
@@ -10992,21 +10106,53 @@ export interface WidgetsWidgetPage {
     page_id: string
 }
 
-export type MessagesFwdMessage = any
+export type UsersFields = string
 
-export type MessagesMessageActionPhoto = any
+export type GroupsFields = string
 
-export type DatabaseStreet = any
+export type BaseUserGroupFields = string
 
-export type MessagesEmail = any
+export type AddressesFields = string
 
-export interface MessagesConversation {
+export interface EventsEventAttach {
     /**
-     * 
+     * event ID
      */
-    conversation: MessagesConversation,
+    id: number,
     /**
-     * 
+     * event start time
      */
-    last_message: MessagesMessage
+    time: number,
+    /**
+     * Current user's member status
+     */
+    member_status: GroupsGroupFullMemberStatus,
+    /**
+     * is favorite
+     */
+    is_favorite: boolean,
+    /**
+     * address of event
+     */
+    address: string,
+    /**
+     * text of attach
+     */
+    text: string,
+    /**
+     * text of attach
+     */
+    button_text: string,
+    /**
+     * array of friends ids
+     */
+    friends: any[]
 }
+
+export type GroupsAddressWorkInfoStatus = any
+
+export type GroupsAddressTimetableDay = any
+
+export type MessagesConversationPeerType = any
+
+export type PodcastTimecode = any

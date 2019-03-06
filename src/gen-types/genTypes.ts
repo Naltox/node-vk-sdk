@@ -38,22 +38,31 @@ async function generate() {
     let modelsCode: SourceCode[] = []
 
     // Hack types missing in schema
-    // messages_message_action_photo
-    // messages_fwd_message
-    // messages_conversation
-    // database_street
-    // messages_email
-    // messages_searchConversations_response
-    // messages_getConversationMembers_response
 
-    let anyType = { type: 'any', properties: { } }
-    objects.definitions['messages_fwd_message'] = anyType
-    objects.definitions['messages_message_action_photo'] = anyType
-    objects.definitions['database_street'] = anyType
-    objects.definitions['messages_email'] = anyType
-    objects.definitions['messages_conversation'] = objects.definitions.messages_conversation_with_message
-    responses.definitions['messages_searchConversations_response'] = { type: 'object', properties: { response: { type: 'any' } } }
-    responses.definitions['messages_getConversationMembers_response'] = { type: 'object', properties: { response: { type: 'any' } } }
+    let anyType = {type: 'any', properties: {}}
+    objects.definitions['groups_address_work_info_status'] = anyType
+    objects.definitions['groups_address_timetable_day'] = anyType
+    objects.definitions['messages_conversation_peer_type'] = anyType
+    objects.definitions['podcast_timecode'] = anyType
+    objects.definitions.events_event_attach.properties.friends.items = anyType
+    objects.definitions.video_video_album_full.properties.privacy = anyType
+    responses.definitions['photos_getOwnerPhotoUploadServer_response'] = {
+        type: 'object',
+        properties: {response: {type: 'any'}}
+    }
+    responses.definitions['database_getMetroStations_response'] = {
+        type: 'object',
+        properties: {response: {type: 'any'}}
+    }
+    responses.definitions['database_getMetroStationsById_response'] = {
+        type: 'object',
+        properties: {response: {type: 'any'}}
+    }
+    responses.definitions['database_getMetroStationsById_response'] = {
+        type: 'object',
+        properties: {response: {type: 'any'}}
+    }
+
 
     //
     //  Models
@@ -101,12 +110,12 @@ async function generate() {
     //
     let methodsPropsCode: SourceCode[] = []
 
-    methods.methods.forEach(method => {
+    methods.methods.forEach((method: any) => {
         let scheme = jsonToMethodScheme(method)
         methodsPropsCode.push(codeGenerator.generateApiMethodParamsInterface(scheme))
     })
 
-    await saveToFile(GENERATED_PATH + METHODS_PROPS_FILE, methodsPropsCode.map(c => c.render()).join('\n\n'))
+    await saveToFile(GENERATED_PATH + METHODS_PROPS_FILE, 'import * as Models from "./Models"\n\n' + methodsPropsCode.map(c => c.render()).join('\n\n'))
     logger.log('methods props generated')
 
     //
@@ -114,7 +123,7 @@ async function generate() {
     //
     let methodsCode: SourceCode[] = []
 
-    methods.methods.forEach(method => {
+    methods.methods.forEach((method: any) => {
         let scheme = jsonToMethodScheme(method)
         methodsCode.push(codeGenerator.generateApiMethod(scheme))
     })
@@ -170,7 +179,7 @@ function jsonToMethodScheme(scheme: any): ApiMethodScheme {
     )
 }
 
-function jsonToClassScheme(name: string, scheme: any, forResponses = false): ClassScheme|CustomPrimitiveScheme {
+function jsonToClassScheme(name: string, scheme: any, forResponses = false): ClassScheme | CustomPrimitiveScheme {
     // just create alias here
     if (scheme.$ref) {
         return new AliasClassScheme(
@@ -226,7 +235,7 @@ function getSchemeClassProps(scheme: any): any {
         props = {...props, ...scheme.properties}
 
     if (scheme.allOf) {
-        scheme.allOf.forEach(prop => {
+        scheme.allOf.forEach((prop: any) => {
             props = {...props, ...getSchemeClassProps(prop)}
         })
     }
@@ -262,13 +271,13 @@ function parseType(scheme: any, forResponses = false): Type {
 
             if (forResponses) {
                 if (primitive)
-                    return  new VectorType(new CustomPrimitiveType('Models.' + name))
+                    return new VectorType(new CustomPrimitiveType('Models.' + name))
 
                 return new VectorType(new CustomType('Models.' + name))
             }
 
             if (primitive)
-                return  new VectorType(new CustomPrimitiveType(name))
+                return new VectorType(new CustomPrimitiveType(name))
 
             return new VectorType(new CustomType(name))
         }
@@ -312,7 +321,7 @@ function parseType(scheme: any, forResponses = false): Type {
         return new AnyType()
     }
 
-    throw { 'UNSUPPORTED TYPE': scheme}
+    throw {'UNSUPPORTED TYPE': scheme}
 }
 
 function getScheme(ref: string): any {

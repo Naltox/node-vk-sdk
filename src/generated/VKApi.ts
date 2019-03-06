@@ -8,7 +8,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   user_ids: (string[]|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -26,7 +26,7 @@ export class VKApi extends BaseVKApi {
      *   sort: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   city: (number|undefined),
      *   country: (number|undefined),
      *   hometown: (string|undefined),
@@ -84,7 +84,7 @@ export class VKApi extends BaseVKApi {
      *   extended: (boolean|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -100,7 +100,7 @@ export class VKApi extends BaseVKApi {
      *   user_id: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -126,25 +126,6 @@ export class VKApi extends BaseVKApi {
         return super.call("users.report", params)
     }
     /**
-     * Indexes current user location and returns nearby users.
-     *
-     * @param {{
-     *   latitude: (number),
-     *   longitude: (number),
-     *   accuracy: (number|undefined),
-     *   timeout: (number|undefined),
-     *   radius: (number|undefined),
-     *   fields: (string[]|undefined),
-     *   name_case: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.UsersGetNearbyResponse>}
-     */
-    public async usersGetNearby(params: MethodsProps.UsersGetNearbyParams): Promise<Responses.UsersGetNearbyResponse> {
-        return super.call("users.getNearby", params)
-    }
-    /**
      * Checks a user's phone number for correctness.
      *
      * @param {{
@@ -159,48 +140,6 @@ export class VKApi extends BaseVKApi {
      */
     public async authCheckPhone(params: MethodsProps.AuthCheckPhoneParams): Promise<Responses.OkResponse> {
         return super.call("auth.checkPhone", params)
-    }
-    /**
-     * Registers a new user by phone number.
-     *
-     * @param {{
-     *   first_name: (string),
-     *   last_name: (string),
-     *   birthday: (string),
-     *   client_id: (number),
-     *   client_secret: (string),
-     *   phone: (string),
-     *   password: (string|undefined),
-     *   test_mode: (boolean|undefined),
-     *   voice: (boolean|undefined),
-     *   sex: (number|undefined),
-     *   sid: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.AuthSignupResponse>}
-     */
-    public async authSignup(params: MethodsProps.AuthSignupParams): Promise<Responses.AuthSignupResponse> {
-        return super.call("auth.signup", params)
-    }
-    /**
-     * Completes a user's registration (begun with the [vk.com/dev/auth.signup|auth.signup] method) using an authorization code.
-     *
-     * @param {{
-     *   client_id: (number),
-     *   client_secret: (string),
-     *   phone: (string),
-     *   code: (string),
-     *   password: (string|undefined),
-     *   test_mode: (boolean|undefined),
-     *   intro: (number|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.AuthConfirmResponse>}
-     */
-    public async authConfirm(params: MethodsProps.AuthConfirmParams): Promise<Responses.AuthConfirmResponse> {
-        return super.call("auth.confirm", params)
     }
     /**
      * Allows to restore account access using a code received via SMS. " This method is only available for apps with [vk.com/dev/auth_direct|Direct authorization] access. "
@@ -226,7 +165,7 @@ export class VKApi extends BaseVKApi {
      *   count: (number|undefined),
      *   filter: (string|undefined),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -246,7 +185,7 @@ export class VKApi extends BaseVKApi {
      *   count: (number|undefined),
      *   offset: (number|undefined),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -368,8 +307,8 @@ export class VKApi extends BaseVKApi {
      * Returns the server address for photo upload.
      *
      * @param {{
-     *   album_id: (number|undefined),
      *   group_id: (number|undefined),
+     *   album_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -382,7 +321,7 @@ export class VKApi extends BaseVKApi {
      * Returns the server address for owner cover upload.
      *
      * @param {{
-     *   group_id: (number|undefined),
+     *   group_id: (number),
      *   crop_x: (number|undefined),
      *   crop_y: (number|undefined),
      *   crop_x2: (number|undefined),
@@ -403,9 +342,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
+     * @returns {Promise<Responses.PhotosGetOwnerPhotoUploadServerResponse>}
      */
-    public async photosGetOwnerPhotoUploadServer(params: MethodsProps.PhotosGetOwnerPhotoUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+    public async photosGetOwnerPhotoUploadServer(params: MethodsProps.PhotosGetOwnerPhotoUploadServerParams): Promise<Responses.PhotosGetOwnerPhotoUploadServerResponse> {
         return super.call("photos.getOwnerPhotoUploadServer", params)
     }
     /**
@@ -419,9 +358,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
+     * @returns {Promise<Responses.PhotosGetUploadServerResponse>}
      */
-    public async photosGetChatUploadServer(params: MethodsProps.PhotosGetChatUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+    public async photosGetChatUploadServer(params: MethodsProps.PhotosGetChatUploadServerParams): Promise<Responses.PhotosGetUploadServerResponse> {
         return super.call("photos.getChatUploadServer", params)
     }
     /**
@@ -436,9 +375,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
+     * @returns {Promise<Responses.PhotosGetMarketUploadServerResponse>}
      */
-    public async photosGetMarketUploadServer(params: MethodsProps.PhotosGetMarketUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+    public async photosGetMarketUploadServer(params: MethodsProps.PhotosGetMarketUploadServerParams): Promise<Responses.PhotosGetMarketUploadServerResponse> {
         return super.call("photos.getMarketUploadServer", params)
     }
     /**
@@ -476,8 +415,8 @@ export class VKApi extends BaseVKApi {
      * Saves cover photo after successful uploading.
      *
      * @param {{
-     *   photo: (string),
      *   hash: (string),
+     *   photo: (string),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -638,7 +577,7 @@ export class VKApi extends BaseVKApi {
      *   list_id: (number|undefined),
      *   count: (number|undefined),
      *   offset: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -707,6 +646,7 @@ export class VKApi extends BaseVKApi {
      *   need_mutual: (boolean|undefined),
      *   out: (boolean|undefined),
      *   sort: (number|undefined),
+     *   need_viewed: (boolean|undefined),
      *   suggested: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -720,7 +660,7 @@ export class VKApi extends BaseVKApi {
      * Approves or creates a friend request.
      *
      * @param {{
-     *   user_id: (number),
+     *   user_id: (number|undefined),
      *   text: (string|undefined),
      *   follow: (boolean|undefined),
      *   access_token: (string|undefined)
@@ -749,7 +689,7 @@ export class VKApi extends BaseVKApi {
      * Declines a friend request or deletes a user from the current user's friend list.
      *
      * @param {{
-     *   user_id: (number),
+     *   user_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -833,7 +773,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   phones: (string[]|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -861,7 +801,7 @@ export class VKApi extends BaseVKApi {
      *   filter: (string[]|undefined),
      *   count: (number|undefined),
      *   offset: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -886,26 +826,12 @@ export class VKApi extends BaseVKApi {
         return super.call("friends.areFriends", params)
     }
     /**
-     * Returns a list of friends who can be called by the current user.
-     *
-     * @param {{
-     *   fields: (string[]|undefined),
-     *   name_case: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.FriendsGetAvailableForCallResponse>}
-     */
-    public async friendsGetAvailableForCall(params: MethodsProps.FriendsGetAvailableForCallParams): Promise<Responses.FriendsGetAvailableForCallResponse> {
-        return super.call("friends.getAvailableForCall", params)
-    }
-    /**
      * Returns a list of friends matching the search criteria.
      *
      * @param {{
      *   user_id: (number),
      *   q: (string|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
@@ -925,7 +851,8 @@ export class VKApi extends BaseVKApi {
      *   url: (string|undefined),
      *   page_id: (string|undefined),
      *   order: (string|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
+     *   offset: (number|undefined),
      *   count: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -942,6 +869,7 @@ export class VKApi extends BaseVKApi {
      *   widget_api_id: (number|undefined),
      *   order: (string|undefined),
      *   period: (string|undefined),
+     *   offset: (number|undefined),
      *   count: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -996,8 +924,8 @@ export class VKApi extends BaseVKApi {
      * Returns list of sources hidden from current user's feed.
      *
      * @param {{
-     *   fields: (string[]|undefined),
      *   extended: (boolean|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1010,9 +938,9 @@ export class VKApi extends BaseVKApi {
      * Returns story by its ID.
      *
      * @param {{
-     *   stories: (string[]|undefined),
+     *   stories: (string[]),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1047,7 +975,7 @@ export class VKApi extends BaseVKApi {
      *   story_id: (number),
      *   access_key: (string|undefined),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1110,6 +1038,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   owner_id: (number),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1162,6 +1091,12 @@ export class VKApi extends BaseVKApi {
      * Shows history of votes transaction between users and the application.
      *
      * @param {{
+     *   type: (number|undefined),
+     *   uid_from: (number|undefined),
+     *   uid_to: (number|undefined),
+     *   date_from: (number|undefined),
+     *   date_to: (number|undefined),
+     *   limit: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1222,6 +1157,7 @@ export class VKApi extends BaseVKApi {
      *   counters: (string[]|undefined),
      *   user_id: (number|undefined),
      *   counter: (number|undefined),
+     *   increment: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1229,21 +1165,6 @@ export class VKApi extends BaseVKApi {
      */
     public async secureSetCounter(params: MethodsProps.SecureSetCounterParams): Promise<Responses.OkResponse> {
         return super.call("secure.setCounter", params)
-    }
-    /**
-     * Sets user game level in the application which can be seen by his/her friends.
-     *
-     * @param {{
-     *   levels: (string[]|undefined),
-     *   user_id: (number|undefined),
-     *   level: (number|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.OkResponse>}
-     */
-    public async secureSetUserLevel(params: MethodsProps.SecureSetUserLevelParams): Promise<Responses.OkResponse> {
-        return super.call("secure.setUserLevel", params)
     }
     /**
      * Returns one of the previously set game levels of one or more users in the application.
@@ -1277,6 +1198,7 @@ export class VKApi extends BaseVKApi {
      *   key: (string|undefined),
      *   keys: (string[]|undefined),
      *   user_id: (number|undefined),
+     *   global: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1292,6 +1214,7 @@ export class VKApi extends BaseVKApi {
      *   key: (string),
      *   value: (string|undefined),
      *   user_id: (number|undefined),
+     *   global: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1305,6 +1228,8 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   user_id: (number|undefined),
+     *   global: (boolean|undefined),
+     *   offset: (number|undefined),
      *   count: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -1318,6 +1243,7 @@ export class VKApi extends BaseVKApi {
      * Returns a list of orders.
      *
      * @param {{
+     *   offset: (number|undefined),
      *   count: (number|undefined),
      *   test_mode: (boolean|undefined),
      *   access_token: (string|undefined)
@@ -1597,7 +1523,7 @@ export class VKApi extends BaseVKApi {
      *   sort: (string|undefined),
      *   access_key: (string|undefined),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1758,7 +1684,7 @@ export class VKApi extends BaseVKApi {
      *   posts: (string[]),
      *   extended: (boolean|undefined),
      *   copy_history_depth: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1785,6 +1711,7 @@ export class VKApi extends BaseVKApi {
      *   post_id: (number|undefined),
      *   guid: (string|undefined),
      *   mark_as_ads: (boolean|undefined),
+     *   close_comments: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1804,7 +1731,6 @@ export class VKApi extends BaseVKApi {
      *   lat: (number|undefined),
      *   long: (number|undefined),
      *   place_id: (number|undefined),
-     *   post_id: (number|undefined),
      *   guid: (string|undefined),
      *   link_button: (string|undefined),
      *   link_title: (string|undefined),
@@ -1865,6 +1791,8 @@ export class VKApi extends BaseVKApi {
      *   long: (number|undefined),
      *   place_id: (number|undefined),
      *   mark_as_ads: (boolean|undefined),
+     *   close_comments: (boolean|undefined),
+     *   poster_bkg_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1957,7 +1885,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   owner_id: (number|undefined),
-     *   post_id: (number),
+     *   post_id: (number|undefined),
      *   need_likes: (boolean|undefined),
      *   start_comment_id: (number|undefined),
      *   offset: (number|undefined),
@@ -1965,6 +1893,9 @@ export class VKApi extends BaseVKApi {
      *   sort: (string|undefined),
      *   preview_length: (number|undefined),
      *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
+     *   comment_id: (number|undefined),
+     *   thread_items_count: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -2116,6 +2047,10 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   lead_id: (number),
      *   secret: (string),
+     *   uid: (number|undefined),
+     *   aid: (number|undefined),
+     *   test_mode: (boolean|undefined),
+     *   force: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -2164,6 +2099,8 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   lead_id: (number),
      *   test_result: (number|undefined),
+     *   test_mode: (boolean|undefined),
+     *   auto_start: (boolean|undefined),
      *   age: (number|undefined),
      *   country: (string|undefined),
      *   access_token: (string|undefined)
@@ -2333,7 +2270,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   group_ids: (string[]|undefined),
      *   group_id: (string|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.GroupsFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -2348,8 +2285,8 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   user_id: (number|undefined),
      *   extended: (boolean|undefined),
-     *   filter: (string[]|undefined),
-     *   fields: (string[]|undefined),
+     *   filter: (Models.GroupsFilter[]|undefined),
+     *   fields: (Models.GroupsFields[]|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
      *   access_token: (string|undefined)
@@ -2368,7 +2305,7 @@ export class VKApi extends BaseVKApi {
      *   sort: (string|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   filter: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -2476,7 +2413,7 @@ export class VKApi extends BaseVKApi {
      *   group_id: (number),
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -2487,46 +2424,14 @@ export class VKApi extends BaseVKApi {
         return super.call("groups.getInvitedUsers", params)
     }
     /**
-     * Adds a user to a community blacklist.
-     *
-     * @param {{
-     *   group_id: (number),
-     *   user_id: (number),
-     *   end_date: (number|undefined),
-     *   reason: (number|undefined),
-     *   comment: (string|undefined),
-     *   comment_visible: (boolean|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.OkResponse>}
-     */
-    public async groupsBanUser(params: MethodsProps.GroupsBanUserParams): Promise<Responses.OkResponse> {
-        return super.call("groups.banUser", params)
-    }
-    /**
-     * Removes a user from a community blacklist.
-     *
-     * @param {{
-     *   group_id: (number),
-     *   user_id: (number),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.OkResponse>}
-     */
-    public async groupsUnbanUser(params: MethodsProps.GroupsUnbanUserParams): Promise<Responses.OkResponse> {
-        return super.call("groups.unbanUser", params)
-    }
-    /**
      * Returns a list of users on a community blacklist.
      *
      * @param {{
      *   group_id: (number),
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
-     *   user_id: (number|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
+     *   owner_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -2584,6 +2489,8 @@ export class VKApi extends BaseVKApi {
      *   docs: (number|undefined),
      *   wiki: (number|undefined),
      *   messages: (boolean|undefined),
+     *   articles: (boolean|undefined),
+     *   addresses: (boolean|undefined),
      *   age_limits: (number|undefined),
      *   market: (boolean|undefined),
      *   market_comments: (boolean|undefined),
@@ -2595,6 +2502,10 @@ export class VKApi extends BaseVKApi {
      *   obscene_filter: (boolean|undefined),
      *   obscene_stopwords: (boolean|undefined),
      *   obscene_words: (string[]|undefined),
+     *   main_section: (number|undefined),
+     *   secondary_section: (number|undefined),
+     *   country: (number|undefined),
+     *   city: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -2602,25 +2513,6 @@ export class VKApi extends BaseVKApi {
      */
     public async groupsEdit(params: MethodsProps.GroupsEditParams): Promise<Responses.OkResponse> {
         return super.call("groups.edit", params)
-    }
-    /**
-     * Edits the place in community.
-     *
-     * @param {{
-     *   group_id: (number),
-     *   title: (string|undefined),
-     *   address: (string|undefined),
-     *   country_id: (number|undefined),
-     *   city_id: (number|undefined),
-     *   latitude: (number|undefined),
-     *   longitude: (number|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.GroupsEditPlaceResponse>}
-     */
-    public async groupsEditPlace(params: MethodsProps.GroupsEditPlaceParams): Promise<Responses.GroupsEditPlaceResponse> {
-        return super.call("groups.editPlace", params)
     }
     /**
      * Returns community settings.
@@ -2642,7 +2534,7 @@ export class VKApi extends BaseVKApi {
      *   group_id: (number),
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -2694,9 +2586,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.GroupsAddLinkResponse>}
      */
-    public async groupsAddLink(params: MethodsProps.GroupsAddLinkParams): Promise<Responses.OkResponse> {
+    public async groupsAddLink(params: MethodsProps.GroupsAddLinkParams): Promise<Responses.GroupsAddLinkResponse> {
         return super.call("groups.addLink", params)
     }
     /**
@@ -2804,10 +2696,12 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   group_id: (number),
      *   server_id: (number|undefined),
+     *   api_version: (string|undefined),
      *   message_new: (boolean|undefined),
      *   message_reply: (boolean|undefined),
      *   message_allow: (boolean|undefined),
      *   message_deny: (boolean|undefined),
+     *   message_typing_state: (boolean|undefined),
      *   photo_new: (boolean|undefined),
      *   audio_new: (boolean|undefined),
      *   video_new: (boolean|undefined),
@@ -2836,6 +2730,9 @@ export class VKApi extends BaseVKApi {
      *   poll_vote_new: (boolean|undefined),
      *   group_join: (boolean|undefined),
      *   group_leave: (boolean|undefined),
+     *   group_change_settings: (boolean|undefined),
+     *   group_change_photo: (boolean|undefined),
+     *   group_officers_edit: (boolean|undefined),
      *   user_block: (boolean|undefined),
      *   user_unblock: (boolean|undefined),
      *   lead_forms_new: (boolean|undefined),
@@ -2881,9 +2778,10 @@ export class VKApi extends BaseVKApi {
      *   enabled: (boolean|undefined),
      *   message_new: (boolean|undefined),
      *   message_reply: (boolean|undefined),
-     *   message_edit: (boolean|undefined),
      *   message_allow: (boolean|undefined),
      *   message_deny: (boolean|undefined),
+     *   message_edit: (boolean|undefined),
+     *   message_typing_state: (boolean|undefined),
      *   photo_new: (boolean|undefined),
      *   audio_new: (boolean|undefined),
      *   video_new: (boolean|undefined),
@@ -2912,6 +2810,9 @@ export class VKApi extends BaseVKApi {
      *   poll_vote_new: (boolean|undefined),
      *   group_join: (boolean|undefined),
      *   group_leave: (boolean|undefined),
+     *   group_change_settings: (boolean|undefined),
+     *   group_change_photo: (boolean|undefined),
+     *   group_officers_edit: (boolean|undefined),
      *   user_block: (boolean|undefined),
      *   user_unblock: (boolean|undefined),
      *   access_token: (string|undefined)
@@ -2921,6 +2822,25 @@ export class VKApi extends BaseVKApi {
      */
     public async groupsSetLongPollSettings(params: MethodsProps.GroupsSetLongPollSettingsParams): Promise<Responses.OkResponse> {
         return super.call("groups.setLongPollSettings", params)
+    }
+    /**
+     * Returns a list of community addresses.
+     *
+     * @param {{
+     *   group_id: (number),
+     *   address_ids: (number[]|undefined),
+     *   latitude: (number|undefined),
+     *   longitude: (number|undefined),
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   fields: (Models.AddressesFields[]|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.GroupsGetAddressesResponse>}
+     */
+    public async groupsGetAddresses(params: MethodsProps.GroupsGetAddressesParams): Promise<Responses.GroupsGetAddressesResponse> {
+        return super.call("groups.getAddresses", params)
     }
     /**
      * Returns a list of topics on a community's discussion board.
@@ -3198,6 +3118,7 @@ export class VKApi extends BaseVKApi {
      *   privacy_comment: (string[]|undefined),
      *   no_comments: (boolean|undefined),
      *   repeat: (boolean|undefined),
+     *   compression: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3259,22 +3180,6 @@ export class VKApi extends BaseVKApi {
         return super.call("video.search", params)
     }
     /**
-     * Returns list of videos in which the user is tagged.
-     *
-     * @param {{
-     *   user_id: (number|undefined),
-     *   offset: (number|undefined),
-     *   count: (number|undefined),
-     *   extended: (boolean|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.VideoGetUserVideosResponse>}
-     */
-    public async videoGetUserVideos(params: MethodsProps.VideoGetUserVideosParams): Promise<Responses.VideoGetUserVideosResponse> {
-        return super.call("video.getUserVideos", params)
-    }
-    /**
      * Returns a list of video albums owned by a user or community.
      *
      * @param {{
@@ -3282,6 +3187,7 @@ export class VKApi extends BaseVKApi {
      *   offset: (number|undefined),
      *   count: (number|undefined),
      *   extended: (boolean|undefined),
+     *   need_system: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3447,6 +3353,7 @@ export class VKApi extends BaseVKApi {
      *   count: (number|undefined),
      *   sort: (string|undefined),
      *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3520,65 +3427,6 @@ export class VKApi extends BaseVKApi {
         return super.call("video.editComment", params)
     }
     /**
-     * Returns a list of tags on a video.
-     *
-     * @param {{
-     *   owner_id: (number|undefined),
-     *   video_id: (number),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.VideoGetTagsResponse>}
-     */
-    public async videoGetTags(params: MethodsProps.VideoGetTagsParams): Promise<Responses.VideoGetTagsResponse> {
-        return super.call("video.getTags", params)
-    }
-    /**
-     * Adds a tag on a video.
-     *
-     * @param {{
-     *   user_id: (number),
-     *   owner_id: (number|undefined),
-     *   video_id: (number),
-     *   tagged_name: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.VideoPutTagResponse>}
-     */
-    public async videoPutTag(params: MethodsProps.VideoPutTagParams): Promise<Responses.VideoPutTagResponse> {
-        return super.call("video.putTag", params)
-    }
-    /**
-     * Removes a tag from a video.
-     *
-     * @param {{
-     *   tag_id: (number),
-     *   owner_id: (number|undefined),
-     *   video_id: (number),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.OkResponse>}
-     */
-    public async videoRemoveTag(params: MethodsProps.VideoRemoveTagParams): Promise<Responses.OkResponse> {
-        return super.call("video.removeTag", params)
-    }
-    /**
-     * Returns a list of videos with tags that have not been viewed.
-     *
-     * @param {{
-     *   offset: (number|undefined),
-     *   count: (number|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.VideoGetNewTagsResponse>}
-     */
-    public async videoGetNewTags(params: MethodsProps.VideoGetNewTagsParams): Promise<Responses.VideoGetNewTagsResponse> {
-        return super.call("video.getNewTags", params)
-    }
-    /**
      * Reports (submits a complaint about) a video.
      *
      * @param {{
@@ -3611,58 +3459,14 @@ export class VKApi extends BaseVKApi {
         return super.call("video.reportComment", params)
     }
     /**
-     * Returns video catalog
-     *
-     * @param {{
-     *   count: (number|undefined),
-     *   items_count: (number|undefined),
-     *   from: (string|undefined),
-     *   filters: (string[]|undefined),
-     *   extended: (boolean|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.VideoGetCatalogResponse>}
-     */
-    public async videoGetCatalog(params: MethodsProps.VideoGetCatalogParams): Promise<Responses.VideoGetCatalogResponse> {
-        return super.call("video.getCatalog", params)
-    }
-    /**
-     * Returns a separate catalog section
-     *
-     * @param {{
-     *   section_id: (string),
-     *   from: (string),
-     *   count: (number|undefined),
-     *   extended: (boolean|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.VideoGetCatalogSectionResponse>}
-     */
-    public async videoGetCatalogSection(params: MethodsProps.VideoGetCatalogSectionParams): Promise<Responses.VideoGetCatalogSectionResponse> {
-        return super.call("video.getCatalogSection", params)
-    }
-    /**
-     * Hides a video catalog section from a user.
-     *
-     * @param {{
-     *   section_id: (number),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.OkResponse>}
-     */
-    public async videoHideCatalogSection(params: MethodsProps.VideoHideCatalogSectionParams): Promise<Responses.OkResponse> {
-        return super.call("video.hideCatalogSection", params)
-    }
-    /**
      * Returns a list of notes created by a user.
      *
      * @param {{
      *   note_ids: (number[]|undefined),
      *   user_id: (number|undefined),
+     *   offset: (number|undefined),
      *   count: (number|undefined),
+     *   sort: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3677,6 +3481,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   note_id: (number),
      *   owner_id: (number|undefined),
+     *   need_wiki: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3737,6 +3542,8 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   note_id: (number),
      *   owner_id: (number|undefined),
+     *   sort: (number|undefined),
+     *   offset: (number|undefined),
      *   count: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -3769,7 +3576,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   comment_id: (number),
      *   owner_id: (number|undefined),
-     *   message: (string|undefined),
+     *   message: (string),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3805,108 +3612,6 @@ export class VKApi extends BaseVKApi {
      */
     public async notesRestoreComment(params: MethodsProps.NotesRestoreCommentParams): Promise<Responses.OkResponse> {
         return super.call("notes.restoreComment", params)
-    }
-    /**
-     * Adds a new location to the location database.
-     *
-     * @param {{
-     *   type: (number|undefined),
-     *   title: (string),
-     *   latitude: (number),
-     *   longitude: (number),
-     *   country: (number|undefined),
-     *   city: (number|undefined),
-     *   address: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.PlacesAddResponse>}
-     */
-    public async placesAdd(params: MethodsProps.PlacesAddParams): Promise<Responses.PlacesAddResponse> {
-        return super.call("places.add", params)
-    }
-    /**
-     * Returns information about locations by their IDs.
-     *
-     * @param {{
-     *   places: (number[]),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.PlacesGetByIdResponse>}
-     */
-    public async placesGetById(params: MethodsProps.PlacesGetByIdParams): Promise<Responses.PlacesGetByIdResponse> {
-        return super.call("places.getById", params)
-    }
-    /**
-     * Returns a list of locations that match the search criteria.
-     *
-     * @param {{
-     *   q: (string|undefined),
-     *   city: (number|undefined),
-     *   latitude: (number),
-     *   longitude: (number),
-     *   radius: (number|undefined),
-     *   offset: (number|undefined),
-     *   count: (number|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.PlacesSearchResponse>}
-     */
-    public async placesSearch(params: MethodsProps.PlacesSearchParams): Promise<Responses.PlacesSearchResponse> {
-        return super.call("places.search", params)
-    }
-    /**
-     * Checks a user in at the specified location.
-     *
-     * @param {{
-     *   place_id: (number|undefined),
-     *   text: (string|undefined),
-     *   latitude: (number|undefined),
-     *   longitude: (number|undefined),
-     *   friends_only: (boolean|undefined),
-     *   services: (string[]|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.PlacesCheckinResponse>}
-     */
-    public async placesCheckin(params: MethodsProps.PlacesCheckinParams): Promise<Responses.PlacesCheckinResponse> {
-        return super.call("places.checkin", params)
-    }
-    /**
-     * Returns a list of user check-ins at locations according to the set parameters.
-     *
-     * @param {{
-     *   latitude: (number|undefined),
-     *   longitude: (number|undefined),
-     *   place: (number|undefined),
-     *   user_id: (number|undefined),
-     *   offset: (number|undefined),
-     *   count: (number|undefined),
-     *   timestamp: (number|undefined),
-     *   friends_only: (boolean|undefined),
-     *   need_places: (boolean|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.PlacesGetCheckinsResponse>}
-     */
-    public async placesGetCheckins(params: MethodsProps.PlacesGetCheckinsParams): Promise<Responses.PlacesGetCheckinsResponse> {
-        return super.call("places.getCheckins", params)
-    }
-    /**
-     * Returns a list of all types of locations.
-     *
-     * @param {{
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.PlacesGetTypesResponse>}
-     */
-    public async placesGetTypes(params: MethodsProps.PlacesGetTypesParams): Promise<Responses.PlacesGetTypesResponse> {
-        return super.call("places.getTypes", params)
     }
     /**
      * Returns non-null values of user counters.
@@ -3961,23 +3666,6 @@ export class VKApi extends BaseVKApi {
         return super.call("account.setOffline", params)
     }
     /**
-     * Allows to search the VK users using phone numbers, e-mail addresses and user IDs on other services.
-     *
-     * @param {{
-     *   contacts: (string[]|undefined),
-     *   service: (string),
-     *   mycontact: (string|undefined),
-     *   return_all: (boolean|undefined),
-     *   fields: (string[]|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.AccountLookupContactsResponse>}
-     */
-    public async accountLookupContacts(params: MethodsProps.AccountLookupContactsParams): Promise<Responses.AccountLookupContactsResponse> {
-        return super.call("account.lookupContacts", params)
-    }
-    /**
      * Subscribes an iOS/Android/Windows Phone-based device to receive push notifications
      *
      * @param {{
@@ -3987,6 +3675,7 @@ export class VKApi extends BaseVKApi {
      *   device_id: (string),
      *   system_version: (string|undefined),
      *   settings: (string|undefined),
+     *   sandbox: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4000,6 +3689,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   device_id: (string|undefined),
+     *   sandbox: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4070,6 +3760,7 @@ export class VKApi extends BaseVKApi {
      * Returns a list of active ads (offers) which executed by the user will bring him/her respective number of votes to his balance in the application.
      *
      * @param {{
+     *   offset: (number|undefined),
      *   count: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4078,32 +3769,6 @@ export class VKApi extends BaseVKApi {
      */
     public async accountGetActiveOffers(params: MethodsProps.AccountGetActiveOffersParams): Promise<Responses.AccountGetActiveOffersResponse> {
         return super.call("account.getActiveOffers", params)
-    }
-    /**
-     * Adds user to the banlist.
-     *
-     * @param {{
-     *   user_id: (number),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.OkResponse>}
-     */
-    public async accountBanUser(params: MethodsProps.AccountBanUserParams): Promise<Responses.OkResponse> {
-        return super.call("account.banUser", params)
-    }
-    /**
-     * Deletes user from the blacklist.
-     *
-     * @param {{
-     *   user_id: (number),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.OkResponse>}
-     */
-    public async accountUnbanUser(params: MethodsProps.AccountUnbanUserParams): Promise<Responses.OkResponse> {
-        return super.call("account.unbanUser", params)
     }
     /**
      * Returns a user's blacklist.
@@ -4201,16 +3866,44 @@ export class VKApi extends BaseVKApi {
         return super.call("account.saveProfileInfo", params)
     }
     /**
+     * undefined
+     *
+     * @param {{
+     *   link: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesJoinChatByInviteLinkResponse>}
+     */
+    public async messagesJoinChatByInviteLink(params: MethodsProps.MessagesJoinChatByInviteLinkParams): Promise<Responses.MessagesJoinChatByInviteLinkResponse> {
+        return super.call("messages.joinChatByInviteLink", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   peer_id: (number),
+     *   reset: (boolean|undefined),
+     *   group_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesGetInviteLinkResponse>}
+     */
+    public async messagesGetInviteLink(params: MethodsProps.MessagesGetInviteLinkParams): Promise<Responses.MessagesGetInviteLinkResponse> {
+        return super.call("messages.getInviteLink", params)
+    }
+    /**
      * Returns a list of the current user's conversations.
      *
      * @param {{
-     *   group_id: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
      *   filter: (string|undefined),
      *   extended: (boolean|undefined),
      *   start_message_id: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4225,7 +3918,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   peer_ids: (number[]),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4242,7 +3935,7 @@ export class VKApi extends BaseVKApi {
      *   message_ids: (number[]),
      *   preview_length: (number|undefined),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4256,10 +3949,10 @@ export class VKApi extends BaseVKApi {
      * Returns messages by their IDs within the conversation.
      *
      * @param {{
-     *   peer_id: (number|undefined),
+     *   peer_id: (number),
      *   conversation_message_ids: (number[]),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4279,6 +3972,8 @@ export class VKApi extends BaseVKApi {
      *   preview_length: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   fields: (string[]|undefined),
      *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4297,10 +3992,10 @@ export class VKApi extends BaseVKApi {
      *   user_id: (number|undefined),
      *   peer_id: (number|undefined),
      *   start_message_id: (number|undefined),
-     *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
-     *   group_id: (number|undefined),
      *   rev: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4318,7 +4013,7 @@ export class VKApi extends BaseVKApi {
      *   start_from: (string|undefined),
      *   count: (number|undefined),
      *   photo_sizes: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4341,11 +4036,14 @@ export class VKApi extends BaseVKApi {
      *   message: (string|undefined),
      *   lat: (number|undefined),
      *   long: (number|undefined),
-     *   attachment: (string[]|undefined),
+     *   attachment: (string|undefined),
+     *   reply_to: (number|undefined),
      *   forward_messages: (string|undefined),
      *   sticker_id: (number|undefined),
-     *   notification: (boolean|undefined),
      *   group_id: (number|undefined),
+     *   keyboard: (string|undefined),
+     *   payload: (string|undefined),
+     *   dont_parse_links: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4360,12 +4058,14 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   peer_id: (number),
      *   message: (string|undefined),
+     *   message_id: (number),
      *   lat: (number|undefined),
      *   long: (number|undefined),
-     *   attachment: (string[]|undefined),
+     *   attachment: (string|undefined),
      *   keep_forward_messages: (boolean|undefined),
      *   keep_snippets: (boolean|undefined),
      *   group_id: (number|undefined),
+     *   dont_parse_links: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4380,8 +4080,8 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   message_ids: (number[]|undefined),
      *   spam: (boolean|undefined),
-     *   delete_for_all: (boolean|undefined),
      *   group_id: (number|undefined),
+     *   delete_for_all: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4394,18 +4094,32 @@ export class VKApi extends BaseVKApi {
      * Deletes all private messages in a conversation.
      *
      * @param {{
-     *   user_id: (string|undefined),
-     *   group_id: (number|undefined),
+     *   user_id: (number|undefined),
      *   peer_id: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.MessagesDeleteConversationResponse>}
      */
-    public async messagesDeleteConversation(params: MethodsProps.MessagesDeleteConversationParams): Promise<Responses.OkResponse> {
+    public async messagesDeleteConversation(params: MethodsProps.MessagesDeleteConversationParams): Promise<Responses.MessagesDeleteConversationResponse> {
         return super.call("messages.deleteConversation", params)
+    }
+    /**
+     * Pin a message.
+     *
+     * @param {{
+     *   peer_id: (number),
+     *   message_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesPinResponse>}
+     */
+    public async messagesPin(params: MethodsProps.MessagesPinParams): Promise<Responses.MessagesPinResponse> {
+        return super.call("messages.pin", params)
     }
     /**
      * Restores a deleted message.
@@ -4425,7 +4139,6 @@ export class VKApi extends BaseVKApi {
      * Marks messages as read.
      *
      * @param {{
-     *   message_ids: (number[]|undefined),
      *   peer_id: (number|undefined),
      *   start_message_id: (number|undefined),
      *   group_id: (number|undefined),
@@ -4442,7 +4155,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   message_ids: (number[]|undefined),
-     *   important: (boolean|undefined),
+     *   important: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4455,9 +4168,9 @@ export class VKApi extends BaseVKApi {
      * Marks and unmarks conversations as important.
      *
      * @param {{
-     *   group_id: (number|undefined),
      *   peer_id: (number),
      *   important: (boolean|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4470,9 +4183,9 @@ export class VKApi extends BaseVKApi {
      * Marks and unmarks conversations as unanswered.
      *
      * @param {{
-     *   group_id: (number|undefined),
      *   peer_id: (number),
      *   answered: (boolean|undefined),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4485,9 +4198,9 @@ export class VKApi extends BaseVKApi {
      * Returns data required for connection to a Long Poll server.
      *
      * @param {{
-     *   lp_version: (number|undefined),
      *   need_pts: (boolean|undefined),
      *   group_id: (number|undefined),
+     *   lp_version: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4504,11 +4217,12 @@ export class VKApi extends BaseVKApi {
      *   pts: (number|undefined),
      *   preview_length: (number|undefined),
      *   onlines: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   events_limit: (number|undefined),
      *   msgs_limit: (number|undefined),
      *   max_msg_id: (number|undefined),
      *   group_id: (number|undefined),
+     *   lp_version: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4518,10 +4232,24 @@ export class VKApi extends BaseVKApi {
         return super.call("messages.getLongPollHistory", params)
     }
     /**
+     * undefined
+     *
+     * @param {{
+     *   link: (string),
+     *   fields: (Models.UsersFields[]|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesGetChatPreviewResponse>}
+     */
+    public async messagesGetChatPreview(params: MethodsProps.MessagesGetChatPreviewParams): Promise<Responses.MessagesGetChatPreviewResponse> {
+        return super.call("messages.getChatPreview", params)
+    }
+    /**
      * Creates a chat with several participants.
      *
      * @param {{
-     *   user_ids: (number[]),
+     *   user_ids: (number[]|undefined),
      *   title: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4549,10 +4277,9 @@ export class VKApi extends BaseVKApi {
      * Returns a list of IDs of users participating in a chat.
      *
      * @param {{
+     *   peer_id: (number),
+     *   fields: (Models.UsersFields[]|undefined),
      *   group_id: (number|undefined),
-     *   peer_id: (number|undefined),
-     *   fields: (string[]|undefined),
-     *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4565,7 +4292,7 @@ export class VKApi extends BaseVKApi {
      * Changes the status of a user as typing in a conversation.
      *
      * @param {{
-     *   user_id: (string|undefined),
+     *   user_id: (number|undefined),
      *   type: (string|undefined),
      *   peer_id: (number|undefined),
      *   group_id: (number|undefined),
@@ -4584,7 +4311,7 @@ export class VKApi extends BaseVKApi {
      *   q: (string|undefined),
      *   count: (number|undefined),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4613,7 +4340,8 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   chat_id: (number),
-     *   user_id: (string),
+     *   user_id: (number|undefined),
+     *   member_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4653,6 +4381,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   chat_id: (number),
+     *   group_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4679,6 +4408,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   group_id: (number),
+     *   key: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4705,15 +4435,16 @@ export class VKApi extends BaseVKApi {
      * Returns data required to show newsfeed for the current user.
      *
      * @param {{
-     *   filters: (string[]|undefined),
+     *   filters: (Models.NewsfeedFilters[]|undefined),
      *   return_banned: (boolean|undefined),
      *   start_time: (number|undefined),
      *   end_time: (number|undefined),
      *   max_photos: (number|undefined),
-     *   source_ids: (string[]|undefined),
+     *   source_ids: (string|undefined),
      *   start_from: (string|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
+     *   section: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4731,7 +4462,7 @@ export class VKApi extends BaseVKApi {
      *   max_photos: (number|undefined),
      *   start_from: (string|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4745,12 +4476,13 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   count: (number|undefined),
-     *   filters: (string[]|undefined),
+     *   filters: (Models.NewsfeedCommentsFilters[]|undefined),
      *   reposts: (string|undefined),
      *   start_time: (number|undefined),
      *   end_time: (number|undefined),
+     *   last_comments_count: (number|undefined),
      *   start_from: (string|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4781,7 +4513,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -4861,7 +4593,7 @@ export class VKApi extends BaseVKApi {
      *   start_time: (number|undefined),
      *   end_time: (number|undefined),
      *   start_from: (string|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4935,7 +4667,7 @@ export class VKApi extends BaseVKApi {
      *   offset: (number|undefined),
      *   count: (number|undefined),
      *   shuffle: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4953,7 +4685,7 @@ export class VKApi extends BaseVKApi {
      *   item_id: (number|undefined),
      *   page_url: (string|undefined),
      *   filter: (string|undefined),
-     *   friends_only: (boolean|undefined),
+     *   friends_only: (number|undefined),
      *   extended: (boolean|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
@@ -5020,6 +4752,10 @@ export class VKApi extends BaseVKApi {
      *   owner_id: (number|undefined),
      *   is_board: (boolean|undefined),
      *   poll_id: (number),
+     *   extended: (boolean|undefined),
+     *   friends_count: (number|undefined),
+     *   fields: (string[]|undefined),
+     *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5034,7 +4770,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   owner_id: (number|undefined),
      *   poll_id: (number),
-     *   answer_id: (number),
+     *   answer_ids: (number[]),
      *   is_board: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -5071,7 +4807,7 @@ export class VKApi extends BaseVKApi {
      *   friends_only: (boolean|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -5087,8 +4823,12 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   question: (string|undefined),
      *   is_anonymous: (boolean|undefined),
+     *   is_multiple: (boolean|undefined),
+     *   end_date: (number|undefined),
      *   owner_id: (number|undefined),
      *   add_answers: (string|undefined),
+     *   photo_id: (number|undefined),
+     *   background_id: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5101,12 +4841,15 @@ export class VKApi extends BaseVKApi {
      * Edits created polls
      *
      * @param {{
-     *   owner_id: (number),
+     *   owner_id: (number|undefined),
      *   poll_id: (number),
      *   question: (string|undefined),
      *   add_answers: (string|undefined),
      *   edit_answers: (string|undefined),
      *   delete_answers: (string|undefined),
+     *   end_date: (number|undefined),
+     *   photo_id: (number|undefined),
+     *   background_id: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5121,6 +4864,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   count: (number|undefined),
      *   offset: (number|undefined),
+     *   type: (number|undefined),
      *   owner_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -5151,9 +4895,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.BaseGetUploadServerResponse>}
+     * @returns {Promise<Responses.DocsGetUploadServer>}
      */
-    public async docsGetUploadServer(params: MethodsProps.DocsGetUploadServerParams): Promise<Responses.BaseGetUploadServerResponse> {
+    public async docsGetUploadServer(params: MethodsProps.DocsGetUploadServerParams): Promise<Responses.DocsGetUploadServer> {
         return super.call("docs.getUploadServer", params)
     }
     /**
@@ -5292,7 +5036,6 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   offset: (number|undefined),
      *   count: (number|undefined),
-     *   photo_sizes: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5350,6 +5093,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   count: (number|undefined),
+     *   offset: (number|undefined),
      *   extended: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -5416,7 +5160,6 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   link: (string),
-     *   text: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5429,7 +5172,7 @@ export class VKApi extends BaseVKApi {
      * Removes link from the user's faves.
      *
      * @param {{
-     *   link_id: (string),
+     *   link_id: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5473,8 +5216,13 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   group_id: (number|undefined),
      *   app_id: (number|undefined),
-     *   date_from: (string|undefined),
-     *   date_to: (string|undefined),
+     *   timestamp_from: (number|undefined),
+     *   timestamp_to: (number|undefined),
+     *   interval: (string|undefined),
+     *   intervals_count: (number|undefined),
+     *   filters: (string[]|undefined),
+     *   stats_groups: (string[]|undefined),
+     *   extended: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5487,6 +5235,7 @@ export class VKApi extends BaseVKApi {
      * undefined
      *
      * @param {{
+     *   id: (string),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5499,7 +5248,7 @@ export class VKApi extends BaseVKApi {
      * Returns stats for a wall post.
      *
      * @param {{
-     *   owner_id: (number),
+     *   owner_id: (string),
      *   post_id: (number),
      *   access_token: (string|undefined)
      * }} params
@@ -5517,6 +5266,7 @@ export class VKApi extends BaseVKApi {
      *   offset: (number|undefined),
      *   limit: (number|undefined),
      *   filters: (string[]|undefined),
+     *   fields: (string[]|undefined),
      *   search_global: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -5536,7 +5286,7 @@ export class VKApi extends BaseVKApi {
      *   platform: (string|undefined),
      *   extended: (boolean|undefined),
      *   return_friends: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   q: (string|undefined),
      *   genre_id: (number|undefined),
@@ -5556,7 +5306,9 @@ export class VKApi extends BaseVKApi {
      *   app_id: (number|undefined),
      *   app_ids: (string[]|undefined),
      *   platform: (string|undefined),
-     *   fields: (string[]|undefined),
+     *   extended: (boolean|undefined),
+     *   return_friends: (boolean|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   name_case: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
@@ -5600,9 +5352,11 @@ export class VKApi extends BaseVKApi {
      * Creates friends list for requests and invites in current app.
      *
      * @param {{
+     *   extended: (boolean|undefined),
      *   count: (number|undefined),
+     *   offset: (number|undefined),
      *   type: (string|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5653,6 +5407,19 @@ export class VKApi extends BaseVKApi {
      */
     public async appsGetScore(params: MethodsProps.AppsGetScoreParams): Promise<Responses.AppsGetScoreResponse> {
         return super.call("apps.getScore", params)
+    }
+    /**
+     * Returns scopes for auth
+     *
+     * @param {{
+     *   type: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AppsGetScopesResponse>}
+     */
+    public async appsGetScopes(params: MethodsProps.AppsGetScopesParams): Promise<Responses.AppsGetScopesResponse> {
+        return super.call("apps.getScopes", params)
     }
     /**
      * Checks whether a link is blocked in VK.
@@ -5781,19 +5548,6 @@ export class VKApi extends BaseVKApi {
      */
     public async databaseGetRegions(params: MethodsProps.DatabaseGetRegionsParams): Promise<Responses.DatabaseGetRegionsResponse> {
         return super.call("database.getRegions", params)
-    }
-    /**
-     * Returns information about streets by their IDs.
-     *
-     * @param {{
-     *   street_ids: (number[]),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.DatabaseGetStreetsByIdResponse>}
-     */
-    public async databaseGetStreetsById(params: MethodsProps.DatabaseGetStreetsByIdParams): Promise<Responses.DatabaseGetStreetsByIdResponse> {
-        return super.call("database.getStreetsById", params)
     }
     /**
      * Returns information about countries by their IDs.
@@ -6207,20 +5961,6 @@ export class VKApi extends BaseVKApi {
         return super.call("ads.getDemographics", params)
     }
     /**
-     * Allows to get detailed information about the ad post reach.
-     *
-     * @param {{
-     *   account_id: (number),
-     *   ads_ids: (string),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.AdsGetAdsPostsReachResponse>}
-     */
-    public async adsGetAdsPostsReach(params: MethodsProps.AdsGetAdsPostsReachParams): Promise<Responses.AdsGetAdsPostsReachResponse> {
-        return super.call("ads.getAdsPostsReach", params)
-    }
-    /**
      * Returns current budget of the advertising account.
      *
      * @param {{
@@ -6279,10 +6019,13 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   account_id: (number),
+     *   client_id: (number|undefined),
      *   criteria: (string|undefined),
      *   ad_id: (number|undefined),
      *   ad_format: (number|undefined),
      *   ad_platform: (string|undefined),
+     *   ad_platform_no_wall: (string|undefined),
+     *   ad_platform_no_ad_network: (string|undefined),
      *   link_url: (string),
      *   link_domain: (string|undefined),
      *   access_token: (string|undefined)
@@ -6329,6 +6072,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   ad_format: (number),
+     *   icon: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -6383,8 +6127,9 @@ export class VKApi extends BaseVKApi {
      *   account_id: (number),
      *   client_id: (number|undefined),
      *   name: (string),
-     *   domain: (string|undefined),
      *   lifetime: (number|undefined),
+     *   target_pixel_id: (number|undefined),
+     *   target_pixel_rules: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -6403,6 +6148,8 @@ export class VKApi extends BaseVKApi {
      *   name: (string),
      *   domain: (string|undefined),
      *   lifetime: (number|undefined),
+     *   target_pixel_id: (number|undefined),
+     *   target_pixel_rules: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -6476,6 +6223,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   owner_id: (number),
+     *   album_id: (number|undefined),
      *   count: (number|undefined),
      *   offset: (number|undefined),
      *   extended: (boolean|undefined),
@@ -6506,14 +6254,17 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   owner_id: (number),
+     *   album_id: (number|undefined),
      *   q: (string|undefined),
      *   price_from: (number|undefined),
      *   price_to: (number|undefined),
      *   tags: (number[]|undefined),
+     *   sort: (number|undefined),
      *   rev: (number|undefined),
      *   offset: (number|undefined),
      *   count: (number|undefined),
      *   extended: (boolean|undefined),
+     *   status: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -6579,10 +6330,11 @@ export class VKApi extends BaseVKApi {
      *   item_id: (number),
      *   need_likes: (boolean|undefined),
      *   start_comment_id: (number|undefined),
+     *   offset: (number|undefined),
      *   count: (number|undefined),
      *   sort: (string|undefined),
      *   extended: (boolean|undefined),
-     *   fields: (string[]|undefined),
+     *   fields: (Models.UsersFields[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -6670,7 +6422,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   owner_id: (number),
      *   item_id: (number),
-     *   reason: (number),
+     *   reason: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -6691,6 +6443,7 @@ export class VKApi extends BaseVKApi {
      *   deleted: (boolean|undefined),
      *   main_photo_id: (number),
      *   photo_ids: (number[]|undefined),
+     *   url: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -6712,6 +6465,7 @@ export class VKApi extends BaseVKApi {
      *   deleted: (boolean|undefined),
      *   main_photo_id: (number),
      *   photo_ids: (number[]|undefined),
+     *   url: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -6857,5 +6611,255 @@ export class VKApi extends BaseVKApi {
      */
     public async marketAddToAlbum(params: MethodsProps.MarketAddToAlbumParams): Promise<Responses.OkResponse> {
         return super.call("market.addToAlbum", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   owner_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async accountBan(params: MethodsProps.AccountBanParams): Promise<Responses.OkResponse> {
+        return super.call("account.ban", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   owner_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async accountUnban(params: MethodsProps.AccountUnbanParams): Promise<Responses.OkResponse> {
+        return super.call("account.unban", params)
+    }
+    /**
+     * Get metro stations by city
+     *
+     * @param {{
+     *   city_id: (number),
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.DatabaseGetMetroStationsResponse>}
+     */
+    public async databaseGetMetroStations(params: MethodsProps.DatabaseGetMetroStationsParams): Promise<Responses.DatabaseGetMetroStationsResponse> {
+        return super.call("database.getMetroStations", params)
+    }
+    /**
+     * Get metro station by his id
+     *
+     * @param {{
+     *   station_ids: (number[]|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.DatabaseGetMetroStationsByIdResponse>}
+     */
+    public async databaseGetMetroStationsById(params: MethodsProps.DatabaseGetMetroStationsByIdParams): Promise<Responses.DatabaseGetMetroStationsByIdResponse> {
+        return super.call("database.getMetroStationsById", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   owner_id: (number|undefined),
+     *   end_date: (number|undefined),
+     *   reason: (number|undefined),
+     *   comment: (string|undefined),
+     *   comment_visible: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async groupsBan(params: MethodsProps.GroupsBanParams): Promise<Responses.OkResponse> {
+        return super.call("groups.ban", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   server_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async groupsDeleteCallbackServer(params: MethodsProps.GroupsDeleteCallbackServerParams): Promise<Responses.OkResponse> {
+        return super.call("groups.deleteCallbackServer", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async groupsDisableOnline(params: MethodsProps.GroupsDisableOnlineParams): Promise<Responses.OkResponse> {
+        return super.call("groups.disableOnline", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   server_id: (number),
+     *   url: (string),
+     *   title: (string),
+     *   secret_key: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async groupsEditCallbackServer(params: MethodsProps.GroupsEditCallbackServerParams): Promise<Responses.OkResponse> {
+        return super.call("groups.editCallbackServer", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async groupsEnableOnline(params: MethodsProps.GroupsEnableOnlineParams): Promise<Responses.OkResponse> {
+        return super.call("groups.enableOnline", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   owner_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async groupsUnban(params: MethodsProps.GroupsUnbanParams): Promise<Responses.OkResponse> {
+        return super.call("groups.unban", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   title: (string),
+     *   address: (string),
+     *   additional_address: (string|undefined),
+     *   country_id: (number),
+     *   city_id: (number),
+     *   metro_id: (number|undefined),
+     *   latitude: (number),
+     *   longitude: (number),
+     *   phone: (string|undefined),
+     *   work_info_status: (string|undefined),
+     *   timetable: (string|undefined),
+     *   is_main_address: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.GroupsAddAddressResponse>}
+     */
+    public async groupsAddAddress(params: MethodsProps.GroupsAddAddressParams): Promise<Responses.GroupsAddAddressResponse> {
+        return super.call("groups.addAddress", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   address_id: (number),
+     *   title: (string|undefined),
+     *   address: (string|undefined),
+     *   additional_address: (string|undefined),
+     *   country_id: (number|undefined),
+     *   city_id: (number|undefined),
+     *   metro_id: (number|undefined),
+     *   latitude: (number|undefined),
+     *   longitude: (number|undefined),
+     *   phone: (string|undefined),
+     *   work_info_status: (string|undefined),
+     *   timetable: (string|undefined),
+     *   is_main_address: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.GroupsEditAddressResponse>}
+     */
+    public async groupsEditAddress(params: MethodsProps.GroupsEditAddressParams): Promise<Responses.GroupsEditAddressResponse> {
+        return super.call("groups.editAddress", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   peer_id: (number),
+     *   group_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async messagesUnpin(params: MethodsProps.MessagesUnpinParams): Promise<Responses.OkResponse> {
+        return super.call("messages.unpin", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   monthly_tier: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.OkResponse>}
+     */
+    public async streamingSetSettings(params: MethodsProps.StreamingSetSettingsParams): Promise<Responses.OkResponse> {
+        return super.call("streaming.setSettings", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   post_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async wallCloseComments(params: MethodsProps.WallCloseCommentsParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("wall.closeComments", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   post_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async wallOpenComments(params: MethodsProps.WallOpenCommentsParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("wall.openComments", params)
     }
 }

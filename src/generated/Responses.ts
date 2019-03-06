@@ -1,7 +1,10 @@
 import * as Models from "./Models"
 
 export type OkResponse = Models.BaseOkResponse
+export type BaseBoolResponse = Models.BaseBoolInt
 export type BaseGetUploadServerResponse = Models.BaseUploadServer
+export type PhotosGetMarketUploadServerResponse = Models.BaseUploadServer
+export type DocsGetUploadServer = Models.BaseUploadServer
 export interface AccountChangePasswordResponse {
     /**
      * New token
@@ -37,7 +40,6 @@ export type AccountGetCountersResponse = Models.AccountAccountCounters
 export type AccountGetInfoResponse = Models.AccountInfo
 export type AccountGetProfileInfoResponse = Models.AccountUserSettings
 export type AccountGetPushSettingsResponse = Models.AccountPushSettings
-export type AccountLookupContactsResponse = Models.AccountLookupResult
 export interface AccountSaveProfileInfoResponse {
     /**
      * 1 if changes has been processed
@@ -69,7 +71,6 @@ export type AdsDeleteClientsResponse = number
 export type AdsGetAccountsResponse = Models.AdsAccount[]
 export type AdsGetAdsResponse = Models.AdsAd[]
 export type AdsGetAdsLayoutResponse = Models.AdsAdLayout[]
-export type AdsGetAdsPostsReachResponse = Models.AdsPostStats[]
 export type AdsGetAdsTargetingResponse = Models.AdsTargSettings[]
 export type AdsGetBudgetResponse = number
 export type AdsGetCampaignsResponse = Models.AdsCampaign[]
@@ -111,6 +112,16 @@ export interface AppsGetCatalogResponse {
      * 
      */
     items: Models.AppsApp[]
+}
+export interface AppsGetScopesResponse {
+    /**
+     * Total number
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.AppsScope[]
 }
 export interface AppsGetLeaderboardResponse {
     /**
@@ -157,22 +168,6 @@ export interface AppsGetFriendsListResponse {
      * 
      */
     items: Models.UsersUserFull[]
-}
-export interface AuthSignupResponse {
-    /**
-     * Parameter to retry
-     */
-    sid: string
-}
-export interface AuthConfirmResponse {
-    /**
-     * 1 if success
-     */
-    success: number,
-    /**
-     * User ID
-     */
-    user_id: number
 }
 export interface AuthRestoreResponse {
     /**
@@ -282,7 +277,6 @@ export interface DatabaseGetRegionsResponse {
      */
     items: Models.DatabaseRegion[]
 }
-export type DatabaseGetStreetsByIdResponse = Models.DatabaseStreet[]
 export type DatabaseGetCountriesByIdResponse = Models.BaseCountry[]
 export interface DatabaseGetChairsResponse {
     /**
@@ -554,26 +548,6 @@ export interface FriendsGetSuggestionsResponse {
     items: Models.UsersUserFull[]
 }
 export type FriendsAreFriendsResponse = Models.FriendsFriendStatus[]
-export interface FriendsGetAvailableForCallResponse {
-    /**
-     * Total number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: number[]
-}
-export interface FriendsGetAvailableForCallFieldsResponse {
-    /**
-     * Total number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: Models.UsersUserFull[]
-}
 export interface FriendsSearchResponse {
     /**
      * Total number
@@ -756,16 +730,6 @@ export interface GroupsGetBannedResponse {
     items: Models.GroupsOwnerXtrBanInfo[]
 }
 export type GroupsCreateResponse = Models.GroupsGroup
-export interface GroupsEditPlaceResponse {
-    /**
-     * 
-     */
-    success: Models.BaseOkResponse,
-    /**
-     * Place address
-     */
-    address: string
-}
 export type GroupsGetSettingsResponse = Models.GroupsGroupSettings
 export interface GroupsGetRequestsResponse {
     /**
@@ -788,6 +752,18 @@ export interface GroupsGetRequestsFieldsResponse {
     items: Models.UsersUserFull[]
 }
 export type GroupsAddLinkResponse = Models.GroupsGroupLink
+export interface GroupsGetAddressesResponse {
+    /**
+     * Total count of addresses
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.GroupsAddress[]
+}
+export type GroupsAddAddressResponse = Models.GroupsAddress
+export type GroupsEditAddressResponse = Models.GroupsAddress
 export type LeadsCompleteResponse = Models.LeadsComplete
 export type LeadsStartResponse = Models.LeadsStart
 export type LeadsGetStatsResponse = Models.LeadsLead
@@ -960,6 +936,19 @@ export interface MarketAddAlbumResponse {
      */
     market_album_id: number
 }
+export interface MessagesGetInviteLinkResponse {
+    /**
+     * 
+     */
+    link: string
+}
+export interface MessagesJoinChatByInviteLinkResponse {
+    /**
+     * 
+     */
+    chat_id: number
+}
+export type MessagesPinResponse = Models.MessagesPinnedMessage
 export interface MessagesGetConversationsResponse {
     /**
      * Total number
@@ -980,11 +969,7 @@ export interface MessagesGetConversationsResponse {
     /**
      * 
      */
-    groups: Models.GroupsGroupFull[],
-    /**
-     * 
-     */
-    emails: Models.MessagesEmail[]
+    groups: Models.GroupsGroupFull[]
 }
 export interface MessagesGetConversationsByIdResponse {
     /**
@@ -995,38 +980,6 @@ export interface MessagesGetConversationsByIdResponse {
      * 
      */
     items: Models.MessagesConversationWithMessage[]
-}
-export interface MessagesGetImportantMessagesResponse {
-    /**
-     * 
-     */
-    messages: Models.MessagesMessage[],
-    /**
-     * 
-     */
-    profiles: Models.UsersUser[],
-    /**
-     * 
-     */
-    groups: Models.GroupsGroup[],
-    /**
-     * 
-     */
-    emails: Models.MessagesEmail[],
-    /**
-     * 
-     */
-    conversations: Models.MessagesConversation[]
-}
-export interface MessagesGetResponse {
-    /**
-     * Total number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: Models.MessagesMessage[]
 }
 export interface MessagesDeleteResponse {
 }
@@ -1127,8 +1080,56 @@ export type MessagesGetChatFieldsResponse = Models.MessagesChatFull
 export type MessagesGetChatChatIdsResponse = Models.MessagesChat[]
 export type MessagesGetChatChatIdsFieldsResponse = Models.MessagesChatFull[]
 export type MessagesCreateChatResponse = number
-export type MessagesEditChatResponse = Models.BaseOkResponse
-export type MessagesGetChatUsersResponse = number[]
+export interface MessagesGetChatPreviewResponse {
+    /**
+     * 
+     */
+    preview: Models.MessageChatPreview,
+    /**
+     * 
+     */
+    profiles: Models.UsersUserFull[]
+}
+export interface MessagesGetConversationMembersResponse {
+    /**
+     * Chat members count
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.MessagesConversationMember[],
+    /**
+     * 
+     */
+    chat_restrictions: Models.MessagesChatRestrictions,
+    /**
+     * 
+     */
+    profiles: Models.UsersUserFull[],
+    /**
+     * 
+     */
+    groups: Models.GroupsGroupFull[]
+}
+export interface MessagesSearchConversationsResponse {
+    /**
+     * Total results number
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.MessagesConversation[],
+    /**
+     * 
+     */
+    profiles: Models.UsersUserFull[],
+    /**
+     * 
+     */
+    groups: Models.GroupsGroupFull[]
+}
 export type MessagesGetLastActivityResponse = Models.MessagesLastActivity
 export interface MessagesSetChatPhotoResponse {
     /**
@@ -1139,6 +1140,12 @@ export interface MessagesSetChatPhotoResponse {
      * 
      */
     chat: Models.MessagesChat
+}
+export interface MessagesDeleteConversationResponse {
+    /**
+     * Id of the last message, that was deleted
+     */
+    last_deleted_id: number
 }
 export interface MessagesDeleteChatPhotoResponse {
     /**
@@ -1454,7 +1461,7 @@ export interface PhotosGetUserPhotosResponse {
      */
     items: Models.PhotosPhoto[]
 }
-export interface PhotosGetUserPhotoExtendedResponse {
+export interface PhotosGetUserPhotosExtendedResponse {
     /**
      * Total number
      */
@@ -1525,40 +1532,6 @@ export interface PhotosGetNewTagsResponse {
      */
     items: Models.PhotosPhotoXtrTagInfo[]
 }
-export interface PlacesAddResponse {
-    /**
-     * Place ID
-     */
-    id: number
-}
-export type PlacesGetByIdResponse = Models.PlacesPlaceMin[]
-export interface PlacesSearchResponse {
-    /**
-     * Total number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: Models.PlacesPlaceFull[]
-}
-export interface PlacesCheckinResponse {
-    /**
-     * Checkin ID
-     */
-    id: number
-}
-export interface PlacesGetCheckinsResponse {
-    /**
-     * Total number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: Models.PlacesCheckin[]
-}
-export type PlacesGetTypesResponse = Models.PlacesTypes[]
 export type PollsGetByIdResponse = Models.PollsPoll
 export type PollsAddVoteResponse = Models.BaseBoolInt
 export type PollsDeleteVoteResponse = Models.BaseBoolInt
@@ -1647,16 +1620,6 @@ export interface UsersGetFollowersFieldsResponse {
      */
     items: Models.UsersUserFull[]
 }
-export interface UsersGetNearbyResponse {
-    /**
-     * Users number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: Models.UsersUserFull[]
-}
 export type UtilsGetShortLinkResponse = Models.UtilsShortLink
 export interface UtilsGetLastShortenedLinksResponse {
     /**
@@ -1713,34 +1676,6 @@ export interface VideoSearchResponse {
     items: Models.VideoVideo[]
 }
 export interface VideoSearchExtendedResponse {
-    /**
-     * Total number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: Models.VideoVideo[],
-    /**
-     * 
-     */
-    profiles: Models.UsersUserMin[],
-    /**
-     * 
-     */
-    groups: Models.GroupsGroupFull[]
-}
-export interface VideoGetUserVideosResponse {
-    /**
-     * Total number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: Models.VideoVideo[]
-}
-export interface VideoGetUserVideosExtendedResponse {
     /**
      * Total number
      */
@@ -1826,74 +1761,6 @@ export interface VideoGetCommentsExtendedResponse {
 }
 export type VideoCreateCommentResponse = number
 export type VideoRestoreCommentResponse = Models.BaseBoolInt
-export type VideoGetTagsResponse = Models.VideoVideoTag[]
-export type VideoPutTagResponse = number
-export interface VideoGetNewTagsResponse {
-    /**
-     * Total number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: Models.VideoVideoTagInfo[]
-}
-export interface VideoGetCatalogResponse {
-    /**
-     * 
-     */
-    items: Models.VideoCatBlock[],
-    /**
-     * New value for _from_ parameter
-     */
-    next: string
-}
-export interface VideoGetCatalogExtendedResponse {
-    /**
-     * 
-     */
-    items: Models.VideoCatBlock[],
-    /**
-     * 
-     */
-    profiles: Models.UsersUserFull[],
-    /**
-     * 
-     */
-    groups: Models.GroupsGroupFull[],
-    /**
-     * New value for _from_ parameter
-     */
-    next: string
-}
-export interface VideoGetCatalogSectionResponse {
-    /**
-     * 
-     */
-    items: Models.VideoCatElement[],
-    /**
-     * New value for _from_ parameter
-     */
-    next: string
-}
-export interface VideoGetCatalogSectionExtendedResponse {
-    /**
-     * 
-     */
-    items: Models.VideoCatElement[],
-    /**
-     * 
-     */
-    profiles: Models.UsersUserFull[],
-    /**
-     * 
-     */
-    groups: Models.GroupsGroupFull[],
-    /**
-     * New value for _from_ parameter
-     */
-    next: string
-}
 export interface WallGetResponse {
     /**
      * Total number
@@ -2017,7 +1884,19 @@ export interface WallGetCommentsResponse {
     /**
      * 
      */
-    items: Models.WallWallComment[]
+    items: Models.WallWallComment[],
+    /**
+     * Information whether current user can comment the post
+     */
+    can_post: Models.BaseBoolInt,
+    /**
+     * Information whether groups can comment the post
+     */
+    groups_can_post: boolean,
+    /**
+     * Count of replies of current level
+     */
+    current_level_count: number
 }
 export interface WallGetCommentsExtendedResponse {
     /**
@@ -2028,6 +1907,18 @@ export interface WallGetCommentsExtendedResponse {
      * 
      */
     items: Models.WallWallComment[],
+    /**
+     * Information whether current user can comment the post
+     */
+    can_post: Models.BaseBoolInt,
+    /**
+     * Information whether groups can comment the post
+     */
+    groups_can_post: boolean,
+    /**
+     * Count of replies of current level
+     */
+    current_level_count: number,
     /**
      * 
      */
@@ -2216,5 +2107,6 @@ export interface StoriesGetViewersExtendedResponse {
      */
     items: Models.UsersUserFull[]
 }
-export type MessagesSearchConversationsResponse = any
-export type MessagesGetConversationMembersResponse = any
+export type PhotosGetOwnerPhotoUploadServerResponse = any
+export type DatabaseGetMetroStationsResponse = any
+export type DatabaseGetMetroStationsByIdResponse = any
