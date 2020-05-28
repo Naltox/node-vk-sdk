@@ -32,36 +32,37 @@ const METHODS_PROPS_FILE = 'MethodsProps.ts'
 
 const GENERATED_PATH = __dirname + '/../generated/'
 
-generate()
+main()
+
+async function main() {
+    try {
+        await generate()
+    } catch (e) {
+        console.error(e)
+    }
+}
 
 async function generate() {
     let modelsCode: SourceCode[] = []
 
     // Hack types missing in schema
-
     let anyType = {type: 'any', properties: {}}
-    objects.definitions['groups_address_work_info_status'] = anyType
-    objects.definitions['groups_address_timetable_day'] = anyType
-    objects.definitions['messages_conversation_peer_type'] = anyType
-    objects.definitions['podcast_timecode'] = anyType
-    objects.definitions.events_event_attach.properties.friends.items = anyType
-    objects.definitions.video_video_album_full.properties.privacy = anyType
-    responses.definitions['photos_getOwnerPhotoUploadServer_response'] = {
-        type: 'object',
-        properties: {response: {type: 'any'}}
-    }
-    responses.definitions['database_getMetroStations_response'] = {
-        type: 'object',
-        properties: {response: {type: 'any'}}
-    }
-    responses.definitions['database_getMetroStationsById_response'] = {
-        type: 'object',
-        properties: {response: {type: 'any'}}
-    }
-    responses.definitions['database_getMetroStationsById_response'] = {
-        type: 'object',
-        properties: {response: {type: 'any'}}
-    }
+    let anyResponse = { type: 'object', properties: {response: {type: 'any'}} }
+    objects.definitions['audio_ads_config'] = anyType
+    objects.definitions['account_info'] = anyType
+    objects.definitions['link_redirects'] = anyType
+    objects.definitions['articles_article'] = anyType
+    objects.definitions['snippets_amp'] = anyType
+    objects.definitions['callback_message_base'] = anyType
+    objects.definitions['notifications_notification_item'] = anyType
+    objects.definitions['stories_clickable_area'] = anyType
+    objects.definitions['actionLinks_action'] = anyType
+    objects.definitions['stories_stat_category'] = anyType
+
+    // Not supported yet
+    responses.definitions['groups_getSettings_response'] = anyResponse
+    responses.definitions['messages_send_user_ids_response'] = anyResponse
+    responses.definitions['secure_giveEventSticker_response'] = anyResponse
 
 
     //

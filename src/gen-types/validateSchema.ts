@@ -45,7 +45,7 @@ function validateMethods() {
     }
 }
 
-function validateType(schema: any, name: string) {
+function validateType(schema: any, name: string, path: string[] = []) {
     if (schema.$ref) {
         if (!resolveRef(schema.$ref)) {
             logger.warn('Missing object ' + typeNameFromRef(schema.$ref) + ' required in ' + name)
@@ -75,7 +75,11 @@ function validateType(schema: any, name: string) {
             return
         }
         if (!schema.properties) {
-            logger.warn('Missing properties in ' + name)
+            if (path.length > 1) {
+                logger.warn('Missing properties in ' + name + ' at ' + path.join('->'))
+            } else {
+                logger.warn('Missing properties in ' + name)
+            }
         }
 
         let propsSet = new Set<string>()
@@ -83,7 +87,7 @@ function validateType(schema: any, name: string) {
             if (propsSet.has(propName)) {
                 logger.warn('Duplicate property definition: ' + propName + ' in object' + name)
             }
-            validateType(schema.properties[propName], propName)
+            validateType(schema.properties[propName], propName, [...path, propName])
             propsSet.add(propName)
         }
     }
@@ -95,7 +99,8 @@ function validateObjects(schema: any) {
         if (objectsSet.has(typeName)) {
             logger.warn('Duplicate object definition: ' + typeName)
         }
-        validateType(schema.definitions[typeName], typeName)
+        // console.log(schema.definitions[typeName], typeName)
+        validateType(schema.definitions[typeName], typeName, [typeName])
         objectsSet.add(typeName)
     }
 }

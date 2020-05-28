@@ -6,7 +6,7 @@ import {postRequest} from "./net";
 const DEFAULT_REQUESTS_PER_SECOND = 3
 const TIMEOUT = 5000 // 5 seconds
 const API_BASE_URL = 'https://api.vk.com/method/'
-const API_VERSION = '5.92'
+const API_VERSION = '5.116'
 
 export interface VKApiOptions {
     lang?: string | number,
