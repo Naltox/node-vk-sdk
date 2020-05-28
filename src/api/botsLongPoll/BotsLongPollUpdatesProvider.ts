@@ -5,7 +5,7 @@ const req = require('tiny_request')
 export class BotsLongPollUpdatesProvider implements BaseUpdateProvider {
     private server?: string
     private key?: string
-    private ts?: number
+    private ts?: string
     private updatesCallback?: (update: any) => void
 
     constructor(
