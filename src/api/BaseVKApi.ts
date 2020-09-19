@@ -6,7 +6,7 @@ import {postRequest} from "./net";
 const DEFAULT_REQUESTS_PER_SECOND = 3
 const TIMEOUT = 5000 // 5 seconds
 const API_BASE_URL = 'https://api.vk.com/method/'
-const API_VERSION = '5.116'
+const API_VERSION = '5.124'
 
 export interface VKApiOptions {
     lang?: string | number,
@@ -15,7 +15,8 @@ export interface VKApiOptions {
     token?: string,
     timeout?: number,
     requestsPerSecond?: number,
-    useQueue?: boolean
+    useQueue?: boolean,
+    version?: string
 }
 
 type GenericParams = { [key: string]: any }
@@ -27,11 +28,13 @@ export class BaseVKApi {
     readonly queue?: AsyncQueue<any>
     readonly token?: string
     readonly timeout: number
+    readonly version: string;
 
     constructor(options: VKApiOptions) {
         this.logger = options.logger
         this.token = options.token
         this.timeout = options.timeout || TIMEOUT
+        this.version = options.version || API_VERSION
         this.lang = options.lang
         this.testMode = options.testMode
 
@@ -49,7 +52,7 @@ export class BaseVKApi {
         if (!params['testMode'] && !!this.testMode)
             params['testMode'] = this.testMode
 
-        params['v'] = API_VERSION
+        params['v'] = this.version
         params['access_token'] = params['access_token'] || this.token
 
         if (!params['access_token'])

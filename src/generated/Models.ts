@@ -5671,8 +5671,9 @@ export interface MarketMarketItem {
     category: MarketMarketCategory,
     /**
      * Date when the item has been created in Unixtime
+     * Now it is returned only to the group administrator (since version 5.122)
      */
-    date: number,
+    date?: number,
     /**
      * Item description
      */
@@ -5697,6 +5698,10 @@ export interface MarketMarketItem {
      * 
      */
     price: MarketPrice,
+    /**
+     * Dimensions and weight of the product. They are returned if they were specified when editing or saving the product
+     */
+    dimensions?: MarketDimensions,
     /**
      * URL of the preview image
      */
@@ -5837,6 +5842,21 @@ export interface MarketPrice {
      * Text
      */
     text: string
+}
+
+export interface MarketDimensions {
+    /**
+     * width in millimeters
+     */
+    width: number,
+    /**
+     * height in millimeters
+     */
+    height: number,
+    /**
+     * length in millimeters
+     */
+    length: number
 }
 
 export interface MarketSection {
