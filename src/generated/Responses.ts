@@ -1854,11 +1854,7 @@ export interface StoriesGetPhotoUploadServerResponse {
     /**
      * Upload URL
      */
-    upload_url: string,
-    /**
-     * Users ID who can to see story.
-     */
-    user_ids: number[]
+    upload_url: string
 }
 export interface StoriesGetStatsV5200Response {
     /**
@@ -1883,11 +1879,7 @@ export interface StoriesGetVideoUploadServerResponse {
     /**
      * Upload URL
      */
-    upload_url: string,
-    /**
-     * Users ID who can to see story.
-     */
-    user_ids: number[]
+    upload_url: string
 }
 export interface StoriesGetViewersExtendedV5115Response {
     /**

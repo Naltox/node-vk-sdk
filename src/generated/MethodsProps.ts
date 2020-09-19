@@ -5215,6 +5215,10 @@ export interface MessagesEditParams {
      */
     message_id?: number,
     /**
+     * ID of the message in the conversation
+     */
+    conversation_message_id?: number,
+    /**
      * access token
      */
     access_token?: string
@@ -5861,6 +5865,10 @@ export interface MessagesSendParams {
      * undefined
      */
     payload?: string,
+    /**
+     * Object that describes the source of user content for chat bots
+     */
+    content_source?: string,
     /**
      * undefined
      */
