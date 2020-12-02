@@ -90,6 +90,22 @@ export interface AdsGetCategoriesResponse {
 export type AdsGetClientsResponse = Models.AdsClient[]
 export type AdsGetDemographicsResponse = Models.AdsDemoStats[]
 export type AdsGetFloodStatsResponse = Models.AdsFloodStats
+export interface AdsGetLookalikeRequestsResponse {
+    /**
+     * Total count of found lookalike requests
+     */
+    count: number,
+    /**
+     * found lookalike requests
+     */
+    items: Models.AdsLookalikeRequest[]
+}
+export interface AdsGetMusiciansResponse {
+    /**
+     * Musicians
+     */
+    items: Models.AdsMusician[]
+}
 export type AdsGetOfficeUsersResponse = Models.AdsUsers[]
 export type AdsGetPostsReachResponse = Models.AdsPromotedPostReach[]
 export type AdsGetRejectionReasonResponse = Models.AdsRejectReason
@@ -107,6 +123,76 @@ export type AdsRemoveOfficeUsersResponse = boolean
 export type AdsUpdateAdsResponse = number[]
 export type AdsUpdateCampaignsResponse = number
 export type AdsUpdateClientsResponse = number
+export type AdsUpdateOfficeUsersResponse = Models.AdsUpdateOfficeUsersResult[]
+export interface AdswebGetAdCategoriesResponse {
+    /**
+     * 
+     */
+    categories: Models.AdswebGetAdCategoriesResponseCategoriesCategory[]
+}
+export interface AdswebGetAdUnitCodeResponse {
+    /**
+     * 
+     */
+    html: string
+}
+export interface AdswebGetAdUnitsResponse {
+    /**
+     * 
+     */
+    count: number,
+    /**
+     * 
+     */
+    ad_units: Models.AdswebGetAdUnitsResponseAdUnitsAdUnit[]
+}
+export interface AdswebGetFraudHistoryResponse {
+    /**
+     * 
+     */
+    count: number,
+    /**
+     * 
+     */
+    entries: Models.AdswebGetFraudHistoryResponseEntriesEntry[]
+}
+export interface AdswebGetSitesResponse {
+    /**
+     * 
+     */
+    count: number,
+    /**
+     * 
+     */
+    sites: Models.AdswebGetSitesResponseSitesSite[]
+}
+export interface AdswebGetStatisticsResponse {
+    /**
+     * 
+     */
+    next_page_id: string,
+    /**
+     * 
+     */
+    items: Models.AdswebGetStatisticsResponseItemsItem[]
+}
+export interface AppWidgetsGetAppImageUploadServerResponse {
+    /**
+     * To upload an image, generate POST-request to upload_url with a file in photo field. Then call appWidgets.saveAppImage method
+     */
+    upload_url: string
+}
+export type AppWidgetsGetAppImagesResponse = Models.AppWidgetsPhotos
+export interface AppWidgetsGetGroupImageUploadServerResponse {
+    /**
+     * To upload an image, generate POST-request to upload_url with a file in photo field. Then call appWidgets.saveAppImage method
+     */
+    upload_url: string
+}
+export type AppWidgetsGetGroupImagesResponse = Models.AppWidgetsPhotos
+export type AppWidgetsGetImagesByIdResponse = Models.AppWidgetsPhoto[]
+export type AppWidgetsSaveAppImageResponse = Models.AppWidgetsPhoto
+export type AppWidgetsSaveGroupImageResponse = Models.AppWidgetsPhoto
 export interface AppsGetCatalogResponse {
     /**
      * Total number
@@ -115,7 +201,11 @@ export interface AppsGetCatalogResponse {
     /**
      * 
      */
-    items: Models.AppsApp[]
+    items: Models.AppsApp[],
+    /**
+     * 
+     */
+    profiles: Models.UsersUserMin[]
 }
 export interface AppsGetFriendsListResponse {
     /**
@@ -164,11 +254,11 @@ export interface AppsGetScopesResponse {
 export type AppsGetScoreResponse = number
 export interface AppsGetResponse {
     /**
-     * Total number
+     * Total number of applications
      */
     count: number,
     /**
-     * 
+     * List of applications
      */
     items: Models.AppsApp[]
 }
@@ -185,6 +275,7 @@ export interface AuthRestoreResponse {
 }
 export type BaseBoolResponse = Models.BaseBoolInt
 export type BaseGetUploadServerResponse = Models.BaseUploadServer
+export type BaseOkResponse = number
 export type BoardAddTopicResponse = number
 export type BoardCreateCommentResponse = number
 export interface BoardGetCommentsExtendedResponse {
@@ -347,12 +438,7 @@ export interface DatabaseGetUniversitiesResponse {
      */
     items: Models.DatabaseUniversity[]
 }
-export interface DocsAddResponse {
-    /**
-     * Doc ID
-     */
-    id: number
-}
+export type DocsAddResponse = number
 export type DocsGetByIdResponse = Models.DocsDoc[]
 export interface DocsGetTypesResponse {
     /**
@@ -402,6 +488,31 @@ export interface DocsSearchResponse {
      * 
      */
     items: Models.DocsDoc[]
+}
+export type DonutGetSubscriptionResponse = Models.DonutDonatorSubscriptionInfo
+export interface DonutGetSubscriptionsResponse {
+    /**
+     * 
+     */
+    subscriptions: Models.DonutDonatorSubscriptionInfo[],
+    /**
+     * 
+     */
+    count: number,
+    /**
+     * 
+     */
+    profiles: Models.UsersUserFull[],
+    /**
+     * 
+     */
+    groups: Models.GroupsGroupFull[]
+}
+export interface DownloadedGamesPaidStatusResponse {
+    /**
+     * Game has been paid
+     */
+    is_paid: boolean
 }
 export type FaveAddTagResponse = Models.FaveTag
 export interface FaveGetPagesResponse {
@@ -459,12 +570,13 @@ export interface FriendsAddListResponse {
     list_id: number
 }
 export type FriendsAddResponse = number
+export type FriendsAreFriendsExtendedResponse = Models.FriendsFriendExtendedStatus[]
 export type FriendsAreFriendsResponse = Models.FriendsFriendStatus[]
 export interface FriendsDeleteResponse {
     /**
      * 
      */
-    success: Models.BaseOkResponse,
+    success: number,
     /**
      * Returns 1 if friend has been deleted
      */
@@ -622,7 +734,17 @@ export interface GroupsGetBannedResponse {
      */
     items: Models.GroupsBannedItem[]
 }
-export type GroupsGetByIdResponse = Models.GroupsGroupFull[]
+export type GroupsGetByIdLegacyResponse = Models.GroupsGroupFull[]
+export interface GroupsGetByIdResponse {
+    /**
+     * 
+     */
+    groups: Models.GroupsGroupFull[],
+    /**
+     * 
+     */
+    profiles: Models.GroupsProfileItem[]
+}
 export interface GroupsGetCallbackConfirmationCodeResponse {
     /**
      * Confirmation code
@@ -688,7 +810,7 @@ export interface GroupsGetInvitesExtendedResponse {
     /**
      * 
      */
-    items: Models.GroupsGroupXtrInvitedBy[],
+    items: Models.GroupsGroupFull[],
     /**
      * 
      */
@@ -706,7 +828,7 @@ export interface GroupsGetInvitesResponse {
     /**
      * 
      */
-    items: Models.GroupsGroupXtrInvitedBy[]
+    items: Models.GroupsGroupFull[]
 }
 export type GroupsGetLongPollServerResponse = Models.GroupsLongPollServer
 export type GroupsGetLongPollSettingsResponse = Models.GroupsLongPollSettings
@@ -761,6 +883,7 @@ export interface GroupsGetRequestsResponse {
     items: number[]
 }
 export type GroupsGetSettingsResponse = any
+export type GroupsGetTagListResponse = Models.GroupsGroupTag[]
 export interface GroupsGetTokenPermissionsResponse {
     /**
      * 
@@ -826,21 +949,6 @@ export interface GroupsSearchResponse {
      */
     items: Models.GroupsGroup[]
 }
-export type LeadsCheckUserResponse = Models.LeadsChecked
-export type LeadsCompleteResponse = Models.LeadsComplete
-export type LeadsGetStatsResponse = Models.LeadsLead
-export type LeadsGetUsersResponse = Models.LeadsEntry[]
-export interface LeadsMetricHitResponse {
-    /**
-     * Information whether request has been processed successfully
-     */
-    result: boolean,
-    /**
-     * Redirect link
-     */
-    redirect_link: string
-}
-export type LeadsStartResponse = Models.LeadsStart
 export interface LikesAddResponse {
     /**
      * Total likes number
@@ -937,6 +1045,12 @@ export interface MarketGetByIdResponse {
      */
     items: Models.MarketMarketItem[]
 }
+export interface MarketGetCategoriesNewResponse {
+    /**
+     * 
+     */
+    items: Models.MarketMarketCategoryTree[]
+}
 export interface MarketGetCategoriesResponse {
     /**
      * Total number
@@ -956,6 +1070,56 @@ export interface MarketGetCommentsResponse {
      * 
      */
     items: Models.WallWallComment[]
+}
+export interface MarketGetGroupOrdersResponse {
+    /**
+     * Total number
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.MarketOrder[]
+}
+export interface MarketGetOrderByIdResponse {
+    /**
+     * 
+     */
+    order: Models.MarketOrder
+}
+export interface MarketGetOrderItemsResponse {
+    /**
+     * Total number
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.MarketOrderItem[]
+}
+export interface MarketGetOrdersExtendedResponse {
+    /**
+     * Total number
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.MarketOrder[],
+    /**
+     * 
+     */
+    groups: Models.GroupsGroupFull[]
+}
+export interface MarketGetOrdersResponse {
+    /**
+     * Total number
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.MarketOrder[]
 }
 export interface MarketGetExtendedResponse {
     /**
@@ -1060,7 +1224,7 @@ export interface MessagesGetChatPreviewResponse {
     /**
      * 
      */
-    preview: Models.MessageChatPreview,
+    preview: Models.MessagesChatPreview,
     /**
      * 
      */
@@ -1148,7 +1312,7 @@ export interface MessagesGetHistoryAttachmentsResponse {
      */
     next_from: string
 }
-export interface MessagesGetHistoryResponse {
+export interface MessagesGetHistoryExtendedResponse {
     /**
      * Total number
      */
@@ -1164,7 +1328,71 @@ export interface MessagesGetHistoryResponse {
     /**
      * 
      */
-    groups: Models.GroupsGroupFull[]
+    groups: Models.GroupsGroupFull[],
+    /**
+     * 
+     */
+    conversations: Models.MessagesConversation[]
+}
+export interface MessagesGetHistoryResponse {
+    /**
+     * Total number
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.MessagesMessage[]
+}
+export interface MessagesGetImportantMessagesExtendedResponse {
+    /**
+     * 
+     */
+    messages: Models.MessagesMessagesArray,
+    /**
+     * 
+     */
+    profiles: Models.UsersUser[],
+    /**
+     * 
+     */
+    groups: Models.GroupsGroup[],
+    /**
+     * 
+     */
+    conversations: Models.MessagesConversation[]
+}
+export interface MessagesGetImportantMessagesResponse {
+    /**
+     * 
+     */
+    messages: Models.MessagesMessagesArray,
+    /**
+     * 
+     */
+    profiles: Models.UsersUser[],
+    /**
+     * 
+     */
+    groups: Models.GroupsGroup[],
+    /**
+     * 
+     */
+    conversations: Models.MessagesConversation[]
+}
+export interface MessagesGetIntentUsersResponse {
+    /**
+     * 
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: number[],
+    /**
+     * 
+     */
+    profiles: Models.UsersUserFull[]
 }
 export interface MessagesGetInviteLinkResponse {
     /**
@@ -1181,15 +1409,19 @@ export interface MessagesGetLongPollHistoryResponse {
     /**
      * 
      */
-    groups: Models.GroupsGroup[],
-    /**
-     * 
-     */
     messages: Models.MessagesLongpollMessages,
     /**
      * 
      */
+    credentials: Models.MessagesLongpollParams,
+    /**
+     * 
+     */
     profiles: Models.UsersUserFull[],
+    /**
+     * 
+     */
+    groups: Models.GroupsGroup[],
     /**
      * 
      */
@@ -1198,6 +1430,10 @@ export interface MessagesGetLongPollHistoryResponse {
      * Persistence timestamp
      */
     new_pts: number,
+    /**
+     * 
+     */
+    from_pts: number,
     /**
      * Has more
      */
@@ -1239,6 +1475,28 @@ export interface MessagesSearchConversationsResponse {
      * 
      */
     groups: Models.GroupsGroupFull[]
+}
+export interface MessagesSearchExtendedResponse {
+    /**
+     * Total number
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: Models.MessagesMessage[],
+    /**
+     * 
+     */
+    profiles: Models.UsersUserFull[],
+    /**
+     * 
+     */
+    groups: Models.GroupsGroupFull[],
+    /**
+     * 
+     */
+    conversations: Models.MessagesConversation[]
 }
 export interface MessagesSearchResponse {
     /**
@@ -1360,7 +1618,7 @@ export interface NewsfeedGetSuggestedSourcesResponse {
     /**
      * 
      */
-    items: any[]
+    items: Models.UsersSubscriptionsItem[]
 }
 export interface NewsfeedGetResponse {
     /**
@@ -1500,7 +1758,6 @@ export interface NotificationsGetResponse {
 }
 export type NotificationsMarkAsViewedResponse = Models.BaseBoolInt
 export type NotificationsSendMessageResponse = Models.NotificationsSendMessageItem[]
-export type OkResponse = Models.BaseOkResponse
 export type OrdersCancelSubscriptionResponse = Models.BaseBoolInt
 export type OrdersChangeStateResponse = string
 export type OrdersGetAmountResponse = Models.OrdersAmount
@@ -1791,9 +2048,7 @@ export type StatsGetPostReachResponse = Models.StatsWallpostStat[]
 export type StatsGetResponse = Models.StatsPeriod[]
 export type StatusGetResponse = Models.StatusStatus
 export type StorageGetKeysResponse = string[]
-export type StorageGetResponse = string
-export type StorageGetV5110Response = Models.StorageValue[]
-export type StorageGetWithKeysResponse = Models.StorageValue[]
+export type StorageGetResponse = Models.StorageValue[]
 export interface StoriesGetBannedExtendedResponse {
     /**
      * Stories count
@@ -1859,24 +2114,6 @@ export interface StoriesGetPhotoUploadServerResponse {
      * Users ID who can to see story.
      */
     user_ids: number[]
-}
-export interface StoriesGetStatsV5200Response {
-    /**
-     * 
-     */
-    preview: string,
-    /**
-     * 
-     */
-    achievement: string,
-    /**
-     * 
-     */
-    achievement_subtitle: string,
-    /**
-     * 
-     */
-    categories: Models.StoriesStatCategory[]
 }
 export type StoriesGetStatsResponse = Models.StoriesStoryStats
 export interface StoriesGetVideoUploadServerResponse {
@@ -1961,11 +2198,21 @@ export interface StoriesGetResponse {
      */
     need_upload_screen: boolean
 }
-export interface StoriesUploadResponse {
+export interface StoriesSaveResponse {
     /**
      * 
      */
-    story: Models.StoriesStory
+    count: number,
+    /**
+     * 
+     */
+    items: Models.StoriesStory[]
+}
+export interface StoriesUploadResponse {
+    /**
+     * A string hash that is used in the stories.save method
+     */
+    upload_result: string
 }
 export interface StreamingGetServerUrlResponse {
     /**
@@ -2195,7 +2442,13 @@ export interface WallGetByIdExtendedResponse {
      */
     groups: Models.GroupsGroupFull[]
 }
-export type WallGetByIdResponse = Models.WallWallpostFull[]
+export type WallGetByIdLegacyResponse = Models.WallWallpostFull[]
+export interface WallGetByIdResponse {
+    /**
+     * 
+     */
+    items: Models.WallWallpostFull[]
+}
 export interface WallGetCommentExtendedResponse {
     /**
      * 
@@ -2330,7 +2583,7 @@ export interface WallRepostResponse {
     /**
      * 
      */
-    success: Models.BaseOkResponse,
+    success: number,
     /**
      * Created post ID
      */
@@ -2339,6 +2592,14 @@ export interface WallRepostResponse {
      * Reposts number
      */
     reposts_count: number,
+    /**
+     * Reposts to wall number
+     */
+    wall_repost_count: number,
+    /**
+     * Reposts to mail number
+     */
+    mail_repost_count: number,
     /**
      * Reposts number
      */

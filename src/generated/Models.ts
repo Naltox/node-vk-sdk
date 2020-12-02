@@ -36,6 +36,10 @@ export interface AccountAccountCounters {
      */
     menu_discover_badge: number,
     /**
+     * 
+     */
+    menu_clips_badge: number,
+    /**
      * New messages number
      */
     messages: number,
@@ -61,7 +65,60 @@ export interface AccountAccountCounters {
     sdk: number
 }
 
-export type AccountInfo = any
+export interface AccountInfo {
+    /**
+     * 
+     */
+    wishlists_ae_promo_banner_show: BaseBoolInt,
+    /**
+     * Two factor authentication is enabled
+     */
+    twoFaRequired: BaseBoolInt,
+    /**
+     * Country code
+     */
+    country: string,
+    /**
+     * Information whether HTTPS-only is enabled
+     */
+    https_required: BaseBoolInt,
+    /**
+     * Information whether user has been processed intro
+     */
+    intro: BaseBoolInt,
+    /**
+     * 
+     */
+    show_vk_apps_intro: boolean,
+    /**
+     * Ads slot id for MyTarget
+     */
+    mini_apps_ads_slot_id: number,
+    /**
+     * 
+     */
+    qr_promotion: number,
+    /**
+     * 
+     */
+    link_redirects: any,
+    /**
+     * Language ID
+     */
+    lang: number,
+    /**
+     * Information whether wall comments should be hidden
+     */
+    no_wall_replies: BaseBoolInt,
+    /**
+     * Information whether only owners posts should be shown
+     */
+    own_posts_default: BaseBoolInt,
+    /**
+     * 
+     */
+    subscriptions: number[]
+}
 
 export interface AccountNameRequest {
     /**
@@ -389,7 +446,11 @@ export interface AccountUserSettings {
     /**
      * URL of square photo of the user with 200 pixels in width
      */
-    photo_200: string
+    photo_200: string,
+    /**
+     * flag about service account
+     */
+    is_service_account: boolean
 }
 
 export interface AccountUserSettingsInterest {
@@ -446,6 +507,8 @@ export type AddressesFields = string
 
 export type AdsAccessRole = string
 
+export type AdsAccessRolePublic = string
+
 export interface AdsAccesses {
     /**
      * Client ID
@@ -473,7 +536,15 @@ export interface AdsAccount {
     /**
      * 
      */
-    account_type: AdsAccountType
+    account_type: AdsAccountType,
+    /**
+     * Account name
+     */
+    account_name: string,
+    /**
+     * Can user view account budget
+     */
+    can_view_budget: boolean
 }
 
 export type AdsAccountType = string
@@ -894,6 +965,71 @@ export interface AdsLinkStatus {
      * Link status
      */
     status: string
+}
+
+export interface AdsLookalikeRequest {
+    /**
+     * Lookalike request ID
+     */
+    id: number,
+    /**
+     * Lookalike request create time, as Unixtime
+     */
+    create_time: number,
+    /**
+     * Lookalike request update time, as Unixtime
+     */
+    update_time: number,
+    /**
+     * Time by which lookalike request would be deleted, as Unixtime
+     */
+    scheduled_delete_time: number,
+    /**
+     * Lookalike request status
+     */
+    status: string,
+    /**
+     * Lookalike request source type
+     */
+    source_type: string,
+    /**
+     * Retargeting group id, which was used as lookalike seed
+     */
+    source_retargeting_group_id: number,
+    /**
+     * Lookalike request seed name (retargeting group name)
+     */
+    source_name: string,
+    /**
+     * Lookalike request seed audience size
+     */
+    audience_count: number,
+    /**
+     * 
+     */
+    save_audience_levels: AdsLookalikeRequestSaveAudienceLevel[]
+}
+
+export interface AdsLookalikeRequestSaveAudienceLevel {
+    /**
+     * Save audience level id, which is used in save audience queries
+     */
+    level: number,
+    /**
+     * Saved audience audience size for according level
+     */
+    audience_count: number
+}
+
+export interface AdsMusician {
+    /**
+     * Targeting music artist ID
+     */
+    id: number,
+    /**
+     * Music artist name
+     */
+    name: string
 }
 
 export type AdsObjectType = string
@@ -1436,6 +1572,63 @@ export interface AdsTargetGroup {
     pixel: string
 }
 
+export interface AdsUpdateOfficeUsersResult {
+    /**
+     * 
+     */
+    user_id: number,
+    /**
+     * 
+     */
+    is_success: boolean,
+    /**
+     * 
+     */
+    error: BaseError
+}
+
+export interface AdsUserSpecification {
+    /**
+     * 
+     */
+    user_id: number,
+    /**
+     * 
+     */
+    role: AdsAccessRolePublic,
+    /**
+     * 
+     */
+    grant_access_to_all_clients: boolean,
+    /**
+     * 
+     */
+    client_ids: number[],
+    /**
+     * 
+     */
+    view_budget: boolean
+}
+
+export interface AdsUserSpecificationCutted {
+    /**
+     * 
+     */
+    user_id: number,
+    /**
+     * 
+     */
+    role: AdsAccessRolePublic,
+    /**
+     * 
+     */
+    client_id: number,
+    /**
+     * 
+     */
+    view_budget: boolean
+}
+
 export interface AdsUsers {
     /**
      * 
@@ -1445,6 +1638,135 @@ export interface AdsUsers {
      * User ID
      */
     user_id: number
+}
+
+export interface AdswebGetAdCategoriesResponseCategoriesCategory {
+    /**
+     * 
+     */
+    id: number,
+    /**
+     * 
+     */
+    name: string
+}
+
+export interface AdswebGetAdUnitsResponseAdUnitsAdUnit {
+    /**
+     * 
+     */
+    id: number,
+    /**
+     * 
+     */
+    site_id: number,
+    /**
+     * 
+     */
+    name: string
+}
+
+export interface AdswebGetFraudHistoryResponseEntriesEntry {
+    /**
+     * 
+     */
+    site_id: number,
+    /**
+     * 
+     */
+    day: string
+}
+
+export interface AdswebGetSitesResponseSitesSite {
+    /**
+     * 
+     */
+    id: number,
+    /**
+     * 
+     */
+    status_user: string,
+    /**
+     * 
+     */
+    status_moder: string,
+    /**
+     * 
+     */
+    domains: string
+}
+
+export interface AdswebGetStatisticsResponseItemsItem {
+    /**
+     * 
+     */
+    site_id: number,
+    /**
+     * 
+     */
+    ad_unit_id: number,
+    /**
+     * 
+     */
+    overall_count: number,
+    /**
+     * 
+     */
+    months_count: number,
+    /**
+     * 
+     */
+    month_min: string,
+    /**
+     * 
+     */
+    month_max: string,
+    /**
+     * 
+     */
+    days_count: number,
+    /**
+     * 
+     */
+    day_min: string,
+    /**
+     * 
+     */
+    day_max: string,
+    /**
+     * 
+     */
+    hours_count: number,
+    /**
+     * 
+     */
+    hour_min: string,
+    /**
+     * 
+     */
+    hour_max: string
+}
+
+export interface AppWidgetsPhoto {
+    /**
+     * Image ID
+     */
+    id: string,
+    /**
+     * 
+     */
+    images: BaseImage[]
+}
+
+export interface AppWidgetsPhotos {
+    /**
+     * 
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: AppWidgetsPhoto[]
 }
 
 export interface AppsApp {
@@ -1484,6 +1806,14 @@ export interface AppsApp {
      * URL of the app icon with 576 px in width
      */
     icon_576: string,
+    /**
+     * Hex color code without hash sign
+     */
+    background_loader_color: string,
+    /**
+     * SVG data
+     */
+    loader_icon: string,
     /**
      * URL of the app icon with 75 px in width
      */
@@ -1610,6 +1940,14 @@ export interface AppsAppMin {
      */
     icon_576: string,
     /**
+     * Hex color code without hash sign
+     */
+    background_loader_color: string,
+    /**
+     * SVG data
+     */
+    loader_icon: string,
+    /**
      * URL of the app icon with 75 px in width
      */
     icon_75: string
@@ -1711,7 +2049,11 @@ export interface BaseCommentsInfo {
     /**
      * Information whether groups can comment the post
      */
-    groups_can_post: boolean
+    groups_can_post: boolean,
+    /**
+     * 
+     */
+    donut: WallWallpostCommentsDonut
 }
 
 export interface BaseCountry {
@@ -1725,15 +2067,76 @@ export interface BaseCountry {
     title: string
 }
 
+export interface BaseCropPhoto {
+    /**
+     * 
+     */
+    photo: PhotosPhoto,
+    /**
+     * 
+     */
+    crop: BaseCropPhotoCrop,
+    /**
+     * 
+     */
+    rect: BaseCropPhotoRect
+}
+
+export interface BaseCropPhotoCrop {
+    /**
+     * Coordinate X of the left upper corner
+     */
+    x: number,
+    /**
+     * Coordinate Y of the left upper corner
+     */
+    y: number,
+    /**
+     * Coordinate X of the right lower corner
+     */
+    x2: number,
+    /**
+     * Coordinate Y of the right lower corner
+     */
+    y2: number
+}
+
+export interface BaseCropPhotoRect {
+    /**
+     * Coordinate X of the left upper corner
+     */
+    x: number,
+    /**
+     * Coordinate Y of the left upper corner
+     */
+    y: number,
+    /**
+     * Coordinate X of the right lower corner
+     */
+    x2: number,
+    /**
+     * Coordinate Y of the right lower corner
+     */
+    y2: number
+}
+
 export interface BaseError {
     /**
      * Error code
      */
     error_code: number,
     /**
+     * Error subcode
+     */
+    error_subcode: number,
+    /**
      * Error message
      */
     error_msg: string,
+    /**
+     * Localized error message
+     */
+    error_text: string,
     /**
      * 
      */
@@ -1768,6 +2171,17 @@ export interface BaseGeoCoordinates {
      * 
      */
     longitude: number
+}
+
+export interface BaseGradientPoint {
+    /**
+     * Hex color code without #
+     */
+    color: string,
+    /**
+     * Point position
+     */
+    position: number
 }
 
 export interface BaseImage {
@@ -1881,17 +2295,9 @@ export interface BaseLink {
      */
     is_external: boolean,
     /**
-     * Preview article
-     */
-    preview_article: ArticlesArticle,
-    /**
      * Video from link
      */
-    video: VideoVideo,
-    /**
-     * Amp for link
-     */
-    amp: SnippetsAmp
+    video: VideoVideo
 }
 
 export interface BaseLinkApplication {
@@ -1933,6 +2339,10 @@ export interface BaseLinkButton {
      * Target section id
      */
     section_id: string,
+    /**
+     * curator id
+     */
+    curator_id: number,
     /**
      * Owner id
      */
@@ -1980,6 +2390,8 @@ export interface BaseLinkProduct {
      */
     orders_count: number
 }
+
+export type BaseLinkProductStatus = string
 
 export interface BaseLinkRating {
     /**
@@ -2032,8 +2444,6 @@ export interface BaseObjectWithName {
     name: string
 }
 
-export type BaseOkResponse = number
-
 export interface BasePlace {
     /**
      * Place address
@@ -2085,9 +2495,17 @@ export type BasePropertyExists = number
 
 export interface BaseRepostsInfo {
     /**
-     * Reposts number
+     * Total reposts counter. Sum of wall and mail reposts counters
      */
     count: number,
+    /**
+     * Wall reposts counter
+     */
+    wall_count: number,
+    /**
+     * Mail reposts counter
+     */
+    mail_count: number,
     /**
      * Information whether current user has reposted the post
      */
@@ -2243,13 +2661,13 @@ export interface BoardTopicComment {
 
 export interface BoardTopicPoll {
     /**
-     * Current user's answer ID
+     * Poll owner's ID
      */
-    answer_id: number,
+    owner_id: number,
     /**
-     * 
+     * Poll ID
      */
-    answers: PollsAnswer[],
+    poll_id: number,
     /**
      * Date when poll has been created in Unixtime
      */
@@ -2259,21 +2677,21 @@ export interface BoardTopicPoll {
      */
     is_closed: BaseBoolInt,
     /**
-     * Poll owner's ID
-     */
-    owner_id: number,
-    /**
-     * Poll ID
-     */
-    poll_id: number,
-    /**
      * Poll question
      */
     question: string,
     /**
      * Votes number
      */
-    votes: string
+    votes: number,
+    /**
+     * Current user's answer ID
+     */
+    answer_id: number,
+    /**
+     * 
+     */
+    answers: PollsAnswer[]
 }
 
 export interface CallbackBoardPostDelete {
@@ -2304,6 +2722,91 @@ export interface CallbackConfirmationMessage {
      * 
      */
     secret: string
+}
+
+export interface CallbackDonutMoneyWithdraw {
+    /**
+     * 
+     */
+    amount: number,
+    /**
+     * 
+     */
+    amount_without_fee: number
+}
+
+export interface CallbackDonutMoneyWithdrawError {
+    /**
+     * 
+     */
+    reason: string
+}
+
+export interface CallbackDonutSubscriptionCancelled {
+    /**
+     * 
+     */
+    user_id: number
+}
+
+export interface CallbackDonutSubscriptionCreate {
+    /**
+     * 
+     */
+    user_id: number,
+    /**
+     * 
+     */
+    amount: number,
+    /**
+     * 
+     */
+    amount_without_fee: number
+}
+
+export interface CallbackDonutSubscriptionExpired {
+    /**
+     * 
+     */
+    user_id: number
+}
+
+export interface CallbackDonutSubscriptionPriceChanged {
+    /**
+     * 
+     */
+    user_id: number,
+    /**
+     * 
+     */
+    amount_old: number,
+    /**
+     * 
+     */
+    amount_new: number,
+    /**
+     * 
+     */
+    amount_diff: number,
+    /**
+     * 
+     */
+    amount_diff_without_fee: number
+}
+
+export interface CallbackDonutSubscriptionProlonged {
+    /**
+     * 
+     */
+    user_id: number,
+    /**
+     * 
+     */
+    amount: number,
+    /**
+     * 
+     */
+    amount_without_fee: number
 }
 
 export interface CallbackGroupChangePhoto {
@@ -2428,6 +2931,33 @@ export interface CallbackGroupSettingsChanges {
      * 
      */
     enable_market: CallbackGroupMarket
+}
+
+export interface CallbackLikeAddRemove {
+    /**
+     * 
+     */
+    liker_id: number,
+    /**
+     * 
+     */
+    object_type: string,
+    /**
+     * 
+     */
+    object_owner_id: number,
+    /**
+     * 
+     */
+    object_id: number,
+    /**
+     * 
+     */
+    post_id: number,
+    /**
+     * 
+     */
+    thread_reply_id: number
 }
 
 export interface CallbackMarketComment {
@@ -2681,6 +3211,46 @@ export interface CallbackWallCommentDelete {
     post_id: number
 }
 
+export interface CallsCall {
+    /**
+     * Call duration
+     */
+    duration: number,
+    /**
+     * Caller initiator
+     */
+    initiator_id: number,
+    /**
+     * Caller receiver
+     */
+    receiver_id: number,
+    /**
+     * 
+     */
+    state: CallsEndState,
+    /**
+     * Timestamp for call
+     */
+    time: number,
+    /**
+     * Was this call initiated as video call
+     */
+    video: boolean
+}
+
+export type CallsEndState = string
+
+export interface CallsParticipants {
+    /**
+     * 
+     */
+    list: number[],
+    /**
+     * Participants count
+     */
+    count: number
+}
+
 export interface CommentThread {
     /**
      * Information whether current user can comment the post
@@ -2792,49 +3362,49 @@ export interface DatabaseUniversity {
 
 export interface DocsDoc {
     /**
-     * Access key for the document
-     */
-    access_key: string,
-    /**
-     * Date when file has been uploaded in Unixtime
-     */
-    date: number,
-    /**
-     * File extension
-     */
-    ext: string,
-    /**
      * Document ID
      */
     id: number,
-    /**
-     * 
-     */
-    is_licensed: BaseBoolInt,
     /**
      * Document owner ID
      */
     owner_id: number,
     /**
-     * 
+     * Document title
      */
-    preview: DocsDocPreview,
+    title: string,
     /**
      * File size in bites
      */
     size: number,
     /**
-     * Document title
+     * File extension
      */
-    title: string,
+    ext: string,
+    /**
+     * File URL
+     */
+    url: string,
+    /**
+     * Date when file has been uploaded in Unixtime
+     */
+    date: number,
     /**
      * Document type
      */
     type: number,
     /**
-     * File URL
+     * 
      */
-    url: string,
+    preview: DocsDocPreview,
+    /**
+     * 
+     */
+    is_licensed: BaseBoolInt,
+    /**
+     * Access key for the document
+     */
+    access_key: string,
     /**
      * Document tags
      */
@@ -2847,6 +3417,14 @@ export interface DocsDocPreview {
     /**
      * 
      */
+    audio_msg: DocsDocPreviewAudioMsg,
+    /**
+     * 
+     */
+    graffiti: DocsDocPreviewGraffiti,
+    /**
+     * 
+     */
     photo: DocsDocPreviewPhoto,
     /**
      * 
@@ -2854,22 +3432,67 @@ export interface DocsDocPreview {
     video: DocsDocPreviewVideo
 }
 
+export interface DocsDocPreviewAudioMsg {
+    /**
+     * Audio message duration in seconds
+     */
+    duration: number,
+    /**
+     * MP3 file URL
+     */
+    link_mp3: string,
+    /**
+     * OGG file URL
+     */
+    link_ogg: string,
+    /**
+     * 
+     */
+    waveform: number[]
+}
+
+export interface DocsDocPreviewGraffiti {
+    /**
+     * Graffiti file URL
+     */
+    src: string,
+    /**
+     * Graffiti width
+     */
+    width: number,
+    /**
+     * Graffiti height
+     */
+    height: number
+}
+
 export interface DocsDocPreviewPhoto {
     /**
      * 
      */
-    sizes: PhotosPhotoSizes[]
+    sizes: DocsDocPreviewPhotoSizes[]
+}
+
+export interface DocsDocPreviewPhotoSizes {
+    /**
+     * URL of the image
+     */
+    src: string,
+    /**
+     * Width in px
+     */
+    width: number,
+    /**
+     * Height in px
+     */
+    height: number,
+    /**
+     * 
+     */
+    type: PhotosPhotoSizesType
 }
 
 export interface DocsDocPreviewVideo {
-    /**
-     * Video file size in bites
-     */
-    filesize: number,
-    /**
-     * Video's height in pixels
-     */
-    height: number,
     /**
      * Video URL
      */
@@ -2877,14 +3500,18 @@ export interface DocsDocPreviewVideo {
     /**
      * Video's width in pixels
      */
-    width: number
+    width: number,
+    /**
+     * Video's height in pixels
+     */
+    height: number,
+    /**
+     * Video file size in bites
+     */
+    file_size: number
 }
 
 export interface DocsDocTypes {
-    /**
-     * Number of docs
-     */
-    count: number,
     /**
      * Doc type ID
      */
@@ -2892,7 +3519,11 @@ export interface DocsDocTypes {
     /**
      * Doc type title
      */
-    name: string
+    name: string,
+    /**
+     * Number of docs
+     */
+    count: number
 }
 
 export interface DocsDocUploadResponse {
@@ -2900,6 +3531,25 @@ export interface DocsDocUploadResponse {
      * Uploaded file data
      */
     file: string
+}
+
+export interface DonutDonatorSubscriptionInfo {
+    /**
+     * 
+     */
+    owner_id: number,
+    /**
+     * 
+     */
+    next_payment_date: number,
+    /**
+     * 
+     */
+    amount: number,
+    /**
+     * 
+     */
+    status: string
 }
 
 export interface EventsEventAttach {
@@ -3012,6 +3662,25 @@ export interface FaveTag {
      * Tag name
      */
     name: string
+}
+
+export interface FriendsFriendExtendedStatus {
+    /**
+     * 
+     */
+    friend_status: FriendsFriendStatusStatus,
+    /**
+     * MD5 hash for the result validation
+     */
+    sign: string,
+    /**
+     * User ID
+     */
+    user_id: number,
+    /**
+     * Is friend request from other user unread
+     */
+    is_request_unread: boolean
 }
 
 export interface FriendsFriendStatus {
@@ -3148,6 +3817,10 @@ export interface FriendsUserXtrLists {
      */
     photo_100: string,
     /**
+     * 
+     */
+    online_info: UsersOnlineInfo,
+    /**
      * Information whether the user is online
      */
     online: BaseBoolInt,
@@ -3232,6 +3905,10 @@ export interface FriendsUserXtrLists {
      */
     maiden_name: string,
     /**
+     * User contact name
+     */
+    contact_name: string,
+    /**
      * Domain name of the user's page
      */
     domain: string,
@@ -3242,7 +3919,7 @@ export interface FriendsUserXtrLists {
     /**
      * 
      */
-    city: BaseObject,
+    city: BaseCity,
     /**
      * 
      */
@@ -3308,6 +3985,146 @@ export interface FriendsUserXtrLists {
      */
     can_see_audio: BaseBoolInt,
     /**
+     * 
+     */
+    type: UsersUserType,
+    /**
+     * 
+     */
+    email: string,
+    /**
+     * 
+     */
+    skype: string,
+    /**
+     * 
+     */
+    facebook: string,
+    /**
+     * 
+     */
+    facebook_name: string,
+    /**
+     * 
+     */
+    twitter: string,
+    /**
+     * 
+     */
+    livejournal: string,
+    /**
+     * 
+     */
+    instagram: string,
+    /**
+     * 
+     */
+    test: BaseBoolInt,
+    /**
+     * 
+     */
+    video_live: VideoLiveInfo,
+    /**
+     * 
+     */
+    is_video_live_notifications_blocked: BaseBoolInt,
+    /**
+     * 
+     */
+    is_service: boolean,
+    /**
+     * 
+     */
+    service_description: string,
+    /**
+     * 
+     */
+    photo_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo: string,
+    /**
+     * 
+     */
+    photo_big: string,
+    /**
+     * 
+     */
+    photo_400: string,
+    /**
+     * 
+     */
+    photo_max_size: PhotosPhoto,
+    /**
+     * 
+     */
+    language: string,
+    /**
+     * 
+     */
+    stories_archive_count: number,
+    /**
+     * 
+     */
+    wall_default: string,
+    /**
+     * Information whether current user can call
+     */
+    can_call: boolean,
+    /**
+     * Information whether current user can see the user's wishes
+     */
+    can_see_wishes: boolean,
+    /**
+     * Information whether current user can see the user's gifts
+     */
+    can_see_gifts: BaseBoolInt,
+    /**
+     * 
+     */
+    interests: string,
+    /**
+     * 
+     */
+    books: string,
+    /**
+     * 
+     */
+    tv: string,
+    /**
+     * 
+     */
+    quotes: string,
+    /**
+     * 
+     */
+    about: string,
+    /**
+     * 
+     */
+    games: string,
+    /**
+     * 
+     */
+    movies: string,
+    /**
+     * 
+     */
+    activities: string,
+    /**
+     * 
+     */
+    music: string,
+    /**
      * Information whether current user can write private message
      */
     can_write_private_message: BaseBoolInt,
@@ -3354,11 +4171,23 @@ export interface FriendsUserXtrLists {
     /**
      * 
      */
-    crop_photo: UsersCropPhoto,
+    crop_photo: BaseCropPhoto,
     /**
      * Number of user's followers
      */
     followers_count: number,
+    /**
+     * User level in live streams achievements
+     */
+    video_live_level: number,
+    /**
+     * Number of user's live streams
+     */
+    video_live_count: number,
+    /**
+     * Number of user's clips
+     */
+    clips_count: number,
     /**
      * Information whether current user is in the requested user's blacklist.
      */
@@ -3399,6 +4228,10 @@ export interface FriendsUserXtrLists {
      * University name
      */
     university_name: string,
+    /**
+     * 
+     */
+    university_group_id: number,
     /**
      * Faculty ID
      */
@@ -3459,6 +4292,26 @@ export interface FriendsUserXtrLists {
      * Can subscribe to wall
      */
     can_subscribe_posts: boolean,
+    /**
+     * 
+     */
+    counters: UsersUserCounters,
+    /**
+     * 
+     */
+    access_key: string,
+    /**
+     * 
+     */
+    can_upload_doc: BaseBoolInt,
+    /**
+     * 
+     */
+    hash: string,
+    /**
+     * 
+     */
+    has_email: boolean,
     /**
      * 
      */
@@ -3511,6 +4364,10 @@ export interface FriendsUserXtrPhone {
      */
     photo_100: string,
     /**
+     * 
+     */
+    online_info: UsersOnlineInfo,
+    /**
      * Information whether the user is online
      */
     online: BaseBoolInt,
@@ -3595,6 +4452,10 @@ export interface FriendsUserXtrPhone {
      */
     maiden_name: string,
     /**
+     * User contact name
+     */
+    contact_name: string,
+    /**
      * Domain name of the user's page
      */
     domain: string,
@@ -3605,7 +4466,7 @@ export interface FriendsUserXtrPhone {
     /**
      * 
      */
-    city: BaseObject,
+    city: BaseCity,
     /**
      * 
      */
@@ -3671,6 +4532,146 @@ export interface FriendsUserXtrPhone {
      */
     can_see_audio: BaseBoolInt,
     /**
+     * 
+     */
+    type: UsersUserType,
+    /**
+     * 
+     */
+    email: string,
+    /**
+     * 
+     */
+    skype: string,
+    /**
+     * 
+     */
+    facebook: string,
+    /**
+     * 
+     */
+    facebook_name: string,
+    /**
+     * 
+     */
+    twitter: string,
+    /**
+     * 
+     */
+    livejournal: string,
+    /**
+     * 
+     */
+    instagram: string,
+    /**
+     * 
+     */
+    test: BaseBoolInt,
+    /**
+     * 
+     */
+    video_live: VideoLiveInfo,
+    /**
+     * 
+     */
+    is_video_live_notifications_blocked: BaseBoolInt,
+    /**
+     * 
+     */
+    is_service: boolean,
+    /**
+     * 
+     */
+    service_description: string,
+    /**
+     * 
+     */
+    photo_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo: string,
+    /**
+     * 
+     */
+    photo_big: string,
+    /**
+     * 
+     */
+    photo_400: string,
+    /**
+     * 
+     */
+    photo_max_size: PhotosPhoto,
+    /**
+     * 
+     */
+    language: string,
+    /**
+     * 
+     */
+    stories_archive_count: number,
+    /**
+     * 
+     */
+    wall_default: string,
+    /**
+     * Information whether current user can call
+     */
+    can_call: boolean,
+    /**
+     * Information whether current user can see the user's wishes
+     */
+    can_see_wishes: boolean,
+    /**
+     * Information whether current user can see the user's gifts
+     */
+    can_see_gifts: BaseBoolInt,
+    /**
+     * 
+     */
+    interests: string,
+    /**
+     * 
+     */
+    books: string,
+    /**
+     * 
+     */
+    tv: string,
+    /**
+     * 
+     */
+    quotes: string,
+    /**
+     * 
+     */
+    about: string,
+    /**
+     * 
+     */
+    games: string,
+    /**
+     * 
+     */
+    movies: string,
+    /**
+     * 
+     */
+    activities: string,
+    /**
+     * 
+     */
+    music: string,
+    /**
      * Information whether current user can write private message
      */
     can_write_private_message: BaseBoolInt,
@@ -3717,11 +4718,23 @@ export interface FriendsUserXtrPhone {
     /**
      * 
      */
-    crop_photo: UsersCropPhoto,
+    crop_photo: BaseCropPhoto,
     /**
      * Number of user's followers
      */
     followers_count: number,
+    /**
+     * User level in live streams achievements
+     */
+    video_live_level: number,
+    /**
+     * Number of user's live streams
+     */
+    video_live_count: number,
+    /**
+     * Number of user's clips
+     */
+    clips_count: number,
     /**
      * Information whether current user is in the requested user's blacklist.
      */
@@ -3762,6 +4775,10 @@ export interface FriendsUserXtrPhone {
      * University name
      */
     university_name: string,
+    /**
+     * 
+     */
+    university_group_id: number,
     /**
      * Faculty ID
      */
@@ -3822,6 +4839,26 @@ export interface FriendsUserXtrPhone {
      * Can subscribe to wall
      */
     can_subscribe_posts: boolean,
+    /**
+     * 
+     */
+    counters: UsersUserCounters,
+    /**
+     * 
+     */
+    access_key: string,
+    /**
+     * 
+     */
+    can_upload_doc: BaseBoolInt,
+    /**
+     * 
+     */
+    hash: string,
+    /**
+     * 
+     */
+    has_email: boolean,
     /**
      * User phone
      */
@@ -3886,6 +4923,10 @@ export interface GiftsLayout {
      * ID of the sticker pack, if the gift is representing one
      */
     stickers_product_id: number,
+    /**
+     * Information whether gift represents a stickers style
+     */
+    is_stickers_style: boolean,
     /**
      * ID of the build of constructor gift
      */
@@ -4051,8 +5092,7 @@ export interface GroupsBanInfo {
 
 export type GroupsBanInfoReason = number
 
-export interface GroupsBannedItem {
-}
+export type GroupsBannedItem = GroupsOwnerXtrBanInfo
 
 export interface GroupsCallbackServer {
     /**
@@ -4094,21 +5134,21 @@ export interface GroupsCallbackSettings {
 
 export interface GroupsContactsItem {
     /**
+     * User ID
+     */
+    user_id: number,
+    /**
      * Contact description
      */
     desc: string,
-    /**
-     * Contact email
-     */
-    email: string,
     /**
      * Contact phone
      */
     phone: string,
     /**
-     * User ID
+     * Contact email
      */
-    user_id: number
+    email: string
 }
 
 export interface GroupsCountersGroup {
@@ -4167,41 +5207,57 @@ export type GroupsFilter = string
 
 export interface GroupsGroup {
     /**
-     * 
-     */
-    admin_level: GroupsGroupAdminLevel,
-    /**
-     * Information whether community is banned
-     */
-    deactivated: string,
-    /**
-     * Finish date in Unixtime format
-     */
-    finish_date: number,
-    /**
      * Community ID
      */
     id: number,
     /**
-     * Information whether current user is administrator
+     * Community name
      */
-    is_admin: BaseBoolInt,
+    name: string,
     /**
-     * Information whether current user is advertiser
+     * Domain of the community page
      */
-    is_advertiser: BaseBoolInt,
+    screen_name: string,
     /**
      * 
      */
     is_closed: GroupsGroupIsClosed,
     /**
+     * 
+     */
+    type: GroupsGroupType,
+    /**
+     * Information whether current user is administrator
+     */
+    is_admin: BaseBoolInt,
+    /**
+     * 
+     */
+    admin_level: GroupsGroupAdminLevel,
+    /**
      * Information whether current user is member
      */
     is_member: BaseBoolInt,
     /**
-     * Community name
+     * Information whether current user is advertiser
      */
-    name: string,
+    is_advertiser: BaseBoolInt,
+    /**
+     * Start date in Unixtime format
+     */
+    start_date: number,
+    /**
+     * Finish date in Unixtime format
+     */
+    finish_date: number,
+    /**
+     * Information whether community is banned
+     */
+    deactivated: string,
+    /**
+     * URL of square photo of the community with 50 pixels in width
+     */
+    photo_50: string,
     /**
      * URL of square photo of the community with 100 pixels in width
      */
@@ -4209,23 +5265,7 @@ export interface GroupsGroup {
     /**
      * URL of square photo of the community with 200 pixels in width
      */
-    photo_200: string,
-    /**
-     * URL of square photo of the community with 50 pixels in width
-     */
-    photo_50: string,
-    /**
-     * Domain of the community page
-     */
-    screen_name: string,
-    /**
-     * Start date in Unixtime format
-     */
-    start_date: number,
-    /**
-     * 
-     */
-    type: GroupsGroupType
+    photo_200: string
 }
 
 export type GroupsGroupAccess = number
@@ -4327,41 +5367,57 @@ export type GroupsGroupDocs = number
 
 export interface GroupsGroupFull {
     /**
-     * 
-     */
-    admin_level: GroupsGroupAdminLevel,
-    /**
-     * Information whether community is banned
-     */
-    deactivated: string,
-    /**
-     * Finish date in Unixtime format
-     */
-    finish_date: number,
-    /**
      * Community ID
      */
     id: number,
     /**
-     * Information whether current user is administrator
+     * Community name
      */
-    is_admin: BaseBoolInt,
+    name: string,
     /**
-     * Information whether current user is advertiser
+     * Domain of the community page
      */
-    is_advertiser: BaseBoolInt,
+    screen_name: string,
     /**
      * 
      */
     is_closed: GroupsGroupIsClosed,
     /**
+     * 
+     */
+    type: GroupsGroupType,
+    /**
+     * Information whether current user is administrator
+     */
+    is_admin: BaseBoolInt,
+    /**
+     * 
+     */
+    admin_level: GroupsGroupAdminLevel,
+    /**
      * Information whether current user is member
      */
     is_member: BaseBoolInt,
     /**
-     * Community name
+     * Information whether current user is advertiser
      */
-    name: string,
+    is_advertiser: BaseBoolInt,
+    /**
+     * Start date in Unixtime format
+     */
+    start_date: number,
+    /**
+     * Finish date in Unixtime format
+     */
+    finish_date: number,
+    /**
+     * Information whether community is banned
+     */
+    deactivated: string,
+    /**
+     * URL of square photo of the community with 50 pixels in width
+     */
+    photo_50: string,
     /**
      * URL of square photo of the community with 100 pixels in width
      */
@@ -4370,22 +5426,6 @@ export interface GroupsGroupFull {
      * URL of square photo of the community with 200 pixels in width
      */
     photo_200: string,
-    /**
-     * URL of square photo of the community with 50 pixels in width
-     */
-    photo_50: string,
-    /**
-     * Domain of the community page
-     */
-    screen_name: string,
-    /**
-     * Start date in Unixtime format
-     */
-    start_date: number,
-    /**
-     * 
-     */
-    type: GroupsGroupType,
     /**
      * 
      */
@@ -4435,6 +5475,22 @@ export interface GroupsGroupFull {
      */
     members_count: number,
     /**
+     * The number of incoming requests to the community
+     */
+    requests_count: number,
+    /**
+     * Community level live streams achievements
+     */
+    video_live_level: number,
+    /**
+     * Number of community's live streams
+     */
+    video_live_count: number,
+    /**
+     * Number of community's clips
+     */
+    clips_count: number,
+    /**
      * 
      */
     counters: GroupsCountersGroup,
@@ -4447,9 +5503,29 @@ export interface GroupsGroupFull {
      */
     can_post: BaseBoolInt,
     /**
+     * 
+     */
+    can_suggest: BaseBoolInt,
+    /**
+     * Information whether current user can upload story
+     */
+    can_upload_story: BaseBoolInt,
+    /**
+     * Information whether current user can upload doc
+     */
+    can_upload_doc: BaseBoolInt,
+    /**
+     * Information whether current user can upload video
+     */
+    can_upload_video: BaseBoolInt,
+    /**
      * Information whether current user can see all posts on community's wall
      */
     can_see_all_posts: BaseBoolInt,
+    /**
+     * Information whether current user can create topic
+     */
+    can_create_topic: BaseBoolInt,
     /**
      * Type of group, start date of event or category of public page
      */
@@ -4459,29 +5535,21 @@ export interface GroupsGroupFull {
      */
     fixed_post: number,
     /**
-     * Information whether current user can create topic
-     */
-    can_create_topic: BaseBoolInt,
-    /**
-     * Information whether current user can upload doc
-     */
-    can_upload_doc: BaseBoolInt,
-    /**
-     * Information whether current user can upload story
-     */
-    can_upload_story: BaseBoolInt,
-    /**
-     * Information whether current user can upload video
-     */
-    can_upload_video: BaseBoolInt,
-    /**
      * Information whether community has photo
      */
     has_photo: BaseBoolInt,
     /**
+     * Данные о точках, по которым вырезаны профильная и миниатюрная фотографии сообщества
+     */
+    crop_photo: BaseCropPhoto,
+    /**
      * Community status
      */
     status: string,
+    /**
+     * 
+     */
+    status_audio: AudioAudio,
     /**
      * Community's main photo album ID
      */
@@ -4507,6 +5575,10 @@ export interface GroupsGroupFull {
      */
     main_section: GroupsGroupFullMainSection,
     /**
+     * 
+     */
+    secondary_section: number,
+    /**
      * Information whether the community has a "fire" pictogram.
      */
     trending: BaseBoolInt,
@@ -4527,6 +5599,10 @@ export interface GroupsGroupFull {
      */
     online_status: GroupsOnlineStatus,
     /**
+     * Inviter ID
+     */
+    invited_by: number,
+    /**
      * Information whether age limit
      */
     age_limits: GroupsGroupFullAgeLimits,
@@ -4538,6 +5614,14 @@ export interface GroupsGroupFull {
      * Information whether community has installed market app
      */
     has_market_app: boolean,
+    /**
+     * 
+     */
+    using_vkpay_market_app: boolean,
+    /**
+     * 
+     */
+    has_group_channel: boolean,
     /**
      * Info about addresses in groups
      */
@@ -4553,7 +5637,15 @@ export interface GroupsGroupFull {
     /**
      * Can subscribe to wall
      */
-    can_subscribe_posts: boolean
+    can_subscribe_posts: boolean,
+    /**
+     * Live covers state
+     */
+    live_covers: GroupsLiveCovers,
+    /**
+     * 
+     */
+    stories_archive_count: number
 }
 
 export type GroupsGroupFullAgeLimits = number
@@ -4614,6 +5706,27 @@ export type GroupsGroupRole = string
 
 export type GroupsGroupSubject = string
 
+export type GroupsGroupSuggestedPrivacy = number
+
+export interface GroupsGroupTag {
+    /**
+     * 
+     */
+    id: number,
+    /**
+     * 
+     */
+    name: string,
+    /**
+     * 
+     */
+    color: string,
+    /**
+     * 
+     */
+    uses: number
+}
+
 export type GroupsGroupTopics = number
 
 export type GroupsGroupType = string
@@ -4623,65 +5736,6 @@ export type GroupsGroupVideo = number
 export type GroupsGroupWall = number
 
 export type GroupsGroupWiki = number
-
-export interface GroupsGroupXtrInvitedBy {
-    /**
-     * 
-     */
-    admin_level: GroupsGroupXtrInvitedByAdminLevel,
-    /**
-     * Community ID
-     */
-    id: number,
-    /**
-     * Inviter ID
-     */
-    invited_by: number,
-    /**
-     * Information whether current user is manager
-     */
-    is_admin: BaseBoolInt,
-    /**
-     * Information whether current user is advertiser
-     */
-    is_advertiser: BaseBoolInt,
-    /**
-     * Information whether community is closed
-     */
-    is_closed: BaseBoolInt,
-    /**
-     * Information whether current user is member
-     */
-    is_member: BaseBoolInt,
-    /**
-     * Community name
-     */
-    name: string,
-    /**
-     * URL of square photo of the community with 100 pixels in width
-     */
-    photo_100: string,
-    /**
-     * URL of square photo of the community with 200 pixels in width
-     */
-    photo_200: string,
-    /**
-     * URL of square photo of the community with 50 pixels in width
-     */
-    photo_50: string,
-    /**
-     * Domain of the community page
-     */
-    screen_name: string,
-    /**
-     * 
-     */
-    type: GroupsGroupXtrInvitedByType
-}
-
-export type GroupsGroupXtrInvitedByAdminLevel = number
-
-export type GroupsGroupXtrInvitedByType = string
 
 export interface GroupsGroupsArray {
     /**
@@ -4723,6 +5777,21 @@ export interface GroupsLinksItem {
      * Link URL
      */
     url: string
+}
+
+export interface GroupsLiveCovers {
+    /**
+     * Information whether live covers is enabled
+     */
+    is_enabled: boolean,
+    /**
+     * Information whether live covers photo scaling is enabled
+     */
+    is_scalable: boolean,
+    /**
+     * 
+     */
+    story_ids: string[]
 }
 
 export interface GroupsLongPollEvents {
@@ -4789,6 +5858,14 @@ export interface GroupsLongPollEvents {
     /**
      * 
      */
+    market_order_new: BaseBoolInt,
+    /**
+     * 
+     */
+    market_order_edit: BaseBoolInt,
+    /**
+     * 
+     */
     message_allow: BaseBoolInt,
     /**
      * 
@@ -4813,7 +5890,7 @@ export interface GroupsLongPollEvents {
     /**
      * 
      */
-    messages_edit: BaseBoolInt,
+    message_edit: BaseBoolInt,
     /**
      * 
      */
@@ -4889,7 +5966,35 @@ export interface GroupsLongPollEvents {
     /**
      * 
      */
-    wall_repost: BaseBoolInt
+    wall_repost: BaseBoolInt,
+    /**
+     * 
+     */
+    donut_subscription_create: BaseBoolInt,
+    /**
+     * 
+     */
+    donut_subscription_prolonged: BaseBoolInt,
+    /**
+     * 
+     */
+    donut_subscription_cancelled: BaseBoolInt,
+    /**
+     * 
+     */
+    donut_subscription_expired: BaseBoolInt,
+    /**
+     * 
+     */
+    donut_subscription_price_changed: BaseBoolInt,
+    /**
+     * 
+     */
+    donut_money_withdraw: BaseBoolInt,
+    /**
+     * 
+     */
+    donut_money_withdraw_error: BaseBoolInt
 }
 
 export interface GroupsLongPollServer {
@@ -4952,6 +6057,8 @@ export interface GroupsMarketInfo {
      */
     price_min: string
 }
+
+export type GroupsMarketState = string
 
 export interface GroupsMemberRole {
     /**
@@ -5044,6 +6151,21 @@ export interface GroupsOwnerXtrBanInfo {
 
 export type GroupsOwnerXtrBanInfoType = string
 
+export interface GroupsProfileItem {
+    /**
+     * User id
+     */
+    id: number,
+    /**
+     * Url for user photo
+     */
+    photo_50: string,
+    /**
+     * Url for user photo
+     */
+    photo_100: string
+}
+
 export type GroupsRoleOptions = string
 
 export interface GroupsSettingsTwitter {
@@ -5124,6 +6246,10 @@ export interface GroupsUserXtrRole {
      * URL of square photo of the user with 100 pixels in width
      */
     photo_100: string,
+    /**
+     * 
+     */
+    online_info: UsersOnlineInfo,
     /**
      * Information whether the user is online
      */
@@ -5209,6 +6335,10 @@ export interface GroupsUserXtrRole {
      */
     maiden_name: string,
     /**
+     * User contact name
+     */
+    contact_name: string,
+    /**
      * Domain name of the user's page
      */
     domain: string,
@@ -5219,7 +6349,7 @@ export interface GroupsUserXtrRole {
     /**
      * 
      */
-    city: BaseObject,
+    city: BaseCity,
     /**
      * 
      */
@@ -5285,6 +6415,146 @@ export interface GroupsUserXtrRole {
      */
     can_see_audio: BaseBoolInt,
     /**
+     * 
+     */
+    type: UsersUserType,
+    /**
+     * 
+     */
+    email: string,
+    /**
+     * 
+     */
+    skype: string,
+    /**
+     * 
+     */
+    facebook: string,
+    /**
+     * 
+     */
+    facebook_name: string,
+    /**
+     * 
+     */
+    twitter: string,
+    /**
+     * 
+     */
+    livejournal: string,
+    /**
+     * 
+     */
+    instagram: string,
+    /**
+     * 
+     */
+    test: BaseBoolInt,
+    /**
+     * 
+     */
+    video_live: VideoLiveInfo,
+    /**
+     * 
+     */
+    is_video_live_notifications_blocked: BaseBoolInt,
+    /**
+     * 
+     */
+    is_service: boolean,
+    /**
+     * 
+     */
+    service_description: string,
+    /**
+     * 
+     */
+    photo_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo: string,
+    /**
+     * 
+     */
+    photo_big: string,
+    /**
+     * 
+     */
+    photo_400: string,
+    /**
+     * 
+     */
+    photo_max_size: PhotosPhoto,
+    /**
+     * 
+     */
+    language: string,
+    /**
+     * 
+     */
+    stories_archive_count: number,
+    /**
+     * 
+     */
+    wall_default: string,
+    /**
+     * Information whether current user can call
+     */
+    can_call: boolean,
+    /**
+     * Information whether current user can see the user's wishes
+     */
+    can_see_wishes: boolean,
+    /**
+     * Information whether current user can see the user's gifts
+     */
+    can_see_gifts: BaseBoolInt,
+    /**
+     * 
+     */
+    interests: string,
+    /**
+     * 
+     */
+    books: string,
+    /**
+     * 
+     */
+    tv: string,
+    /**
+     * 
+     */
+    quotes: string,
+    /**
+     * 
+     */
+    about: string,
+    /**
+     * 
+     */
+    games: string,
+    /**
+     * 
+     */
+    movies: string,
+    /**
+     * 
+     */
+    activities: string,
+    /**
+     * 
+     */
+    music: string,
+    /**
      * Information whether current user can write private message
      */
     can_write_private_message: BaseBoolInt,
@@ -5331,11 +6601,23 @@ export interface GroupsUserXtrRole {
     /**
      * 
      */
-    crop_photo: UsersCropPhoto,
+    crop_photo: BaseCropPhoto,
     /**
      * Number of user's followers
      */
     followers_count: number,
+    /**
+     * User level in live streams achievements
+     */
+    video_live_level: number,
+    /**
+     * Number of user's live streams
+     */
+    video_live_count: number,
+    /**
+     * Number of user's clips
+     */
+    clips_count: number,
     /**
      * Information whether current user is in the requested user's blacklist.
      */
@@ -5376,6 +6658,10 @@ export interface GroupsUserXtrRole {
      * University name
      */
     university_name: string,
+    /**
+     * 
+     */
+    university_group_id: number,
     /**
      * Faculty ID
      */
@@ -5439,147 +6725,27 @@ export interface GroupsUserXtrRole {
     /**
      * 
      */
+    counters: UsersUserCounters,
+    /**
+     * 
+     */
+    access_key: string,
+    /**
+     * 
+     */
+    can_upload_doc: BaseBoolInt,
+    /**
+     * 
+     */
+    hash: string,
+    /**
+     * 
+     */
+    has_email: boolean,
+    /**
+     * 
+     */
     role: GroupsRoleOptions
-}
-
-export interface LeadsChecked {
-    /**
-     * Reason why user can't start the lead
-     */
-    reason: string,
-    /**
-     * 
-     */
-    result: LeadsCheckedResult,
-    /**
-     * Session ID
-     */
-    sid: string,
-    /**
-     * URL user should open to start the lead
-     */
-    start_link: string
-}
-
-export type LeadsCheckedResult = string
-
-export interface LeadsComplete {
-    /**
-     * Offer cost
-     */
-    cost: number,
-    /**
-     * Offer limit
-     */
-    limit: number,
-    /**
-     * Amount of spent votes
-     */
-    spent: number,
-    /**
-     * 
-     */
-    success: BaseOkResponse,
-    /**
-     * Information whether test mode is enabled
-     */
-    test_mode: BaseBoolInt
-}
-
-export interface LeadsEntry {
-    /**
-     * Application ID
-     */
-    aid: number,
-    /**
-     * Comment text
-     */
-    comment: string,
-    /**
-     * Date when the action has been started in Unixtime
-     */
-    date: number,
-    /**
-     * Session string ID
-     */
-    sid: string,
-    /**
-     * Start date in Unixtime (for status=2)
-     */
-    start_date: number,
-    /**
-     * Action type
-     */
-    status: number,
-    /**
-     * Information whether test mode is enabled
-     */
-    test_mode: BaseBoolInt,
-    /**
-     * User ID
-     */
-    uid: number
-}
-
-export interface LeadsLead {
-    /**
-     * Completed offers number
-     */
-    completed: number,
-    /**
-     * Offer cost
-     */
-    cost: number,
-    /**
-     * 
-     */
-    days: LeadsLeadDays,
-    /**
-     * Impressions number
-     */
-    impressions: number,
-    /**
-     * Lead limit
-     */
-    limit: number,
-    /**
-     * Amount of spent votes
-     */
-    spent: number,
-    /**
-     * Started offers number
-     */
-    started: number
-}
-
-export interface LeadsLeadDays {
-    /**
-     * Completed offers number
-     */
-    completed: number,
-    /**
-     * Impressions number
-     */
-    impressions: number,
-    /**
-     * Amount of spent votes
-     */
-    spent: number,
-    /**
-     * Started offers number
-     */
-    started: number
-}
-
-export interface LeadsStart {
-    /**
-     * Information whether test mode is enabled
-     */
-    test_mode: BaseBoolInt,
-    /**
-     * Session data
-     */
-    vk_sid: string
 }
 
 export type LikesType = string
@@ -5637,7 +6803,24 @@ export interface MarketMarketAlbum {
     updated_time: number
 }
 
-export interface MarketMarketCategory {
+export type MarketMarketCategory = MarketMarketCategoryOld
+
+export interface MarketMarketCategoryNested {
+    /**
+     * Category ID
+     */
+    id: number,
+    /**
+     * Category name
+     */
+    name: string,
+    /**
+     * 
+     */
+    parent: MarketMarketCategoryNested
+}
+
+export interface MarketMarketCategoryOld {
     /**
      * Category ID
      */
@@ -5650,6 +6833,21 @@ export interface MarketMarketCategory {
      * 
      */
     section: MarketSection
+}
+
+export interface MarketMarketCategoryTree {
+    /**
+     * Category ID
+     */
+    id: number,
+    /**
+     * Category name
+     */
+    name: string,
+    /**
+     * 
+     */
+    children: MarketMarketCategoryTree[]
 }
 
 export interface MarketMarketItem {
@@ -5813,7 +7011,121 @@ export interface MarketMarketItemFull {
     /**
      * Views number
      */
-    views_count: number
+    views_count: number,
+    /**
+     * Object identifier in wishlist of viewer
+     */
+    wishlist_item_id: number,
+    /**
+     * Information for cancel and revert order
+     */
+    cancel_info: BaseLink,
+    /**
+     * User agreement info
+     */
+    user_agreement_info: string
+}
+
+export interface MarketOrder {
+    /**
+     * 
+     */
+    id: number,
+    /**
+     * 
+     */
+    group_id: number,
+    /**
+     * 
+     */
+    user_id: number,
+    /**
+     * 
+     */
+    display_order_id: string,
+    /**
+     * 
+     */
+    date: number,
+    /**
+     * 
+     */
+    status: number,
+    /**
+     * 
+     */
+    items_count: number,
+    /**
+     * 
+     */
+    track_number: string,
+    /**
+     * 
+     */
+    track_link: string,
+    /**
+     * 
+     */
+    comment: string,
+    /**
+     * 
+     */
+    address: string,
+    /**
+     * 
+     */
+    merchant_comment: string,
+    /**
+     * 
+     */
+    weight: number,
+    /**
+     * 
+     */
+    total_price: MarketPrice,
+    /**
+     * Several order items for preview
+     */
+    preview_order_items: MarketOrderItem[],
+    /**
+     * Information for cancel and revert order
+     */
+    cancel_info: BaseLink
+}
+
+export interface MarketOrderItem {
+    /**
+     * 
+     */
+    owner_id: number,
+    /**
+     * 
+     */
+    item_id: number,
+    /**
+     * 
+     */
+    price: MarketPrice,
+    /**
+     * 
+     */
+    quantity: number,
+    /**
+     * 
+     */
+    item: MarketMarketItem,
+    /**
+     * 
+     */
+    title: string,
+    /**
+     * 
+     */
+    photo: PhotosPhoto,
+    /**
+     * 
+     */
+    variants: string[]
 }
 
 export interface MarketPrice {
@@ -5836,7 +7148,11 @@ export interface MarketPrice {
     /**
      * Text
      */
-    text: string
+    text: string,
+    /**
+     * Textual representation of old price
+     */
+    old_amount_text: string
 }
 
 export interface MarketSection {
@@ -5889,38 +7205,15 @@ export interface MediaRestriction {
     list_icon: BaseImage[]
 }
 
-export interface MessageChatPreview {
-    /**
-     * 
-     */
-    admin_id: number,
-    /**
-     * 
-     */
-    joined: boolean,
-    /**
-     * 
-     */
-    local_id: number,
-    /**
-     * 
-     */
-    members: number[],
-    /**
-     * 
-     */
-    members_count: number,
-    /**
-     * 
-     */
-    title: string
-}
-
 export interface MessagesAudioMessage {
     /**
      * Access key for audio message
      */
     access_key: string,
+    /**
+     * 
+     */
+    transcript_error: number,
     /**
      * Audio message duration in seconds
      */
@@ -6045,6 +7338,33 @@ export interface MessagesChatFull {
     users: MessagesUserXtrInvitedBy[]
 }
 
+export interface MessagesChatPreview {
+    /**
+     * 
+     */
+    admin_id: number,
+    /**
+     * 
+     */
+    joined: boolean,
+    /**
+     * 
+     */
+    local_id: number,
+    /**
+     * 
+     */
+    members: number[],
+    /**
+     * 
+     */
+    members_count: number,
+    /**
+     * 
+     */
+    title: string
+}
+
 export interface MessagesChatPushSettings {
     /**
      * Time until that notifications are disabled
@@ -6079,11 +7399,177 @@ export interface MessagesChatRestrictions {
     only_admins_kick: boolean
 }
 
+export interface MessagesChatSettings {
+    /**
+     * 
+     */
+    members_count: number,
+    /**
+     * 
+     */
+    owner_id: number,
+    /**
+     * Chat title
+     */
+    title: string,
+    /**
+     * 
+     */
+    pinned_message: MessagesPinnedMessage,
+    /**
+     * 
+     */
+    state: MessagesChatSettingsState,
+    /**
+     * 
+     */
+    photo: MessagesChatSettingsPhoto,
+    /**
+     * Ids of chat admins
+     */
+    admin_ids: number[],
+    /**
+     * 
+     */
+    active_ids: number[],
+    /**
+     * 
+     */
+    is_group_channel: boolean,
+    /**
+     * 
+     */
+    acl: MessagesChatSettingsAcl,
+    /**
+     * 
+     */
+    permissions: MessagesChatSettingsPermissions,
+    /**
+     * 
+     */
+    is_disappearing: boolean,
+    /**
+     * 
+     */
+    theme: string,
+    /**
+     * 
+     */
+    disappearing_chat_link: string,
+    /**
+     * 
+     */
+    is_service: boolean
+}
+
+export interface MessagesChatSettingsAcl {
+    /**
+     * Can you change photo, description and name
+     */
+    can_change_info: boolean,
+    /**
+     * Can you change invite link for this chat
+     */
+    can_change_invite_link: boolean,
+    /**
+     * Can you pin/unpin message for this chat
+     */
+    can_change_pin: boolean,
+    /**
+     * Can you invite other peers in chat
+     */
+    can_invite: boolean,
+    /**
+     * Can you promote simple users to chat admins
+     */
+    can_promote_users: boolean,
+    /**
+     * Can you see invite link for this chat
+     */
+    can_see_invite_link: boolean,
+    /**
+     * Can you moderate (delete) other users' messages
+     */
+    can_moderate: boolean,
+    /**
+     * Can you copy chat
+     */
+    can_copy_chat: boolean,
+    /**
+     * Can you init group call in the chat
+     */
+    can_call: boolean,
+    /**
+     * Can you use mass mentions
+     */
+    can_use_mass_mentions: boolean,
+    /**
+     * Can you change chat service type
+     */
+    can_change_service_type: boolean
+}
+
+export interface MessagesChatSettingsPermissions {
+    /**
+     * Who can invite users to chat
+     */
+    invite: string,
+    /**
+     * Who can change chat info
+     */
+    change_info: string,
+    /**
+     * Who can change pinned message
+     */
+    change_pin: string,
+    /**
+     * Who can use mass mentions
+     */
+    use_mass_mentions: string,
+    /**
+     * Who can see invite link
+     */
+    see_invite_link: string,
+    /**
+     * Who can make calls
+     */
+    call: string,
+    /**
+     * Who can change admins
+     */
+    change_admins: string
+}
+
+export interface MessagesChatSettingsPhoto {
+    /**
+     * URL of the preview image with 50px in width
+     */
+    photo_50: string,
+    /**
+     * URL of the preview image with 100px in width
+     */
+    photo_100: string,
+    /**
+     * URL of the preview image with 200px in width
+     */
+    photo_200: string,
+    /**
+     * If provided photo is default
+     */
+    is_default_photo: boolean
+}
+
+export type MessagesChatSettingsState = string
+
 export interface MessagesConversation {
     /**
      * 
      */
     peer: MessagesConversationPeer,
+    /**
+     * 
+     */
+    sort_id: MessagesConversationSortId,
     /**
      * ID of the last message in conversation
      */
@@ -6100,6 +7586,14 @@ export interface MessagesConversation {
      * Unread messages number
      */
     unread_count: number,
+    /**
+     * Is this conversation uread
+     */
+    is_marked_unread: boolean,
+    /**
+     * 
+     */
+    out_read_by: MessagesOutReadBy,
     /**
      * 
      */
@@ -6123,7 +7617,30 @@ export interface MessagesConversation {
     /**
      * 
      */
-    current_keyboard: MessagesKeyboard
+    current_keyboard: MessagesKeyboard,
+    /**
+     * 
+     */
+    push_settings: MessagesPushSettings,
+    /**
+     * 
+     */
+    can_write: MessagesConversationCanWrite,
+    /**
+     * 
+     */
+    chat_settings: MessagesChatSettings
+}
+
+export interface MessagesConversationCanWrite {
+    /**
+     * 
+     */
+    allowed: boolean,
+    /**
+     * 
+     */
+    reason: number
 }
 
 export interface MessagesConversationMember {
@@ -6177,6 +7694,17 @@ export interface MessagesConversationPeer {
 }
 
 export type MessagesConversationPeerType = string
+
+export interface MessagesConversationSortId {
+    /**
+     * Major id for sorting conversations
+     */
+    major_id: number,
+    /**
+     * Minor id for sorting conversations
+     */
+    minor_id: number
+}
 
 export interface MessagesConversationWithMessage {
     /**
@@ -6244,6 +7772,29 @@ export interface MessagesForeignMessage {
     payload: string
 }
 
+export interface MessagesForward {
+    /**
+     * Messages owner_id
+     */
+    owner_id: number,
+    /**
+     * Messages peer_id
+     */
+    peer_id: number,
+    /**
+     * 
+     */
+    conversation_message_ids: number[],
+    /**
+     * 
+     */
+    message_ids: number[],
+    /**
+     * If you need to reply to a message
+     */
+    is_reply: boolean
+}
+
 export interface MessagesGraffiti {
     /**
      * Access key for graffiti
@@ -6283,7 +7834,11 @@ export interface MessagesHistoryAttachment {
     /**
      * Message author's ID
      */
-    from_id: number
+    from_id: number,
+    /**
+     * Forward level (optional)
+     */
+    forward_level: number
 }
 
 export interface MessagesHistoryMessageAttachment {
@@ -6420,21 +7975,21 @@ export interface MessagesLongpollMessages {
 
 export interface MessagesLongpollParams {
     /**
-     * Key
-     */
-    key: string,
-    /**
-     * Persistent timestamp
-     */
-    pts: number,
-    /**
      * Server URL
      */
     server: string,
     /**
+     * Key
+     */
+    key: string,
+    /**
      * Timestamp
      */
-    ts: string
+    ts: number,
+    /**
+     * Persistent timestamp
+     */
+    pts: number
 }
 
 export interface MessagesMessage {
@@ -6537,7 +8092,11 @@ export interface MessagesMessage {
     /**
      * Was the audio message inside already listened by you
      */
-    was_listened: boolean
+    was_listened: boolean,
+    /**
+     * Date when the message has been pinned in Unixtime
+     */
+    pinned_at: number
 }
 
 export interface MessagesMessageAction {
@@ -6600,6 +8159,10 @@ export interface MessagesMessageAttachment {
     /**
      * 
      */
+    call: CallsCall,
+    /**
+     * 
+     */
     doc: DocsDoc,
     /**
      * 
@@ -6648,7 +8211,11 @@ export interface MessagesMessageAttachment {
     /**
      * 
      */
-    wall_reply: WallWallComment
+    wall_reply: WallWallComment,
+    /**
+     * 
+     */
+    poll: PollsPoll
 }
 
 export type MessagesMessageAttachmentType = string
@@ -6666,6 +8233,28 @@ export interface MessagesMessageRequestData {
      * Message request date
      */
     request_date: number
+}
+
+export interface MessagesMessagesArray {
+    /**
+     * 
+     */
+    count: number,
+    /**
+     * 
+     */
+    items: MessagesMessage[]
+}
+
+export interface MessagesOutReadBy {
+    /**
+     * 
+     */
+    count: number,
+    /**
+     * 
+     */
+    member_ids: number[]
 }
 
 export interface MessagesPinnedMessage {
@@ -6715,6 +8304,21 @@ export interface MessagesPinnedMessage {
     keyboard: MessagesKeyboard
 }
 
+export interface MessagesPushSettings {
+    /**
+     * Information whether push notifications are disabled forever
+     */
+    disabled_forever: boolean,
+    /**
+     * Time until what notifications are disabled
+     */
+    disabled_until: number,
+    /**
+     * Information whether the sound is on
+     */
+    no_sound: boolean
+}
+
 export type MessagesTemplateActionTypeNames = string
 
 export interface MessagesUserXtrInvitedBy {
@@ -6762,6 +8366,10 @@ export interface MessagesUserXtrInvitedBy {
      * URL of square photo of the user with 100 pixels in width
      */
     photo_100: string,
+    /**
+     * 
+     */
+    online_info: UsersOnlineInfo,
     /**
      * Information whether the user is online
      */
@@ -6896,17 +8504,13 @@ export interface NewsfeedItemDigest {
      */
     date: number,
     /**
-     * 
-     */
-    button_text: string,
-    /**
      * id of feed in digest
      */
     feed_id: string,
     /**
      * 
      */
-    items: WallWallpost[],
+    items: NewsfeedItemDigestItem[],
     /**
      * 
      */
@@ -6918,12 +8522,90 @@ export interface NewsfeedItemDigest {
     /**
      * 
      */
-    title: string,
+    header: NewsfeedItemDigestHeader,
+    /**
+     * 
+     */
+    footer: NewsfeedItemDigestFooter,
     /**
      * 
      */
     track_code: string
 }
+
+export interface NewsfeedItemDigestButton {
+    /**
+     * 
+     */
+    title: string,
+    /**
+     * 
+     */
+    style: string
+}
+
+export interface NewsfeedItemDigestFooter {
+    /**
+     * 
+     */
+    style: string,
+    /**
+     * text for invite to enable smart feed
+     */
+    text: string,
+    /**
+     * 
+     */
+    button: NewsfeedItemDigestButton
+}
+
+export interface NewsfeedItemDigestFullItem {
+    /**
+     * 
+     */
+    text: string,
+    /**
+     * 
+     */
+    source_name: string,
+    /**
+     * 
+     */
+    attachment_index: number,
+    /**
+     * 
+     */
+    attachment: WallWallpostAttachment,
+    /**
+     * 
+     */
+    style: string,
+    /**
+     * 
+     */
+    post: WallWallpost
+}
+
+export interface NewsfeedItemDigestHeader {
+    /**
+     * Title of the header
+     */
+    title: string,
+    /**
+     * Subtitle of the header, when title have two strings
+     */
+    subtitle: string,
+    /**
+     * 
+     */
+    style: string,
+    /**
+     * 
+     */
+    button: NewsfeedItemDigestButton
+}
+
+export type NewsfeedItemDigestItem = WallWallpost
 
 export interface NewsfeedItemFriend {
     /**
@@ -6974,37 +8656,11 @@ export interface NewsfeedItemHolidayRecommendationsBlockHeader {
     action: BaseLinkButtonAction
 }
 
-export interface NewsfeedItemNote {
-    /**
-     * 
-     */
-    type: NewsfeedNewsfeedItemType,
-    /**
-     * Item source ID
-     */
-    source_id: number,
-    /**
-     * Date when item has been added in Unixtime
-     */
-    date: number,
-    /**
-     * 
-     */
-    notes: NewsfeedItemNoteNotes
-}
-
-export interface NewsfeedItemNoteNotes {
-    /**
-     * Notes number
-     */
-    count: number,
-    /**
-     * 
-     */
-    items: NewsfeedNewsfeedNote[]
-}
-
 export interface NewsfeedItemPhoto {
+    /**
+     * Index of current carousel element
+     */
+    carousel_offset: number,
     /**
      * 
      */
@@ -7039,6 +8695,10 @@ export interface NewsfeedItemPhotoPhotos {
 }
 
 export interface NewsfeedItemPhotoTag {
+    /**
+     * Index of current carousel element
+     */
+    carousel_offset: number,
     /**
      * 
      */
@@ -7170,6 +8830,10 @@ export interface NewsfeedItemTopic {
 
 export interface NewsfeedItemVideo {
     /**
+     * Index of current carousel element
+     */
+    carousel_offset: number,
+    /**
      * 
      */
     type: NewsfeedNewsfeedItemType,
@@ -7199,6 +8863,10 @@ export interface NewsfeedItemVideoVideo {
 }
 
 export interface NewsfeedItemWallpost {
+    /**
+     * Index of current carousel element
+     */
+    carousel_offset: number,
     /**
      * 
      */
@@ -7274,7 +8942,11 @@ export interface NewsfeedItemWallpost {
     /**
      * Count of views
      */
-    views: WallViews
+    views: WallViews,
+    /**
+     * Preview length control parameter
+     */
+    short_text_rate: number
 }
 
 export interface NewsfeedItemWallpostFeedback {
@@ -7350,25 +9022,6 @@ export interface NewsfeedNewsfeedItem {
 
 export type NewsfeedNewsfeedItemType = string
 
-export interface NewsfeedNewsfeedNote {
-    /**
-     * Comments Number
-     */
-    comments: number,
-    /**
-     * Note ID
-     */
-    id: number,
-    /**
-     * integer
-     */
-    owner_id: number,
-    /**
-     * Note title
-     */
-    title: string
-}
-
 export interface NewsfeedNewsfeedPhoto {
     /**
      * Access key for the photo
@@ -7407,6 +9060,18 @@ export interface NewsfeedNewsfeedPhoto {
      */
     owner_id: number,
     /**
+     * URL of image with 2560 px width
+     */
+    photo_256: string,
+    /**
+     * Information whether current user can comment the photo
+     */
+    can_comment: BaseBoolInt,
+    /**
+     * 
+     */
+    place: string,
+    /**
      * Post ID
      */
     post_id: number,
@@ -7433,15 +9098,15 @@ export interface NewsfeedNewsfeedPhoto {
     /**
      * 
      */
+    restrictions: MediaRestriction,
+    /**
+     * 
+     */
     likes: BaseLikes,
     /**
      * 
      */
     comments: BaseObjectCount,
-    /**
-     * Information whether current user can comment the photo
-     */
-    can_comment: BaseBoolInt,
     /**
      * Information whether current user can repost the photo
      */
@@ -7676,6 +9341,18 @@ export interface NotificationsNotificationParent {
      */
     owner_id: number,
     /**
+     * URL of image with 2560 px width
+     */
+    photo_256: string,
+    /**
+     * Information whether current user can comment the video
+     */
+    can_comment: BaseBoolInt,
+    /**
+     * 
+     */
+    place: string,
+    /**
      * 
      */
     sizes: PhotosPhotoSizes[],
@@ -7691,6 +9368,10 @@ export interface NotificationsNotificationParent {
      * Whether photo has attached tag links
      */
     has_tags: boolean,
+    /**
+     * 
+     */
+    restrictions: MediaRestriction,
     /**
      * Date when the topic has been created in Unixtime
      */
@@ -7723,10 +9404,6 @@ export interface NotificationsNotificationParent {
      * Date when the video has been added in Unixtime
      */
     adding_date: number,
-    /**
-     * Information whether current user can comment the video
-     */
-    can_comment: BaseBoolInt,
     /**
      * Information whether current user can edit the video
      */
@@ -7843,6 +9520,14 @@ export interface NotificationsNotificationParent {
      * 1 if the video is an upcoming stream
      */
     upcoming: BasePropertyExists,
+    /**
+     * Date in Unixtime when the live stream is scheduled to start by the author
+     */
+    live_start_time: number,
+    /**
+     * Whether current user is subscribed to the upcoming live stream notification (if not subscribed to the author)
+     */
+    live_notify: BaseBoolInt,
     /**
      * Number of spectators of the stream
      */
@@ -8408,6 +10093,18 @@ export interface PhotosPhoto {
      */
     owner_id: number,
     /**
+     * URL of image with 2560 px width
+     */
+    photo_256: string,
+    /**
+     * Information whether current user can comment the photo
+     */
+    can_comment: BaseBoolInt,
+    /**
+     * 
+     */
+    place: string,
+    /**
      * Post ID
      */
     post_id: number,
@@ -8430,7 +10127,11 @@ export interface PhotosPhoto {
     /**
      * Whether photo has attached tag links
      */
-    has_tags: boolean
+    has_tags: boolean,
+    /**
+     * 
+     */
+    restrictions: MediaRestriction
 }
 
 export interface PhotosPhotoAlbum {
@@ -8527,6 +10228,8 @@ export interface PhotosPhotoAlbumFull {
     upload_by_admins_only: BaseBoolInt
 }
 
+export type PhotosPhotoFalseable = any
+
 export interface PhotosPhotoFull {
     /**
      * Access key for the photo
@@ -8540,10 +10243,6 @@ export interface PhotosPhotoFull {
      * Information whether current user can comment the photo
      */
     can_comment: BaseBoolInt,
-    /**
-     * 
-     */
-    comments: BaseObjectCount,
     /**
      * Date when uploaded
      */
@@ -8569,6 +10268,14 @@ export interface PhotosPhotoFull {
      */
     likes: BaseLikes,
     /**
+     * 
+     */
+    reposts: BaseRepostsInfo,
+    /**
+     * 
+     */
+    comments: BaseObjectCount,
+    /**
      * Longitude
      */
     long: number,
@@ -8580,10 +10287,6 @@ export interface PhotosPhotoFull {
      * Post ID
      */
     post_id: number,
-    /**
-     * 
-     */
-    reposts: BaseObjectCount,
     /**
      * 
      */
@@ -8719,6 +10422,10 @@ export interface PhotosPhotoSizes {
      */
     url: string,
     /**
+     * URL of the image
+     */
+    src: string,
+    /**
      * 
      */
     type: PhotosPhotoSizesType,
@@ -8747,6 +10454,10 @@ export interface PhotosPhotoTag {
      * Tag description
      */
     tagged_name: string,
+    /**
+     * Tagged description.
+     */
+    description: string,
     /**
      * Tagged user ID
      */
@@ -8805,6 +10516,10 @@ export interface PhotosPhotoUploadResponse {
      * Uploading hash
      */
     hash: string,
+    /**
+     * Uploaded photo data
+     */
+    photo: string,
     /**
      * Uploaded photos data
      */
@@ -8993,6 +10708,52 @@ export interface PhotosPhotoXtrTagInfo {
     width: number
 }
 
+export interface PhotosTagsSuggestionItem {
+    /**
+     * 
+     */
+    title: string,
+    /**
+     * 
+     */
+    caption: string,
+    /**
+     * 
+     */
+    type: string,
+    /**
+     * 
+     */
+    buttons: PhotosTagsSuggestionItemButton[],
+    /**
+     * 
+     */
+    photo: PhotosPhoto,
+    /**
+     * 
+     */
+    tags: PhotosPhotoTag[],
+    /**
+     * 
+     */
+    track_code: string
+}
+
+export interface PhotosTagsSuggestionItemButton {
+    /**
+     * 
+     */
+    title: string,
+    /**
+     * 
+     */
+    action: string,
+    /**
+     * 
+     */
+    style: string
+}
+
 export interface PhotosWallUploadResponse {
     /**
      * Uploading hash
@@ -9027,15 +10788,105 @@ export interface PollsAnswer {
     votes: number
 }
 
+export interface PollsBackground {
+    /**
+     * Gradient angle with 0 on positive X axis
+     */
+    angle: number,
+    /**
+     * Hex color code without #
+     */
+    color: string,
+    /**
+     * Original height of pattern tile
+     */
+    height: number,
+    /**
+     * 
+     */
+    id: number,
+    /**
+     * 
+     */
+    name: string,
+    /**
+     * Pattern tiles
+     */
+    images: BaseImage[],
+    /**
+     * Gradient points
+     */
+    points: BaseGradientPoint[],
+    /**
+     * 
+     */
+    type: string,
+    /**
+     * Original with of pattern tile
+     */
+    width: number
+}
+
+export interface PollsFriend {
+    /**
+     * 
+     */
+    id: number
+}
+
 export interface PollsPoll {
     /**
-     * Information whether the field is anonymous
+     * 
      */
-    anonymous: boolean,
+    anonymous: PollsPollAnonymous,
+    /**
+     * 
+     */
+    friends: PollsFriend[],
+    /**
+     * Information whether the poll with multiple choices
+     */
+    multiple: boolean,
     /**
      * Current user's answer ID
      */
     answer_id: number,
+    /**
+     * 
+     */
+    end_date: number,
+    /**
+     * Current user's answer IDs
+     */
+    answer_ids: number[],
+    /**
+     * 
+     */
+    closed: boolean,
+    /**
+     * 
+     */
+    is_board: boolean,
+    /**
+     * 
+     */
+    can_edit: boolean,
+    /**
+     * 
+     */
+    can_vote: boolean,
+    /**
+     * 
+     */
+    can_report: boolean,
+    /**
+     * 
+     */
+    can_share: boolean,
+    /**
+     * 
+     */
+    photo: PollsBackground,
     /**
      * 
      */
@@ -9053,14 +10904,28 @@ export interface PollsPoll {
      */
     owner_id: number,
     /**
+     * Poll author's ID
+     */
+    author_id: number,
+    /**
      * Poll question
      */
     question: string,
     /**
+     * 
+     */
+    background: PollsBackground,
+    /**
      * Votes number
      */
-    votes: string
+    votes: number,
+    /**
+     * 
+     */
+    disable_unvote: boolean
 }
+
+export type PollsPollAnonymous = boolean
 
 export interface PollsVoters {
     /**
@@ -9204,7 +11069,7 @@ export interface SecureTokenChecked {
     /**
      * Returns if successfully processed
      */
-    success: BaseOkResponse,
+    success: number,
     /**
      * User ID
      */
@@ -9472,13 +11337,13 @@ export interface StatsWallpostStat {
 
 export interface StatusStatus {
     /**
-     * 
-     */
-    audio: AudioAudio,
-    /**
      * Status text
      */
-    text: string
+    text: string,
+    /**
+     * 
+     */
+    audio: AudioAudio
 }
 
 export interface StorageValue {
@@ -9490,6 +11355,17 @@ export interface StorageValue {
      * 
      */
     value: string
+}
+
+export interface StoriesClickableArea {
+    /**
+     * 
+     */
+    x: number,
+    /**
+     * 
+     */
+    y: number
 }
 
 export interface StoriesClickableSticker {
@@ -9600,7 +11476,15 @@ export interface StoriesClickableSticker {
     /**
      * Whether current user allowed broadcast notify from this app
      */
-    is_broadcast_notify_allowed: boolean
+    is_broadcast_notify_allowed: boolean,
+    /**
+     * 
+     */
+    situational_theme_id: number,
+    /**
+     * 
+     */
+    situational_app_url: string
 }
 
 export interface StoriesClickableStickers {
@@ -9624,6 +11508,10 @@ export interface StoriesFeedItem {
      */
     type: string,
     /**
+     * 
+     */
+    id: string,
+    /**
      * Author stories
      */
     stories: StoriesStory[],
@@ -9638,7 +11526,11 @@ export interface StoriesFeedItem {
     /**
      * Additional data for promo stories (for type promo_stories)
      */
-    promo_data: StoriesPromoBlock
+    promo_data: StoriesPromoBlock,
+    /**
+     * 
+     */
+    birthday_user_id: number
 }
 
 export interface StoriesPromoBlock {
@@ -9802,7 +11694,15 @@ export interface StoriesStory {
     /**
      * 
      */
-    first_narrative_title: string
+    first_narrative_title: string,
+    /**
+     * 
+     */
+    birthday_wish_user_id: number,
+    /**
+     * 
+     */
+    can_use_in_narrative: boolean
 }
 
 export interface StoriesStoryLink {
@@ -9889,6 +11789,10 @@ export interface UsersCareer {
      */
     city_id: number,
     /**
+     * City name
+     */
+    city_name: string,
+    /**
      * Company name
      */
     company: string,
@@ -9916,59 +11820,6 @@ export interface UsersCareer {
      * Till year
      */
     until: number
-}
-
-export interface UsersCropPhoto {
-    /**
-     * 
-     */
-    crop: UsersCropPhotoCrop,
-    /**
-     * 
-     */
-    photo: PhotosPhoto,
-    /**
-     * 
-     */
-    rect: UsersCropPhotoRect
-}
-
-export interface UsersCropPhotoCrop {
-    /**
-     * Coordinate X of the left upper corner
-     */
-    x: number,
-    /**
-     * Coordinate X of the right lower corner
-     */
-    x2: number,
-    /**
-     * Coordinate Y of the left upper corner
-     */
-    y: number,
-    /**
-     * Coordinate Y of the right lower corner
-     */
-    y2: number
-}
-
-export interface UsersCropPhotoRect {
-    /**
-     * Coordinate X of the left upper corner
-     */
-    x: number,
-    /**
-     * Coordinate X of the right lower corner
-     */
-    x2: number,
-    /**
-     * Coordinate Y of the left upper corner
-     */
-    y: number,
-    /**
-     * Coordinate Y of the right lower corner
-     */
-    y2: number
 }
 
 export interface UsersExports {
@@ -10039,6 +11890,33 @@ export interface UsersOccupation {
      * Type of occupation
      */
     type: string
+}
+
+export interface UsersOnlineInfo {
+    /**
+     * Whether you can see real online status of user or not
+     */
+    visible: boolean,
+    /**
+     * Last time we saw user being active
+     */
+    last_seen: number,
+    /**
+     * Whether user is currently online or not
+     */
+    is_online: boolean,
+    /**
+     * Application id from which user is currently online or was last seen online
+     */
+    app_id: number,
+    /**
+     * Is user online from desktop app or mobile app
+     */
+    is_mobile: boolean,
+    /**
+     * In case user online is not visible, it indicates approximate timeframe of user online
+     */
+    status: string
 }
 
 export interface UsersPersonal {
@@ -10139,7 +12017,11 @@ export interface UsersSchool {
     /**
      * Year the user finished to study
      */
-    year_to: number
+    year_to: number,
+    /**
+     * 
+     */
+    speciality: string
 }
 
 export interface UsersSubscriptionsItem {
@@ -10189,7 +12071,11 @@ export interface UsersUniversity {
     /**
      * University name
      */
-    name: string
+    name: string,
+    /**
+     * 
+     */
+    university_group_id: number
 }
 
 export interface UsersUser {
@@ -10237,6 +12123,10 @@ export interface UsersUser {
      * URL of square photo of the user with 100 pixels in width
      */
     photo_100: string,
+    /**
+     * 
+     */
+    online_info: UsersOnlineInfo,
     /**
      * Information whether the user is online
      */
@@ -10350,7 +12240,43 @@ export interface UsersUserCounters {
     /**
      * Videos number
      */
-    videos: number
+    videos: number,
+    /**
+     * 
+     */
+    new_photo_tags: number,
+    /**
+     * 
+     */
+    new_recognition_tags: number,
+    /**
+     * 
+     */
+    mutual_friends: number,
+    /**
+     * 
+     */
+    posts: number,
+    /**
+     * 
+     */
+    articles: number,
+    /**
+     * 
+     */
+    wishes: number,
+    /**
+     * 
+     */
+    podcasts: number,
+    /**
+     * 
+     */
+    clips: number,
+    /**
+     * 
+     */
+    clips_followers: number
 }
 
 export interface UsersUserFull {
@@ -10398,6 +12324,10 @@ export interface UsersUserFull {
      * URL of square photo of the user with 100 pixels in width
      */
     photo_100: string,
+    /**
+     * 
+     */
+    online_info: UsersOnlineInfo,
     /**
      * Information whether the user is online
      */
@@ -10483,6 +12413,10 @@ export interface UsersUserFull {
      */
     maiden_name: string,
     /**
+     * User contact name
+     */
+    contact_name: string,
+    /**
      * Domain name of the user's page
      */
     domain: string,
@@ -10493,7 +12427,7 @@ export interface UsersUserFull {
     /**
      * 
      */
-    city: BaseObject,
+    city: BaseCity,
     /**
      * 
      */
@@ -10559,6 +12493,146 @@ export interface UsersUserFull {
      */
     can_see_audio: BaseBoolInt,
     /**
+     * 
+     */
+    type: UsersUserType,
+    /**
+     * 
+     */
+    email: string,
+    /**
+     * 
+     */
+    skype: string,
+    /**
+     * 
+     */
+    facebook: string,
+    /**
+     * 
+     */
+    facebook_name: string,
+    /**
+     * 
+     */
+    twitter: string,
+    /**
+     * 
+     */
+    livejournal: string,
+    /**
+     * 
+     */
+    instagram: string,
+    /**
+     * 
+     */
+    test: BaseBoolInt,
+    /**
+     * 
+     */
+    video_live: VideoLiveInfo,
+    /**
+     * 
+     */
+    is_video_live_notifications_blocked: BaseBoolInt,
+    /**
+     * 
+     */
+    is_service: boolean,
+    /**
+     * 
+     */
+    service_description: string,
+    /**
+     * 
+     */
+    photo_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo: string,
+    /**
+     * 
+     */
+    photo_big: string,
+    /**
+     * 
+     */
+    photo_400: string,
+    /**
+     * 
+     */
+    photo_max_size: PhotosPhoto,
+    /**
+     * 
+     */
+    language: string,
+    /**
+     * 
+     */
+    stories_archive_count: number,
+    /**
+     * 
+     */
+    wall_default: string,
+    /**
+     * Information whether current user can call
+     */
+    can_call: boolean,
+    /**
+     * Information whether current user can see the user's wishes
+     */
+    can_see_wishes: boolean,
+    /**
+     * Information whether current user can see the user's gifts
+     */
+    can_see_gifts: BaseBoolInt,
+    /**
+     * 
+     */
+    interests: string,
+    /**
+     * 
+     */
+    books: string,
+    /**
+     * 
+     */
+    tv: string,
+    /**
+     * 
+     */
+    quotes: string,
+    /**
+     * 
+     */
+    about: string,
+    /**
+     * 
+     */
+    games: string,
+    /**
+     * 
+     */
+    movies: string,
+    /**
+     * 
+     */
+    activities: string,
+    /**
+     * 
+     */
+    music: string,
+    /**
      * Information whether current user can write private message
      */
     can_write_private_message: BaseBoolInt,
@@ -10605,11 +12679,23 @@ export interface UsersUserFull {
     /**
      * 
      */
-    crop_photo: UsersCropPhoto,
+    crop_photo: BaseCropPhoto,
     /**
      * Number of user's followers
      */
     followers_count: number,
+    /**
+     * User level in live streams achievements
+     */
+    video_live_level: number,
+    /**
+     * Number of user's live streams
+     */
+    video_live_count: number,
+    /**
+     * Number of user's clips
+     */
+    clips_count: number,
     /**
      * Information whether current user is in the requested user's blacklist.
      */
@@ -10650,6 +12736,10 @@ export interface UsersUserFull {
      * University name
      */
     university_name: string,
+    /**
+     * 
+     */
+    university_group_id: number,
     /**
      * Faculty ID
      */
@@ -10709,7 +12799,27 @@ export interface UsersUserFull {
     /**
      * Can subscribe to wall
      */
-    can_subscribe_posts: boolean
+    can_subscribe_posts: boolean,
+    /**
+     * 
+     */
+    counters: UsersUserCounters,
+    /**
+     * 
+     */
+    access_key: string,
+    /**
+     * 
+     */
+    can_upload_doc: BaseBoolInt,
+    /**
+     * 
+     */
+    hash: string,
+    /**
+     * 
+     */
+    has_email: boolean
 }
 
 export interface UsersUserMin {
@@ -10884,6 +12994,10 @@ export interface UsersUserXtrCounters {
      */
     photo_100: string,
     /**
+     * 
+     */
+    online_info: UsersOnlineInfo,
+    /**
      * Information whether the user is online
      */
     online: BaseBoolInt,
@@ -10968,6 +13082,10 @@ export interface UsersUserXtrCounters {
      */
     maiden_name: string,
     /**
+     * User contact name
+     */
+    contact_name: string,
+    /**
      * Domain name of the user's page
      */
     domain: string,
@@ -10978,7 +13096,7 @@ export interface UsersUserXtrCounters {
     /**
      * 
      */
-    city: BaseObject,
+    city: BaseCity,
     /**
      * 
      */
@@ -11044,6 +13162,146 @@ export interface UsersUserXtrCounters {
      */
     can_see_audio: BaseBoolInt,
     /**
+     * 
+     */
+    type: UsersUserType,
+    /**
+     * 
+     */
+    email: string,
+    /**
+     * 
+     */
+    skype: string,
+    /**
+     * 
+     */
+    facebook: string,
+    /**
+     * 
+     */
+    facebook_name: string,
+    /**
+     * 
+     */
+    twitter: string,
+    /**
+     * 
+     */
+    livejournal: string,
+    /**
+     * 
+     */
+    instagram: string,
+    /**
+     * 
+     */
+    test: BaseBoolInt,
+    /**
+     * 
+     */
+    video_live: VideoLiveInfo,
+    /**
+     * 
+     */
+    is_video_live_notifications_blocked: BaseBoolInt,
+    /**
+     * 
+     */
+    is_service: boolean,
+    /**
+     * 
+     */
+    service_description: string,
+    /**
+     * 
+     */
+    photo_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo_medium_rec: PhotosPhotoFalseable,
+    /**
+     * 
+     */
+    photo: string,
+    /**
+     * 
+     */
+    photo_big: string,
+    /**
+     * 
+     */
+    photo_400: string,
+    /**
+     * 
+     */
+    photo_max_size: PhotosPhoto,
+    /**
+     * 
+     */
+    language: string,
+    /**
+     * 
+     */
+    stories_archive_count: number,
+    /**
+     * 
+     */
+    wall_default: string,
+    /**
+     * Information whether current user can call
+     */
+    can_call: boolean,
+    /**
+     * Information whether current user can see the user's wishes
+     */
+    can_see_wishes: boolean,
+    /**
+     * Information whether current user can see the user's gifts
+     */
+    can_see_gifts: BaseBoolInt,
+    /**
+     * 
+     */
+    interests: string,
+    /**
+     * 
+     */
+    books: string,
+    /**
+     * 
+     */
+    tv: string,
+    /**
+     * 
+     */
+    quotes: string,
+    /**
+     * 
+     */
+    about: string,
+    /**
+     * 
+     */
+    games: string,
+    /**
+     * 
+     */
+    movies: string,
+    /**
+     * 
+     */
+    activities: string,
+    /**
+     * 
+     */
+    music: string,
+    /**
      * Information whether current user can write private message
      */
     can_write_private_message: BaseBoolInt,
@@ -11090,11 +13348,23 @@ export interface UsersUserXtrCounters {
     /**
      * 
      */
-    crop_photo: UsersCropPhoto,
+    crop_photo: BaseCropPhoto,
     /**
      * Number of user's followers
      */
     followers_count: number,
+    /**
+     * User level in live streams achievements
+     */
+    video_live_level: number,
+    /**
+     * Number of user's live streams
+     */
+    video_live_count: number,
+    /**
+     * Number of user's clips
+     */
+    clips_count: number,
     /**
      * Information whether current user is in the requested user's blacklist.
      */
@@ -11135,6 +13405,10 @@ export interface UsersUserXtrCounters {
      * University name
      */
     university_name: string,
+    /**
+     * 
+     */
+    university_group_id: number,
     /**
      * Faculty ID
      */
@@ -11198,7 +13472,23 @@ export interface UsersUserXtrCounters {
     /**
      * 
      */
-    counters: UsersUserCounters
+    counters: UsersUserCounters,
+    /**
+     * 
+     */
+    access_key: string,
+    /**
+     * 
+     */
+    can_upload_doc: BaseBoolInt,
+    /**
+     * 
+     */
+    hash: string,
+    /**
+     * 
+     */
+    has_email: boolean
 }
 
 export interface UsersUserXtrType {
@@ -11246,6 +13536,10 @@ export interface UsersUserXtrType {
      * URL of square photo of the user with 100 pixels in width
      */
     photo_100: string,
+    /**
+     * 
+     */
+    online_info: UsersOnlineInfo,
     /**
      * Information whether the user is online
      */
@@ -11458,6 +13752,17 @@ export interface UtilsStatsSexAge {
      *  Views by male users
      */
     male: number
+}
+
+export interface VideoLiveInfo {
+    /**
+     * 
+     */
+    enabled: BaseBoolInt,
+    /**
+     * 
+     */
+    is_notifications_blocked: BaseBoolInt
 }
 
 export interface VideoLiveSettings {
@@ -11678,6 +13983,14 @@ export interface VideoVideo {
      * 1 if the video is an upcoming stream
      */
     upcoming: BasePropertyExists,
+    /**
+     * Date in Unixtime when the live stream is scheduled to start by the author
+     */
+    live_start_time: number,
+    /**
+     * Whether current user is subscribed to the upcoming live stream notification (if not subscribed to the author)
+     */
+    live_notify: BaseBoolInt,
     /**
      * Number of spectators of the stream
      */
@@ -11928,6 +14241,14 @@ export interface VideoVideoFull {
      */
     upcoming: BasePropertyExists,
     /**
+     * Date in Unixtime when the live stream is scheduled to start by the author
+     */
+    live_start_time: number,
+    /**
+     * Whether current user is subscribed to the upcoming live stream notification (if not subscribed to the author)
+     */
+    live_notify: BaseBoolInt,
+    /**
      * Number of spectators of the stream
      */
     spectators: number,
@@ -11950,11 +14271,7 @@ export interface VideoVideoFull {
     /**
      * Settings for live stream
      */
-    live_settings: VideoLiveSettings,
-    /**
-     * Action button
-     */
-    action_button: ActionLinksAction
+    live_settings: VideoLiveSettings
 }
 
 export interface VideoVideoImage {
@@ -12028,6 +14345,13 @@ export interface WallAttachedNote {
      * URL of the page with note preview
      */
     view_url: string
+}
+
+export interface WallCarouselBase {
+    /**
+     * Index of current carousel element
+     */
+    carousel_offset: number
 }
 
 export interface WallCommentAttachment {
@@ -12195,6 +14519,10 @@ export interface WallWallComment {
      */
     date: number,
     /**
+     * 
+     */
+    donut: WallWallCommentDonut,
+    /**
      * Author ID
      */
     from_id: number,
@@ -12242,6 +14570,24 @@ export interface WallWallComment {
      * 
      */
     deleted: boolean
+}
+
+export interface WallWallCommentDonut {
+    /**
+     * Means commentator is donator
+     */
+    is_don: boolean,
+    /**
+     * 
+     */
+    placeholder: WallWallCommentDonutPlaceholder
+}
+
+export interface WallWallCommentDonutPlaceholder {
+    /**
+     * 
+     */
+    text: string
 }
 
 export interface WallWallpost {
@@ -12296,13 +14642,25 @@ export interface WallWallpost {
     /**
      * 
      */
+    poster: any,
+    /**
+     * If post type 'reply', contains original post ID
+     */
+    post_id: number,
+    /**
+     * If post type 'reply', contains original parent IDs stack
+     */
+    parents_stack: number[],
+    /**
+     * 
+     */
     post_source: WallPostSource,
     /**
      * 
      */
     post_type: WallPostType,
     /**
-     * Count of views
+     * 
      */
     reposts: BaseRepostsInfo,
     /**
@@ -12400,7 +14758,55 @@ export interface WallWallpostAttachment {
 
 export type WallWallpostAttachmentType = string
 
+export interface WallWallpostCommentsDonut {
+    /**
+     * 
+     */
+    placeholder: WallWallpostCommentsDonutPlaceholder
+}
+
+export interface WallWallpostCommentsDonutPlaceholder {
+    /**
+     * 
+     */
+    text: string
+}
+
+export interface WallWallpostDonut {
+    /**
+     * Post only for dons
+     */
+    is_donut: boolean,
+    /**
+     * Value of this field need to pass in wall.post/edit in donut_paid_duration
+     */
+    paid_duration: number,
+    /**
+     * If placeholder was respond, text and all attachments will be hidden
+     */
+    placeholder: WallWallpostDonutPlaceholder,
+    /**
+     * Says whether group admin can post free copy of this donut post
+     */
+    can_publish_free_copy: boolean,
+    /**
+     * Says what user can edit in post about donut properties
+     */
+    edit_mode: string
+}
+
+export interface WallWallpostDonutPlaceholder {
+    /**
+     * 
+     */
+    text: string
+}
+
 export interface WallWallpostFull {
+    /**
+     * Index of current carousel element
+     */
+    carousel_offset: number,
     /**
      * Access key to private object
      */
@@ -12452,13 +14858,25 @@ export interface WallWallpostFull {
     /**
      * 
      */
+    poster: any,
+    /**
+     * If post type 'reply', contains original post ID
+     */
+    post_id: number,
+    /**
+     * If post type 'reply', contains original parent IDs stack
+     */
+    parents_stack: number[],
+    /**
+     * 
+     */
     post_source: WallPostSource,
     /**
      * 
      */
     post_type: WallPostType,
     /**
-     * Count of views
+     * 
      */
     reposts: BaseRepostsInfo,
     /**
@@ -12494,6 +14912,10 @@ export interface WallWallpostFull {
      */
     can_pin: BaseBoolInt,
     /**
+     * 
+     */
+    donut: WallWallpostDonut,
+    /**
      * Information whether the post is pinned
      */
     is_pinned: number,
@@ -12504,7 +14926,11 @@ export interface WallWallpostFull {
     /**
      * Information whether the post is marked as ads
      */
-    marked_as_ads: BaseBoolInt
+    marked_as_ads: BaseBoolInt,
+    /**
+     * Preview length control parameter
+     */
+    short_text_rate: number
 }
 
 export interface WallWallpostToId {
@@ -12746,16 +15172,4 @@ export interface WidgetsWidgetPage {
     url: string
 }
 
-export type AudioAdsConfig = any
-
-export type LinkRedirects = any
-
-export type ArticlesArticle = any
-
-export type SnippetsAmp = any
-
-export type StoriesClickableArea = any
-
-export type ActionLinksAction = any
-
-export type StoriesStatCategory = any
+export type Poster = any

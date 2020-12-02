@@ -48,16 +48,13 @@ async function generate() {
     // Hack types missing in schema
     let anyType = {type: 'any', properties: {}}
     let anyResponse = { type: 'object', properties: {response: {type: 'any'}} }
-    objects.definitions['audio_ads_config'] = anyType
-    objects.definitions['account_info'] = anyType
-    objects.definitions['link_redirects'] = anyType
-    objects.definitions['articles_article'] = anyType
-    objects.definitions['snippets_amp'] = anyType
+
+    objects.definitions['account_info'].properties['link_redirects'] = anyType
+    objects.definitions['wall_wallpost'].properties['poster'] = anyType
     objects.definitions['callback_message_base'] = anyType
     objects.definitions['notifications_notification_item'] = anyType
-    objects.definitions['stories_clickable_area'] = anyType
-    objects.definitions['actionLinks_action'] = anyType
-    objects.definitions['stories_stat_category'] = anyType
+    objects.definitions['photos_photo_falseable'] = anyType
+    objects.definitions['poster'] = anyType
 
     // Not supported yet
     responses.definitions['groups_getSettings_response'] = anyResponse
@@ -71,7 +68,16 @@ async function generate() {
     for (let className in objects.definitions) {
         let classScheme = jsonToClassScheme(className, objects.definitions[className])
 
-
+        if (classScheme instanceof AliasClassScheme) {
+            classScheme = new AliasClassScheme(
+                classScheme.name,
+                classScheme.fields,
+                new ClassScheme(
+                    classScheme.aliasClass.name.replace('Models.', ''),
+                    classScheme.aliasClass.fields
+                )
+            )
+        }
         if (classScheme instanceof ClassScheme) {
             modelsCode.push(codeGenerator.generateInterface(classScheme))
         }
@@ -212,7 +218,6 @@ function jsonToClassScheme(name: string, scheme: any, forResponses = false): Cla
 
         if (name == 'class')
             name = 'schoolClass'
-
 
         fields.push(
             new ClassField(
@@ -356,7 +361,7 @@ async function saveToFile(name: string, data: string): Promise<any> {
                 return
             }
 
-            resolve()
+            resolve(true)
         })
     })
 }

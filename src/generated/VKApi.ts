@@ -11,9 +11,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountBan(params: MethodsProps.AccountBanParams): Promise<Responses.OkResponse> {
+    public async accountBan(params: MethodsProps.AccountBanParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.ban", params)
     }
     /**
@@ -138,9 +138,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountRegisterDevice(params: MethodsProps.AccountRegisterDeviceParams): Promise<Responses.OkResponse> {
+    public async accountRegisterDevice(params: MethodsProps.AccountRegisterDeviceParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.registerDevice", params)
     }
     /**
@@ -178,9 +178,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountSetInfo(params: MethodsProps.AccountSetInfoParams): Promise<Responses.OkResponse> {
+    public async accountSetInfo(params: MethodsProps.AccountSetInfoParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.setInfo", params)
     }
     /**
@@ -192,9 +192,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountSetNameInMenu(params: MethodsProps.AccountSetNameInMenuParams): Promise<Responses.OkResponse> {
+    public async accountSetNameInMenu(params: MethodsProps.AccountSetNameInMenuParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.setNameInMenu", params)
     }
     /**
@@ -204,9 +204,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountSetOffline(params: MethodsProps.AccountSetOfflineParams): Promise<Responses.OkResponse> {
+    public async accountSetOffline(params: MethodsProps.AccountSetOfflineParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.setOffline", params)
     }
     /**
@@ -217,9 +217,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountSetOnline(params: MethodsProps.AccountSetOnlineParams): Promise<Responses.OkResponse> {
+    public async accountSetOnline(params: MethodsProps.AccountSetOnlineParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.setOnline", params)
     }
     /**
@@ -233,9 +233,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountSetPushSettings(params: MethodsProps.AccountSetPushSettingsParams): Promise<Responses.OkResponse> {
+    public async accountSetPushSettings(params: MethodsProps.AccountSetPushSettingsParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.setPushSettings", params)
     }
     /**
@@ -249,9 +249,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountSetSilenceMode(params: MethodsProps.AccountSetSilenceModeParams): Promise<Responses.OkResponse> {
+    public async accountSetSilenceMode(params: MethodsProps.AccountSetSilenceModeParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.setSilenceMode", params)
     }
     /**
@@ -262,9 +262,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountUnban(params: MethodsProps.AccountUnbanParams): Promise<Responses.OkResponse> {
+    public async accountUnban(params: MethodsProps.AccountUnbanParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.unban", params)
     }
     /**
@@ -276,9 +276,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async accountUnregisterDevice(params: MethodsProps.AccountUnregisterDeviceParams): Promise<Responses.OkResponse> {
+    public async accountUnregisterDevice(params: MethodsProps.AccountUnregisterDeviceParams): Promise<Responses.BaseOkResponse> {
         return super.call("account.unregisterDevice", params)
     }
     /**
@@ -286,7 +286,7 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   account_id: (number),
-     *   data: (string),
+     *   data: (Models.AdsUserSpecificationCutted[]),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -360,7 +360,7 @@ export class VKApi extends BaseVKApi {
      *   account_id: (number),
      *   client_id: (number|undefined),
      *   name: (string),
-     *   lifetime: (number|undefined),
+     *   lifetime: (number),
      *   target_pixel_id: (number|undefined),
      *   target_pixel_rules: (string|undefined),
      *   access_token: (string|undefined)
@@ -423,9 +423,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async adsDeleteTargetGroup(params: MethodsProps.AdsDeleteTargetGroupParams): Promise<Responses.OkResponse> {
+    public async adsDeleteTargetGroup(params: MethodsProps.AdsDeleteTargetGroupParams): Promise<Responses.BaseOkResponse> {
         return super.call("ads.deleteTargetGroup", params)
     }
     /**
@@ -449,6 +449,7 @@ export class VKApi extends BaseVKApi {
      *   campaign_ids: (string|undefined),
      *   client_id: (number|undefined),
      *   include_deleted: (boolean|undefined),
+     *   only_deleted: (boolean|undefined),
      *   limit: (number|undefined),
      *   offset: (number|undefined),
      *   access_token: (string|undefined)
@@ -585,6 +586,37 @@ export class VKApi extends BaseVKApi {
         return super.call("ads.getFloodStats", params)
     }
     /**
+     * undefined
+     *
+     * @param {{
+     *   account_id: (number),
+     *   client_id: (number|undefined),
+     *   requests_ids: (string|undefined),
+     *   offset: (number|undefined),
+     *   limit: (number|undefined),
+     *   sort_by: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdsGetLookalikeRequestsResponse>}
+     */
+    public async adsGetLookalikeRequests(params: MethodsProps.AdsGetLookalikeRequestsParams): Promise<Responses.AdsGetLookalikeRequestsResponse> {
+        return super.call("ads.getLookalikeRequests", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   artist_name: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdsGetMusiciansResponse>}
+     */
+    public async adsGetMusicians(params: MethodsProps.AdsGetMusiciansParams): Promise<Responses.AdsGetMusiciansResponse> {
+        return super.call("ads.getMusicians", params)
+    }
+    /**
      * Returns a list of managers and supervisors of advertising account.
      *
      * @param {{
@@ -692,6 +724,8 @@ export class VKApi extends BaseVKApi {
      *   ad_platform_no_ad_network: (string|undefined),
      *   link_url: (string),
      *   link_domain: (string|undefined),
+     *   need_precise: (boolean|undefined),
+     *   impressions_limit_period: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -799,6 +833,20 @@ export class VKApi extends BaseVKApi {
         return super.call("ads.updateClients", params)
     }
     /**
+     * Adds managers and/or supervisors to advertising account.
+     *
+     * @param {{
+     *   account_id: (number),
+     *   data: (Models.AdsUserSpecification[]),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdsUpdateOfficeUsersResponse>}
+     */
+    public async adsUpdateOfficeUsers(params: MethodsProps.AdsUpdateOfficeUsersParams): Promise<Responses.AdsUpdateOfficeUsersResponse> {
+        return super.call("ads.updateOfficeUsers", params)
+    }
+    /**
      * Edits a retarget group.
      *
      * @param {{
@@ -807,16 +855,210 @@ export class VKApi extends BaseVKApi {
      *   target_group_id: (number),
      *   name: (string),
      *   domain: (string|undefined),
-     *   lifetime: (number|undefined),
+     *   lifetime: (number),
      *   target_pixel_id: (number|undefined),
      *   target_pixel_rules: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async adsUpdateTargetGroup(params: MethodsProps.AdsUpdateTargetGroupParams): Promise<Responses.OkResponse> {
+    public async adsUpdateTargetGroup(params: MethodsProps.AdsUpdateTargetGroupParams): Promise<Responses.BaseOkResponse> {
         return super.call("ads.updateTargetGroup", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   office_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdswebGetAdCategoriesResponse>}
+     */
+    public async adswebGetAdCategories(params: MethodsProps.AdswebGetAdCategoriesParams): Promise<Responses.AdswebGetAdCategoriesResponse> {
+        return super.call("adsweb.getAdCategories", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdswebGetAdUnitCodeResponse>}
+     */
+    public async adswebGetAdUnitCode(params: MethodsProps.AdswebGetAdUnitCodeParams): Promise<Responses.AdswebGetAdUnitCodeResponse> {
+        return super.call("adsweb.getAdUnitCode", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   office_id: (number),
+     *   sites_ids: (string|undefined),
+     *   ad_units_ids: (string|undefined),
+     *   fields: (string|undefined),
+     *   limit: (number|undefined),
+     *   offset: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdswebGetAdUnitsResponse>}
+     */
+    public async adswebGetAdUnits(params: MethodsProps.AdswebGetAdUnitsParams): Promise<Responses.AdswebGetAdUnitsResponse> {
+        return super.call("adsweb.getAdUnits", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   office_id: (number),
+     *   sites_ids: (string|undefined),
+     *   limit: (number|undefined),
+     *   offset: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdswebGetFraudHistoryResponse>}
+     */
+    public async adswebGetFraudHistory(params: MethodsProps.AdswebGetFraudHistoryParams): Promise<Responses.AdswebGetFraudHistoryResponse> {
+        return super.call("adsweb.getFraudHistory", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   office_id: (number),
+     *   sites_ids: (string|undefined),
+     *   fields: (string|undefined),
+     *   limit: (number|undefined),
+     *   offset: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdswebGetSitesResponse>}
+     */
+    public async adswebGetSites(params: MethodsProps.AdswebGetSitesParams): Promise<Responses.AdswebGetSitesResponse> {
+        return super.call("adsweb.getSites", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   office_id: (number),
+     *   ids_type: (string),
+     *   ids: (string),
+     *   period: (string),
+     *   date_from: (string),
+     *   date_to: (string),
+     *   fields: (string|undefined),
+     *   limit: (number|undefined),
+     *   page_id: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AdswebGetStatisticsResponse>}
+     */
+    public async adswebGetStatistics(params: MethodsProps.AdswebGetStatisticsParams): Promise<Responses.AdswebGetStatisticsResponse> {
+        return super.call("adsweb.getStatistics", params)
+    }
+    /**
+     * Returns a URL for uploading a photo to the community collection for community app widgets
+     *
+     * @param {{
+     *   image_type: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AppWidgetsGetAppImageUploadServerResponse>}
+     */
+    public async appWidgetsGetAppImageUploadServer(params: MethodsProps.AppWidgetsGetAppImageUploadServerParams): Promise<Responses.AppWidgetsGetAppImageUploadServerResponse> {
+        return super.call("appWidgets.getAppImageUploadServer", params)
+    }
+    /**
+     * Returns an app collection of images for community app widgets
+     *
+     * @param {{
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   image_type: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AppWidgetsGetAppImagesResponse>}
+     */
+    public async appWidgetsGetAppImages(params: MethodsProps.AppWidgetsGetAppImagesParams): Promise<Responses.AppWidgetsGetAppImagesResponse> {
+        return super.call("appWidgets.getAppImages", params)
+    }
+    /**
+     * Returns a URL for uploading a photo to the community collection for community app widgets
+     *
+     * @param {{
+     *   image_type: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AppWidgetsGetGroupImageUploadServerResponse>}
+     */
+    public async appWidgetsGetGroupImageUploadServer(params: MethodsProps.AppWidgetsGetGroupImageUploadServerParams): Promise<Responses.AppWidgetsGetGroupImageUploadServerResponse> {
+        return super.call("appWidgets.getGroupImageUploadServer", params)
+    }
+    /**
+     * Returns a community collection of images for community app widgets
+     *
+     * @param {{
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   image_type: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AppWidgetsGetGroupImagesResponse>}
+     */
+    public async appWidgetsGetGroupImages(params: MethodsProps.AppWidgetsGetGroupImagesParams): Promise<Responses.AppWidgetsGetGroupImagesResponse> {
+        return super.call("appWidgets.getGroupImages", params)
+    }
+    /**
+     * Returns an image for community app widgets by its ID
+     *
+     * @param {{
+     *   images: (string[]),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AppWidgetsGetImagesByIdResponse>}
+     */
+    public async appWidgetsGetImagesById(params: MethodsProps.AppWidgetsGetImagesByIdParams): Promise<Responses.AppWidgetsGetImagesByIdResponse> {
+        return super.call("appWidgets.getImagesById", params)
+    }
+    /**
+     * Allows to save image into app collection for community app widgets
+     *
+     * @param {{
+     *   hash: (string),
+     *   image: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AppWidgetsSaveAppImageResponse>}
+     */
+    public async appWidgetsSaveAppImage(params: MethodsProps.AppWidgetsSaveAppImageParams): Promise<Responses.AppWidgetsSaveAppImageResponse> {
+        return super.call("appWidgets.saveAppImage", params)
+    }
+    /**
+     * Allows to save image into community collection for community app widgets
+     *
+     * @param {{
+     *   hash: (string),
+     *   image: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.AppWidgetsSaveGroupImageResponse>}
+     */
+    public async appWidgetsSaveGroupImage(params: MethodsProps.AppWidgetsSaveGroupImageParams): Promise<Responses.AppWidgetsSaveGroupImageResponse> {
+        return super.call("appWidgets.saveGroupImage", params)
     }
     /**
      * Allows to update community app widget
@@ -827,9 +1069,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async appWidgetsUpdate(params: MethodsProps.AppWidgetsUpdateParams): Promise<Responses.OkResponse> {
+    public async appWidgetsUpdate(params: MethodsProps.AppWidgetsUpdateParams): Promise<Responses.BaseOkResponse> {
         return super.call("appWidgets.update", params)
     }
     /**
@@ -839,9 +1081,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async appsDeleteAppRequests(params: MethodsProps.AppsDeleteAppRequestsParams): Promise<Responses.OkResponse> {
+    public async appsDeleteAppRequests(params: MethodsProps.AppsDeleteAppRequestsParams): Promise<Responses.BaseOkResponse> {
         return super.call("apps.deleteAppRequests", params)
     }
     /**
@@ -991,22 +1233,6 @@ export class VKApi extends BaseVKApi {
         return super.call("apps.sendRequest", params)
     }
     /**
-     * Checks a user's phone number for correctness.
-     *
-     * @param {{
-     *   phone: (string),
-     *   client_id: (number|undefined),
-     *   client_secret: (string|undefined),
-     *   auth_by_phone: (boolean|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.OkResponse>}
-     */
-    public async authCheckPhone(params: MethodsProps.AuthCheckPhoneParams): Promise<Responses.OkResponse> {
-        return super.call("auth.checkPhone", params)
-    }
-    /**
      * Allows to restore account access using a code received via SMS. " This method is only available for apps with [vk.com/dev/auth_direct|Direct authorization] access. "
      *
      * @param {{
@@ -1046,9 +1272,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardCloseTopic(params: MethodsProps.BoardCloseTopicParams): Promise<Responses.OkResponse> {
+    public async boardCloseTopic(params: MethodsProps.BoardCloseTopicParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.closeTopic", params)
     }
     /**
@@ -1080,9 +1306,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardDeleteComment(params: MethodsProps.BoardDeleteCommentParams): Promise<Responses.OkResponse> {
+    public async boardDeleteComment(params: MethodsProps.BoardDeleteCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.deleteComment", params)
     }
     /**
@@ -1094,9 +1320,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardDeleteTopic(params: MethodsProps.BoardDeleteTopicParams): Promise<Responses.OkResponse> {
+    public async boardDeleteTopic(params: MethodsProps.BoardDeleteTopicParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.deleteTopic", params)
     }
     /**
@@ -1111,9 +1337,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardEditComment(params: MethodsProps.BoardEditCommentParams): Promise<Responses.OkResponse> {
+    public async boardEditComment(params: MethodsProps.BoardEditCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.editComment", params)
     }
     /**
@@ -1126,9 +1352,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardEditTopic(params: MethodsProps.BoardEditTopicParams): Promise<Responses.OkResponse> {
+    public async boardEditTopic(params: MethodsProps.BoardEditTopicParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.editTopic", params)
     }
     /**
@@ -1140,9 +1366,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardFixTopic(params: MethodsProps.BoardFixTopicParams): Promise<Responses.OkResponse> {
+    public async boardFixTopic(params: MethodsProps.BoardFixTopicParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.fixTopic", params)
     }
     /**
@@ -1194,9 +1420,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardOpenTopic(params: MethodsProps.BoardOpenTopicParams): Promise<Responses.OkResponse> {
+    public async boardOpenTopic(params: MethodsProps.BoardOpenTopicParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.openTopic", params)
     }
     /**
@@ -1209,9 +1435,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardRestoreComment(params: MethodsProps.BoardRestoreCommentParams): Promise<Responses.OkResponse> {
+    public async boardRestoreComment(params: MethodsProps.BoardRestoreCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.restoreComment", params)
     }
     /**
@@ -1223,9 +1449,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async boardUnfixTopic(params: MethodsProps.BoardUnfixTopicParams): Promise<Responses.OkResponse> {
+    public async boardUnfixTopic(params: MethodsProps.BoardUnfixTopicParams): Promise<Responses.BaseOkResponse> {
         return super.call("board.unfixTopic", params)
     }
     /**
@@ -1433,9 +1659,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async docsDelete(params: MethodsProps.DocsDeleteParams): Promise<Responses.OkResponse> {
+    public async docsDelete(params: MethodsProps.DocsDeleteParams): Promise<Responses.BaseOkResponse> {
         return super.call("docs.delete", params)
     }
     /**
@@ -1449,9 +1675,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async docsEdit(params: MethodsProps.DocsEditParams): Promise<Responses.OkResponse> {
+    public async docsEdit(params: MethodsProps.DocsEditParams): Promise<Responses.BaseOkResponse> {
         return super.call("docs.edit", params)
     }
     /**
@@ -1575,13 +1801,83 @@ export class VKApi extends BaseVKApi {
      * undefined
      *
      * @param {{
+     *   owner_id: (number),
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   fields: (string[]|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.GroupsGetMembersFieldsResponse>}
+     */
+    public async donutGetFriends(params: MethodsProps.DonutGetFriendsParams): Promise<Responses.GroupsGetMembersFieldsResponse> {
+        return super.call("donut.getFriends", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.DonutGetSubscriptionResponse>}
+     */
+    public async donutGetSubscription(params: MethodsProps.DonutGetSubscriptionParams): Promise<Responses.DonutGetSubscriptionResponse> {
+        return super.call("donut.getSubscription", params)
+    }
+    /**
+     * Returns a list of user's VK Donut subscriptions.
+     *
+     * @param {{
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.DonutGetSubscriptionsResponse>}
+     */
+    public async donutGetSubscriptions(params: MethodsProps.DonutGetSubscriptionsParams): Promise<Responses.DonutGetSubscriptionsResponse> {
+        return super.call("donut.getSubscriptions", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async donutIsDon(params: MethodsProps.DonutIsDonParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("donut.isDon", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   user_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.DownloadedGamesPaidStatusResponse>}
+     */
+    public async downloadedGamesGetPaidStatus(params: MethodsProps.DownloadedGamesGetPaidStatusParams): Promise<Responses.DownloadedGamesPaidStatusResponse> {
+        return super.call("downloadedGames.getPaidStatus", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
      *   url: (string),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveAddArticle(params: MethodsProps.FaveAddArticleParams): Promise<Responses.OkResponse> {
+    public async faveAddArticle(params: MethodsProps.FaveAddArticleParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.addArticle", params)
     }
     /**
@@ -1592,9 +1888,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveAddLink(params: MethodsProps.FaveAddLinkParams): Promise<Responses.OkResponse> {
+    public async faveAddLink(params: MethodsProps.FaveAddLinkParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.addLink", params)
     }
     /**
@@ -1606,9 +1902,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveAddPage(params: MethodsProps.FaveAddPageParams): Promise<Responses.OkResponse> {
+    public async faveAddPage(params: MethodsProps.FaveAddPageParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.addPage", params)
     }
     /**
@@ -1621,9 +1917,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveAddPost(params: MethodsProps.FaveAddPostParams): Promise<Responses.OkResponse> {
+    public async faveAddPost(params: MethodsProps.FaveAddPostParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.addPost", params)
     }
     /**
@@ -1636,9 +1932,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveAddProduct(params: MethodsProps.FaveAddProductParams): Promise<Responses.OkResponse> {
+    public async faveAddProduct(params: MethodsProps.FaveAddProductParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.addProduct", params)
     }
     /**
@@ -1665,9 +1961,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveAddVideo(params: MethodsProps.FaveAddVideoParams): Promise<Responses.OkResponse> {
+    public async faveAddVideo(params: MethodsProps.FaveAddVideoParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.addVideo", params)
     }
     /**
@@ -1679,9 +1975,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveEditTag(params: MethodsProps.FaveEditTagParams): Promise<Responses.OkResponse> {
+    public async faveEditTag(params: MethodsProps.FaveEditTagParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.editTag", params)
     }
     /**
@@ -1767,9 +2063,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveRemoveLink(params: MethodsProps.FaveRemoveLinkParams): Promise<Responses.OkResponse> {
+    public async faveRemoveLink(params: MethodsProps.FaveRemoveLinkParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.removeLink", params)
     }
     /**
@@ -1781,9 +2077,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveRemovePage(params: MethodsProps.FaveRemovePageParams): Promise<Responses.OkResponse> {
+    public async faveRemovePage(params: MethodsProps.FaveRemovePageParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.removePage", params)
     }
     /**
@@ -1795,9 +2091,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveRemovePost(params: MethodsProps.FaveRemovePostParams): Promise<Responses.OkResponse> {
+    public async faveRemovePost(params: MethodsProps.FaveRemovePostParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.removePost", params)
     }
     /**
@@ -1809,9 +2105,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveRemoveProduct(params: MethodsProps.FaveRemoveProductParams): Promise<Responses.OkResponse> {
+    public async faveRemoveProduct(params: MethodsProps.FaveRemoveProductParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.removeProduct", params)
     }
     /**
@@ -1822,10 +2118,24 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveRemoveTag(params: MethodsProps.FaveRemoveTagParams): Promise<Responses.OkResponse> {
+    public async faveRemoveTag(params: MethodsProps.FaveRemoveTagParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.removeTag", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   owner_id: (number),
+     *   id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseOkResponse>}
+     */
+    public async faveRemoveVideo(params: MethodsProps.FaveRemoveVideoParams): Promise<Responses.BaseOkResponse> {
+        return super.call("fave.removeVideo", params)
     }
     /**
      * undefined
@@ -1835,9 +2145,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveReorderTags(params: MethodsProps.FaveReorderTagsParams): Promise<Responses.OkResponse> {
+    public async faveReorderTags(params: MethodsProps.FaveReorderTagsParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.reorderTags", params)
     }
     /**
@@ -1850,9 +2160,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveSetPageTags(params: MethodsProps.FaveSetPageTagsParams): Promise<Responses.OkResponse> {
+    public async faveSetPageTags(params: MethodsProps.FaveSetPageTagsParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.setPageTags", params)
     }
     /**
@@ -1868,9 +2178,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveSetTags(params: MethodsProps.FaveSetTagsParams): Promise<Responses.OkResponse> {
+    public async faveSetTags(params: MethodsProps.FaveSetTagsParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.setTags", params)
     }
     /**
@@ -1882,9 +2192,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async faveTrackPageInteraction(params: MethodsProps.FaveTrackPageInteractionParams): Promise<Responses.OkResponse> {
+    public async faveTrackPageInteraction(params: MethodsProps.FaveTrackPageInteractionParams): Promise<Responses.BaseOkResponse> {
         return super.call("fave.trackPageInteraction", params)
     }
     /**
@@ -1922,6 +2232,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   user_ids: (number[]),
      *   need_sign: (boolean|undefined),
+     *   extended: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -1950,9 +2261,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async friendsDeleteAllRequests(params: MethodsProps.FriendsDeleteAllRequestsParams): Promise<Responses.OkResponse> {
+    public async friendsDeleteAllRequests(params: MethodsProps.FriendsDeleteAllRequestsParams): Promise<Responses.BaseOkResponse> {
         return super.call("friends.deleteAllRequests", params)
     }
     /**
@@ -1963,9 +2274,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async friendsDeleteList(params: MethodsProps.FriendsDeleteListParams): Promise<Responses.OkResponse> {
+    public async friendsDeleteList(params: MethodsProps.FriendsDeleteListParams): Promise<Responses.BaseOkResponse> {
         return super.call("friends.deleteList", params)
     }
     /**
@@ -1977,9 +2288,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async friendsEdit(params: MethodsProps.FriendsEditParams): Promise<Responses.OkResponse> {
+    public async friendsEdit(params: MethodsProps.FriendsEditParams): Promise<Responses.BaseOkResponse> {
         return super.call("friends.edit", params)
     }
     /**
@@ -1994,9 +2305,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async friendsEditList(params: MethodsProps.FriendsEditListParams): Promise<Responses.OkResponse> {
+    public async friendsEditList(params: MethodsProps.FriendsEditListParams): Promise<Responses.BaseOkResponse> {
         return super.call("friends.editList", params)
     }
     /**
@@ -2245,9 +2556,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsApproveRequest(params: MethodsProps.GroupsApproveRequestParams): Promise<Responses.OkResponse> {
+    public async groupsApproveRequest(params: MethodsProps.GroupsApproveRequestParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.approveRequest", params)
     }
     /**
@@ -2263,9 +2574,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsBan(params: MethodsProps.GroupsBanParams): Promise<Responses.OkResponse> {
+    public async groupsBan(params: MethodsProps.GroupsBanParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.ban", params)
     }
     /**
@@ -2290,13 +2601,27 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   group_id: (number),
+     *   address_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseOkResponse>}
+     */
+    public async groupsDeleteAddress(params: MethodsProps.GroupsDeleteAddressParams): Promise<Responses.BaseOkResponse> {
+        return super.call("groups.deleteAddress", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
      *   server_id: (number),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsDeleteCallbackServer(params: MethodsProps.GroupsDeleteCallbackServerParams): Promise<Responses.OkResponse> {
+    public async groupsDeleteCallbackServer(params: MethodsProps.GroupsDeleteCallbackServerParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.deleteCallbackServer", params)
     }
     /**
@@ -2308,9 +2633,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsDeleteLink(params: MethodsProps.GroupsDeleteLinkParams): Promise<Responses.OkResponse> {
+    public async groupsDeleteLink(params: MethodsProps.GroupsDeleteLinkParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.deleteLink", params)
     }
     /**
@@ -2321,9 +2646,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsDisableOnline(params: MethodsProps.GroupsDisableOnlineParams): Promise<Responses.OkResponse> {
+    public async groupsDisableOnline(params: MethodsProps.GroupsDisableOnlineParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.disableOnline", params)
     }
     /**
@@ -2378,9 +2703,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsEdit(params: MethodsProps.GroupsEditParams): Promise<Responses.OkResponse> {
+    public async groupsEdit(params: MethodsProps.GroupsEditParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.edit", params)
     }
     /**
@@ -2421,9 +2746,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsEditCallbackServer(params: MethodsProps.GroupsEditCallbackServerParams): Promise<Responses.OkResponse> {
+    public async groupsEditCallbackServer(params: MethodsProps.GroupsEditCallbackServerParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.editCallbackServer", params)
     }
     /**
@@ -2436,9 +2761,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsEditLink(params: MethodsProps.GroupsEditLinkParams): Promise<Responses.OkResponse> {
+    public async groupsEditLink(params: MethodsProps.GroupsEditLinkParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.editLink", params)
     }
     /**
@@ -2455,9 +2780,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsEditManager(params: MethodsProps.GroupsEditManagerParams): Promise<Responses.OkResponse> {
+    public async groupsEditManager(params: MethodsProps.GroupsEditManagerParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.editManager", params)
     }
     /**
@@ -2468,9 +2793,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsEnableOnline(params: MethodsProps.GroupsEnableOnlineParams): Promise<Responses.OkResponse> {
+    public async groupsEnableOnline(params: MethodsProps.GroupsEnableOnlineParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.enableOnline", params)
     }
     /**
@@ -2537,9 +2862,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.GroupsGetByIdResponse>}
+     * @returns {Promise<Responses.GroupsGetByIdLegacyResponse>}
      */
-    public async groupsGetById(params: MethodsProps.GroupsGetByIdParams): Promise<Responses.GroupsGetByIdResponse> {
+    public async groupsGetById(params: MethodsProps.GroupsGetByIdParams): Promise<Responses.GroupsGetByIdLegacyResponse> {
         return super.call("groups.getById", params)
     }
     /**
@@ -2717,6 +3042,19 @@ export class VKApi extends BaseVKApi {
         return super.call("groups.getSettings", params)
     }
     /**
+     * List of group's tags
+     *
+     * @param {{
+     *   group_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.GroupsGetTagListResponse>}
+     */
+    public async groupsGetTagList(params: MethodsProps.GroupsGetTagListParams): Promise<Responses.GroupsGetTagListResponse> {
+        return super.call("groups.getTagList", params)
+    }
+    /**
      * undefined
      *
      * @param {{
@@ -2737,9 +3075,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsInvite(params: MethodsProps.GroupsInviteParams): Promise<Responses.OkResponse> {
+    public async groupsInvite(params: MethodsProps.GroupsInviteParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.invite", params)
     }
     /**
@@ -2767,9 +3105,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsJoin(params: MethodsProps.GroupsJoinParams): Promise<Responses.OkResponse> {
+    public async groupsJoin(params: MethodsProps.GroupsJoinParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.join", params)
     }
     /**
@@ -2780,9 +3118,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsLeave(params: MethodsProps.GroupsLeaveParams): Promise<Responses.OkResponse> {
+    public async groupsLeave(params: MethodsProps.GroupsLeaveParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.leave", params)
     }
     /**
@@ -2794,9 +3132,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsRemoveUser(params: MethodsProps.GroupsRemoveUserParams): Promise<Responses.OkResponse> {
+    public async groupsRemoveUser(params: MethodsProps.GroupsRemoveUserParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.removeUser", params)
     }
     /**
@@ -2809,9 +3147,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsReorderLink(params: MethodsProps.GroupsReorderLinkParams): Promise<Responses.OkResponse> {
+    public async groupsReorderLink(params: MethodsProps.GroupsReorderLinkParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.reorderLink", params)
     }
     /**
@@ -2873,6 +3211,8 @@ export class VKApi extends BaseVKApi {
      *   market_comment_edit: (boolean|undefined),
      *   market_comment_delete: (boolean|undefined),
      *   market_comment_restore: (boolean|undefined),
+     *   market_order_new: (boolean|undefined),
+     *   market_order_edit: (boolean|undefined),
      *   poll_vote_new: (boolean|undefined),
      *   group_join: (boolean|undefined),
      *   group_leave: (boolean|undefined),
@@ -2882,12 +3222,22 @@ export class VKApi extends BaseVKApi {
      *   user_block: (boolean|undefined),
      *   user_unblock: (boolean|undefined),
      *   lead_forms_new: (boolean|undefined),
+     *   like_add: (boolean|undefined),
+     *   like_remove: (boolean|undefined),
+     *   message_event: (boolean|undefined),
+     *   donut_subscription_create: (boolean|undefined),
+     *   donut_subscription_prolonged: (boolean|undefined),
+     *   donut_subscription_cancelled: (boolean|undefined),
+     *   donut_subscription_price_changed: (boolean|undefined),
+     *   donut_subscription_expired: (boolean|undefined),
+     *   donut_money_withdraw: (boolean|undefined),
+     *   donut_money_withdraw_error: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsSetCallbackSettings(params: MethodsProps.GroupsSetCallbackSettingsParams): Promise<Responses.OkResponse> {
+    public async groupsSetCallbackSettings(params: MethodsProps.GroupsSetCallbackSettingsParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.setCallbackSettings", params)
     }
     /**
@@ -2936,13 +3286,129 @@ export class VKApi extends BaseVKApi {
      *   group_officers_edit: (boolean|undefined),
      *   user_block: (boolean|undefined),
      *   user_unblock: (boolean|undefined),
+     *   like_add: (boolean|undefined),
+     *   like_remove: (boolean|undefined),
+     *   message_event: (boolean|undefined),
+     *   donut_subscription_create: (boolean|undefined),
+     *   donut_subscription_prolonged: (boolean|undefined),
+     *   donut_subscription_cancelled: (boolean|undefined),
+     *   donut_subscription_price_changed: (boolean|undefined),
+     *   donut_subscription_expired: (boolean|undefined),
+     *   donut_money_withdraw: (boolean|undefined),
+     *   donut_money_withdraw_error: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsSetLongPollSettings(params: MethodsProps.GroupsSetLongPollSettingsParams): Promise<Responses.OkResponse> {
+    public async groupsSetLongPollSettings(params: MethodsProps.GroupsSetLongPollSettingsParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.setLongPollSettings", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   messages: (boolean|undefined),
+     *   bots_capabilities: (boolean|undefined),
+     *   bots_start_button: (boolean|undefined),
+     *   bots_add_to_chat: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseOkResponse>}
+     */
+    public async groupsSetSettings(params: MethodsProps.GroupsSetSettingsParams): Promise<Responses.BaseOkResponse> {
+        return super.call("groups.setSettings", params)
+    }
+    /**
+     * In order to save note about group participant
+     *
+     * @param {{
+     *   group_id: (number),
+     *   user_id: (number),
+     *   note: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async groupsSetUserNote(params: MethodsProps.GroupsSetUserNoteParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("groups.setUserNote", params)
+    }
+    /**
+     * Add new group's tag
+     *
+     * @param {{
+     *   group_id: (number),
+     *   tag_name: (string),
+     *   tag_color: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async groupsTagAdd(params: MethodsProps.GroupsTagAddParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("groups.tagAdd", params)
+    }
+    /**
+     * Bind or unbind group's tag to user
+     *
+     * @param {{
+     *   group_id: (number),
+     *   tag_id: (number),
+     *   user_id: (number),
+     *   act: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async groupsTagBind(params: MethodsProps.GroupsTagBindParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("groups.tagBind", params)
+    }
+    /**
+     * Delete group's tag
+     *
+     * @param {{
+     *   group_id: (number),
+     *   tag_id: (number),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async groupsTagDelete(params: MethodsProps.GroupsTagDeleteParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("groups.tagDelete", params)
+    }
+    /**
+     * Update group's tag
+     *
+     * @param {{
+     *   group_id: (number),
+     *   tag_id: (number),
+     *   tag_name: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async groupsTagUpdate(params: MethodsProps.GroupsTagUpdateParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("groups.tagUpdate", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   group_id: (number),
+     *   state: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseOkResponse>}
+     */
+    public async groupsToggleMarket(params: MethodsProps.GroupsToggleMarketParams): Promise<Responses.BaseOkResponse> {
+        return super.call("groups.toggleMarket", params)
     }
     /**
      * undefined
@@ -2953,108 +3419,10 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async groupsUnban(params: MethodsProps.GroupsUnbanParams): Promise<Responses.OkResponse> {
+    public async groupsUnban(params: MethodsProps.GroupsUnbanParams): Promise<Responses.BaseOkResponse> {
         return super.call("groups.unban", params)
-    }
-    /**
-     * Checks if the user can start the lead.
-     *
-     * @param {{
-     *   lead_id: (number),
-     *   test_result: (number|undefined),
-     *   test_mode: (boolean|undefined),
-     *   auto_start: (boolean|undefined),
-     *   age: (number|undefined),
-     *   country: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.LeadsCheckUserResponse>}
-     */
-    public async leadsCheckUser(params: MethodsProps.LeadsCheckUserParams): Promise<Responses.LeadsCheckUserResponse> {
-        return super.call("leads.checkUser", params)
-    }
-    /**
-     * Completes the lead started by user.
-     *
-     * @param {{
-     *   vk_sid: (string),
-     *   secret: (string),
-     *   comment: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.LeadsCompleteResponse>}
-     */
-    public async leadsComplete(params: MethodsProps.LeadsCompleteParams): Promise<Responses.LeadsCompleteResponse> {
-        return super.call("leads.complete", params)
-    }
-    /**
-     * Returns lead stats data.
-     *
-     * @param {{
-     *   lead_id: (number),
-     *   secret: (string|undefined),
-     *   date_start: (string|undefined),
-     *   date_end: (string|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.LeadsGetStatsResponse>}
-     */
-    public async leadsGetStats(params: MethodsProps.LeadsGetStatsParams): Promise<Responses.LeadsGetStatsResponse> {
-        return super.call("leads.getStats", params)
-    }
-    /**
-     * Returns a list of last user actions for the offer.
-     *
-     * @param {{
-     *   offer_id: (number),
-     *   secret: (string),
-     *   offset: (number|undefined),
-     *   count: (number|undefined),
-     *   status: (number|undefined),
-     *   reverse: (boolean|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.LeadsGetUsersResponse>}
-     */
-    public async leadsGetUsers(params: MethodsProps.LeadsGetUsersParams): Promise<Responses.LeadsGetUsersResponse> {
-        return super.call("leads.getUsers", params)
-    }
-    /**
-     * Counts the metric event.
-     *
-     * @param {{
-     *   data: (string),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.LeadsMetricHitResponse>}
-     */
-    public async leadsMetricHit(params: MethodsProps.LeadsMetricHitParams): Promise<Responses.LeadsMetricHitResponse> {
-        return super.call("leads.metricHit", params)
-    }
-    /**
-     * Creates new session for the user passing the offer.
-     *
-     * @param {{
-     *   lead_id: (number),
-     *   secret: (string),
-     *   uid: (number|undefined),
-     *   aid: (number|undefined),
-     *   test_mode: (boolean|undefined),
-     *   force: (boolean|undefined),
-     *   access_token: (string|undefined)
-     * }} params
-     *
-     * @returns {Promise<Responses.LeadsStartResponse>}
-     */
-    public async leadsStart(params: MethodsProps.LeadsStartParams): Promise<Responses.LeadsStartResponse> {
-        return super.call("leads.start", params)
     }
     /**
      * Adds the specified object to the 'Likes' list of the current user.
@@ -3137,9 +3505,13 @@ export class VKApi extends BaseVKApi {
      *   price: (number|undefined),
      *   old_price: (number|undefined),
      *   deleted: (boolean|undefined),
-     *   main_photo_id: (number),
+     *   main_photo_id: (number|undefined),
      *   photo_ids: (number[]|undefined),
      *   url: (string|undefined),
+     *   dimension_width: (number|undefined),
+     *   dimension_height: (number|undefined),
+     *   dimension_length: (number|undefined),
+     *   weight: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3174,9 +3546,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketAddToAlbum(params: MethodsProps.MarketAddToAlbumParams): Promise<Responses.OkResponse> {
+    public async marketAddToAlbum(params: MethodsProps.MarketAddToAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.addToAlbum", params)
     }
     /**
@@ -3208,9 +3580,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketDelete(params: MethodsProps.MarketDeleteParams): Promise<Responses.OkResponse> {
+    public async marketDelete(params: MethodsProps.MarketDeleteParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.delete", params)
     }
     /**
@@ -3222,9 +3594,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketDeleteAlbum(params: MethodsProps.MarketDeleteAlbumParams): Promise<Responses.OkResponse> {
+    public async marketDeleteAlbum(params: MethodsProps.MarketDeleteAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.deleteAlbum", params)
     }
     /**
@@ -3258,9 +3630,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketEdit(params: MethodsProps.MarketEditParams): Promise<Responses.OkResponse> {
+    public async marketEdit(params: MethodsProps.MarketEditParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.edit", params)
     }
     /**
@@ -3275,9 +3647,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketEditAlbum(params: MethodsProps.MarketEditAlbumParams): Promise<Responses.OkResponse> {
+    public async marketEditAlbum(params: MethodsProps.MarketEditAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.editAlbum", params)
     }
     /**
@@ -3291,10 +3663,26 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketEditComment(params: MethodsProps.MarketEditCommentParams): Promise<Responses.OkResponse> {
+    public async marketEditComment(params: MethodsProps.MarketEditCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.editComment", params)
+    }
+    /**
+     * Edit order
+     *
+     * @param {{
+     *   user_id: (number),
+     *   order_id: (number),
+     *   merchant_comment: (string|undefined),
+     *   status: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseOkResponse>}
+     */
+    public async marketEditOrder(params: MethodsProps.MarketEditOrderParams): Promise<Responses.BaseOkResponse> {
+        return super.call("market.editOrder", params)
     }
     /**
      * Returns items list for a community.
@@ -3365,9 +3753,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.MarketGetCategoriesResponse>}
+     * @returns {Promise<Responses.MarketGetCategoriesNewResponse>}
      */
-    public async marketGetCategories(params: MethodsProps.MarketGetCategoriesParams): Promise<Responses.MarketGetCategoriesResponse> {
+    public async marketGetCategories(params: MethodsProps.MarketGetCategoriesParams): Promise<Responses.MarketGetCategoriesNewResponse> {
         return super.call("market.getCategories", params)
     }
     /**
@@ -3392,6 +3780,66 @@ export class VKApi extends BaseVKApi {
         return super.call("market.getComments", params)
     }
     /**
+     * Get market orders
+     *
+     * @param {{
+     *   group_id: (number),
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MarketGetGroupOrdersResponse>}
+     */
+    public async marketGetGroupOrders(params: MethodsProps.MarketGetGroupOrdersParams): Promise<Responses.MarketGetGroupOrdersResponse> {
+        return super.call("market.getGroupOrders", params)
+    }
+    /**
+     * Get order
+     *
+     * @param {{
+     *   user_id: (number|undefined),
+     *   order_id: (number),
+     *   extended: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MarketGetOrderByIdResponse>}
+     */
+    public async marketGetOrderById(params: MethodsProps.MarketGetOrderByIdParams): Promise<Responses.MarketGetOrderByIdResponse> {
+        return super.call("market.getOrderById", params)
+    }
+    /**
+     * Get market items in the order
+     *
+     * @param {{
+     *   order_id: (number),
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MarketGetOrderItemsResponse>}
+     */
+    public async marketGetOrderItems(params: MethodsProps.MarketGetOrderItemsParams): Promise<Responses.MarketGetOrderItemsResponse> {
+        return super.call("market.getOrderItems", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MarketGetOrdersResponse>}
+     */
+    public async marketGetOrders(params: MethodsProps.MarketGetOrdersParams): Promise<Responses.MarketGetOrdersResponse> {
+        return super.call("market.getOrders", params)
+    }
+    /**
      * Removes an item from one or multiple collections.
      *
      * @param {{
@@ -3401,9 +3849,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketRemoveFromAlbum(params: MethodsProps.MarketRemoveFromAlbumParams): Promise<Responses.OkResponse> {
+    public async marketRemoveFromAlbum(params: MethodsProps.MarketRemoveFromAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.removeFromAlbum", params)
     }
     /**
@@ -3417,9 +3865,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketReorderAlbums(params: MethodsProps.MarketReorderAlbumsParams): Promise<Responses.OkResponse> {
+    public async marketReorderAlbums(params: MethodsProps.MarketReorderAlbumsParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.reorderAlbums", params)
     }
     /**
@@ -3434,9 +3882,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketReorderItems(params: MethodsProps.MarketReorderItemsParams): Promise<Responses.OkResponse> {
+    public async marketReorderItems(params: MethodsProps.MarketReorderItemsParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.reorderItems", params)
     }
     /**
@@ -3449,9 +3897,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketReport(params: MethodsProps.MarketReportParams): Promise<Responses.OkResponse> {
+    public async marketReport(params: MethodsProps.MarketReportParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.report", params)
     }
     /**
@@ -3464,9 +3912,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketReportComment(params: MethodsProps.MarketReportCommentParams): Promise<Responses.OkResponse> {
+    public async marketReportComment(params: MethodsProps.MarketReportCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.reportComment", params)
     }
     /**
@@ -3478,9 +3926,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async marketRestore(params: MethodsProps.MarketRestoreParams): Promise<Responses.OkResponse> {
+    public async marketRestore(params: MethodsProps.MarketRestoreParams): Promise<Responses.BaseOkResponse> {
         return super.call("market.restore", params)
     }
     /**
@@ -3506,7 +3954,6 @@ export class VKApi extends BaseVKApi {
      *   q: (string|undefined),
      *   price_from: (number|undefined),
      *   price_to: (number|undefined),
-     *   tags: (number[]|undefined),
      *   sort: (number|undefined),
      *   rev: (number|undefined),
      *   offset: (number|undefined),
@@ -3531,9 +3978,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesAddChatUser(params: MethodsProps.MessagesAddChatUserParams): Promise<Responses.OkResponse> {
+    public async messagesAddChatUser(params: MethodsProps.MessagesAddChatUserParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.addChatUser", params)
     }
     /**
@@ -3545,9 +3992,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesAllowMessagesFromGroup(params: MethodsProps.MessagesAllowMessagesFromGroupParams): Promise<Responses.OkResponse> {
+    public async messagesAllowMessagesFromGroup(params: MethodsProps.MessagesAllowMessagesFromGroupParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.allowMessagesFromGroup", params)
     }
     /**
@@ -3618,9 +4065,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesDenyMessagesFromGroup(params: MethodsProps.MessagesDenyMessagesFromGroupParams): Promise<Responses.OkResponse> {
+    public async messagesDenyMessagesFromGroup(params: MethodsProps.MessagesDenyMessagesFromGroupParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.denyMessagesFromGroup", params)
     }
     /**
@@ -3637,6 +4084,9 @@ export class VKApi extends BaseVKApi {
      *   group_id: (number|undefined),
      *   dont_parse_links: (boolean|undefined),
      *   message_id: (number|undefined),
+     *   conversation_message_id: (number|undefined),
+     *   template: (string|undefined),
+     *   keyboard: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3650,13 +4100,13 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   chat_id: (number),
-     *   title: (string),
+     *   title: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesEditChat(params: MethodsProps.MessagesEditChatParams): Promise<Responses.OkResponse> {
+    public async messagesEditChat(params: MethodsProps.MessagesEditChatParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.editChat", params)
     }
     /**
@@ -3801,6 +4251,44 @@ export class VKApi extends BaseVKApi {
         return super.call("messages.getHistoryAttachments", params)
     }
     /**
+     * Returns a list of user's important messages.
+     *
+     * @param {{
+     *   count: (number|undefined),
+     *   offset: (number|undefined),
+     *   start_message_id: (number|undefined),
+     *   preview_length: (number|undefined),
+     *   fields: (Models.BaseUserGroupFields[]|undefined),
+     *   extended: (boolean|undefined),
+     *   group_id: (number|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesGetImportantMessagesResponse>}
+     */
+    public async messagesGetImportantMessages(params: MethodsProps.MessagesGetImportantMessagesParams): Promise<Responses.MessagesGetImportantMessagesResponse> {
+        return super.call("messages.getImportantMessages", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   intent: (string),
+     *   subscribe_id: (number|undefined),
+     *   offset: (number|undefined),
+     *   count: (number|undefined),
+     *   extended: (boolean|undefined),
+     *   name_case: (string[]|undefined),
+     *   fields: (string[]|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.MessagesGetIntentUsersResponse>}
+     */
+    public async messagesGetIntentUsers(params: MethodsProps.MessagesGetIntentUsersParams): Promise<Responses.MessagesGetIntentUsersResponse> {
+        return super.call("messages.getIntentUsers", params)
+    }
+    /**
      * undefined
      *
      * @param {{
@@ -3904,9 +4392,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesMarkAsAnsweredConversation(params: MethodsProps.MessagesMarkAsAnsweredConversationParams): Promise<Responses.OkResponse> {
+    public async messagesMarkAsAnsweredConversation(params: MethodsProps.MessagesMarkAsAnsweredConversationParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.markAsAnsweredConversation", params)
     }
     /**
@@ -3933,9 +4421,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesMarkAsImportantConversation(params: MethodsProps.MessagesMarkAsImportantConversationParams): Promise<Responses.OkResponse> {
+    public async messagesMarkAsImportantConversation(params: MethodsProps.MessagesMarkAsImportantConversationParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.markAsImportantConversation", params)
     }
     /**
@@ -3946,12 +4434,13 @@ export class VKApi extends BaseVKApi {
      *   peer_id: (number|undefined),
      *   start_message_id: (number|undefined),
      *   group_id: (number|undefined),
+     *   mark_conversation_as_read: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesMarkAsRead(params: MethodsProps.MessagesMarkAsReadParams): Promise<Responses.OkResponse> {
+    public async messagesMarkAsRead(params: MethodsProps.MessagesMarkAsReadParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.markAsRead", params)
     }
     /**
@@ -3960,6 +4449,7 @@ export class VKApi extends BaseVKApi {
      * @param {{
      *   peer_id: (number),
      *   message_id: (number|undefined),
+     *   conversation_message_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -3978,9 +4468,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesRemoveChatUser(params: MethodsProps.MessagesRemoveChatUserParams): Promise<Responses.OkResponse> {
+    public async messagesRemoveChatUser(params: MethodsProps.MessagesRemoveChatUserParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.removeChatUser", params)
     }
     /**
@@ -3992,9 +4482,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesRestore(params: MethodsProps.MessagesRestoreParams): Promise<Responses.OkResponse> {
+    public async messagesRestore(params: MethodsProps.MessagesRestoreParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.restore", params)
     }
     /**
@@ -4042,6 +4532,7 @@ export class VKApi extends BaseVKApi {
      *   user_id: (number|undefined),
      *   random_id: (number|undefined),
      *   peer_id: (number|undefined),
+     *   peer_ids: (number[]|undefined),
      *   domain: (string|undefined),
      *   chat_id: (number|undefined),
      *   user_ids: (number[]|undefined),
@@ -4051,13 +4542,17 @@ export class VKApi extends BaseVKApi {
      *   attachment: (string|undefined),
      *   reply_to: (number|undefined),
      *   forward_messages: (number[]|undefined),
+     *   forward: (string|undefined),
      *   sticker_id: (number|undefined),
      *   group_id: (number|undefined),
      *   keyboard: (string|undefined),
+     *   template: (string|undefined),
      *   payload: (string|undefined),
+     *   content_source: (string|undefined),
      *   dont_parse_links: (boolean|undefined),
      *   disable_mentions: (boolean|undefined),
      *   intent: (string|undefined),
+     *   subscribe_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4065,6 +4560,22 @@ export class VKApi extends BaseVKApi {
      */
     public async messagesSend(params: MethodsProps.MessagesSendParams): Promise<Responses.MessagesSendResponse> {
         return super.call("messages.send", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   event_id: (string),
+     *   user_id: (number),
+     *   peer_id: (number),
+     *   event_data: (string|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseOkResponse>}
+     */
+    public async messagesSendMessageEventAnswer(params: MethodsProps.MessagesSendMessageEventAnswerParams): Promise<Responses.BaseOkResponse> {
+        return super.call("messages.sendMessageEventAnswer", params)
     }
     /**
      * Changes the status of a user as typing in a conversation.
@@ -4077,9 +4588,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesSetActivity(params: MethodsProps.MessagesSetActivityParams): Promise<Responses.OkResponse> {
+    public async messagesSetActivity(params: MethodsProps.MessagesSetActivityParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.setActivity", params)
     }
     /**
@@ -4104,9 +4615,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async messagesUnpin(params: MethodsProps.MessagesUnpinParams): Promise<Responses.OkResponse> {
+    public async messagesUnpin(params: MethodsProps.MessagesUnpinParams): Promise<Responses.BaseOkResponse> {
         return super.call("messages.unpin", params)
     }
     /**
@@ -4118,9 +4629,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async newsfeedAddBan(params: MethodsProps.NewsfeedAddBanParams): Promise<Responses.OkResponse> {
+    public async newsfeedAddBan(params: MethodsProps.NewsfeedAddBanParams): Promise<Responses.BaseOkResponse> {
         return super.call("newsfeed.addBan", params)
     }
     /**
@@ -4132,9 +4643,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async newsfeedDeleteBan(params: MethodsProps.NewsfeedDeleteBanParams): Promise<Responses.OkResponse> {
+    public async newsfeedDeleteBan(params: MethodsProps.NewsfeedDeleteBanParams): Promise<Responses.BaseOkResponse> {
         return super.call("newsfeed.deleteBan", params)
     }
     /**
@@ -4145,9 +4656,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async newsfeedDeleteList(params: MethodsProps.NewsfeedDeleteListParams): Promise<Responses.OkResponse> {
+    public async newsfeedDeleteList(params: MethodsProps.NewsfeedDeleteListParams): Promise<Responses.BaseOkResponse> {
         return super.call("newsfeed.deleteList", params)
     }
     /**
@@ -4277,14 +4788,14 @@ export class VKApi extends BaseVKApi {
      *
      * @param {{
      *   type: (string),
-     *   owner_id: (number),
-     *   item_id: (number),
+     *   owner_id: (number|undefined),
+     *   item_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async newsfeedIgnoreItem(params: MethodsProps.NewsfeedIgnoreItemParams): Promise<Responses.OkResponse> {
+    public async newsfeedIgnoreItem(params: MethodsProps.NewsfeedIgnoreItemParams): Promise<Responses.BaseOkResponse> {
         return super.call("newsfeed.ignoreItem", params)
     }
     /**
@@ -4331,12 +4842,13 @@ export class VKApi extends BaseVKApi {
      *   type: (string),
      *   owner_id: (number),
      *   item_id: (number),
+     *   track_code: (string|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async newsfeedUnignoreItem(params: MethodsProps.NewsfeedUnignoreItemParams): Promise<Responses.OkResponse> {
+    public async newsfeedUnignoreItem(params: MethodsProps.NewsfeedUnignoreItemParams): Promise<Responses.BaseOkResponse> {
         return super.call("newsfeed.unignoreItem", params)
     }
     /**
@@ -4349,9 +4861,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async newsfeedUnsubscribe(params: MethodsProps.NewsfeedUnsubscribeParams): Promise<Responses.OkResponse> {
+    public async newsfeedUnsubscribe(params: MethodsProps.NewsfeedUnsubscribeParams): Promise<Responses.BaseOkResponse> {
         return super.call("newsfeed.unsubscribe", params)
     }
     /**
@@ -4395,9 +4907,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async notesDelete(params: MethodsProps.NotesDeleteParams): Promise<Responses.OkResponse> {
+    public async notesDelete(params: MethodsProps.NotesDeleteParams): Promise<Responses.BaseOkResponse> {
         return super.call("notes.delete", params)
     }
     /**
@@ -4409,9 +4921,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async notesDeleteComment(params: MethodsProps.NotesDeleteCommentParams): Promise<Responses.OkResponse> {
+    public async notesDeleteComment(params: MethodsProps.NotesDeleteCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("notes.deleteComment", params)
     }
     /**
@@ -4426,9 +4938,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async notesEdit(params: MethodsProps.NotesEditParams): Promise<Responses.OkResponse> {
+    public async notesEdit(params: MethodsProps.NotesEditParams): Promise<Responses.BaseOkResponse> {
         return super.call("notes.edit", params)
     }
     /**
@@ -4441,9 +4953,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async notesEditComment(params: MethodsProps.NotesEditCommentParams): Promise<Responses.OkResponse> {
+    public async notesEditComment(params: MethodsProps.NotesEditCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("notes.editComment", params)
     }
     /**
@@ -4504,9 +5016,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async notesRestoreComment(params: MethodsProps.NotesRestoreCommentParams): Promise<Responses.OkResponse> {
+    public async notesRestoreComment(params: MethodsProps.NotesRestoreCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("notes.restoreComment", params)
     }
     /**
@@ -4546,6 +5058,7 @@ export class VKApi extends BaseVKApi {
      *   message: (string),
      *   fragment: (string|undefined),
      *   group_id: (number|undefined),
+     *   random_id: (number|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -4679,9 +5192,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async pagesClearCache(params: MethodsProps.PagesClearCacheParams): Promise<Responses.OkResponse> {
+    public async pagesClearCache(params: MethodsProps.PagesClearCacheParams): Promise<Responses.BaseOkResponse> {
         return super.call("pages.clearCache", params)
     }
     /**
@@ -4805,9 +5318,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosConfirmTag(params: MethodsProps.PhotosConfirmTagParams): Promise<Responses.OkResponse> {
+    public async photosConfirmTag(params: MethodsProps.PhotosConfirmTagParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.confirmTag", params)
     }
     /**
@@ -4874,9 +5387,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosDelete(params: MethodsProps.PhotosDeleteParams): Promise<Responses.OkResponse> {
+    public async photosDelete(params: MethodsProps.PhotosDeleteParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.delete", params)
     }
     /**
@@ -4888,9 +5401,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosDeleteAlbum(params: MethodsProps.PhotosDeleteAlbumParams): Promise<Responses.OkResponse> {
+    public async photosDeleteAlbum(params: MethodsProps.PhotosDeleteAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.deleteAlbum", params)
     }
     /**
@@ -4922,9 +5435,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosEdit(params: MethodsProps.PhotosEditParams): Promise<Responses.OkResponse> {
+    public async photosEdit(params: MethodsProps.PhotosEditParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.edit", params)
     }
     /**
@@ -4942,9 +5455,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosEditAlbum(params: MethodsProps.PhotosEditAlbumParams): Promise<Responses.OkResponse> {
+    public async photosEditAlbum(params: MethodsProps.PhotosEditAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.editAlbum", params)
     }
     /**
@@ -4958,9 +5471,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosEditComment(params: MethodsProps.PhotosEditCommentParams): Promise<Responses.OkResponse> {
+    public async photosEditComment(params: MethodsProps.PhotosEditCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.editComment", params)
     }
     /**
@@ -5264,9 +5777,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosMakeCover(params: MethodsProps.PhotosMakeCoverParams): Promise<Responses.OkResponse> {
+    public async photosMakeCover(params: MethodsProps.PhotosMakeCoverParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.makeCover", params)
     }
     /**
@@ -5279,9 +5792,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosMove(params: MethodsProps.PhotosMoveParams): Promise<Responses.OkResponse> {
+    public async photosMove(params: MethodsProps.PhotosMoveParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.move", params)
     }
     /**
@@ -5313,9 +5826,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosRemoveTag(params: MethodsProps.PhotosRemoveTagParams): Promise<Responses.OkResponse> {
+    public async photosRemoveTag(params: MethodsProps.PhotosRemoveTagParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.removeTag", params)
     }
     /**
@@ -5329,9 +5842,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosReorderAlbums(params: MethodsProps.PhotosReorderAlbumsParams): Promise<Responses.OkResponse> {
+    public async photosReorderAlbums(params: MethodsProps.PhotosReorderAlbumsParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.reorderAlbums", params)
     }
     /**
@@ -5345,9 +5858,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosReorderPhotos(params: MethodsProps.PhotosReorderPhotosParams): Promise<Responses.OkResponse> {
+    public async photosReorderPhotos(params: MethodsProps.PhotosReorderPhotosParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.reorderPhotos", params)
     }
     /**
@@ -5360,9 +5873,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosReport(params: MethodsProps.PhotosReportParams): Promise<Responses.OkResponse> {
+    public async photosReport(params: MethodsProps.PhotosReportParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.report", params)
     }
     /**
@@ -5375,9 +5888,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosReportComment(params: MethodsProps.PhotosReportCommentParams): Promise<Responses.OkResponse> {
+    public async photosReportComment(params: MethodsProps.PhotosReportCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.reportComment", params)
     }
     /**
@@ -5389,9 +5902,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async photosRestore(params: MethodsProps.PhotosRestoreParams): Promise<Responses.OkResponse> {
+    public async photosRestore(params: MethodsProps.PhotosRestoreParams): Promise<Responses.BaseOkResponse> {
         return super.call("photos.restore", params)
     }
     /**
@@ -5575,6 +6088,7 @@ export class VKApi extends BaseVKApi {
      *   add_answers: (string|undefined),
      *   photo_id: (number|undefined),
      *   background_id: (string|undefined),
+     *   disable_unvote: (boolean|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
@@ -5615,9 +6129,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async pollsEdit(params: MethodsProps.PollsEditParams): Promise<Responses.OkResponse> {
+    public async pollsEdit(params: MethodsProps.PollsEditParams): Promise<Responses.BaseOkResponse> {
         return super.call("polls.edit", params)
     }
     /**
@@ -5782,9 +6296,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async secureAddAppEvent(params: MethodsProps.SecureAddAppEventParams): Promise<Responses.OkResponse> {
+    public async secureAddAppEvent(params: MethodsProps.SecureAddAppEventParams): Promise<Responses.BaseOkResponse> {
         return super.call("secure.addAppEvent", params)
     }
     /**
@@ -5898,9 +6412,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async secureSendSMSNotification(params: MethodsProps.SecureSendSMSNotificationParams): Promise<Responses.OkResponse> {
+    public async secureSendSMSNotification(params: MethodsProps.SecureSendSMSNotificationParams): Promise<Responses.BaseOkResponse> {
         return super.call("secure.sendSMSNotification", params)
     }
     /**
@@ -5914,9 +6428,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async secureSetCounter(params: MethodsProps.SecureSetCounterParams): Promise<Responses.OkResponse> {
+    public async secureSetCounter(params: MethodsProps.SecureSetCounterParams): Promise<Responses.BaseOkResponse> {
         return super.call("secure.setCounter", params)
     }
     /**
@@ -5962,9 +6476,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async statsTrackVisitor(params: MethodsProps.StatsTrackVisitorParams): Promise<Responses.OkResponse> {
+    public async statsTrackVisitor(params: MethodsProps.StatsTrackVisitorParams): Promise<Responses.BaseOkResponse> {
         return super.call("stats.trackVisitor", params)
     }
     /**
@@ -5990,9 +6504,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async statusSet(params: MethodsProps.StatusSetParams): Promise<Responses.OkResponse> {
+    public async statusSet(params: MethodsProps.StatusSetParams): Promise<Responses.BaseOkResponse> {
         return super.call("status.set", params)
     }
     /**
@@ -6005,9 +6519,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.StorageGetV5110Response>}
+     * @returns {Promise<Responses.StorageGetResponse>}
      */
-    public async storageGet(params: MethodsProps.StorageGetParams): Promise<Responses.StorageGetV5110Response> {
+    public async storageGet(params: MethodsProps.StorageGetParams): Promise<Responses.StorageGetResponse> {
         return super.call("storage.get", params)
     }
     /**
@@ -6035,9 +6549,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async storageSet(params: MethodsProps.StorageSetParams): Promise<Responses.OkResponse> {
+    public async storageSet(params: MethodsProps.StorageSetParams): Promise<Responses.BaseOkResponse> {
         return super.call("storage.set", params)
     }
     /**
@@ -6048,23 +6562,24 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async storiesBanOwner(params: MethodsProps.StoriesBanOwnerParams): Promise<Responses.OkResponse> {
+    public async storiesBanOwner(params: MethodsProps.StoriesBanOwnerParams): Promise<Responses.BaseOkResponse> {
         return super.call("stories.banOwner", params)
     }
     /**
      * Allows to delete story.
      *
      * @param {{
-     *   owner_id: (number),
-     *   story_id: (number),
+     *   owner_id: (number|undefined),
+     *   story_id: (number|undefined),
+     *   stories: (string[]|undefined),
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async storiesDelete(params: MethodsProps.StoriesDeleteParams): Promise<Responses.OkResponse> {
+    public async storiesDelete(params: MethodsProps.StoriesDeleteParams): Promise<Responses.BaseOkResponse> {
         return super.call("stories.delete", params)
     }
     /**
@@ -6206,9 +6721,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async storiesHideAllReplies(params: MethodsProps.StoriesHideAllRepliesParams): Promise<Responses.OkResponse> {
+    public async storiesHideAllReplies(params: MethodsProps.StoriesHideAllRepliesParams): Promise<Responses.BaseOkResponse> {
         return super.call("stories.hideAllReplies", params)
     }
     /**
@@ -6220,10 +6735,23 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async storiesHideReply(params: MethodsProps.StoriesHideReplyParams): Promise<Responses.OkResponse> {
+    public async storiesHideReply(params: MethodsProps.StoriesHideReplyParams): Promise<Responses.BaseOkResponse> {
         return super.call("stories.hideReply", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
+     *   upload_results: (string[]),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.StoriesSaveResponse>}
+     */
+    public async storiesSave(params: MethodsProps.StoriesSaveParams): Promise<Responses.StoriesSaveResponse> {
+        return super.call("stories.save", params)
     }
     /**
      * undefined
@@ -6247,6 +6775,23 @@ export class VKApi extends BaseVKApi {
         return super.call("stories.search", params)
     }
     /**
+     * undefined
+     *
+     * @param {{
+     *   access_key: (string),
+     *   message: (string|undefined),
+     *   is_broadcast: (boolean|undefined),
+     *   is_anonymous: (boolean|undefined),
+     *   unseen_marker: (boolean|undefined),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseOkResponse>}
+     */
+    public async storiesSendInteraction(params: MethodsProps.StoriesSendInteractionParams): Promise<Responses.BaseOkResponse> {
+        return super.call("stories.sendInteraction", params)
+    }
+    /**
      * Allows to show stories from hidden sources in current user's feed.
      *
      * @param {{
@@ -6254,9 +6799,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async storiesUnbanOwner(params: MethodsProps.StoriesUnbanOwnerParams): Promise<Responses.OkResponse> {
+    public async storiesUnbanOwner(params: MethodsProps.StoriesUnbanOwnerParams): Promise<Responses.BaseOkResponse> {
         return super.call("stories.unbanOwner", params)
     }
     /**
@@ -6279,9 +6824,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async streamingSetSettings(params: MethodsProps.StreamingSetSettingsParams): Promise<Responses.OkResponse> {
+    public async streamingSetSettings(params: MethodsProps.StreamingSetSettingsParams): Promise<Responses.BaseOkResponse> {
         return super.call("streaming.setSettings", params)
     }
     /**
@@ -6343,9 +6888,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async usersReport(params: MethodsProps.UsersReportParams): Promise<Responses.OkResponse> {
+    public async usersReport(params: MethodsProps.UsersReportParams): Promise<Responses.BaseOkResponse> {
         return super.call("users.report", params)
     }
     /**
@@ -6413,9 +6958,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async utilsDeleteFromLastShortened(params: MethodsProps.UtilsDeleteFromLastShortenedParams): Promise<Responses.OkResponse> {
+    public async utilsDeleteFromLastShortened(params: MethodsProps.UtilsDeleteFromLastShortenedParams): Promise<Responses.BaseOkResponse> {
         return super.call("utils.deleteFromLastShortened", params)
     }
     /**
@@ -6499,9 +7044,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoAdd(params: MethodsProps.VideoAddParams): Promise<Responses.OkResponse> {
+    public async videoAdd(params: MethodsProps.VideoAddParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.add", params)
     }
     /**
@@ -6531,9 +7076,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoAddToAlbum(params: MethodsProps.VideoAddToAlbumParams): Promise<Responses.OkResponse> {
+    public async videoAddToAlbum(params: MethodsProps.VideoAddToAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.addToAlbum", params)
     }
     /**
@@ -6566,9 +7111,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoDelete(params: MethodsProps.VideoDeleteParams): Promise<Responses.OkResponse> {
+    public async videoDelete(params: MethodsProps.VideoDeleteParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.delete", params)
     }
     /**
@@ -6580,9 +7125,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoDeleteAlbum(params: MethodsProps.VideoDeleteAlbumParams): Promise<Responses.OkResponse> {
+    public async videoDeleteAlbum(params: MethodsProps.VideoDeleteAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.deleteAlbum", params)
     }
     /**
@@ -6594,9 +7139,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoDeleteComment(params: MethodsProps.VideoDeleteCommentParams): Promise<Responses.OkResponse> {
+    public async videoDeleteComment(params: MethodsProps.VideoDeleteCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.deleteComment", params)
     }
     /**
@@ -6614,9 +7159,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoEdit(params: MethodsProps.VideoEditParams): Promise<Responses.OkResponse> {
+    public async videoEdit(params: MethodsProps.VideoEditParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.edit", params)
     }
     /**
@@ -6630,9 +7175,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoEditAlbum(params: MethodsProps.VideoEditAlbumParams): Promise<Responses.OkResponse> {
+    public async videoEditAlbum(params: MethodsProps.VideoEditAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.editAlbum", params)
     }
     /**
@@ -6646,9 +7191,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoEditComment(params: MethodsProps.VideoEditCommentParams): Promise<Responses.OkResponse> {
+    public async videoEditComment(params: MethodsProps.VideoEditCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.editComment", params)
     }
     /**
@@ -6749,9 +7294,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoRemoveFromAlbum(params: MethodsProps.VideoRemoveFromAlbumParams): Promise<Responses.OkResponse> {
+    public async videoRemoveFromAlbum(params: MethodsProps.VideoRemoveFromAlbumParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.removeFromAlbum", params)
     }
     /**
@@ -6765,9 +7310,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoReorderAlbums(params: MethodsProps.VideoReorderAlbumsParams): Promise<Responses.OkResponse> {
+    public async videoReorderAlbums(params: MethodsProps.VideoReorderAlbumsParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.reorderAlbums", params)
     }
     /**
@@ -6785,9 +7330,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoReorderVideos(params: MethodsProps.VideoReorderVideosParams): Promise<Responses.OkResponse> {
+    public async videoReorderVideos(params: MethodsProps.VideoReorderVideosParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.reorderVideos", params)
     }
     /**
@@ -6802,9 +7347,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoReport(params: MethodsProps.VideoReportParams): Promise<Responses.OkResponse> {
+    public async videoReport(params: MethodsProps.VideoReportParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.report", params)
     }
     /**
@@ -6817,9 +7362,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoReportComment(params: MethodsProps.VideoReportCommentParams): Promise<Responses.OkResponse> {
+    public async videoReportComment(params: MethodsProps.VideoReportCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.reportComment", params)
     }
     /**
@@ -6831,9 +7376,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async videoRestore(params: MethodsProps.VideoRestoreParams): Promise<Responses.OkResponse> {
+    public async videoRestore(params: MethodsProps.VideoRestoreParams): Promise<Responses.BaseOkResponse> {
         return super.call("video.restore", params)
     }
     /**
@@ -6901,6 +7446,19 @@ export class VKApi extends BaseVKApi {
      * undefined
      *
      * @param {{
+     *   link: (string),
+     *   access_token: (string|undefined)
+     * }} params
+     *
+     * @returns {Promise<Responses.BaseBoolResponse>}
+     */
+    public async wallCheckCopyrightLink(params: MethodsProps.WallCheckCopyrightLinkParams): Promise<Responses.BaseBoolResponse> {
+        return super.call("wall.checkCopyrightLink", params)
+    }
+    /**
+     * undefined
+     *
+     * @param {{
      *   owner_id: (number),
      *   post_id: (number),
      *   access_token: (string|undefined)
@@ -6940,9 +7498,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallDelete(params: MethodsProps.WallDeleteParams): Promise<Responses.OkResponse> {
+    public async wallDelete(params: MethodsProps.WallDeleteParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.delete", params)
     }
     /**
@@ -6954,9 +7512,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallDeleteComment(params: MethodsProps.WallDeleteCommentParams): Promise<Responses.OkResponse> {
+    public async wallDeleteComment(params: MethodsProps.WallDeleteCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.deleteComment", params)
     }
     /**
@@ -6976,6 +7534,7 @@ export class VKApi extends BaseVKApi {
      *   place_id: (number|undefined),
      *   mark_as_ads: (boolean|undefined),
      *   close_comments: (boolean|undefined),
+     *   donut_paid_duration: (number|undefined),
      *   poster_bkg_id: (number|undefined),
      *   poster_bkg_owner_id: (number|undefined),
      *   poster_bkg_access_hash: (string|undefined),
@@ -7007,9 +7566,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallEditAdsStealth(params: MethodsProps.WallEditAdsStealthParams): Promise<Responses.OkResponse> {
+    public async wallEditAdsStealth(params: MethodsProps.WallEditAdsStealthParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.editAdsStealth", params)
     }
     /**
@@ -7023,9 +7582,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallEditComment(params: MethodsProps.WallEditCommentParams): Promise<Responses.OkResponse> {
+    public async wallEditComment(params: MethodsProps.WallEditCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.editComment", params)
     }
     /**
@@ -7058,9 +7617,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.WallGetByIdResponse>}
+     * @returns {Promise<Responses.WallGetByIdLegacyResponse>}
      */
-    public async wallGetById(params: MethodsProps.WallGetByIdParams): Promise<Responses.WallGetByIdResponse> {
+    public async wallGetById(params: MethodsProps.WallGetByIdParams): Promise<Responses.WallGetByIdLegacyResponse> {
         return super.call("wall.getById", params)
     }
     /**
@@ -7142,9 +7701,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallPin(params: MethodsProps.WallPinParams): Promise<Responses.OkResponse> {
+    public async wallPin(params: MethodsProps.WallPinParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.pin", params)
     }
     /**
@@ -7166,6 +7725,7 @@ export class VKApi extends BaseVKApi {
      *   guid: (string|undefined),
      *   mark_as_ads: (boolean|undefined),
      *   close_comments: (boolean|undefined),
+     *   donut_paid_duration: (number|undefined),
      *   mute_notifications: (boolean|undefined),
      *   copyright: (string|undefined),
      *   access_token: (string|undefined)
@@ -7210,9 +7770,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallReportComment(params: MethodsProps.WallReportCommentParams): Promise<Responses.OkResponse> {
+    public async wallReportComment(params: MethodsProps.WallReportCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.reportComment", params)
     }
     /**
@@ -7225,9 +7785,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallReportPost(params: MethodsProps.WallReportPostParams): Promise<Responses.OkResponse> {
+    public async wallReportPost(params: MethodsProps.WallReportPostParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.reportPost", params)
     }
     /**
@@ -7256,9 +7816,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallRestore(params: MethodsProps.WallRestoreParams): Promise<Responses.OkResponse> {
+    public async wallRestore(params: MethodsProps.WallRestoreParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.restore", params)
     }
     /**
@@ -7270,9 +7830,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallRestoreComment(params: MethodsProps.WallRestoreCommentParams): Promise<Responses.OkResponse> {
+    public async wallRestoreComment(params: MethodsProps.WallRestoreCommentParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.restoreComment", params)
     }
     /**
@@ -7304,9 +7864,9 @@ export class VKApi extends BaseVKApi {
      *   access_token: (string|undefined)
      * }} params
      *
-     * @returns {Promise<Responses.OkResponse>}
+     * @returns {Promise<Responses.BaseOkResponse>}
      */
-    public async wallUnpin(params: MethodsProps.WallUnpinParams): Promise<Responses.OkResponse> {
+    public async wallUnpin(params: MethodsProps.WallUnpinParams): Promise<Responses.BaseOkResponse> {
         return super.call("wall.unpin", params)
     }
     /**

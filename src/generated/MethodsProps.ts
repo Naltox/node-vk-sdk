@@ -341,7 +341,7 @@ export interface AdsAddOfficeUsersParams {
     /**
      * Serialized JSON array of objects that describe added managers. Description of 'user_specification' objects see below.
      */
-    data: string,
+    data: Models.AdsUserSpecificationCutted[],
     /**
      * access token
      */
@@ -432,7 +432,7 @@ export interface AdsCreateTargetGroupParams {
     /**
      * 'For groups with auditory created with pixel code only.', , Number of days after that users will be automatically removed from the group.
      */
-    lifetime?: number,
+    lifetime: number,
     /**
      * undefined
      */
@@ -539,6 +539,10 @@ export interface AdsGetAdsParams {
      * Flag that specifies whether archived ads shall be shown: *0 — show only active ads,, *1 — show all ads.
      */
     include_deleted?: boolean,
+    /**
+     * Flag that specifies whether to show only archived ads: *0 — show all ads,, *1 — show only archived ads. Available when include_deleted flag is *1
+     */
+    only_deleted?: boolean,
     /**
      * Limit of number of returned ads. Used only if ad_ids parameter is null, and 'campaign_ids' parameter contains ID of only one campaign.
      */
@@ -725,6 +729,48 @@ export interface AdsGetFloodStatsParams {
     access_token?: string
 }
 
+export interface AdsGetLookalikeRequestsParams {
+    /**
+     * undefined
+     */
+    account_id: number,
+    /**
+     * undefined
+     */
+    client_id?: number,
+    /**
+     * undefined
+     */
+    requests_ids?: string,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * undefined
+     */
+    limit?: number,
+    /**
+     * undefined
+     */
+    sort_by?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AdsGetMusiciansParams {
+    /**
+     * undefined
+     */
+    artist_name: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface AdsGetOfficeUsersParams {
     /**
      * Advertising account ID.
@@ -897,6 +943,14 @@ export interface AdsGetTargetingStatsParams {
      */
     link_domain?: string,
     /**
+     * Additionally return recommended cpc and cpm to reach 5,10..95 percents of audience.
+     */
+    need_precise?: boolean,
+    /**
+     * Impressions limit period in seconds, must be a multiple of 86400(day)
+     */
+    impressions_limit_period?: number,
+    /**
      * access token
      */
     access_token?: string
@@ -1007,6 +1061,21 @@ export interface AdsUpdateClientsParams {
     access_token?: string
 }
 
+export interface AdsUpdateOfficeUsersParams {
+    /**
+     * Advertising account ID.
+     */
+    account_id: number,
+    /**
+     * Serialized JSON array of objects that describe added managers. Description of 'user_specification' objects see below.
+     */
+    data: Models.AdsUserSpecification[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface AdsUpdateTargetGroupParams {
     /**
      * Advertising account ID.
@@ -1029,9 +1098,9 @@ export interface AdsUpdateTargetGroupParams {
      */
     domain?: string,
     /**
-     * 'Only for the groups that get audience from sites with user accounting code.', Time in days when users added to a retarget group will be automatically excluded from it. '0' – automatic exclusion is off.
+     * 'Only for the groups that get audience from sites with user accounting code.', Time in days when users added to a retarget group will be automatically excluded from it. '0' - automatic exclusion is off.
      */
-    lifetime?: number,
+    lifetime: number,
     /**
      * undefined
      */
@@ -1040,6 +1109,249 @@ export interface AdsUpdateTargetGroupParams {
      * undefined
      */
     target_pixel_rules?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AdswebGetAdCategoriesParams {
+    /**
+     * undefined
+     */
+    office_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AdswebGetAdUnitCodeParams {
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AdswebGetAdUnitsParams {
+    /**
+     * undefined
+     */
+    office_id: number,
+    /**
+     * undefined
+     */
+    sites_ids?: string,
+    /**
+     * undefined
+     */
+    ad_units_ids?: string,
+    /**
+     * undefined
+     */
+    fields?: string,
+    /**
+     * undefined
+     */
+    limit?: number,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AdswebGetFraudHistoryParams {
+    /**
+     * undefined
+     */
+    office_id: number,
+    /**
+     * undefined
+     */
+    sites_ids?: string,
+    /**
+     * undefined
+     */
+    limit?: number,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AdswebGetSitesParams {
+    /**
+     * undefined
+     */
+    office_id: number,
+    /**
+     * undefined
+     */
+    sites_ids?: string,
+    /**
+     * undefined
+     */
+    fields?: string,
+    /**
+     * undefined
+     */
+    limit?: number,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AdswebGetStatisticsParams {
+    /**
+     * undefined
+     */
+    office_id: number,
+    /**
+     * undefined
+     */
+    ids_type: string,
+    /**
+     * undefined
+     */
+    ids: string,
+    /**
+     * undefined
+     */
+    period: string,
+    /**
+     * undefined
+     */
+    date_from: string,
+    /**
+     * undefined
+     */
+    date_to: string,
+    /**
+     * undefined
+     */
+    fields?: string,
+    /**
+     * undefined
+     */
+    limit?: number,
+    /**
+     * undefined
+     */
+    page_id?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AppWidgetsGetAppImageUploadServerParams {
+    /**
+     * undefined
+     */
+    image_type: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AppWidgetsGetAppImagesParams {
+    /**
+     * Offset needed to return a specific subset of images.
+     */
+    offset?: number,
+    /**
+     * Maximum count of results.
+     */
+    count?: number,
+    /**
+     * undefined
+     */
+    image_type?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AppWidgetsGetGroupImageUploadServerParams {
+    /**
+     * undefined
+     */
+    image_type: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AppWidgetsGetGroupImagesParams {
+    /**
+     * Offset needed to return a specific subset of images.
+     */
+    offset?: number,
+    /**
+     * Maximum count of results.
+     */
+    count?: number,
+    /**
+     * undefined
+     */
+    image_type?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AppWidgetsGetImagesByIdParams {
+    /**
+     * List of images IDs
+     */
+    images: string[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AppWidgetsSaveAppImageParams {
+    /**
+     * Parameter returned when photo is uploaded to server
+     */
+    hash: string,
+    /**
+     * Parameter returned when photo is uploaded to server
+     */
+    image: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface AppWidgetsSaveGroupImageParams {
+    /**
+     * Parameter returned when photo is uploaded to server
+     */
+    hash: string,
+    /**
+     * Parameter returned when photo is uploaded to server
+     */
+    image: string,
     /**
      * access token
      */
@@ -1277,29 +1589,6 @@ export interface AppsSendRequestParams {
      * undefined
      */
     separate?: boolean,
-    /**
-     * access token
-     */
-    access_token?: string
-}
-
-export interface AuthCheckPhoneParams {
-    /**
-     * Phone number.
-     */
-    phone: string,
-    /**
-     * User ID.
-     */
-    client_id?: number,
-    /**
-     * undefined
-     */
-    client_secret?: string,
-    /**
-     * undefined
-     */
-    auth_by_phone?: boolean,
     /**
      * access token
      */
@@ -2049,6 +2338,81 @@ export interface DocsSearchParams {
     access_token?: string
 }
 
+export interface DonutGetFriendsParams {
+    /**
+     * undefined
+     */
+    owner_id: number,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * undefined
+     */
+    count?: number,
+    /**
+     * undefined
+     */
+    fields?: string[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface DonutGetSubscriptionParams {
+    /**
+     * undefined
+     */
+    owner_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface DonutGetSubscriptionsParams {
+    /**
+     * undefined
+     */
+    fields?: Models.BaseUserGroupFields[],
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * undefined
+     */
+    count?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface DonutIsDonParams {
+    /**
+     * undefined
+     */
+    owner_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface DownloadedGamesGetPaidStatusParams {
+    /**
+     * undefined
+     */
+    user_id?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface FaveAddArticleParams {
     /**
      * undefined
@@ -2335,6 +2699,21 @@ export interface FaveRemoveTagParams {
     access_token?: string
 }
 
+export interface FaveRemoveVideoParams {
+    /**
+     * undefined
+     */
+    owner_id: number,
+    /**
+     * undefined
+     */
+    id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface FaveReorderTagsParams {
     /**
      * undefined
@@ -2454,6 +2833,10 @@ export interface FriendsAreFriendsParams {
      * '1' — to return 'sign' field. 'sign' is md5("{id}_{user_id}_{friends_status}_{application_secret}"), where id is current user ID. This field allows to check that data has not been modified by the client. By default: '0'.
      */
     need_sign?: boolean,
+    /**
+     * Return friend request read_state field
+     */
+    extended?: boolean,
     /**
      * access token
      */
@@ -2978,6 +3361,21 @@ export interface GroupsCreateParams {
     access_token?: string
 }
 
+export interface GroupsDeleteAddressParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    address_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface GroupsDeleteCallbackServerParams {
     /**
      * undefined
@@ -3325,7 +3723,7 @@ export interface GroupsEditManagerParams {
      */
     user_id: number,
     /**
-     * Manager role. Possible values: *'moderator',, *'editor',, *'administrator'.
+     * Manager role. Possible values: *'moderator',, *'editor',, *'administrator',, *'advertiser'.
      */
     role?: string,
     /**
@@ -3677,6 +4075,17 @@ export interface GroupsGetSettingsParams {
     access_token?: string
 }
 
+export interface GroupsGetTagListParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface GroupsGetTokenPermissionsParams {
     /**
      * access token
@@ -3963,6 +4372,14 @@ export interface GroupsSetCallbackSettingsParams {
      */
     market_comment_restore?: boolean,
     /**
+     * undefined
+     */
+    market_order_new?: boolean,
+    /**
+     * undefined
+     */
+    market_order_edit?: boolean,
+    /**
      * A vote in a public poll has been added ('0' — disabled, '1' — enabled).
      */
     poll_vote_new?: boolean,
@@ -3998,6 +4415,46 @@ export interface GroupsSetCallbackSettingsParams {
      * New form in lead forms
      */
     lead_forms_new?: boolean,
+    /**
+     * undefined
+     */
+    like_add?: boolean,
+    /**
+     * undefined
+     */
+    like_remove?: boolean,
+    /**
+     * undefined
+     */
+    message_event?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_create?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_prolonged?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_cancelled?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_price_changed?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_expired?: boolean,
+    /**
+     * undefined
+     */
+    donut_money_withdraw?: boolean,
+    /**
+     * undefined
+     */
+    donut_money_withdraw_error?: boolean,
     /**
      * access token
      */
@@ -4174,6 +4631,183 @@ export interface GroupsSetLongPollSettingsParams {
      */
     user_unblock?: boolean,
     /**
+     * undefined
+     */
+    like_add?: boolean,
+    /**
+     * undefined
+     */
+    like_remove?: boolean,
+    /**
+     * undefined
+     */
+    message_event?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_create?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_prolonged?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_cancelled?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_price_changed?: boolean,
+    /**
+     * undefined
+     */
+    donut_subscription_expired?: boolean,
+    /**
+     * undefined
+     */
+    donut_money_withdraw?: boolean,
+    /**
+     * undefined
+     */
+    donut_money_withdraw_error?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsSetSettingsParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    messages?: boolean,
+    /**
+     * undefined
+     */
+    bots_capabilities?: boolean,
+    /**
+     * undefined
+     */
+    bots_start_button?: boolean,
+    /**
+     * undefined
+     */
+    bots_add_to_chat?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsSetUserNoteParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    user_id: number,
+    /**
+     * Note body
+     */
+    note?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsTagAddParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    tag_name: string,
+    /**
+     * undefined
+     */
+    tag_color?: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsTagBindParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    tag_id: number,
+    /**
+     * undefined
+     */
+    user_id: number,
+    /**
+     * Describe the action
+     */
+    act: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsTagDeleteParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    tag_id: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsTagUpdateParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    tag_id: number,
+    /**
+     * undefined
+     */
+    tag_name: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface GroupsToggleMarketParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    state: string,
+    /**
      * access token
      */
     access_token?: string
@@ -4188,152 +4822,6 @@ export interface GroupsUnbanParams {
      * undefined
      */
     owner_id?: number,
-    /**
-     * access token
-     */
-    access_token?: string
-}
-
-export interface LeadsCheckUserParams {
-    /**
-     * Lead ID.
-     */
-    lead_id: number,
-    /**
-     * Value to be return in 'result' field when test mode is used.
-     */
-    test_result?: number,
-    /**
-     * undefined
-     */
-    test_mode?: boolean,
-    /**
-     * undefined
-     */
-    auto_start?: boolean,
-    /**
-     * User age.
-     */
-    age?: number,
-    /**
-     * User country code.
-     */
-    country?: string,
-    /**
-     * access token
-     */
-    access_token?: string
-}
-
-export interface LeadsCompleteParams {
-    /**
-     * Session obtained as GET parameter when session started.
-     */
-    vk_sid: string,
-    /**
-     * Secret key from the lead testing interface.
-     */
-    secret: string,
-    /**
-     * Comment text.
-     */
-    comment?: string,
-    /**
-     * access token
-     */
-    access_token?: string
-}
-
-export interface LeadsGetStatsParams {
-    /**
-     * Lead ID.
-     */
-    lead_id: number,
-    /**
-     * Secret key obtained from the lead testing interface.
-     */
-    secret?: string,
-    /**
-     * Day to start stats from (YYYY_MM_DD, e.g.2011-09-17).
-     */
-    date_start?: string,
-    /**
-     * Day to finish stats (YYYY_MM_DD, e.g.2011-09-17).
-     */
-    date_end?: string,
-    /**
-     * access token
-     */
-    access_token?: string
-}
-
-export interface LeadsGetUsersParams {
-    /**
-     * Offer ID.
-     */
-    offer_id: number,
-    /**
-     * Secret key obtained in the lead testing interface.
-     */
-    secret: string,
-    /**
-     * Offset needed to return a specific subset of results.
-     */
-    offset?: number,
-    /**
-     * Number of results to return.
-     */
-    count?: number,
-    /**
-     * Action type. Possible values: *'0' — start,, *'1' — finish,, *'2' — blocking users,, *'3' — start in a test mode,, *'4' — finish in a test mode.
-     */
-    status?: number,
-    /**
-     * Sort order. Possible values: *'1' — chronological,, *'0' — reverse chronological.
-     */
-    reverse?: boolean,
-    /**
-     * access token
-     */
-    access_token?: string
-}
-
-export interface LeadsMetricHitParams {
-    /**
-     * Metric data obtained in the lead interface.
-     */
-    data: string,
-    /**
-     * access token
-     */
-    access_token?: string
-}
-
-export interface LeadsStartParams {
-    /**
-     * Lead ID.
-     */
-    lead_id: number,
-    /**
-     * Secret key from the lead testing interface.
-     */
-    secret: string,
-    /**
-     * undefined
-     */
-    uid?: number,
-    /**
-     * undefined
-     */
-    aid?: number,
-    /**
-     * undefined
-     */
-    test_mode?: boolean,
-    /**
-     * undefined
-     */
-    force?: boolean,
     /**
      * access token
      */
@@ -4488,7 +4976,7 @@ export interface MarketAddParams {
     /**
      * Cover photo ID.
      */
-    main_photo_id: number,
+    main_photo_id?: number,
     /**
      * IDs of additional photos.
      */
@@ -4497,6 +4985,22 @@ export interface MarketAddParams {
      * Url for button in market item.
      */
     url?: string,
+    /**
+     * undefined
+     */
+    dimension_width?: number,
+    /**
+     * undefined
+     */
+    dimension_height?: number,
+    /**
+     * undefined
+     */
+    dimension_length?: number,
+    /**
+     * undefined
+     */
+    weight?: number,
     /**
      * access token
      */
@@ -4726,6 +5230,29 @@ export interface MarketEditCommentParams {
     access_token?: string
 }
 
+export interface MarketEditOrderParams {
+    /**
+     * undefined
+     */
+    user_id: number,
+    /**
+     * undefined
+     */
+    order_id: number,
+    /**
+     * undefined
+     */
+    merchant_comment?: string,
+    /**
+     * undefined
+     */
+    status?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface MarketGetParams {
     /**
      * ID of an item owner community, "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
@@ -4854,6 +5381,82 @@ export interface MarketGetCommentsParams {
      * List of additional profile fields to return. See the [vk.com/dev/fields|details]
      */
     fields?: Models.UsersFields[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MarketGetGroupOrdersParams {
+    /**
+     * undefined
+     */
+    group_id: number,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * undefined
+     */
+    count?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MarketGetOrderByIdParams {
+    /**
+     * undefined
+     */
+    user_id?: number,
+    /**
+     * undefined
+     */
+    order_id: number,
+    /**
+     * undefined
+     */
+    extended?: boolean,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MarketGetOrderItemsParams {
+    /**
+     * undefined
+     */
+    order_id: number,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * undefined
+     */
+    count?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MarketGetOrdersParams {
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * undefined
+     */
+    count?: number,
+    /**
+     * undefined
+     */
+    extended?: boolean,
     /**
      * access token
      */
@@ -5018,10 +5621,6 @@ export interface MarketSearchParams {
      * Maximum item price value.
      */
     price_to?: number,
-    /**
-     * Comma-separated tag IDs list.
-     */
-    tags?: number[],
     /**
      * undefined
      */
@@ -5215,6 +5814,18 @@ export interface MessagesEditParams {
      */
     message_id?: number,
     /**
+     * undefined
+     */
+    conversation_message_id?: number,
+    /**
+     * undefined
+     */
+    template?: string,
+    /**
+     * undefined
+     */
+    keyboard?: string,
+    /**
      * access token
      */
     access_token?: string
@@ -5228,7 +5839,7 @@ export interface MessagesEditChatParams {
     /**
      * New title of the chat.
      */
-    title: string,
+    title?: string,
     /**
      * access token
      */
@@ -5471,6 +6082,76 @@ export interface MessagesGetHistoryAttachmentsParams {
     access_token?: string
 }
 
+export interface MessagesGetImportantMessagesParams {
+    /**
+     * Amount of needed important messages.
+     */
+    count?: number,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * undefined
+     */
+    start_message_id?: number,
+    /**
+     * Maximum length of messages body.
+     */
+    preview_length?: number,
+    /**
+     * Actors fields to return.
+     */
+    fields?: Models.BaseUserGroupFields[],
+    /**
+     * Return extended properties
+     */
+    extended?: boolean,
+    /**
+     * Group ID (for group messages with group access token)
+     */
+    group_id?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MessagesGetIntentUsersParams {
+    /**
+     * undefined
+     */
+    intent: string,
+    /**
+     * undefined
+     */
+    subscribe_id?: number,
+    /**
+     * undefined
+     */
+    offset?: number,
+    /**
+     * undefined
+     */
+    count?: number,
+    /**
+     * undefined
+     */
+    extended?: boolean,
+    /**
+     * undefined
+     */
+    name_case?: string[],
+    /**
+     * undefined
+     */
+    fields?: string[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface MessagesGetInviteLinkParams {
     /**
      * Destination ID.
@@ -5672,6 +6353,10 @@ export interface MessagesMarkAsReadParams {
      */
     group_id?: number,
     /**
+     * undefined
+     */
+    mark_conversation_as_read?: boolean,
+    /**
      * access token
      */
     access_token?: string
@@ -5683,9 +6368,13 @@ export interface MessagesPinParams {
      */
     peer_id: number,
     /**
-     * undefined
+     * Message ID
      */
     message_id?: number,
+    /**
+     * Conversation message ID
+     */
+    conversation_message_id?: number,
     /**
      * access token
      */
@@ -5810,6 +6499,10 @@ export interface MessagesSendParams {
      */
     peer_id?: number,
     /**
+     * IDs of message recipients. (See peer_id)
+     */
+    peer_ids?: number[],
+    /**
      * User's short address (for example, 'illarionov').
      */
     domain?: string,
@@ -5846,6 +6539,10 @@ export interface MessagesSendParams {
      */
     forward_messages?: number[],
     /**
+     * JSON describing the forwarded message or reply
+     */
+    forward?: string,
+    /**
      * Sticker id.
      */
     sticker_id?: number,
@@ -5860,7 +6557,15 @@ export interface MessagesSendParams {
     /**
      * undefined
      */
+    template?: string,
+    /**
+     * undefined
+     */
     payload?: string,
+    /**
+     * JSON describing the content source in the message
+     */
+    content_source?: string,
     /**
      * undefined
      */
@@ -5873,6 +6578,33 @@ export interface MessagesSendParams {
      * undefined
      */
     intent?: string,
+    /**
+     * undefined
+     */
+    subscribe_id?: number,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface MessagesSendMessageEventAnswerParams {
+    /**
+     * undefined
+     */
+    event_id: string,
+    /**
+     * undefined
+     */
+    user_id: number,
+    /**
+     * undefined
+     */
+    peer_id: number,
+    /**
+     * undefined
+     */
+    event_data?: string,
     /**
      * access token
      */
@@ -5971,7 +6703,7 @@ export interface NewsfeedDeleteListParams {
 
 export interface NewsfeedGetParams {
     /**
-     * Filters to apply: 'post' — new wall posts, 'photo' — new photos, 'photo_tag' — new photo tags, 'wall_photo' — new wall photos, 'friend' — new friends, 'note' — new notes
+     * Filters to apply: 'post' — new wall posts, 'photo' — new photos, 'photo_tag' — new photo tags, 'wall_photo' — new wall photos, 'friend' — new friends
      */
     filters?: Models.NewsfeedFilters[],
     /**
@@ -6178,11 +6910,11 @@ export interface NewsfeedIgnoreItemParams {
     /**
      * Item owner's identifier (user or community), "Note that community id must be negative. 'owner_id=1' – user , 'owner_id=-1' – community "
      */
-    owner_id: number,
+    owner_id?: number,
     /**
      * Item identifier
      */
-    item_id: number,
+    item_id?: number,
     /**
      * access token
      */
@@ -6268,6 +7000,10 @@ export interface NewsfeedUnignoreItemParams {
      * Item identifier
      */
     item_id: number,
+    /**
+     * Track code of unignored item
+     */
+    track_code?: string,
     /**
      * access token
      */
@@ -6554,6 +7290,10 @@ export interface NotificationsSendMessageParams {
      * undefined
      */
     group_id?: number,
+    /**
+     * undefined
+     */
+    random_id?: number,
     /**
      * access token
      */
@@ -8047,6 +8787,10 @@ export interface PollsCreateParams {
      */
     background_id?: string,
     /**
+     * undefined
+     */
+    disable_unvote?: boolean,
+    /**
      * access token
      */
     access_token?: string
@@ -8706,11 +9450,15 @@ export interface StoriesDeleteParams {
     /**
      * Story owner's ID. Current user id is used by default.
      */
-    owner_id: number,
+    owner_id?: number,
     /**
      * Story ID.
      */
-    story_id: number,
+    story_id?: number,
+    /**
+     * undefined
+     */
+    stories?: string[],
     /**
      * access token
      */
@@ -8939,6 +9687,17 @@ export interface StoriesHideReplyParams {
     access_token?: string
 }
 
+export interface StoriesSaveParams {
+    /**
+     * undefined
+     */
+    upload_results: string[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface StoriesSearchParams {
     /**
      * undefined
@@ -8976,6 +9735,33 @@ export interface StoriesSearchParams {
      * undefined
      */
     fields?: string[],
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
+export interface StoriesSendInteractionParams {
+    /**
+     * undefined
+     */
+    access_key: string,
+    /**
+     * undefined
+     */
+    message?: string,
+    /**
+     * undefined
+     */
+    is_broadcast?: boolean,
+    /**
+     * undefined
+     */
+    is_anonymous?: boolean,
+    /**
+     * undefined
+     */
+    unseen_marker?: boolean,
     /**
      * access token
      */
@@ -9987,6 +10773,17 @@ export interface VideoSearchParams {
     access_token?: string
 }
 
+export interface WallCheckCopyrightLinkParams {
+    /**
+     * undefined
+     */
+    link: string,
+    /**
+     * access token
+     */
+    access_token?: string
+}
+
 export interface WallCloseCommentsParams {
     /**
      * undefined
@@ -10124,6 +10921,10 @@ export interface WallEditParams {
      * undefined
      */
     close_comments?: boolean,
+    /**
+     * undefined
+     */
+    donut_paid_duration?: number,
     /**
      * undefined
      */
@@ -10474,6 +11275,10 @@ export interface WallPostParams {
      * undefined
      */
     close_comments?: boolean,
+    /**
+     * undefined
+     */
+    donut_paid_duration?: number,
     /**
      * undefined
      */
