@@ -13,7 +13,7 @@ export function createQueue<T>(callsPerSec: number): AsyncQueue<T> {
 
     return {
         run: async function(handler: () => Promise<T>): Promise<T> {
-            await new Promise(resolve => queue.push(resolve))
+            await new Promise(resolve => queue.push(resolve as (() => void)))
             return handler()
         },
         stop: async () => {
